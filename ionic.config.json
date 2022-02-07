@@ -1,0 +1,7 @@
+{
+  "name": "taller_PMD",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
