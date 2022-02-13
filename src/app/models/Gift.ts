@@ -1,7 +1,8 @@
 import { ExchangeGift } from './ExchangeGift';
 
 export interface Gift{
-    key?:string,
+    id?:number,
+    name:string,
     points:number,
     isAvailable:string,
     picture:string, 

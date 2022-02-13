@@ -4,7 +4,7 @@ import { InsuranceCompany } from "./InsuranceCompany";
 import { User } from "./User";
 
 export interface Agency{
-    key?:string,
+    id?:number,
     zipCode:number,
     address:string,
     location:string,
