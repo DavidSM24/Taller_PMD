@@ -1,5 +1,5 @@
 export interface User{
-    id?:number,
+    key?:String,
     code:number,
     password:string,
     administrator:boolean,

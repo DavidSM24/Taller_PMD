@@ -7,6 +7,7 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { GiftService } from '../services/gift.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers:[GiftService],
   declarations: [Tab2Page]
 })
 export class Tab2PageModule {}

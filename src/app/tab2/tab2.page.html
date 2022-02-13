@@ -13,6 +13,21 @@
   Prueba getAll()
 </ion-button>
 
+<ion-button (click)="test_GetAllPaged(15,0)" expand="block" shape="round">
+  Prueba getAllPaged()
+</ion-button>
+
+<ion-button (click)="test_GetById(1)" expand="block" shape="round">
+  Prueba getById()
+</ion-button>
+
+<ion-button (click)="test_GetByNamePaged('go',15,0)" expand="block" shape="round">
+  Prueba getByNamePaged()
+</ion-button>
+
+<ion-button (click)="test_GetByAvailablePaged(true,15,0)" expand="block" shape="round">
+  Prueba getByAvailablePaged()
+</ion-button>
 <div>
 
   <form [formGroup]="formTest" >
@@ -24,9 +39,7 @@
       <ion-label>Descripción:</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
-  
-    <ion-button expand="full" color="primary" shape="round"
-       type="submit" [disabled]="this.formTest.invalid">Agregar</ion-button>
+
   </form>
 
   <ion-button (click)="test_Create()" expand="block" shape="round">
