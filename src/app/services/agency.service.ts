@@ -109,43 +109,34 @@ export class AgencyService {
 
   public async createOrUpdate(agency: Agency): Promise<Agency> {
     console.log(agency);
-    if (agency != null) {
-      const body=agency;
+    if (agency == null
+      || agency.address == null
+      || agency.address == ""
+      || agency.phoneNumber == null
+      || agency.zipCode == null
+      || agency.myInsuranceCompany == null
+      || agency.myUser == null) {
+
+      console.log("Algún campo es nulo o no contiene caracteres.")
+      return agency
+    }
+
+    else {
+      const body = agency;
       return new Promise(resolve => {
 
         this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((data: any) => {
 
           console.log(data);
 
-          let result: Agency = {
-            id: data.id,
-            zipCode: data.zipCode,
-            address: data.address,
-            location: data.location,
-            phoneNumber: data.phoneNumber,
-            amount: data.amount,
-            points: data.points,
-            pointsRedeemed: data.pointsRedeemed,
-            isActive: data.active,
-            myInsuranceCompany: data.myInsuranceCompany,
-            myCarRepairs: data.mycarRepairs,
-            myExchangeGifts: data.myExchangeGifts,
-            myUser: data.myUser
-
-          }
-          resolve(result);
+          agency=data;
+          resolve(agency);
         }, error => {
           console.log(error);
           resolve(agency);
         });
       });
     }
-
-    else {
-      return agency;
-    }
-
-
   }
 
   public delete(agency: Agency): Promise<boolean> {

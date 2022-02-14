@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Gift } from '../models/Gift';
 import { environment } from 'src/environments/environment';
 import { ExchangeGift } from '../models/ExchangeGift';
+import { debug } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -104,33 +105,30 @@ export class GiftService {
 
   public async createOrUpdate(gift: Gift): Promise<Gift> {
     console.log(gift);
-    if (gift != null) {
-      const body=gift;
+    if (
+      gift == null
+      || gift.name == null
+      || gift.name==("")
+    ) {
+      console.log("El campo name esta nulo o no contiene caracteres."); 
+      return gift
+    }
+
+    else {
+      const body = gift;
       return new Promise(resolve => {
 
         this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((data: any) => {
 
           console.log(data);
 
-          let result: Gift = {
-            id: data.id,
-            name: data.name,
-            points: data.points,
-            picture: data.picture,
-            exchangeGifts: [],
-            isAvailable: data.available
-
-          }
-          resolve(result);
+          gift = data;
+          resolve(gift);
         }, error => {
           console.log(error);
           resolve(gift);
         });
       });
-    }
-
-    else {
-      return gift;
     }
 
 
@@ -140,7 +138,7 @@ export class GiftService {
 
     return new Promise(resolve => {
 
-      this.http.delete<Gift>("http://localhost:8080" + this.endpoint, { body:gift}).subscribe(() => {
+      this.http.delete<Gift>("http://localhost:8080" + this.endpoint, { body: gift }).subscribe(() => {
         resolve(true);
       }, error => {
         console.log(error);
@@ -149,5 +147,5 @@ export class GiftService {
     });
   }
 
-  
+
 }
