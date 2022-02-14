@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Gift } from '../models/Gift';
 import { environment } from 'src/environments/environment';
 import { ExchangeGift } from '../models/ExchangeGift';
@@ -105,14 +105,14 @@ export class GiftService {
   public async createOrUpdate(gift: Gift): Promise<Gift> {
     console.log(gift);
     if (gift != null) {
-
+      const body=gift;
       return new Promise(resolve => {
 
-        this.http.post<Gift>("http://localhost:8080" + this.endpoint, { body: gift }).subscribe((data:any) => {
-        
-        console.log(data);
-        
-        let result:Gift={
+        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((data: any) => {
+
+          console.log(data);
+
+          let result: Gift = {
             id: data.id,
             name: data.name,
             points: data.points,
@@ -126,10 +126,10 @@ export class GiftService {
           console.log(error);
           resolve(gift);
         });
-      });  
+      });
     }
 
-    else{
+    else {
       return gift;
     }
 
@@ -140,7 +140,7 @@ export class GiftService {
 
     return new Promise(resolve => {
 
-      this.http.delete<Gift>("http://localhost:8080" + this.endpoint, { body: gift }).subscribe(() => {
+      this.http.delete<Gift>("http://localhost:8080" + this.endpoint, { body:gift}).subscribe(() => {
         resolve(true);
       }, error => {
         console.log(error);
@@ -148,4 +148,6 @@ export class GiftService {
       });
     });
   }
+
+  
 }
