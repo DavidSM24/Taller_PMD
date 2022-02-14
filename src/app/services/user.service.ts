@@ -1,40 +1,179 @@
 import { Injectable } from '@angular/core';
 import { promise } from 'protractor';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  endpoint: string = "/users";
 
-  constructor() { }
+  URLDatabase: string;
+  constructor(public http: HttpClient) {
+    this.URLDatabase = environment.herokuConfig.url;
+   }
+  
+  private async getListData(endpoint: string): Promise<User[]> {
+    let users: User[] = [];
 
-  public getAllPaged(all?):Observable<User[]>{
-    return null;
+    return new Promise(resolve => {
+      this.http.get(endpoint).subscribe((data: any[]) => {
+
+        if (data != null && data.length > 0) {
+
+          for (let miuser of data) {
+            const tmp: User = {
+              id: miuser.id,
+              code: miuser.code,
+              password: miuser.password,
+              administrator: miuser.administrator,
+              email: miuser.email,
+              name: miuser.name
+            }
+
+            users.push(tmp);
+          }
+        }
+        console.log(data);
+        resolve(users);
+      }, error => {
+        console.log(error);
+      });
+    });
+  }
+  public async getAllPaged(element: number, page: number):Promise<User[]>{
+    return this.getListData("http://localhost:8080" + this.endpoint + "/element/" + element + "/page/" + page);
   }
 
-  public getAll():Observable<User[]>{
-    return null;
-  }
-  public getByCode(code:number):Promise<User>{
-    return null;
-  }
-  public getByName(name:string):Promise<User>{
-    return null;
-  }
-  public getAllUserAgenciesPaged(administrator:boolean):Observable<User[]>{
-    return null;
+  public async getAll():Promise<User[]>{
+    return this.getListData("http://localhost:8080" + this.endpoint);
   }
 
-  public getAllAdminPaged(administrator:boolean):Observable<User[]>{
-    return null;
+
+  public async getById(id: number): Promise<User> {
+
+    let user: User = null;
+
+    return new Promise(resolve => {
+      this.http.get(/*this.URLDatabase*/"http://localhost:8080" + this.endpoint + "/id/" + id).subscribe((miuser: any) => {
+
+        if (miuser.id) {
+          const tmp: User = {
+            id: miuser.id,
+            code: miuser.code,
+            password: miuser.password,
+            administrator: miuser.administrator,
+            email: miuser.email,
+            name: miuser.name
+          }
+          user = tmp;
+        }
+        console.log(user);
+        resolve(user);
+      }, error => {
+        console.log(error);
+        console.log(user);
+        resolve(user);
+      });
+    });
   }
 
-  public createOrUpdate(user:User):Promise<User>{
-    return null;
+  public async getByCode(code:number):Promise<User>{
+    let user: User = null;
+
+    return new Promise(resolve => {
+      this.http.get("http://localhost:8080" + this.endpoint + "/code/" + code).subscribe((miuser: any) => {
+
+        if (miuser.code) {
+          const tmp: User = {
+            id: miuser.id,
+            code: miuser.code,
+            password: miuser.password,
+            administrator: miuser.administrator,
+            email: miuser.email,
+            name: miuser.name
+          }
+          user = tmp;
+        }
+        console.log(user);
+        resolve(user);
+      }, error => {
+        console.log(error);
+        console.log(user);
+        resolve(user);
+      });
+    });
   }
-  public delete(user:User):Promise<void>{
-    return null;
+  public async getByName(name:string):Promise<User>{
+    let user: User = null;
+
+    return new Promise(resolve => {
+      this.http.get("http://localhost:8080" + this.endpoint + "/name/" + name).subscribe((miuser: any) => {
+
+        if (miuser.name) {
+          const tmp: User = {
+            id: miuser.id,
+            code: miuser.code,
+            password: miuser.password,
+            administrator: miuser.administrator,
+            email: miuser.email,
+            name: miuser.name
+          }
+          user = tmp;
+        }
+        console.log(user);
+        resolve(user);
+      }, error => {
+        console.log(error);
+        console.log(user);
+        resolve(user);
+      });
+    });
+  }
+  public async getAllUserAgenciesPaged(administrator:boolean, element: number, page: number):Promise<User[]>{
+    return this.getListData("http://localhost:8080"+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+  }
+
+  public async getAllAdminPaged(administrator:boolean, element: number, page: number):Promise<User[]>{
+    return this.getListData("http://localhost:8080"+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+  }
+
+  public async createOrUpdate(user:User):Promise<User>{
+    if (user != null) {
+      const body=user;
+      return new Promise(resolve => {
+
+        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((miuser: any) => {
+          let result: User = {
+            id: miuser.id,
+            code: miuser.code,
+            password: miuser.password,
+            administrator: miuser.administrator,
+            email: miuser.email,
+            name: miuser.name
+          }
+          resolve(result);
+        }, error => {
+          console.log(error);
+          resolve(user);
+        });
+      });
+    }
+  }
+
+  
+  public async delete(user:User):Promise<boolean>{
+    return new Promise(resolve => {
+
+      this.http.delete<User>("http://localhost:8080" + this.endpoint, { body: user }).subscribe(() => {
+        resolve(true);
+      }, error => {
+        console.log(error);
+        resolve(false);
+      });
+    });
   }
 }
