@@ -36,7 +36,13 @@ export class Tab3Page {
   }
 
   public async test_Update() {
-
+    let toDrop: Agency[] = await this.as.getAll();
+    let last: Agency = toDrop[toDrop.length - 1];
+    last.address="se ha modificadoo 666";
+    console.log(last);
+    if (toDrop != null) {
+      console.log(await this.as.createOrUpdate(last));
+    }
   }
 
   public async test_Delete() {

@@ -39,10 +39,13 @@ export class Tab2Page {
   }
 
   public async test_Update() {
-    let newGift: Gift = await this.gs.getById(19);
-    newGift.name="pantalon";
-    newGift=await this.gs.createOrUpdate(newGift);
-    console.log(newGift);
+    let toDrop: Gift[] = await this.gs.getAll();
+    let last: Gift = toDrop[toDrop.length - 1];
+    last.name="hola1";
+    console.log(last);
+    if (toDrop != null) {
+      console.log(await this.gs.createOrUpdate(last));
+    }
   }
 
   public async test_Delete() {

@@ -71,18 +71,18 @@ export class AgencyService {
         if (a.id) {
           const tmp: Agency = {
             id: a.id,
-              zipCode: a.zipCode,
-              address: a.address,
-              location: a.location,
-              phoneNumber: a.phoneNumber,
-              amount: a.amount,
-              points: a.points,
-              pointsRedeemed: a.pointsRedeemed,
-              isActive: a.active,
-              myInsuranceCompany: a.myInsuranceCompany,
-              myCarRepairs: a.mycarRepairs,
-              myExchangeGifts: a.myExchangeGifts,
-              myUser: a.myUser
+            zipCode: a.zipCode,
+            address: a.address,
+            location: a.location,
+            phoneNumber: a.phoneNumber,
+            amount: a.amount,
+            points: a.points,
+            pointsRedeemed: a.pointsRedeemed,
+            isActive: a.active,
+            myInsuranceCompany: a.myInsuranceCompany,
+            myCarRepairs: a.mycarRepairs,
+            myExchangeGifts: a.myExchangeGifts,
+            myUser: a.myUser
           }
 
           agency = tmp;
@@ -99,12 +99,44 @@ export class AgencyService {
     });
   }
 
-  public async getByUserNamePaged(username:string, limit: number, offset: number): Promise<Agency[]> {
+  public async getByUserNamePaged(username: string, limit: number, offset: number): Promise<Agency[]> {
     return this.getListData("http://localhost:8080" + this.endpoint + "/username/" + username + "/element/" + limit + "/page/" + offset);
   }
 
-  public async getByisActivePaged(active:boolean, limit: number, offset: number): Promise<Agency[]> {
+  public async getByisActivePaged(active: boolean, limit: number, offset: number): Promise<Agency[]> {
     return this.getListData("http://localhost:8080" + this.endpoint + "/active/" + active + "/element/" + limit + "/page/" + offset);
+  }
+
+  public async createOrUpdate(agency: Agency): Promise<Agency> {
+    console.log(agency);
+    if (agency == null
+      || agency.address == null
+      || agency.address == ""
+      || agency.phoneNumber == null
+      || agency.zipCode == null
+      || agency.myInsuranceCompany == null
+      || agency.myUser == null) {
+
+      console.log("Algún campo es nulo o no contiene caracteres.")
+      return agency
+    }
+
+    else {
+      const body = agency;
+      return new Promise(resolve => {
+
+        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((data: any) => {
+
+          console.log(data);
+
+          agency=data;
+          resolve(agency);
+        }, error => {
+          console.log(error);
+          resolve(agency);
+        });
+      });
+    }
   }
 
   public delete(agency: Agency): Promise<boolean> {
