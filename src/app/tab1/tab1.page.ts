@@ -22,11 +22,28 @@ export class Tab1Page {
   public test_GetByName(name: string) {
     this.us.getByName(name);
   }
-  public getAllUserAgenciesPaged(administrator:boolean, element: number, page: number) {
+  public test_getAllUserAgenciesPaged(administrator:boolean, element: number, page: number) {
     this.us.getAllUserAgenciesPaged(administrator,element,page);
   }
-  public getAllAdminPaged(administrator:boolean, element: number, page: number) {
+  public test_getAllAdminPaged(administrator:boolean, element: number, page: number) {
     this.us.getAllAdminPaged(administrator,element,page);
   }
-  
+  public async test_Update() {
+    let toDrop: User[] = await this.us.getAll();
+    let last: User = toDrop[toDrop.length - 1];
+    last.email="hola@gmail.es";
+    console.log(last);
+    if (toDrop != null) {
+      console.log(await this.us.createOrUpdate(last));
+    }
+  }
+
+  public async test_Delete() {
+    let toDrop: User[] = await this.us.getAll();
+    let last: User = toDrop[toDrop.length - 1];
+    console.log(last);
+    if (toDrop != null) {
+      console.log(await this.us.delete(last));
+    }
+  }
 }

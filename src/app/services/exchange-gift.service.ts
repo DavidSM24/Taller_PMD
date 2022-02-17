@@ -89,4 +89,37 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     }
     
   }
+  public async createOrUpdate(exgift:ExchangeGift):Promise<ExchangeGift>{
+    if (exgift != null) {
+      const body=exgift;
+      return new Promise(resolve => {
+
+        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((miexgift: any) => {
+          let result: ExchangeGift = {
+            id: miexgift.id,
+              dateEchange: miexgift.dateEchange,
+              observations:miexgift.observations,
+              isDelivered: miexgift.isDelivered,
+              agency: miexgift.agency,
+              gift: miexgift.gift
+          }
+          resolve(result);
+        }, error => {
+          console.log(error);
+          resolve(exgift);
+        });
+      });
+    }
+  }
+
+  public async delete(exgift:ExchangeGift):Promise<boolean>{
+    return new Promise(resolve => {
+      this.http.delete<ExchangeGift>("http://localhost:8080" + this.endpoint, { body: exgift }).subscribe(() => {
+        resolve(true);
+      }, error => {
+        console.log(error);
+        resolve(false);
+      });
+    });
+  }
 }
