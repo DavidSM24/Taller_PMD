@@ -166,7 +166,6 @@ export class UserService {
   
   public async delete(user:User):Promise<boolean>{
     return new Promise(resolve => {
-
       this.http.delete<User>("http://localhost:8080" + this.endpoint, { body: user }).subscribe(() => {
         resolve(true);
       }, error => {

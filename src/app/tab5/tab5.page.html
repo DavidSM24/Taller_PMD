@@ -1,9 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>tab5</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <ion-button (click)="test_GetAll()" expand="block" shape="round">
+    Prueba getAll()
+  </ion-button>
+  
+  <ion-button (click)="test_GetAllPaged(15,0)" expand="block" shape="round">
+    Prueba getAllPaged()
+  </ion-button>
+  
+  <ion-button (click)="test_GetById(7)" expand="block" shape="round">
+    Prueba getById()
+  </ion-button>
+  
+  <ion-button (click)="test_getByDeliveredPaged(true,15,0)" expand="block" shape="round">
+    Prueba getByDeliveredPaged()
+  </ion-button>
+  
+  <ion-button (click)="test_Delete()" expand="block" shape="round">
+    Prueba delete
+  </ion-button>
 </ion-content>
