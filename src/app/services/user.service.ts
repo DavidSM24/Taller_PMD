@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { promise } from 'protractor';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
@@ -9,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  endpoint: string = "/users";
+  endpoint: string = "/user";
 
   URLDatabase: string;
   constructor(public http: HttpClient) {
@@ -58,7 +57,7 @@ export class UserService {
     let user: User = null;
 
     return new Promise(resolve => {
-      this.http.get(/*this.URLDatabase*/"http://localhost:8080" + this.endpoint + "/id/" + id).subscribe((miuser: any) => {
+      this.http.get("http://localhost:8080" + this.endpoint + "/id/" + id).subscribe((miuser: any) => {
 
         if (miuser.id) {
           const tmp: User = {
