@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 import { AgencyService } from '../services/agency.service';
+import { CloudService } from '../services/cloud.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { AgencyService } from '../services/agency.service';
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
   ],
-  providers:[AgencyService],
+  providers:[AgencyService,CloudService],
   declarations: [Tab3Page]
 })
 export class Tab3PageModule {}
