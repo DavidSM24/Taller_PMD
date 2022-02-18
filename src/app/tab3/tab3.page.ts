@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Agency } from '../models/Agency';
 import { AgencyService } from '../services/agency.service';
+import { CloudService } from '../services/cloud.service';
 
 @Component({
   selector: 'app-tab3',
@@ -9,7 +10,8 @@ import { AgencyService } from '../services/agency.service';
 })
 export class Tab3Page {
 
-  constructor(private as:AgencyService) {}
+  constructor(private as:AgencyService,
+    private cs:CloudService) {}
 
   public test_GetAll() {
     this.as.getAll();
@@ -52,6 +54,10 @@ export class Tab3Page {
     if (toDrop != null) {
       console.log(await this.as.delete(last));
     }
+  }
+
+  public async test_Cloud(){
+    this.cs.upload();
   }
 
 }

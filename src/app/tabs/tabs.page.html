@@ -26,8 +26,8 @@
       <ion-label>test-exchangegift</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab6">
-      <ion-icon name="square"></ion-icon>
+    <ion-tab-button tab="tab6" *ngIf="this.navC.isEnable4thButton">
+      <ion-icon name="square"></ion-icon> 
       <ion-label>test-insuranccompany</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
