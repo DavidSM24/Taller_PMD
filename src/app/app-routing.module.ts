@@ -21,12 +21,8 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  }
-  ,
+  },
   {
-    path: '**',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
     path: 'agency-list',
     loadChildren: () => import('./administrator/agency/agency-list/agency-list.module').then( m => m.AgencyListPageModule)
   },
@@ -93,7 +89,11 @@ const routes: Routes = [
   {
     path: 'tab-administrator',
     loadChildren: () => import('./administrator/tab-administrator/tab-administrator.module').then( m => m.TabAdministratorPageModule)
-  }
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
 
 ];
 @NgModule({
