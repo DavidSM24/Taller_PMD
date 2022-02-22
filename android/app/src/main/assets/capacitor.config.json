@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "taller_PMD",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

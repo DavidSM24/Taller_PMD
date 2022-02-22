@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  endpoint: string = "/user";
+  endpoint: string = "/users";
 
   URLDatabase: string;
   constructor(public http: HttpClient) {
@@ -44,11 +44,11 @@ export class UserService {
     });
   }
   public async getAllPaged(element: number, page: number):Promise<User[]>{
-    return this.getListData("http://localhost:8080" + this.endpoint + "/element/" + element + "/page/" + page);
+    return this.getListData(this.URLDatabase + this.endpoint + "/element/" + element + "/page/" + page);
   }
 
   public async getAll():Promise<User[]>{
-    return this.getListData("http://localhost:8080" + this.endpoint);
+    return this.getListData(this.URLDatabase + this.endpoint);
   }
 
 
@@ -57,7 +57,7 @@ export class UserService {
     let user: User = null;
 
     return new Promise(resolve => {
-      this.http.get("http://localhost:8080" + this.endpoint + "/id/" + id).subscribe((miuser: any) => {
+      this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miuser: any) => {
 
         if (miuser.id) {
           const tmp: User = {
@@ -84,7 +84,7 @@ export class UserService {
     let user: User = null;
 
     return new Promise(resolve => {
-      this.http.get("http://localhost:8080" + this.endpoint + "/code/" + code).subscribe((miuser: any) => {
+      this.http.get(this.URLDatabase + this.endpoint + "/code/" + code).subscribe((miuser: any) => {
 
         if (miuser.code) {
           const tmp: User = {
@@ -110,7 +110,7 @@ export class UserService {
     let user: User = null;
 
     return new Promise(resolve => {
-      this.http.get("http://localhost:8080" + this.endpoint + "/name/" + name).subscribe((miuser: any) => {
+      this.http.get(this.URLDatabase + this.endpoint + "/name/" + name).subscribe((miuser: any) => {
 
         if (miuser.name) {
           const tmp: User = {
@@ -133,11 +133,11 @@ export class UserService {
     });
   }
   public async getAllUserAgenciesPaged(administrator:boolean, element: number, page: number):Promise<User[]>{
-    return this.getListData("http://localhost:8080"+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+    return this.getListData(this.URLDatabase+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
   }
 
   public async getAllAdminPaged(administrator:boolean, element: number, page: number):Promise<User[]>{
-    return this.getListData("http://localhost:8080"+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+    return this.getListData(this.URLDatabase+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
   }
 
   public async createOrUpdate(user:User):Promise<User>{
@@ -145,7 +145,7 @@ export class UserService {
       const body=user;
       return new Promise(resolve => {
 
-        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((miuser: any) => {
+        this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miuser: any) => {
           let result: User = {
             id: miuser.id,
             code: miuser.code,
@@ -166,7 +166,7 @@ export class UserService {
   
   public async delete(user:User):Promise<boolean>{
     return new Promise(resolve => {
-      this.http.delete<User>("http://localhost:8080" + this.endpoint, { body: user }).subscribe(() => {
+      this.http.delete<User>(this.URLDatabase + this.endpoint, { body: user }).subscribe(() => {
         resolve(true);
       }, error => {
         console.log(error);

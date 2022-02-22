@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Agency } from '../models/Agency';
 import { ExchangeGift } from '../models/ExchangeGift';
@@ -45,17 +44,17 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     });
   }
   public getAllPaged(element: number, page: number):Promise<ExchangeGift[]>{
-    return this.getListData("http://localhost:8080" + this.endpoint + "/element/" + element + "/page/" + page);
+    return this.getListData(this.URLDatabase + this.endpoint + "/element/" + element + "/page/" + page);
   }
   public getAll():Promise<ExchangeGift[]>{
-    return this.getListData("http://localhost:8080" + this.endpoint);
+    return this.getListData(this.URLDatabase + this.endpoint);
   }
   public async getById(id: number): Promise<ExchangeGift> {
 
     let exchangegift: ExchangeGift = null;
 
     return new Promise(resolve => {
-      this.http.get("http://localhost:8080" + this.endpoint + "/id/" + id).subscribe((miexgift: any) => {
+      this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miexgift: any) => {
 
         if (miexgift.id) {
           const tmp: ExchangeGift = {
@@ -78,11 +77,11 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     });
   }
   public getByDeliveredPaged(delivered:Boolean, element: number, page: number):Promise<ExchangeGift[]>{
-    return this.getListData("http://localhost:8080" + this.endpoint +"/delivered/"+ delivered + "/element/" + element + "/page/" + page);
+    return this.getListData(this.URLDatabase + this.endpoint +"/delivered/"+ delivered + "/element/" + element + "/page/" + page);
   }
   public getByAgencyPaged(agency:Agency, element: number, page: number):Promise<ExchangeGift[]>{
     if(agency!=null){
-      return this.getListData("http://localhost:8080" + this.endpoint +"/id_agency/"+ agency.id + "/element/" + element + "/page/" + page);
+      return this.getListData(this.URLDatabase + this.endpoint +"/id_agency/"+ agency.id + "/element/" + element + "/page/" + page);
     }else{
       let result:Promise<ExchangeGift[]>
       return result;
@@ -94,7 +93,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
       const body=exgift;
       return new Promise(resolve => {
 
-        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((miexgift: any) => {
+        this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miexgift: any) => {
           let result: ExchangeGift = {
             id: miexgift.id,
               dateEchange: miexgift.dateEchange,
@@ -114,7 +113,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
 
   public async delete(exgift:ExchangeGift):Promise<boolean>{
     return new Promise(resolve => {
-      this.http.delete<ExchangeGift>("http://localhost:8080" + this.endpoint, { body: exgift }).subscribe(() => {
+      this.http.delete<ExchangeGift>(this.URLDatabase + this.endpoint, { body: exgift }).subscribe(() => {
         resolve(true);
       }, error => {
         console.log(error);

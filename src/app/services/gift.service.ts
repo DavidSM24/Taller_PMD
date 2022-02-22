@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Gift } from '../models/Gift';
 import { environment } from 'src/environments/environment';
-import { ExchangeGift } from '../models/ExchangeGift';
-import { debug } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -53,11 +51,11 @@ export class GiftService {
 
   public async getAll(): Promise<Gift[]> {
 
-    return this.getListData("http://localhost:8080" + this.endpoint);
+    return this.getListData(this.URLDatabase + this.endpoint);
   }
 
   public async getAllPaged(limit: number, offset: number): Promise<Gift[]> {
-    return this.getListData("http://localhost:8080" + this.endpoint + "/element/" + limit + "/page/" + offset);
+    return this.getListData(this.URLDatabase + this.endpoint + "/element/" + limit + "/page/" + offset);
   }
 
   public async getById(id: number): Promise<Gift> {
@@ -65,7 +63,7 @@ export class GiftService {
     let gift: Gift = null;
 
     return new Promise(resolve => {
-      this.http.get(/*this.URLDatabase*/"http://localhost:8080" + this.endpoint + "/id/" + id).subscribe((data: any) => {
+      this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((data: any) => {
 
         if (data.id) {
           const tmp: Gift = {
@@ -96,21 +94,22 @@ export class GiftService {
   }
 
   public async getByNamePaged(name: string, limit: number, offset: number): Promise<Gift[]> {
-    return this.getListData("http://localhost:8080" + this.endpoint + "/name/" + name + "/element/" + limit + "/page/" + offset);
+    return this.getListData(this.URLDatabase+ this.endpoint + "/name/" + name + "/element/" + limit + "/page/" + offset);
   }
 
   public async getByAvailablePaged(available: boolean, limit: number, offset: number): Promise<Gift[]> {
-    return this.getListData("http://localhost:8080" + this.endpoint + "/available/" + available + "/element/" + limit + "/page/" + offset);
+    return this.getListData(this.URLDatabase + this.endpoint + "/available/" + available + "/element/" + limit + "/page/" + offset);
   }
 
-  public async createOrUpdate(gift: Gift): Promise<Gift> {
+  public async createOrUpdate(gift: Gift, ImageFile: any): Promise<Gift> {
     console.log(gift);
     if (
       gift == null
       || gift.name == null
-      || gift.name==("")
+      || gift.name == ("")
+      || ImageFile==null
     ) {
-      console.log("El campo name esta nulo o no contiene caracteres."); 
+      console.log("El campo name esta nulo o no contiene caracteres.");
       return gift
     }
 
@@ -118,27 +117,32 @@ export class GiftService {
       const body = gift;
       return new Promise(resolve => {
 
-        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((data: any) => {
+
+
+        let formData = new FormData();
+        formData.append('g', new Blob([JSON.stringify(gift)], {
+          type: 'application/json'
+        }));
+        formData.append('file', ImageFile);
+
+        this.http.post(this.URLDatabase+this.endpoint, formData).subscribe((data: any) => {
 
           console.log(data);
 
-          gift = data;
-          resolve(gift);
+          resolve(data);
         }, error => {
           console.log(error);
-          resolve(gift);
+          resolve(error);
         });
       });
     }
-
-
   }
 
   public delete(gift: Gift): Promise<boolean> {
 
     return new Promise(resolve => {
 
-      this.http.delete<Gift>("http://localhost:8080" + this.endpoint, { body: gift }).subscribe(() => {
+      this.http.delete<Gift>(this.URLDatabase + this.endpoint, { body: gift }).subscribe(() => {
         resolve(true);
       }, error => {
         console.log(error);

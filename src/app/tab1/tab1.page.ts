@@ -9,9 +9,14 @@ import { UserService } from '../services/user.service';
 })
 export class Tab1Page {
 
+  msg:string="";
+
   constructor(private us: UserService) {}
-  public test_GetAll() {
-    this.us.getAll();
+  public async test_GetAll() {
+    let user:User[] = await this.us.getAll();
+    this.msg=user[0].name;
+    console.log(this.msg);
+    
   }
   public test_GetAllPaged(limit: number, offset: number) {
     this.us.getAllPaged(limit, offset);

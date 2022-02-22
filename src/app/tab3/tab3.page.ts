@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Agency } from '../models/Agency';
 import { AgencyService } from '../services/agency.service';
-import { CloudService } from '../services/cloud.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab3',
@@ -10,8 +10,15 @@ import { CloudService } from '../services/cloud.service';
 })
 export class Tab3Page {
 
+  public formTest:FormGroup;
+
   constructor(private as:AgencyService,
-    private cs:CloudService) {}
+    private fb: FormBuilder) {
+
+      this.formTest = this.fb.group({
+        img: ["", Validators.required]
+      });
+    }
 
   public test_GetAll() {
     this.as.getAll();
@@ -55,9 +62,5 @@ export class Tab3Page {
       console.log(await this.as.delete(last));
     }
   }
-
-  public async test_Cloud(){
-    this.cs.upload();
-  }
-
+  
 }

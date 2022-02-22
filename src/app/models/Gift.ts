@@ -4,7 +4,7 @@ export interface Gift{
     id?:number,
     name:string,
     points:number,
-    isAvailable:string,
+    isAvailable:boolean,
     picture:string, 
     exchangeGifts:ExchangeGift[]
 }

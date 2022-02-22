@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 
   herokuConfig: {
-    url: "https://talleraadd.herokuapp.com/agencies"
+    url: "https://talleraadd.herokuapp.com"
   }
 };
 
