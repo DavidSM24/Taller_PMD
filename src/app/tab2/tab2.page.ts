@@ -10,7 +10,9 @@ import { GiftService } from '../services/gift.service';
 })
 export class Tab2Page {
 
+  public img:string;
   public formTest: FormGroup;
+  public file: any;
 
   constructor(private gs: GiftService) { }
 
@@ -44,7 +46,9 @@ export class Tab2Page {
     last.name="hola1";
     console.log(last);
     if (toDrop != null) {
-      console.log(await this.gs.createOrUpdate(last));
+      last=await this.gs.createOrUpdate(last,this.file);
+      console.log(last);
+      this.img="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/"+last.picture;
     }
   }
 
@@ -55,5 +59,10 @@ export class Tab2Page {
     if (toDrop != null) {
       console.log(await this.gs.delete(last));
     }
+  }
+
+  public changeListener($event) : void {
+    this.file = $event.target.files[0];
+    console.log(this.file);
   }
 }

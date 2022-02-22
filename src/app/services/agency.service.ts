@@ -54,11 +54,11 @@ export class AgencyService {
 
   public async getAll(): Promise<Agency[]> {
 
-    return this.getListData("http://localhost:8080" + this.endpoint);
+    return this.getListData(this.URLDatabase + this.endpoint);
   }
 
   public async getAllPaged(limit: number, offset: number): Promise<Agency[]> {
-    return this.getListData("http://localhost:8080" + this.endpoint + "/element/" + limit + "/page/" + offset);
+    return this.getListData(this.URLDatabase + this.endpoint + "/element/" + limit + "/page/" + offset);
   }
 
   public async getById(id: number): Promise<Agency> {
@@ -66,7 +66,7 @@ export class AgencyService {
     let agency: Agency = null;
 
     return new Promise(resolve => {
-      this.http.get(/*this.URLDatabase*/"http://localhost:8080" + this.endpoint + "/id/" + id).subscribe((a: any) => {
+      this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((a: any) => {
 
         if (a.id) {
           const tmp: Agency = {
@@ -100,11 +100,11 @@ export class AgencyService {
   }
 
   public async getByUserNamePaged(username: string, limit: number, offset: number): Promise<Agency[]> {
-    return this.getListData("http://localhost:8080" + this.endpoint + "/username/" + username + "/element/" + limit + "/page/" + offset);
+    return this.getListData(this.URLDatabase + this.endpoint + "/username/" + username + "/element/" + limit + "/page/" + offset);
   }
 
   public async getByisActivePaged(active: boolean, limit: number, offset: number): Promise<Agency[]> {
-    return this.getListData("http://localhost:8080" + this.endpoint + "/active/" + active + "/element/" + limit + "/page/" + offset);
+    return this.getListData(this.URLDatabase + this.endpoint + "/active/" + active + "/element/" + limit + "/page/" + offset);
   }
 
   public async createOrUpdate(agency: Agency): Promise<Agency> {
@@ -125,7 +125,7 @@ export class AgencyService {
       const body = agency;
       return new Promise(resolve => {
 
-        this.http.post("http://localhost:8080" + this.endpoint, body).subscribe((data: any) => {
+        this.http.post(this.URLDatabase + this.endpoint, body).subscribe((data: any) => {
 
           console.log(data);
 
@@ -143,7 +143,7 @@ export class AgencyService {
 
     return new Promise(resolve => {
 
-      this.http.delete<Agency>("http://localhost:8080" + this.endpoint, { body: agency }).subscribe(() => {
+      this.http.delete<Agency>(this.URLDatabase + this.endpoint, { body: agency }).subscribe(() => {
         resolve(true);
       }, error => {
         console.log(error);

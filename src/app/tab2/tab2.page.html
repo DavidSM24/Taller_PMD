@@ -7,51 +7,55 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-<ion-label></ion-label>
+  <ion-label></ion-label>
 
-<ion-button (click)="test_GetAll()" expand="block" shape="round">
-  Prueba getAll()
-</ion-button>
-
-<ion-button (click)="test_GetAllPaged(15,0)" expand="block" shape="round">
-  Prueba getAllPaged()
-</ion-button>
-
-<ion-button (click)="test_GetById(1)" expand="block" shape="round">
-  Prueba getById()
-</ion-button>
-
-<ion-button (click)="test_GetByNamePaged('go',15,0)" expand="block" shape="round">
-  Prueba getByNamePaged()
-</ion-button>
-
-<ion-button (click)="test_GetByAvailablePaged(true,15,0)" expand="block" shape="round">
-  Prueba getByAvailablePaged()
-</ion-button>
-<div>
-
-  <form [formGroup]="formTest" >
-    <ion-item>
-      <ion-label>Título:</ion-label>
-      <ion-input type="text" formControlName="title"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Descripción:</ion-label>
-      <ion-textarea formControlName="description"></ion-textarea>
-    </ion-item>
-
-  </form>
-
-  <ion-button (click)="test_Create()" expand="block" shape="round">
-    Prueba create
-  </ion-button>
-  <ion-button (click)="test_Update()" expand="block" shape="round">
-    Prueba update
+  <ion-button (click)="test_GetAll()" expand="block" shape="round">
+    Prueba getAll()
   </ion-button>
 
-</div>
+  <ion-button (click)="test_GetAllPaged(15,0)" expand="block" shape="round">
+    Prueba getAllPaged()
+  </ion-button>
 
-<ion-button (click)="test_Delete()" expand="block" shape="round">
-  Prueba delete
-</ion-button>
+  <ion-button (click)="test_GetById(1)" expand="block" shape="round">
+    Prueba getById()
+  </ion-button>
+
+  <ion-button (click)="test_GetByNamePaged('go',15,0)" expand="block" shape="round">
+    Prueba getByNamePaged()
+  </ion-button>
+
+  <ion-button (click)="test_GetByAvailablePaged(true,15,0)" expand="block" shape="round">
+    Prueba getByAvailablePaged()
+  </ion-button>
+  <div>
+
+    <form [formGroup]="formTest">
+      <ion-item>
+        <ion-label>Título:</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Descripción:</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+
+    </form>
+
+    <ion-button (click)="test_Create()" expand="block" shape="round">
+      Prueba create
+    </ion-button>
+    <ion-button (click)="test_Update()" expand="block" shape="round">
+      Prueba update
+    </ion-button>
+
+  </div>
+
+  <ion-button (click)="test_Delete()" expand="block" shape="round">
+    Prueba delete
+  </ion-button>
+
+  <ion-input type="file" placeholder="Awesome Input" formControlName="img" accept="image/*" (change)="changeListener($event)"></ion-input>
+
+  <ion-img [src]="img"></ion-img>
 </ion-content>

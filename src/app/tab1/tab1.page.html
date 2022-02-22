@@ -6,16 +6,21 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content [fullscreen]="true">
+  
+  <ion-label>{{this.msg}}</ion-label>
+  
   <ion-button (click)="test_GetAll()" expand="block" shape="round">
     Prueba getAll()
   </ion-button>
   
-  <ion-button (click)="test_GetAllPaged(15,0)" expand="block" shape="round">
+  <ion-button (click)="test_GetAllPaged(15,1)" expand="block" shape="round">
     Prueba getAllPaged()
   </ion-button>
   
-  <ion-button (click)="test_GetById(7)" expand="block" shape="round">
+  <ion-button (click)="test_GetById(1)" expand="block" shape="round">
     Prueba getById()
   </ion-button>
   
