@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-car-repair-list',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarRepairListPage implements OnInit {
 
-  constructor() { }
+  @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+
+  
+
+  constructor() {
+
+   }
 
   ngOnInit() {
   }
