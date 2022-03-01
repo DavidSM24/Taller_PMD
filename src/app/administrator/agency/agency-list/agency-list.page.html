@@ -1,49 +1,85 @@
 <ion-header [translucent]="false">
   <ion-toolbar color="primary">
+    
     <ion-title>Lista de Agencias</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5"></ion-icon>
-      <ion-icon class="icon-logout" slot="end" name="person" style="zoom:1.5"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="person" style="zoom:1.5;cursor:pointer"></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
   <ion-toolbar color="primary">
     <ion-searchbar color="dark" placeholder="Encuentra la agencia que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+
+    <ion-row class="header-row">
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+
+      <ion-col size="3.3" style="border: 0px !important;">
+        <ion-text>Compañía</ion-text>
+      </ion-col>
+
+      <ion-col  size="3.3" style="border: 0px !important;">
+        <ion-text>Puntos</ion-text>
+      </ion-col>
+
+      <ion-col size="3.3" style="border: 0px !important;">
+        <ion-text>Acumulado</ion-text>
+      </ion-col>
+      
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+    </ion-row>
+
   </ion-toolbar>
+  
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
+<ion-content [fullscreen]="true" style="background-color: white;">
+<div class="body">
   <ion-refresher slot="fixed" (ionRefresh)="reset($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list> 
+  <ion-grid class="ion-text-center">
 
-    <ion-item-sliding *ngFor="let agency of this.agencies;let i=index" color="primary">
-      <ion-item-options side="start">
-        <ion-item-option (click)="edit(agency)">
-          <ion-icon name="create" style="zoom:3.0"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+    <ion-row let *ngFor="let agency of this.agencies" class="row">
+      
+      <ion-col size="1">
+        <ion-text>
+          <ion-icon name="pencil" style="color:#22388c;cursor:pointer"></ion-icon>
+        </ion-text>
+      </ion-col>
+      
+      <ion-col size="3.4">
+        <ion-text>
+            {{agency.myInsuranceCompany.CIA_Name}}
+        </ion-text>
+      </ion-col>
 
-      <ion-item>
-        <ion-label>
-          <h2>{{agency.myUser.name}}</h2>
-          <p>{{agency.points}}</p>
-        </ion-label>
-      </ion-item>
+        <ion-col size="3.3">
+          <ion-text>
+            {{agency.points}}
+          </ion-text>
+        </ion-col>
+  
+        <ion-col size="3.3">
+          <ion-text>
+            {{agency.amount}} €
+          </ion-text>
+        </ion-col>
 
-      <ion-item-options side="end">
-        <ion-item-option color="danger" expandable (click)="showDeleteMenu(agency)">
-          <ion-icon name="remove-circle" style="zoom:3.0"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+        <ion-col size="1">
+          <ion-text>
+            <ion-icon name="trash" color="danger" style="cursor: pointer;"></ion-icon>
+          </ion-text>
+        </ion-col>
+    </ion-row>
 
-
-  </ion-list>
+  </ion-grid>
 
 
 
@@ -51,4 +87,6 @@
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</div>
+  
 </ion-content>

@@ -45,13 +45,13 @@ export class AgencyListPage implements OnInit {
       }
       
       this.infinite.disabled=false;
-      newAgencies=await this.as.getAllPaged(15,0);
+      newAgencies=await this.as.getAllPaged(30,0);
       
       this.agencies=this.agencies.concat(newAgencies);
 
     }
 
-    if(newAgencies.length<15){
+    if(newAgencies.length<30){
       this.infinite.disabled=true;
     }
 
@@ -124,10 +124,10 @@ export class AgencyListPage implements OnInit {
   public async infiniteLoad($event) {
     let newAgencies:Agency[]=[];
     if(!this.infinite.disabled){
-      newAgencies=await this.as.getAllPaged(15,this.agencies.length);
+      newAgencies=await this.as.getAllPaged(30,this.agencies.length);
       this.agencies=this.agencies.concat(newAgencies);
 
-      if(newAgencies.length<15){
+      if(newAgencies.length<30){
         this.infinite.disabled=true;
       }
     }

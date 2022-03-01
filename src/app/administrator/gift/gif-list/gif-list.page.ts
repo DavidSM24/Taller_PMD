@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, IonRow, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { Gift } from 'src/app/models/Gift';
 import { GiftService } from '../../../services/gift.service';
 import { GifUpdatePage } from '../gif-update/gif-update.page';
@@ -10,7 +10,7 @@ import { GifUpdatePage } from '../gif-update/gif-update.page';
   styleUrls: ['./gif-list.page.scss'],
 })
 export class GifListPage implements OnInit {
-
+  @ViewChild("rowItem") rowItem:HTMLElement;
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   private n:number=0;
@@ -24,14 +24,17 @@ export class GifListPage implements OnInit {
     private toast: ToastController,
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private loading: LoadingController) { }
+    private loading: LoadingController,
+    private pt:Platform) { }
 
   ngOnInit() {
+    let nItems=Math.ceil(this.pt.height()/this.rowItem.clientHeight)+20;
   }
 
   async ionViewWillEnter() {
     await this.loadgifts();
     this.n=this.gifts.length;
+
   }
 
   public async loadgifts(event?) {
