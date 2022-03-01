@@ -262,6 +262,11 @@ export class CarRepairService {
 
    //delete
 
+   /**
+    * Método que borra una reparación de la base de datos
+    * @param carRepair reparación que se quiera borrar
+    * @returns Promise<boolean> boleano que indica si la reparación se ha borrado o no
+    */
    public delete(carRepair:CarRepair):Promise<boolean>{
 
     return new Promise(resolve=>{
