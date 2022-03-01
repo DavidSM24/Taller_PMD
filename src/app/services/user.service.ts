@@ -79,6 +79,10 @@ export class UserService {
       });
     });
   }
+  
+  public async getByAvailable():Promise<User[]>{
+    return this.getListData(this.URLDatabase + this.endpoint + "/available");
+  }
 
   public async getByCode(code:number):Promise<User>{
     let user: User = null;
