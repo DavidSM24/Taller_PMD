@@ -6,7 +6,21 @@ import { GifListPage } from './gif-list.page';
 const routes: Routes = [
   {
     path: '',
-    component: GifListPage
+    component: GifListPage,
+    children:[
+      {
+        path: 'gif-create',
+        loadChildren: () => import('../gif-create/gif-create.module').then( m => m.GifCreatePageModule)
+      },
+      {
+        path: 'gif-saw',
+        loadChildren: () => import('../gif-saw/gif-saw.module').then( m => m.GifSawPageModule)
+      },
+      {
+        path: 'gif-update',
+        loadChildren: () => import('../gif-update/gif-update.module').then( m => m.GifUpdatePageModule)
+      }
+    ]
   }
 ];
 
