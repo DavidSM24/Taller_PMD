@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Tab 3
     </ion-title>
@@ -7,36 +7,92 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button (click)="test_GetAll()" expand="block" shape="round">
-    Prueba getAll()
-  </ion-button>
 
-  <ion-button (click)="test_GetAllPaged(15,0)" expand="block" shape="round">
-    Prueba getAllPaged()
-  </ion-button>
+  <div class="formulario">
+    <center>
+    <form [formGroup]="formTest" class="ion-padding">
+      <ion-item no-lines>
+        <ion-label size="2">ZipCode:</ion-label>
+        <ion-input size="10" class="customInput" type="number" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label size="2">Dirección:</ion-label>
+        <ion-input size="10" type="text" class="customInput" formControlName="description"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label size="2">Localidad:</ion-label>
+        <ion-input size="10" class="customInput" type="number" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label size="2">Nose:</ion-label>
+        <ion-input size="10" type="text" class="customInput" formControlName="description"></ion-input>
+      </ion-item>
 
-  <ion-button (click)="test_GetById(7)" expand="block" shape="round">
-    Prueba getById()
-  </ion-button>
+      <ion-item>
+        <ion-label>Desarrollador</ion-label>
+        <ion-label type="text" >Elección</ion-label>
+        <ion-button expand="block" shape="round" >
+          Elegir desarrollador
+        </ion-button>
+      </ion-item>
+      
+      <ion-item> 
+        <ion-label>Completado</ion-label>
+      </ion-item>
+      <ion-segment value="no" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="si">
+          <ion-label color="success">Si</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="no">
+          <ion-label color="danger">No</ion-label>
+        </ion-segment-button>
+      </ion-segment>
 
-  <ion-button (click)="test_GetByUserNamePaged('no',15,0)" expand="block" shape="round">
-    Prueba getByUserNamePaged()
-  </ion-button>
+      <ion-button expand="block" shape="round" style="margin-top: 2% !important;" class="button">
+        Click me
+      </ion-button>
 
-  <ion-button (click)="test_GetByisActivePaged(true,15,0)" expand="block" shape="round">
-    Prueba getByIsActivePaged()
-  </ion-button>
+    </form>
+  </center>
+  </div>
 
-  <ion-button (click)="test_Update()" expand="block" shape="round">
-    Prueba createUpdate
-  </ion-button>
+  <div *ngIf="false">
 
-  <ion-button (click)="test_Delete()" expand="block" shape="round">
-    Prueba delete
-  </ion-button>
 
-  <ion-button routerLink="/tab-administrator/agency-list" expand="block" shape="round">
-    Prueba delete
-  </ion-button>
+    <ion-button (click)="test_GetAll()" expand="block" shape="round">
+      Prueba getAll()
+    </ion-button>
+  
+    <ion-button (click)="test_GetAllPaged(15,0)" expand="block" shape="round">
+      Prueba getAllPaged()
+    </ion-button>
+  
+    <ion-button (click)="test_GetById(7)" expand="block" shape="round">
+      Prueba getById()
+    </ion-button>
+  
+    <ion-button (click)="test_GetByUserNamePaged('no',15,0)" expand="block" shape="round">
+      Prueba getByUserNamePaged()
+    </ion-button>
+  
+    <ion-button (click)="test_GetByisActivePaged(true,15,0)" expand="block" shape="round">
+      Prueba getByIsActivePaged()
+    </ion-button>
+  
+    <ion-button (click)="test_Update()" expand="block" shape="round">
+      Prueba createUpdate
+    </ion-button>
+  
+    <ion-button (click)="test_Delete()" expand="block" shape="round">
+      Prueba delete
+    </ion-button>
+  
+    <ion-button routerLink="/tab-administrator/agency-list" expand="block" shape="round">
+      Prueba delete
+    </ion-button>
+
+  </div>
+
+  
 
 </ion-content>

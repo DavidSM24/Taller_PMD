@@ -36,7 +36,7 @@ export class InsuranceCompanyService {
 
             const tmp:InsuranceCompany={//se instancia una compañia
               id:insuranceCompany.id,
-              CIA_Name:insuranceCompany.CIA_Name
+              cia_Name:insuranceCompany.cia_Name
             }
 
             insurancesCompany.push(tmp);
@@ -118,7 +118,7 @@ export class InsuranceCompanyService {
         if(data.id){
           const tmp:InsuranceCompany={
             id:data.id,
-            CIA_Name:data.CIA_Name
+            cia_Name:data.cia_Name
           }
           insuranceCompany=tmp;
           resolve(insuranceCompany);
@@ -137,7 +137,7 @@ export class InsuranceCompanyService {
    //CreateOrUpdate
    public async createOrUpdate(insuranceCompany:InsuranceCompany):Promise<InsuranceCompany>{
      if(insuranceCompany!=null){
-       if(insuranceCompany.CIA_Name!=null){
+       if(insuranceCompany.cia_Name!=null){
 
          const body=insuranceCompany;
 

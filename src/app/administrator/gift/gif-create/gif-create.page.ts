@@ -12,4 +12,8 @@ export class GifCreatePage implements OnInit {
   ngOnInit() {
   }
 
+  public segmentChanged(event){
+    
+  }
+
 }

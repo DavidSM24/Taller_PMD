@@ -1,4 +1,4 @@
 export interface InsuranceCompany{
     id?:number,
-    CIA_Name:string
+    cia_Name:string
 }

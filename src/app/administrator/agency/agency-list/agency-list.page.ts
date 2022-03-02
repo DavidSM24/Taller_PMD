@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { Agency } from 'src/app/models/Agency';
 import { AgencyService } from '../../../services/agency.service';
 import { AgencyUpdatePage } from '../agency-update/agency-update.page';
@@ -18,18 +18,21 @@ export class AgencyListPage implements OnInit {
 
   searchStr = "";
   private miLoading: HTMLIonLoadingElement;
+  niTems:number;
 
   constructor(
     private as: AgencyService,
     private toast: ToastController,
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private loading: LoadingController) { }
+    private loading: LoadingController,
+    private pt:Platform) { }
 
   ngOnInit() {
   }
 
   async ionViewWillEnter() {
+    this.niTems=  Math.ceil(this.pt.height()/20+10);
     await this.loadAgencies();
     this.n=this.agencies.length;
   }
@@ -45,13 +48,13 @@ export class AgencyListPage implements OnInit {
       }
       
       this.infinite.disabled=false;
-      newAgencies=await this.as.getAllPaged(30,0);
+      newAgencies=await this.as.getAllPaged(this.niTems,0);
       
       this.agencies=this.agencies.concat(newAgencies);
 
     }
 
-    if(newAgencies.length<30){
+    if(newAgencies.length<this.niTems){
       this.infinite.disabled=true;
     }
 
@@ -105,7 +108,7 @@ export class AgencyListPage implements OnInit {
       buttons: [
         {
           text: 'Eliminar',
-          //cssClass: 'rojo',
+          cssClass: 'rojo',
           handler: () => {
             this.delete(agency);
           }
@@ -113,6 +116,7 @@ export class AgencyListPage implements OnInit {
 
         {
           text: 'Cancelar',
+          cssClass: 'secondary',
           role: 'cancel'
         }
       ]
@@ -124,7 +128,7 @@ export class AgencyListPage implements OnInit {
   public async infiniteLoad($event) {
     let newAgencies:Agency[]=[];
     if(!this.infinite.disabled){
-      newAgencies=await this.as.getAllPaged(30,this.agencies.length);
+      newAgencies=await this.as.getAllPaged(this.niTems,this.agencies.length);
       this.agencies=this.agencies.concat(newAgencies);
 
       if(newAgencies.length<30){

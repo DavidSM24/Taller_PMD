@@ -10,7 +10,6 @@ import { GifUpdatePage } from '../gif-update/gif-update.page';
   styleUrls: ['./gif-list.page.scss'],
 })
 export class GifListPage implements OnInit {
-  @ViewChild("rowItem") rowItem:HTMLElement;
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   private n:number=0;
@@ -18,6 +17,7 @@ export class GifListPage implements OnInit {
 
   searchStr = "";
   private miLoading: HTMLIonLoadingElement;
+  private niTems:number;
 
   constructor(
     private gs: GiftService,
@@ -26,12 +26,12 @@ export class GifListPage implements OnInit {
     private modalCtrl: ModalController,
     private loading: LoadingController,
     private pt:Platform) { }
-
+    
   ngOnInit() {
-    let nItems=Math.ceil(this.pt.height()/this.rowItem.clientHeight)+20;
   }
 
   async ionViewWillEnter() {
+    this.niTems=  Math.ceil(this.pt.height()/20+10);
     await this.loadgifts();
     this.n=this.gifts.length;
 
@@ -48,13 +48,13 @@ export class GifListPage implements OnInit {
       }
       
       this.infinite.disabled=false;
-      newgifts=await this.gs.getAllPaged(15,0);
+      newgifts=await this.gs.getAllPaged(this.niTems,0);
       
       this.gifts=this.gifts.concat(newgifts);
 
     }
 
-    if(newgifts.length<15){
+    if(newgifts.length<this.niTems){
       this.infinite.disabled=true;
     }
 
@@ -108,7 +108,7 @@ export class GifListPage implements OnInit {
       buttons: [
         {
           text: 'Eliminar',
-          //cssClass: 'rojo',
+          cssClass: 'rojo',
           handler: () => {
             this.delete(gift);
           }
@@ -116,6 +116,7 @@ export class GifListPage implements OnInit {
 
         {
           text: 'Cancelar',
+          cssClass: 'secondary',
           role: 'cancel'
         }
       ]
@@ -127,10 +128,10 @@ export class GifListPage implements OnInit {
   public async infiniteLoad($event) {
     let newgifts:Gift[]=[];
     if(!this.infinite.disabled){
-      newgifts=await this.gs.getAllPaged(15,this.gifts.length);
+      newgifts=await this.gs.getAllPaged(this.niTems,this.gifts.length);
       this.gifts=this.gifts.concat(newgifts);
 
-      if(newgifts.length<15){
+      if(newgifts.length<this.niTems){
         this.infinite.disabled=true;
       }
     }

@@ -63,4 +63,8 @@ export class Tab3Page {
     }
   }
   
+  public segmentChanged(event){
+    
+  }
+
 }
