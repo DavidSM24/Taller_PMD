@@ -1,12 +1,16 @@
+.body{
+    background: #717499;
+    height: 100%;
+
+}
+
 .formulario{
-    margin: 2%;
+    padding: 1%;
     border-top: 2px double gray;
     border: 1px solid;
     border-color: "primary";
     border-radius: 2.5rem;
-
-    
-
+    background-color: white;
 }
 
 .button{
@@ -14,9 +18,12 @@
 }
 
 .customInput{
-    border: 1px solid;
-    border-color: "primary";
-    //border-radius: 2.5rem;
-    
+        border: 1px solid gray;
+        border-color: "primary";
+        border-radius: 2.5rem;
+}
+
+.toggle{
+    padding-right: 60%;
 }
 
