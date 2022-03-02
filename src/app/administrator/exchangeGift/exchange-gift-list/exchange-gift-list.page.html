@@ -1,59 +1,99 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>ExchangeGiftList</ion-title>
+<ion-header [translucent]="false">
+  <ion-toolbar color="primary">
+    
+    <ion-title>Lista de Regalos Intercambiados</ion-title>
+
+    <ion-buttons style="margin-right: 1%;" slot="end">
+      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="person" style="zoom:1.5;cursor:pointer"></ion-icon>
+    </ion-buttons>
+
   </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar placeholder="Encuentra la agencia que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+
+    <ion-row class="header-row">
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Fecha de Intercambio</ion-text>
+      </ion-col>
+
+      <ion-col  size="2.5" style="border: 0px !important;">
+        <ion-text>Nombre de Agencia</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Nombre de Regalo</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Entregado</ion-text>
+      </ion-col>
+
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+  
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-searchbar [(ngModel)]="searchTerm">
-  </ion-searchbar>
-  <ion-refresher slot="fixed" (ionRefresh)="cargaNotas($event)">
+<ion-content [fullscreen]="true" style="background-color: white;">
+
+  <ion-refresher slot="fixed" (ionRefresh)="reset($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
-
-    <ion-item-sliding *ngFor="let nota of notas | filter:searchTerm ;let i=index">
-      <ion-item-options side="start">
-        <ion-item-option color="primary" (click)="edita(nota)">
-          <ion-icon name="create" style="zoom:3.0"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+  <div class="body">
   
-      <ion-item>
-        <ion-label>
-          <h2>Fecha de intercambio: {{ExchangeGift.dateEchange}}</h2>
-          <h3>
-            Observaciones: {{ExchangeGift.observations}}
-          </h3>
-          <p>
-           Entregado: {{ExchangeGift.isDelivered}}
-          </p>
-          <p>
-           Nombre Agencia: {{ExchangeGift.agency.zipCode}}
-          </p>
-          <p>
-           Nombre Regalo: {{ExchangeGift.gift.name}}
-          </p>
-        </ion-label>
-      </ion-item>
+
+  <ion-grid class="ion-text-center">
+
+    <ion-row let *ngFor="let agency of this.agencies" class="row">
+      
+      <ion-col size="1">
+        <ion-text>
+          <ion-icon name="pencil" style="color:#22388c;cursor:pointer"></ion-icon>
+        </ion-text>
+      </ion-col>
+      
+      <ion-col size="3.4">
+        <ion-text>
+            {{agency.myInsuranceCompany.cia_Name}}
+        </ion-text>
+      </ion-col>
+
+        <ion-col size="3.3">
+          <ion-text>
+            {{agency.points}}
+          </ion-text>
+        </ion-col>
   
-      <ion-item-options side="end">
-        <ion-item-option color="danger" expandable (click)="mensagealerta(nota)">
-          <ion-icon name="remove-circle" style="zoom:3.0"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+        <ion-col size="3.3">
+          <ion-text>
+            {{agency.amount}} €
+          </ion-text>
+        </ion-col>
 
-   
-  </ion-list>
+        <ion-col size="1">
+          <ion-text>
+            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="showDeleteMenu(agency)"></ion-icon>
+          </ion-text>
+        </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
 
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="cargaInfinita($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="">
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="infiniteLoad($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</div>
+  
 </ion-content>
