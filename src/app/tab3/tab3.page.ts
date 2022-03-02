@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class Tab3Page {
 
   public formTest:FormGroup;
-
+  public file;
   constructor(private as:AgencyService,
     private fb: FormBuilder) {
 
@@ -63,6 +63,11 @@ export class Tab3Page {
     }
   }
   
+  public changeListener($event) : void {
+    this.file = $event.target.files[0];
+    console.log(this.file);
+  }
+
   public segmentChanged(event){
     
   }
