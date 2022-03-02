@@ -13,7 +13,7 @@ export class CarRepairService {
   URLDatabase:string;
 
   constructor(
-    public http:HttpClient
+    private http:HttpClient
   ) {
     this.URLDatabase=environment.herokuConfig.url;
    }
@@ -51,7 +51,7 @@ export class CarRepairService {
               myAgency:carRepair.myAgency
             }
 
-            carRepairs.push(carRepair);//se añade a la lista
+            carRepairs.push(tmp);//se añade a la lista
             
           }
         }
