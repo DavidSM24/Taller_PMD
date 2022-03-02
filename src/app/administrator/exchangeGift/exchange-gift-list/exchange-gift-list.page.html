@@ -10,7 +10,7 @@
 
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Encuentra la agencia que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+    <ion-searchbar placeholder="Encuentra el regalo intercambiado que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
     <ion-row class="header-row">
       <ion-col size="1" style="border: 0px !important;">
@@ -53,7 +53,7 @@
 
   <ion-grid class="ion-text-center">
 
-    <ion-row let *ngFor="let agency of this.agencies" class="row">
+    <ion-row let *ngFor="let exchangeGift of this.exGifts" class="row">
       
       <ion-col size="1">
         <ion-text>
@@ -61,27 +61,33 @@
         </ion-text>
       </ion-col>
       
-      <ion-col size="3.4">
+      <ion-col size="2.5">
         <ion-text>
-            {{agency.myInsuranceCompany.cia_Name}}
+            {{exchangeGift.dateEchange}}
         </ion-text>
       </ion-col>
 
-        <ion-col size="3.3">
+        <ion-col size="2.5">
           <ion-text>
-            {{agency.points}}
+            {{exchangeGift.agency.zipCode}}
           </ion-text>
         </ion-col>
   
-        <ion-col size="3.3">
+        <ion-col size="2.5">
           <ion-text>
-            {{agency.amount}} €
+            {{exchangeGift.gift.name}}
           </ion-text>
         </ion-col>
 
+        <ion-col size="2.5">
+          <ion-text>
+            {{exchangeGift.isDelivered}}
+          </ion-text>
+        </ion-col>
+        
         <ion-col size="1">
           <ion-text>
-            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="showDeleteMenu(agency)"></ion-icon>
+            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="mensagealerta(exchangeGift)"></ion-icon>
           </ion-text>
         </ion-col>
     </ion-row>
@@ -90,7 +96,7 @@
 
 
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="infiniteLoad($event)">
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="cargaInfinita($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
