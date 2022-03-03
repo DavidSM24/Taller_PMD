@@ -83,7 +83,7 @@ export class CarRepairService {
     */
    public async getAllPaged(limit:number,offset:number):Promise<CarRepair[]>{
 
-     return this.getListData(this.URLDatabase+this.endpoint+"/element/" + limit + "/page/" + offset);
+     return this.getListData(this.URLDatabase+this.endpoint+"/elements/" + limit + "/page/" + offset);
 
    }
 
