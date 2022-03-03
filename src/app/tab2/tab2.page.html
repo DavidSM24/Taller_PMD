@@ -11,7 +11,7 @@
   <div class="body">
   
   
-    <form [formGroup]="formTest" class="ion-padding">
+    <form [formGroup]="formGift" class="ion-padding">
       <div class="formulario">
       <ion-grid>
         <ion-row class="ion-align-items-center">
@@ -36,19 +36,19 @@
           </ion-col>
           <ion-col sizeSm="3" sizeLg="11  ">
             <ion-item  lines="none">
-              Si<ion-toggle></ion-toggle>No
+              No<ion-toggle></ion-toggle>Si
            </ion-item>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
         
           <ion-col size="12">
-            <ion-input type="file" (change)="changeListener($event)"></ion-input>
+            <ion-input type="file" accept=".jpg,.jpeg,.png" (change)="changeListener($event)"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col size="12">
-            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" class="button">
+            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="test_Create()" class="button">
               Crear Regalo
             </ion-button>
           </ion-col>
@@ -85,18 +85,6 @@
     Prueba getByAvailablePaged()
   </ion-button>
   <div>
-
-    <form [formGroup]="formTest">
-      <ion-item>
-        <ion-label>Título:</ion-label>
-        <ion-input class="customInput" type="text" formControlName="title"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Descripción:</ion-label>
-        <ion-textarea class="customInput" formControlName="description"></ion-textarea>
-      </ion-item>
-
-    </form>
 
     <ion-button (click)="test_Create()" expand="block" shape="round">
       Prueba create

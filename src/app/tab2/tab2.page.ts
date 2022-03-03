@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonToggle } from '@ionic/angular';
 import { Gift } from '../models/Gift';
 import { GiftService } from '../services/gift.service';
+
+
 
 @Component({
   selector: 'app-tab2',
@@ -10,11 +13,24 @@ import { GiftService } from '../services/gift.service';
 })
 export class Tab2Page {
 
+  @ViewChild(IonToggle) toggle: IonToggle;
+
+  public formGift:FormGroup;
+
   public img:string;
   public formTest: FormGroup;
   public file: any;
+  private extension:string;
 
-  constructor(private gs: GiftService) { }
+  constructor(
+    private gs: GiftService,
+    private fb: FormBuilder) { 
+
+      this.formGift = this.fb.group({
+        name: ["", Validators.required],
+        points: ["",Validators.required],
+      });
+    }
 
   public test_GetAll() {
     this.gs.getAll();
@@ -37,7 +53,24 @@ export class Tab2Page {
   }
 
   public async test_Create(): Promise<void> {
-    
+    if(this.extension){
+      if(this.extension==("image/jpg")
+      ||this.extension==("image/jpeg")
+      ||this.extension=="image/png"){
+
+        console.log("entro?");
+
+        let newGift: Gift = {
+          name: this.formGift.get("name").value,
+          points: this.formGift.get("points").value,
+          isAvailable: this.toggle.checked,
+          picture: '',
+          exchangeGifts: []
+        }
+
+        newGift=await this.gs.createOrUpdate(newGift,this.file);
+      }
+    }
   }
 
   public async test_Update() {
@@ -62,7 +95,24 @@ export class Tab2Page {
   }
 
   public changeListener($event) : void {
-    this.file = $event.target.files[0];
-    console.log(this.file);
+    try {
+      if($event){
+        
+        let extension:string=$event.target.files[0].type.toString();
+        if(extension==("image/jpeg")
+        ||extension==("image/png")){
+          this.file = $event.target.files[0];
+          this.extension=this.file.type;
+        }
+        else{
+          this.file=null;
+        }
+      }
+    } catch (error) {
+      //alert
+      this.file=null;
+    }
+    
+    console.log(this.file.type);
   }
 }
