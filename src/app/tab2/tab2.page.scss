@@ -1,7 +1,28 @@
-.customInput[type=text] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box; 
-    border: 2px !important;
-  }
+.body{
+  background: #717499;
+  background-size: cover;
+  min-height: 100%;
+}
+
+.formulario{
+  margin-top: 1.5%;
+  padding: 2%;
+  border-top: 2px double gray;
+  border: 1px solid;
+  border-color: "primary";
+  border-radius: 2.5rem;
+  background-color: white;
+  margin-bottom: 4%;
+}
+
+.button{
+  --background: #22388c;
+}
+
+.customInput{
+      border: 1px solid gray;
+      border-color: "primary";
+      border-radius: 2.5rem;
+}
+
+

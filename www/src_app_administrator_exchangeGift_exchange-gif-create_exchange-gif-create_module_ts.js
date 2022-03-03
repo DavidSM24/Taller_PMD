@@ -38,7 +38,7 @@ ExchangeGifCreatePageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__dec
 
 /***/ }),
 
-/***/ 5017:
+/***/ 2632:
 /*!**********************************************************************************************!*\
   !*** ./src/app/administrator/exchangeGift/exchange-gif-create/exchange-gif-create.module.ts ***!
   \**********************************************************************************************/

@@ -87,6 +87,11 @@ let UserService = class UserService {
             });
         });
     }
+    getByAvailable() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + this.endpoint + "/available");
+        });
+    }
     getByCode(code) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
             let user = null;

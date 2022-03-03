@@ -26,7 +26,7 @@ const routes = [
         children: [
             {
                 path: 'exchange-gift-list',
-                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_exchangeGift_exchange-gift-list_exchange-gift-list_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gift-list/exchange-gift-list.module */ 6243)).then(m => m.ExchangeGiftListPageModule)
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_exchangeGift_exchange-gift-list_exchange-gift-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gift-list/exchange-gift-list.module */ 6243)).then(m => m.ExchangeGiftListPageModule)
             },
             {
                 path: 'car-repair-list',
@@ -154,7 +154,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!--\r\n<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>TabAdministrator</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n-->\r\n<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button tab=\"about\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>About</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"blog\">\r\n      <ion-icon name=\"albums-outline\"></ion-icon>\r\n      <ion-label>Blog</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"contact\">\r\n      <ion-icon name=\"call-outline\"></ion-icon>\r\n      <ion-label>Contact</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!--\r\n<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>TabAdministrator</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n-->\r\n<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button tab=\"exchange-gift-list\">\r\n      <ion-icon name=\"mail\"></ion-icon>\r\n      <ion-label>Pedidos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"car-repair-list\">\r\n      <ion-icon name=\"car\"></ion-icon>\r\n      <ion-label>Reparaciones</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"agency-list\">\r\n      <ion-icon name=\"business\"></ion-icon>\r\n      <ion-label>Agencias</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"gif-list\">\r\n      <ion-icon name=\"gift\"></ion-icon>\r\n      <ion-label>Regalos</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n\r\n");
 
 /***/ }),
 
@@ -164,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************************************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0YWItYWRtaW5pc3RyYXRvci5wYWdlLnNjc3MifQ== */";
+module.exports = "ion-label {\n  color: #fff !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYi1hZG1pbmlzdHJhdG9yLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHNCQUFBO0FBQ0oiLCJmaWxlIjoidGFiLWFkbWluaXN0cmF0b3IucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWxhYmVse1xyXG4gICAgY29sb3I6ICNmZmYgIWltcG9ydGFudDtcclxufSJdfQ== */";
 
 /***/ })
 

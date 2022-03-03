@@ -42,7 +42,7 @@ const routes = [
             },
             {
                 path: 'tab5',
-                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_tab5_tab5_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../tab5/tab5.module */ 1853)).then(m => m.Tab5PageModule)
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_tab5_tab5_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../tab5/tab5.module */ 1853)).then(m => m.Tab5PageModule)
             },
             {
                 path: 'tab6',

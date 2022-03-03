@@ -22,7 +22,21 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        component: _gif_list_page__WEBPACK_IMPORTED_MODULE_0__.GifListPage
+        component: _gif_list_page__WEBPACK_IMPORTED_MODULE_0__.GifListPage,
+        children: [
+            {
+                path: 'gif-create',
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_gift_gif-create_gif-create_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../gif-create/gif-create.module */ 4844)).then(m => m.GifCreatePageModule)
+            },
+            {
+                path: 'gif-saw',
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_gift_gif-saw_gif-saw_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../gif-saw/gif-saw.module */ 2728)).then(m => m.GifSawPageModule)
+            },
+            {
+                path: 'gif-update',
+                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_gift_gif-update_gif-update_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../gif-update/gif-update.module */ 8458)).then(m => m.GifUpdatePageModule)
+            }
+        ]
     }
 ];
 let GifListPageRoutingModule = class GifListPageRoutingModule {
@@ -105,12 +119,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let GifListPage = class GifListPage {
-    constructor(gs, toast, AlertCtrl, modalCtrl, loading) {
+    constructor(gs, toast, AlertCtrl, modalCtrl, loading, pt) {
         this.gs = gs;
         this.toast = toast;
         this.AlertCtrl = AlertCtrl;
         this.modalCtrl = modalCtrl;
         this.loading = loading;
+        this.pt = pt;
         this.n = 0;
         this.gifts = [];
         this.searchStr = "";
@@ -119,6 +134,7 @@ let GifListPage = class GifListPage {
     }
     ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.niTems = Math.ceil(this.pt.height() / 20 + 10);
             yield this.loadgifts();
             this.n = this.gifts.length;
         });
@@ -131,10 +147,10 @@ let GifListPage = class GifListPage {
                     this.presentLoading();
                 }
                 this.infinite.disabled = false;
-                newgifts = yield this.gs.getAllPaged(15, 0);
+                newgifts = yield this.gs.getAllPaged(this.niTems, 0);
                 this.gifts = this.gifts.concat(newgifts);
             }
-            if (newgifts.length < 15) {
+            if (newgifts.length < this.niTems) {
                 this.infinite.disabled = true;
             }
             if (event) {
@@ -186,13 +202,14 @@ let GifListPage = class GifListPage {
                 buttons: [
                     {
                         text: 'Eliminar',
-                        //cssClass: 'rojo',
+                        cssClass: 'rojo',
                         handler: () => {
                             this.delete(gift);
                         }
                     },
                     {
                         text: 'Cancelar',
+                        cssClass: 'secondary',
                         role: 'cancel'
                     }
                 ]
@@ -204,9 +221,9 @@ let GifListPage = class GifListPage {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             let newgifts = [];
             if (!this.infinite.disabled) {
-                newgifts = yield this.gs.getAllPaged(15, this.gifts.length);
+                newgifts = yield this.gs.getAllPaged(this.niTems, this.gifts.length);
                 this.gifts = this.gifts.concat(newgifts);
-                if (newgifts.length < 15) {
+                if (newgifts.length < this.niTems) {
                     this.infinite.disabled = true;
                 }
             }
@@ -247,7 +264,8 @@ GifListPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ToastController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.LoadingController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.Platform }
 ];
 GifListPage.propDecorators = {
     infinite: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.ViewChild, args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonInfiniteScroll,] }]
@@ -264,6 +282,42 @@ GifListPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
+/***/ 6667:
+/*!******************************************************************!*\
+  !*** ./src/app/administrator/gift/gif-update/gif-update.page.ts ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GifUpdatePage": () => (/* binding */ GifUpdatePage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_update_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./gif-update.page.html */ 881);
+/* harmony import */ var _gif_update_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gif-update.page.scss */ 5795);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
+
+
+
+
+let GifUpdatePage = class GifUpdatePage {
+    constructor() { }
+    ngOnInit() {
+    }
+};
+GifUpdatePage.ctorParameters = () => [];
+GifUpdatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-gif-update',
+        template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_update_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_gif_update_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], GifUpdatePage);
+
+
+
+/***/ }),
+
 /***/ 9238:
 /*!*******************************************************************************************************************************!*\
   !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/administrator/gift/gif-list/gif-list.page.html ***!
@@ -274,7 +328,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"false\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>Lista de Regalos</ion-title>\r\n\r\n    <ion-buttons style=\"margin-right: 1%;\" slot=\"end\">\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"add-circle\" style=\"zoom:1.5\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"person\" style=\"zoom:1.5\"></ion-icon>\r\n    </ion-buttons>\r\n\r\n  </ion-toolbar>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-searchbar color=\"dark\" placeholder=\"Encuentra la agencia que estás buscando...\" inputmode=\"text\" type=\"text\" (ionChange)=\"onSearchChange($event)\" showCancelButton=\"always\"></ion-searchbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"reset($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <ion-list> \r\n\r\n    <ion-item-sliding *ngFor=\"let gift of this.gifts;let i=index\" color=\"primary\">\r\n      <ion-item-options side=\"start\">\r\n        <ion-item-option (click)=\"edit(gift)\">\r\n          <ion-icon name=\"create\" style=\"zoom:3.0\"></ion-icon>\r\n        </ion-item-option>\r\n      </ion-item-options>\r\n\r\n      <ion-item>\r\n        <ion-label>\r\n          <h2>{{gift.name}}</h2>\r\n          <p>{{gift.points}}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n\r\n      <ion-item-options side=\"end\">\r\n        <ion-item-option color=\"danger\" expandable (click)=\"showDeleteMenu(gift)\">\r\n          <ion-icon name=\"remove-circle\" style=\"zoom:3.0\"></ion-icon>\r\n        </ion-item-option>\r\n      </ion-item-options>\r\n    </ion-item-sliding>\r\n\r\n\r\n  </ion-list>\r\n\r\n\r\n\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"infiniteLoad($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n</ion-content>\r\n\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"false\">\r\n  <ion-toolbar color=\"primary\">\r\n    \r\n    <ion-title>Lista de Regalos</ion-title>\r\n\r\n    <ion-buttons style=\"margin-right: 1%;\" slot=\"end\">\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"add-circle\" style=\"zoom:1.5;cursor:pointer\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"person\" style=\"zoom:1.5;cursor:pointer\"></ion-icon>\r\n    </ion-buttons>\r\n\r\n  </ion-toolbar>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-searchbar color=\"dark\" placeholder=\"Encuentra el regalo que estás buscando...\" inputmode=\"text\" type=\"text\" (ionChange)=\"onSearchChange($event)\" showCancelButton=\"always\"></ion-searchbar>\r\n\r\n    <ion-row #rowItem class=\"header-row\">\r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"5\" style=\"border: 0px !important;\">\r\n        <ion-text>Nombre</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col  size=\"5\" style=\"border: 0px !important;\">\r\n        <ion-text>Puntos</ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-toolbar>\r\n  \r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"reset($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <div class=\"body\">\r\n\r\n  <ion-grid class=\"ion-text-center\">\r\n\r\n    <ion-row let *ngFor=\"let gift of this.gifts\" class=\"row\">\r\n      \r\n      <ion-col size=\"1\">\r\n        <ion-text>\r\n          <ion-icon name=\"pencil\" style=\"color:#22388c;cursor:pointer\"></ion-icon>\r\n        </ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"5\">\r\n        <ion-text>\r\n            {{gift.name}}\r\n        </ion-text>\r\n      </ion-col>\r\n\r\n        <ion-col size=\"5\">\r\n          <ion-text>\r\n            {{gift.points}}\r\n          </ion-text>\r\n        </ion-col>\r\n  \r\n        <ion-col size=\"1\">\r\n          <ion-text>\r\n            <ion-icon name=\"trash\" color=\"danger\" style=\"cursor: pointer;\" (click)=\"showDeleteMenu(gift)\"></ion-icon>\r\n          </ion-text>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-grid>\r\n\r\n\r\n\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"infiniteLoad($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n</div>\r\n  \r\n</ion-content>\r\n\r\n");
+
+/***/ }),
+
+/***/ 881:
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/administrator/gift/gif-update/gif-update.page.html ***!
+  \***********************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>GifUpdate</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -284,7 +352,17 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************************************/
 /***/ ((module) => {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJnaWYtbGlzdC5wYWdlLnNjc3MifQ== */";
+module.exports = "ion-col {\n  border-bottom: 1px solid #4b4b4d;\n}\nion-col ion-text {\n  color: #4b4b4d !important;\n}\n.header-row {\n  border-radius: 0%;\n  border: 0px;\n}\n.header-row ion-col {\n  text-align: center;\n}\n.header-row ion-col ion-text {\n  color: #fff !important;\n  font-size: 1.2rem;\n  text-align: center;\n}\n.row {\n  color: #fff;\n  font-size: 1.1rem;\n}\n.body {\n  /*  background: -webkit-linear-gradient(left, #22388c, #9ba2cc);\n    background: linear-gradient(to right, #22388c, #9ba2cc);*/\n  background-color: white;\n  font-family: \"Roboto\", sans-serif;\n  color: #4b4b4d;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdpZi1saXN0LnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFRTtFQUNFLGdDQUFBO0FBREo7QUFFSTtFQUNFLHlCQUFBO0FBQU47QUFHQTtFQUVJLGlCQUFBO0VBQ0EsV0FBQTtBQURKO0FBRUk7RUFDRSxrQkFBQTtBQUFOO0FBQ0k7RUFDRSxzQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7QUFDTjtBQUVFO0VBRUUsV0FBQTtFQUNBLGlCQUFBO0FBQUo7QUFHRTtFQUNBOzZEQUFBO0VBRUUsdUJBQUE7RUFDQSxpQ0FBQTtFQUNBLGNBQUE7QUFBSiIsImZpbGUiOiJnaWYtbGlzdC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuICBcclxuICBpb24tY29sIHtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjNGI0YjRkO1xyXG4gICAgaW9uLXRleHR7XHJcbiAgICAgIGNvbG9yOiM0YjRiNGQgIWltcG9ydGFudDtcclxuICAgIH1cclxuICB9XHJcbi5oZWFkZXItcm93IHtcclxuICAgIC8vYmFja2dyb3VuZDogIzliOWI5YjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDAlO1xyXG4gICAgYm9yZGVyOiAwcHg7XHJcbiAgICBpb24tY29se1xyXG4gICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBpb24tdGV4dHtcclxuICAgICAgY29sb3I6ICNmZmYgIWltcG9ydGFudDtcclxuICAgICAgZm9udC1zaXplOiAxLjJyZW07XHJcbiAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIH19XHJcbiAgfVxyXG4gIC5yb3cge1xyXG4gICAgLy9iYWNrZ3JvdW5kOiAjMjIzODhjO1xyXG4gICAgY29sb3I6ICNmZmY7XHJcbiAgICBmb250LXNpemU6IDEuMXJlbTtcclxuICB9XHJcblxyXG4gIC5ib2R5e1xyXG4gIC8qICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudChsZWZ0LCAjMjIzODhjLCAjOWJhMmNjKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzIyMzg4YywgIzliYTJjYyk7Ki9cclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zLXNlcmlmO1xyXG4gICAgY29sb3I6ICM0YjRiNGQ7XHJcbiAgfSJdfQ== */";
+
+/***/ }),
+
+/***/ 5795:
+/*!********************************************************************!*\
+  !*** ./src/app/administrator/gift/gif-update/gif-update.page.scss ***!
+  \********************************************************************/
+/***/ ((module) => {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJnaWYtdXBkYXRlLnBhZ2Uuc2NzcyJ9 */";
 
 /***/ })
 

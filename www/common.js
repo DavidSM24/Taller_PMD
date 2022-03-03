@@ -165,78 +165,6 @@ const searchSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/
 
 /***/ }),
 
-/***/ 2483:
-/*!**************************************************************************!*\
-  !*** ./src/app/administrator/agency/agency-update/agency-update.page.ts ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AgencyUpdatePage": () => (/* binding */ AgencyUpdatePage)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_agency_update_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./agency-update.page.html */ 7447);
-/* harmony import */ var _agency_update_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./agency-update.page.scss */ 4478);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-
-
-
-
-let AgencyUpdatePage = class AgencyUpdatePage {
-    constructor() { }
-    ngOnInit() {
-    }
-};
-AgencyUpdatePage.ctorParameters = () => [];
-AgencyUpdatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
-        selector: 'app-agency-update',
-        template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_agency_update_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_agency_update_page_scss__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], AgencyUpdatePage);
-
-
-
-/***/ }),
-
-/***/ 6667:
-/*!******************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-update/gif-update.page.ts ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GifUpdatePage": () => (/* binding */ GifUpdatePage)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_update_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./gif-update.page.html */ 881);
-/* harmony import */ var _gif_update_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gif-update.page.scss */ 5795);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-
-
-
-
-let GifUpdatePage = class GifUpdatePage {
-    constructor() { }
-    ngOnInit() {
-    }
-};
-GifUpdatePage.ctorParameters = () => [];
-GifUpdatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
-        selector: 'app-gif-update',
-        template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_update_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_gif_update_page_scss__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], GifUpdatePage);
-
-
-
-/***/ }),
-
 /***/ 4551:
 /*!******************************************************************!*\
   !*** ./src/app/explore-container/explore-container.component.ts ***!
@@ -473,6 +401,149 @@ AgencyService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 
 /***/ }),
 
+/***/ 63:
+/*!***************************************************!*\
+  !*** ./src/app/services/exchange-gift.service.ts ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ExchangeGiftService": () => (/* binding */ ExchangeGiftService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 3981);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
+
+
+
+
+let ExchangeGiftService = class ExchangeGiftService {
+    constructor(http) {
+        this.http = http;
+        this.endpoint = "/exchangegift";
+        this.URLDatabase = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.herokuConfig.url;
+    }
+    getListData(endpoint) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let users = [];
+            return new Promise(resolve => {
+                this.http.get(endpoint).subscribe((data) => {
+                    if (data != null && data.length > 0) {
+                        for (let miexgift of data) {
+                            const tmp = {
+                                id: miexgift.id,
+                                dateEchange: miexgift.dateEchange,
+                                observations: miexgift.observations,
+                                isDelivered: miexgift.isDelivered,
+                                agency: miexgift.agency,
+                                gift: miexgift.gift
+                            };
+                            users.push(tmp);
+                        }
+                    }
+                    console.log(data);
+                    resolve(users);
+                }, error => {
+                    console.log(error);
+                });
+            });
+        });
+    }
+    getAllPaged(element, page) {
+        return this.getListData(this.URLDatabase + this.endpoint + "/element/" + element + "/page/" + page);
+    }
+    getAll() {
+        return this.getListData(this.URLDatabase + this.endpoint);
+    }
+    getById(id) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let exchangegift = null;
+            return new Promise(resolve => {
+                this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miexgift) => {
+                    if (miexgift.id) {
+                        const tmp = {
+                            id: miexgift.id,
+                            dateEchange: miexgift.dateEchange,
+                            observations: miexgift.observations,
+                            isDelivered: miexgift.isDelivered,
+                            agency: miexgift.agency,
+                            gift: miexgift.gift
+                        };
+                        exchangegift = tmp;
+                    }
+                    console.log(exchangegift);
+                    resolve(exchangegift);
+                }, error => {
+                    console.log(error);
+                    console.log(exchangegift);
+                    resolve(exchangegift);
+                });
+            });
+        });
+    }
+    getByDeliveredPaged(delivered, element, page) {
+        return this.getListData(this.URLDatabase + this.endpoint + "/delivered/" + delivered + "/element/" + element + "/page/" + page);
+    }
+    getByAgencyPaged(agency, element, page) {
+        if (agency != null) {
+            return this.getListData(this.URLDatabase + this.endpoint + "/id_agency/" + agency.id + "/element/" + element + "/page/" + page);
+        }
+        else {
+            let result;
+            return result;
+        }
+    }
+    createOrUpdate(exgift) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            if (exgift != null) {
+                const body = exgift;
+                return new Promise(resolve => {
+                    this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miexgift) => {
+                        let result = {
+                            id: miexgift.id,
+                            dateEchange: miexgift.dateEchange,
+                            observations: miexgift.observations,
+                            isDelivered: miexgift.isDelivered,
+                            agency: miexgift.agency,
+                            gift: miexgift.gift
+                        };
+                        resolve(result);
+                    }, error => {
+                        console.log(error);
+                        resolve(exgift);
+                    });
+                });
+            }
+        });
+    }
+    delete(exgift) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return new Promise(resolve => {
+                this.http.delete(this.URLDatabase + this.endpoint, { body: exgift }).subscribe(() => {
+                    resolve(true);
+                }, error => {
+                    console.log(error);
+                    resolve(false);
+                });
+            });
+        });
+    }
+};
+ExchangeGiftService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
+];
+ExchangeGiftService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+        providedIn: 'root'
+    })
+], ExchangeGiftService);
+
+
+
+/***/ }),
+
 /***/ 4483:
 /*!******************************************!*\
   !*** ./src/app/services/gift.service.ts ***!
@@ -628,34 +699,6 @@ GiftService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 
 /***/ }),
 
-/***/ 7447:
-/*!*******************************************************************************************************************************************!*\
-  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/administrator/agency/agency-update/agency-update.page.html ***!
-  \*******************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>AgencyUpdate</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n");
-
-/***/ }),
-
-/***/ 881:
-/*!***********************************************************************************************************************************!*\
-  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/administrator/gift/gif-update/gif-update.page.html ***!
-  \***********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>GifUpdate</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n");
-
-/***/ }),
-
 /***/ 9651:
 /*!***********************************************************************************************************************************!*\
   !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/explore-container/explore-container.component.html ***!
@@ -667,26 +710,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div id=\"container\">\n  <strong>{{ name }}</strong>\n  <p>Explore <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://ionicframework.com/docs/components\">UI Components</a></p>\n</div>");
-
-/***/ }),
-
-/***/ 4478:
-/*!****************************************************************************!*\
-  !*** ./src/app/administrator/agency/agency-update/agency-update.page.scss ***!
-  \****************************************************************************/
-/***/ ((module) => {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhZ2VuY3ktdXBkYXRlLnBhZ2Uuc2NzcyJ9 */";
-
-/***/ }),
-
-/***/ 5795:
-/*!********************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-update/gif-update.page.scss ***!
-  \********************************************************************/
-/***/ ((module) => {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJnaWYtdXBkYXRlLnBhZ2Uuc2NzcyJ9 */";
 
 /***/ }),
 

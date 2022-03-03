@@ -102,6 +102,8 @@ let GifCreatePage = class GifCreatePage {
     constructor() { }
     ngOnInit() {
     }
+    segmentChanged(event) {
+    }
 };
 GifCreatePage.ctorParameters = () => [];
 GifCreatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
@@ -126,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>GifCreate</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>GifCreate</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n  it workds!\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
