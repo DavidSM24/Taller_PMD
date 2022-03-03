@@ -3,14 +3,103 @@
     <ion-title>CarRepairList</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5"></ion-icon>
+      <ion-icon class="icon-logout"  slot="end" name="add-circle" style="zoom:1.5"></ion-icon>
       <ion-icon class="icon-logout" slot="end" name="person" style="zoom:1.5"></ion-icon>
     </ion-buttons>
 
     
   </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-searchbar placeholder="Encuentra la agencia que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+
+    <ion-row class="header-row">
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Operación</ion-text>
+      </ion-col>
+
+      <ion-col  size="2.5" style="border: 0px !important;">
+        <ion-text>Matrícula</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Agencia</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Reparado</ion-text>
+      </ion-col>
+      
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+  
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" style="background-color: white;">
 
+  <ion-refresher slot="fixed" (ionRefresh)="reset($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="body">
+  
+
+  <ion-grid class="ion-text-center">
+
+    <ion-row let *ngFor="let carRepair of this.carRepairs" class="row">
+      
+      <ion-col size="1">
+        <ion-text>
+          <ion-icon name="pencil" style="color:#22388c;cursor:pointer"></ion-icon>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="2.5">
+        <ion-text>
+            {{carRepair.operation}}
+        </ion-text>
+      </ion-col>
+      
+      <ion-col size="2.5">
+        <ion-text>
+            {{carRepair.carPlate}}
+        </ion-text>
+      </ion-col>
+
+        <ion-col size="2.5">
+          <ion-text>
+            {{carRepair.myAgency.myUser.name}}
+          </ion-text>
+        </ion-col>
+  
+        <ion-col size="2.5">
+          <ion-text>
+            {{carRepair.repaired}} 
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="1">
+          <ion-text>
+            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="showDeleteMenu(carRepair)"></ion-icon>
+          </ion-text>
+        </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="infiniteLoad($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>
 </ion-content>

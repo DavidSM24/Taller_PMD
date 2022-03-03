@@ -1,0 +1,32 @@
+
+  ion-col {
+    border-bottom: 1px solid #4b4b4d;
+    ion-text{
+      color:#4b4b4d !important;
+    }
+  }
+.header-row {
+    //background: #9b9b9b;
+    border-radius: 0%;
+    border: 0px;
+    ion-col{
+      text-align: center;
+    ion-text{
+      color: #fff !important;
+      font-size: 1.2rem;
+      text-align: center;
+    }}
+  }
+  .row {
+    //background: #22388c;
+    color: #fff;
+    font-size: 1.1rem;
+  }
+
+  .body{
+  /*  background: -webkit-linear-gradient(left, #22388c, #9ba2cc);
+    background: linear-gradient(to right, #22388c, #9ba2cc);*/
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    color: #4b4b4d;
+  }
