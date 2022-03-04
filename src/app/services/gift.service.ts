@@ -31,7 +31,7 @@ export class GiftService {
               points: g.points,
               picture: g.picture,
               exchangeGifts: [],
-              isAvailable: g.available
+              available: g.available
             }
 
             for (let eg of g.exchangeGifts) {
@@ -72,7 +72,7 @@ export class GiftService {
             points: data.points,
             picture: data.picture,
             exchangeGifts: [],
-            isAvailable: data.available
+            available: data.available
           }
 
           for (let eg of data.exchangeGifts) {
@@ -114,10 +114,8 @@ export class GiftService {
     }
 
     else {
-      const body = gift;
+      const body:Gift = gift;
       return new Promise(resolve => {
-
-
 
         let formData = new FormData();
         formData.append('g', new Blob([JSON.stringify(gift)], {

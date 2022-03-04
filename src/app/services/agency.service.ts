@@ -34,10 +34,10 @@ export class AgencyService {
               amount: a.amount,
               points: a.points,
               pointsRedeemed: a.pointsRedeemed,
-              isActive: a.active,
+              active: a.active,
               myInsuranceCompany: a.myInsuranceCompany,
               myCarRepairs: a.mycarRepairs,
-              myExchangeGifts: a.myExchangeGifts,
+              myExchangesGifts: a.myExchangeGifts,
               myUser: a.myUser
             }
 
@@ -78,10 +78,10 @@ export class AgencyService {
             amount: a.amount,
             points: a.points,
             pointsRedeemed: a.pointsRedeemed,
-            isActive: a.active,
+            active: a.active,
             myInsuranceCompany: a.myInsuranceCompany,
             myCarRepairs: a.mycarRepairs,
-            myExchangeGifts: a.myExchangeGifts,
+            myExchangesGifts: a.myExchangeGifts,
             myUser: a.myUser
           }
 
@@ -108,7 +108,7 @@ export class AgencyService {
   }
 
   public async createOrUpdate(agency: Agency): Promise<Agency> {
-    console.log(agency);
+
     if (agency == null
       || agency.address == null
       || agency.address == ""
