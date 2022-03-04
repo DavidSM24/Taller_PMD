@@ -58,30 +58,30 @@
       
       <ion-col size="1">
         <ion-text>
-          <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="goUpdatePage()"></ion-icon>
+          <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="goUpdatePage(carRepair.id)"></ion-icon>
         </ion-text>
       </ion-col>
 
       
-      <ion-col size="2.5" (click)="goSawPage()">
+      <ion-col size="2.5" (click)="goSawPage(carRepair.id)">
         <ion-text class="pointerText">
             {{carRepair.operation}}
         </ion-text>
       </ion-col>
       
-      <ion-col size="2.5"(click)="goSawPage()">
+      <ion-col size="2.5"(click)="goSawPage(carRepair.id)">
         <ion-text class="pointerText">
             {{carRepair.carPlate}}
         </ion-text>
       </ion-col>
 
-        <ion-col size="2.5"(click)="goSawPage()">
+        <ion-col size="2.5"(click)="goSawPage(carRepair.id)">
           <ion-text class="pointerText">
             {{carRepair.myAgency.myUser.name}}
           </ion-text>
         </ion-col>
   
-        <ion-col size="2.5"(click)="goSawPage()">
+        <ion-col size="2.5"(click)="goSawPage(carRepair.id)">
           <ion-text class="pointerText">
             {{carRepair.repaired}} 
           </ion-text>

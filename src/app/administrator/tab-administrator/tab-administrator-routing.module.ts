@@ -35,11 +35,11 @@ const routes: Routes = [
             loadChildren: () => import('../carRepair/car-repair-list/car-repair-list.module').then( m => m.CarRepairListPageModule)
           },
           {
-            path: 'saw',
+            path: 'saw/:id',
             loadChildren: () => import('../carRepair/car-repair-saw/car-repair-saw.module').then( m => m.CarRepairSawPageModule)
           },
           {
-            path: 'update',
+            path: 'update/:id',
             loadChildren: () => import('../carRepair/car-repair-update/car-repair-update.module').then( m => m.CarRepairUpdatePageModule)
           }
         ]

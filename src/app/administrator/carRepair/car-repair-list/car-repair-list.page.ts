@@ -75,7 +75,7 @@ export class CarRepairListPage implements OnInit {
         this.presentToast("Error de carga","danger");
       }finally{
         if(event){
-
+         
           event.target.complete();
     
         }else{
@@ -196,15 +196,15 @@ export class CarRepairListPage implements OnInit {
   /**
    * Método que redirige a la página de actualizar reparaciones
    */
-  public goUpdatePage(){
-    this.routes.navigateByUrl('tab-administrator/car-repair/update');
+  public goUpdatePage(id:number){
+    this.routes.navigateByUrl('tab-administrator/car-repair/update/'+id);
   }
 
   /**
    * Método que redirige a la página de ver
    */
-  public goSawPage(){
-    this.routes.navigateByUrl('tab-administrator/car-repair/saw');
+  public goSawPage(id:number){
+    this.routes.navigateByUrl('tab-administrator/car-repair/saw/'+id);
 
   }
 
