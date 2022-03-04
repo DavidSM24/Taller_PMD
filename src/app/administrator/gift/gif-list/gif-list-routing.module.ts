@@ -9,15 +9,15 @@ const routes: Routes = [
     component: GifListPage,
     children:[
       {
-        path: 'gif-create',
+        path: 'gift-create',
         loadChildren: () => import('../gif-create/gif-create.module').then( m => m.GifCreatePageModule)
       },
       {
-        path: 'gif-saw',
+        path: 'gift-saw',
         loadChildren: () => import('../gif-saw/gif-saw.module').then( m => m.GifSawPageModule)
       },
       {
-        path: 'gif-update',
+        path: 'gift-update',
         loadChildren: () => import('../gif-update/gif-update.module').then( m => m.GifUpdatePageModule)
       }
     ]
