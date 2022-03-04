@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Agency } from '../models/Agency';
 import { ExchangeGift } from '../models/ExchangeGift';
 import { ExchangeGiftService } from '../services/exchange-gift.service';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-tab5',
   templateUrl: './tab5.page.html',
   styleUrls: ['./tab5.page.scss'],
 })
-export class Tab5Page implements OnInit {
+export class Tab5Page {
+  public formTest:FormGroup;
+  
+  constructor(private ex: ExchangeGiftService,
+    private fb: FormBuilder) {
 
-  constructor(private ex: ExchangeGiftService) { }
+      this.formTest=this.fb.group({
+        
+      });
+    }
 
-  ngOnInit() {
-  }
   public test_GetAll() {
     this.ex.getAll();
   }
