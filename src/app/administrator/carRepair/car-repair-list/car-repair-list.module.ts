@@ -8,6 +8,8 @@ import { CarRepairListPageRoutingModule } from './car-repair-list-routing.module
 
 import { CarRepairListPage } from './car-repair-list.page';
 
+
+
 @NgModule({
   imports: [
     CommonModule,

@@ -21,22 +21,6 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'agency-list',
-    loadChildren: () => import('./administrator/agency/agency-list/agency-list.module').then( m => m.AgencyListPageModule)
-  },  
-  {
-    path: 'gif-list',
-    loadChildren: () => import('./administrator/gift/gif-list/gif-list.module').then( m => m.GifListPageModule)
-  },
-  {
-    path: 'car-repair-list',
-    loadChildren: () => import('./administrator/carRepair/car-repair-list/car-repair-list.module').then( m => m.CarRepairListPageModule)
-  },  
-  {
-    path: 'exchange-gift-list',
-    loadChildren: () => import('./administrator/exchangeGift/exchange-gift-list/exchange-gift-list.module').then( m => m.ExchangeGiftListPageModule)
   },  
   {
     path: 'tab-administrator',
@@ -46,6 +30,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+  
 
 ];
 @NgModule({
