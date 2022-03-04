@@ -2,9 +2,10 @@
     background: #717499;
     background-size: cover;
     min-height: 100%;
-}
+    
+  }
 
-.container{
+  .formulario{
     margin-top: 1.5%;
     padding: 2%;
     border-top: 2px double gray;
@@ -13,14 +14,24 @@
     border-radius: 2.5rem;
     background-color: white;
     margin-bottom: 4%;
-}
+    margin-left:5%;
+    margin-right:5%;
+  }
 
-.button{
-    --background: #22388c;
-}
+  .card{
+    margin-left:22%;
+    margin-right:22%;
+  }
 
-.customInput{
-        border: 1px solid gray;
-        border-color: "primary";
-        border-radius: 2.5rem;
-}
+  .info{
+
+    margin-left:15%;
+    margin-right:15%;
+    
+  }
+
+  .image {
+    width: fit-content;
+ }
+
+  
