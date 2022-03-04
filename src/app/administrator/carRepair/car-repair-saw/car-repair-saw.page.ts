@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CarRepairService } from 'src/app/services/car-repair.service';
 
 @Component({
   selector: 'app-car-repair-saw',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarRepairSawPage implements OnInit {
 
-  constructor() { }
+  public formCarRepair:FormGroup;
+
+  constructor(
+    private carRepairService:CarRepairService,
+    private formBuilder:FormBuilder,
+    private routes:Router
+  ) { }
 
   ngOnInit() {
   }
 
+
+  public goUpdatePage(){
+    this.routes.navigateByUrl('tab-administrator/car-repair/update');
+  }
 }

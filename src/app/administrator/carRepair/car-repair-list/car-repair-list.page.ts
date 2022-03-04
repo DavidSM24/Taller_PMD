@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
-import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
-import { CarRepairListPageRoutingModule } from './car-repair-list-routing.module';
 
 @Component({
   selector: 'app-car-repair-list',
