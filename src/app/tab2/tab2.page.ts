@@ -53,6 +53,9 @@ export class Tab2Page {
   }
 
   public async test_Create(): Promise<void> {
+    
+    console.log(this.toggle.checked);
+    
     if(this.extension){
       if(this.extension==("image/jpg")
       ||this.extension==("image/jpeg")
@@ -60,10 +63,10 @@ export class Tab2Page {
 
         console.log("entro?");
 
-        let newGift: Gift = {
+        let newGift:Gift = {
           name: this.formGift.get("name").value,
           points: this.formGift.get("points").value,
-          isAvailable: this.toggle.checked,
+          available: this.toggle.checked,
           picture: '',
           exchangeGifts: []
         }

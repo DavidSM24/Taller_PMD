@@ -12,9 +12,9 @@ export interface Agency{
     amount:number,
     points:number,
     pointsRedeemed:number,
-    isActive:boolean,
+    active:boolean,
     myInsuranceCompany:InsuranceCompany,
     myCarRepairs:CarRepair[],
-    myExchangeGifts:ExchangeGift[],
+    myExchangesGifts:ExchangeGift[],
     myUser:User
 }
