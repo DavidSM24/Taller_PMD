@@ -4,6 +4,130 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <div class="body">
+    <form [formGroup]="formCarRepair" class="ion-padding">
+      <div class="formulario">
+      <ion-grid>
+        
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Operación</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input type="number" Disabled class="customInput" formControlName="zipCode"></ion-input>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Matrícula</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" Disabled type="text" formControlName="address"></ion-input>
+          </ion-col>
+        </ion-row>
 
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Modelo</ion-label>
+          </ion-col>
+          <ion-col sizeSm="5" sizeLg="11">
+            <ion-input class="customInput" Disabled type="text" formControlName="location"></ion-input>
+          </ion-col>          
+        </ion-row>
+        
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Marca</ion-label>
+          </ion-col>
+          <ion-col sizeSm="5" sizeLg="11">
+            <ion-input class="customInput" Disabled type="text" formControlName="phoneNumber"></ion-input>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Cliente</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" Disabled type="text" formControlName="amount"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>NOR</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" Disabled type="number" formControlName="pointsRedeemed"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Coste</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" Disabled type="number" formControlName="pointsRedeemed"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Puntos</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" Disabled type="number" formControlName="pointsRedeemed"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Agencia</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" Disabled type="text" formControlName="pointsRedeemed"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col   sizeSm="7" sizeLg="1.5">
+            <ion-label>Fecha de alta</ion-label>
+          </ion-col>
+          <ion-col  sizeSm="7" sizeLg="1.5" >
+            <ion-input class="customInput" Disabled type="date" formControlName="points"></ion-input>
+          </ion-col>
+         
+         
+        </ion-row> 
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="7" sizeLg="1.5">
+            <ion-label>Fecha de reparación</ion-label>
+          </ion-col>
+          <ion-col  sizeSm="7" sizeLg="1.5">
+            <ion-input class="customInput" Disabled type="date" formControlName="pointsRedeemed"></ion-input>
+          </ion-col>
+        </ion-row> 
+        <ion-row class="ion-align-items-center">
+          <ion-col  sizeSm="7" sizeLg="1.5">
+            Reparado
+          </ion-col>
+          <ion-col sizeSm="7" sizeLg="1.5">
+            <ion-input class="customInput" Disabled type="text" formControlName="pointsRedeemed"></ion-input>
+          
+          </ion-col>
+        </ion-row> 
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6">
+            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" class="button">
+              Cancelar
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="goUpdatePage()" class="button">
+              Actualizar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    </form>  
+</div>
 </ion-content>
