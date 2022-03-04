@@ -19,7 +19,7 @@ const routes: Routes = [
       {
         path: 'car-repair-create',
         loadChildren: () => import('../car-repair-create/car-repair-create.module').then( m => m.CarRepairCreatePageModule)
-      },
+      }
     ]
   }
 ];

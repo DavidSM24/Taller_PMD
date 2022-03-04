@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
-import { AgencyUpdatePage } from '../../agency/agency-update/agency-update.page';
 import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
+import { CarRepairListPageRoutingModule } from './car-repair-list-routing.module';
 
 @Component({
   selector: 'app-car-repair-list',
@@ -26,7 +27,9 @@ export class CarRepairListPage implements OnInit {
     private alertCtrl:AlertController,
     private modalCtrl:ModalController,
     private loading:LoadingController,
+    private routes:Router,
     private pt:Platform//para saber el dispositivo
+
   ) {
 
    }
@@ -182,6 +185,29 @@ export class CarRepairListPage implements OnInit {
         
       }
     }
+  }
+
+
+  /**
+   * Método que te redirige a la página de crear
+   */
+  public goCreatePage(){
+    this.routes.navigateByUrl('tab-administrator/car-repair/create');
+  }
+
+  /**
+   * Método que redirige a la página de actualizar reparaciones
+   */
+  public goUpdatePage(){
+    this.routes.navigateByUrl('tab-administrator/car-repair/update');
+  }
+
+  /**
+   * Método que redirige a la página de ver
+   */
+  public goSawPage(){
+    this.routes.navigateByUrl('tab-administrator/car-repair/saw');
+
   }
 
 
