@@ -29,7 +29,7 @@ export class Tab3Page {
       zipCode: ["", Validators.required],
       address: ["", Validators.required],
       location: ["", Validators.required],
-      phoneNumber: ["", Validators.required],
+      phoneNumber: ["", Validators.required]
     });
   }
 

@@ -19,7 +19,7 @@ export class Tab2Page {
 
   public img:string;
   public formTest: FormGroup;
-  public file: any;
+  public file: any=null;
   private extension:string;
 
   constructor(

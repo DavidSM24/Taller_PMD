@@ -42,4 +42,8 @@ ion-icon{
 .secondary{
   color: #22388c !important;
 }
-
+.customInput{
+  .native-input{
+    border-radius: 2.5rem !important;
+  }
+}

@@ -78,7 +78,7 @@
 
         <ion-row class="ion-align-items-center">
           <ion-col size="12">
-            <ion-button (click)="test_Create()" expand="block" shape="round" style="margin-top: 2% !important;" class="button">
+            <ion-button (click)="test_Create()" expand="block" shape="round" style="margin-top: 2% !important;" class="button" [disabled]="this.formAgency.invalid||this.insurance==null">
               Crear Agencia
             </ion-button>
           </ion-col>
