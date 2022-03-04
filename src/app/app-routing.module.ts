@@ -30,6 +30,19 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: 'user-create',
+    loadChildren: () => import('./administrator/user/user-create/user-create.module').then( m => m.UserCreatePageModule)
+  },
+  {
+    path: 'user-list',
+    loadChildren: () => import('./administrator/user/user-list/user-list.module').then( m => m.UserListPageModule)
+  },
+  {
+    path: 'user-update',
+    loadChildren: () => import('./administrator/user/user-update/user-update.module').then( m => m.UserUpdatePageModule)
+  },
+
   
 
 ];

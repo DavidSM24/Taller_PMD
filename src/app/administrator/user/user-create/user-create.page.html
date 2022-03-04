@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Creacion de Usuario
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="body">
+    <form [formGroup]="formUser" class="ion-padding">
+      <div class="formulario">
+      <ion-grid>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Code:</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" type="number" formControlName="code"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Contraseña:</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" type="password" formControlName="password"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="9" sizeLg="1">
+            Administrador:
+          </ion-col>
+          <ion-col sizeSm="3" sizeLg="11  ">
+            <ion-item  lines="none">
+              No<ion-toggle></ion-toggle>Si
+           </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Email:</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" type="text" formControlName="email"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Name:</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-input class="customInput" type="text" formControlName="name"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12">
+            <ion-button (click)="CreateUser()" expand="block" shape="round" style="margin-top: 2% !important;" class="button" [disabled]="this.formUser.invalid">
+              Crear Usuario
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    </form>
+</div>
+</ion-content>
