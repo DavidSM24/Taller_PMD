@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,7 +15,9 @@ import { CarRepairListPage } from './car-repair-list.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CarRepairListPageRoutingModule
+    CarRepairListPageRoutingModule,
+
+    ReactiveFormsModule
   ],
   declarations: [CarRepairListPage]
 })
