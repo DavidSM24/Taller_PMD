@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
+import { CarRepairSawPage } from '../car-repair-saw/car-repair-saw.page';
+import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
 
 @Component({
   selector: 'app-car-repair-list',
@@ -92,7 +94,40 @@ export class CarRepairListPage implements OnInit {
    */
   public async edit(carRepair:CarRepair){
 
+    const modal = await this.modalCtrl.create({
+      component: CarRepairUpdatePage,
+      //hoja de estilos
+      cssClass: 'my-modal-class',
+      //pasar datos al modal
+      
+      componentProps: {
+        'carRepair':carRepair
+        
+        
+      }
+    });
    
+  
+    return await modal.present();
+
+  }
+  public async saw(carRepair:CarRepair){
+
+    const modal = await this.modalCtrl.create({
+      component: CarRepairSawPage,
+      //hoja de estilos
+      cssClass: 'my-modal-class',
+      //pasar datos al modal
+      
+      componentProps: {
+        'carRepair':carRepair
+        
+        
+      }
+    });
+   
+  
+    return await modal.present();
 
   }
 
