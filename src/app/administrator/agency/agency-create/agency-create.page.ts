@@ -6,6 +6,7 @@ import { Agency } from 'src/app/models/Agency';
 import { InsuranceCompany } from 'src/app/models/InsuranceCompany';
 import { AgencyService } from 'src/app/services/agency.service';
 import { InsuranceCompanyService } from 'src/app/services/insurance-company.service';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
   selector: 'app-agency-create',
@@ -24,7 +25,8 @@ export class AgencyCreatePage {
     private as: AgencyService,
     private fb: FormBuilder,
     private is: InsuranceCompanyService,
-    private pickerController:PickerController) {
+    private pickerController:PickerController,
+    private uts:UtilService) {
 
     this.formAgency = this.fb.group({
       zipCode: ["", Validators.required],
@@ -35,38 +37,24 @@ export class AgencyCreatePage {
   }
 
   async ionViewWillEnter() {
+    
+    this.uts.presentLoading();
     this.companies=await this.is.getAll();
-    if(this.companies.length>0){
+    if(this.companies.length<=0){
+      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger');
     }
-  }
-
-  public test_GetAll() {
-    this.as.getAll();
-  }
-
-  public test_GetAllPaged(limit: number, offset: number) {
-    this.as.getAllPaged(limit, offset);
-  }
-
-  public test_GetById(id: number) {
-    this.as.getById(id);
-  }
-
-  public test_GetByUserNamePaged(username: string, limit: number, offset: number) {
-    this.as.getByUserNamePaged(username, limit, offset);
-  }
-
-  public test_GetByisActivePaged(available: boolean, limit: number, offset: number) {
-    this.as.getByisActivePaged(available, limit, offset);
+    this.uts.hideLoading();
   }
 
   public async create(): Promise<void> {
+
+    this.uts.presentLoading();
 
     if(this.insurance!=null){
       let ag: Agency = await this.as.getById(7);
 
 
-      let newGift: Agency = {
+      let newAgency: Agency = {
         zipCode: this.formAgency.get("zipCode").value,
         address: this.formAgency.get("address").value,
         location: this.formAgency.get("location").value,
@@ -81,35 +69,21 @@ export class AgencyCreatePage {
         active: this.toggle.checked
       }
   
-      console.log(newGift);
+      console.log(newAgency);
   
-      newGift = await this.as.createOrUpdate(newGift);
+      newAgency = await this.as.createOrUpdate(newAgency);
+      if(newAgency.id){
+        this.formAgency.reset();
+        this.uts.presentToast('La agencia se ha creado correctamente.','success');
+      }
+      else{
+        this.uts.presentToast('Un error ha surgido al intentar crear la agencia.','danger');
+      }
+
+      this.uts.hideLoading();
     }
 
     
-  }
-
-  public async test_Update() {
-    let toDrop: Agency[] = await this.as.getAll();
-    let last: Agency = toDrop[toDrop.length - 1];
-    last.address = "se ha modificadoo 666";
-    console.log(last);
-    if (toDrop != null) {
-      console.log(await this.as.createOrUpdate(last));
-    }
-  }
-
-  public async test_Delete() {
-    let toDrop: Agency[] = await this.as.getAll();
-    let last: Agency = toDrop[toDrop.length - 1];
-    console.log(last);
-    if (toDrop != null) {
-      console.log(await this.as.delete(last));
-    }
-  }
-
-  public segmentChanged(event) {
-
   }
 
   async showPicker() {

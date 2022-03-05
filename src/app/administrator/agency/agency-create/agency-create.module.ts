@@ -9,6 +9,8 @@ import { AgencyCreatePageRoutingModule } from './agency-create-routing.module';
 import { AgencyCreatePage } from './agency-create.page';
 import { InsuranceCompanyService } from '../../../services/insurance-company.service';
 import { AgencyService } from 'src/app/services/agency.service';
+import { UserService } from '../../../services/user.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @NgModule({
   imports: [
@@ -18,9 +20,9 @@ import { AgencyService } from 'src/app/services/agency.service';
     AgencyCreatePageRoutingModule,
 
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  providers:[AgencyService,InsuranceCompanyService],
+  providers:[AgencyService,InsuranceCompanyService,UtilService],
   declarations: [AgencyCreatePage]
 })
 export class AgencyCreatePageModule {}
