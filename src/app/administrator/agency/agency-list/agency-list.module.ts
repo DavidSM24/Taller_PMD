@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { AgencyListPageRoutingModule } from './agency-list-routing.module';
 
 import { AgencyListPage } from './agency-list.page';
+import { AgencyService } from '../../../services/agency.service';
+import { UtilService } from '../../../services/util.service';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { AgencyListPage } from './agency-list.page';
     IonicModule,
     AgencyListPageRoutingModule
   ],
+  providers:[AgencyService,UtilService],
   declarations: [AgencyListPage]
 })
 export class AgencyListPageModule {}

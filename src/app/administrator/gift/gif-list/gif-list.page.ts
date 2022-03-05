@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonInfiniteScroll, IonRow, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, ModalController, Platform} from '@ionic/angular';
 import { Gift } from 'src/app/models/Gift';
 import { GiftService } from '../../../services/gift.service';
 import { GifUpdatePage } from '../gif-update/gif-update.page';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
   selector: 'app-gif-list',
@@ -16,16 +17,14 @@ export class GifListPage implements OnInit {
   public gifts: Gift[] = [];
 
   searchStr = "";
-  private miLoading: HTMLIonLoadingElement;
   private niTems:number;
 
   constructor(
     private gs: GiftService,
-    private toast: ToastController,
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private loading: LoadingController,
-    private pt:Platform) { }
+    private pt:Platform,
+    private uts:UtilService) { }
     
   ngOnInit() {
   }
@@ -43,9 +42,7 @@ export class GifListPage implements OnInit {
     
     if(this.gifts.length==0){ //inicio
       
-      if(!event){ //si event, el reset ya tiene loading...
-        this.presentLoading();
-      }
+      this.uts.presentLoading();
       
       this.infinite.disabled=false;
       newgifts=await this.gs.getAllPaged(this.niTems,0);
@@ -62,8 +59,9 @@ export class GifListPage implements OnInit {
       event.target.complete();
     }
     else{
-      this.loading.dismiss();
+     
     }
+    this.uts.hideLoading();
   }
 
   public async edit(gift:Gift){
@@ -85,19 +83,19 @@ export class GifListPage implements OnInit {
   }
 
   public async delete(gift:Gift){
-    await this.presentLoading();
+    await this.uts.presentLoading();
     const result:boolean=await this.gs.delete(gift);
     let i=this.gifts.indexOf(gift,0);
     
-    await this.miLoading.dismiss();
+    await this.uts.hideLoading();;
     if(result){
       if(i>-1){
         this.gifts.splice(i,1);
       }
-      this.presentToast("Regalo eliminada correctamente.","success");
+      this.uts.presentToast("Regalo eliminada correctamente.","success");
     }
     else{
-      this.presentToast("Error al eliminar el regalo...","danger");
+      this.uts.presentToast("Error al eliminar el regalo...","danger");
     }
   }
 
@@ -127,6 +125,7 @@ export class GifListPage implements OnInit {
 
   public async infiniteLoad($event) {
     let newgifts:Gift[]=[];
+    
     if(!this.infinite.disabled){
       newgifts=await this.gs.getAllPaged(this.niTems,this.gifts.length);
       this.gifts=this.gifts.concat(newgifts);
@@ -135,22 +134,6 @@ export class GifListPage implements OnInit {
         this.infinite.disabled=true;
       }
     }
-  }
-
-  async presentLoading() {
-    this.miLoading = await this.loading.create({
-      message: ''
-    });
-    await this.miLoading.present();
-  }
-
-  async presentToast(msg: string, clr: string) {
-    const miToast = await this.toast.create({
-      message: msg,
-      duration: 2000,
-      color: clr
-    });
-    miToast.present();
   }
 
   public onSearchChange(event) {

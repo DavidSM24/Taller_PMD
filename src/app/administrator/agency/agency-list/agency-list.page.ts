@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, ModalController, Platform, ToastController } from '@ionic/angular';
 import { Agency } from 'src/app/models/Agency';
 import { AgencyService } from '../../../services/agency.service';
 import { AgencyUpdatePage } from '../agency-update/agency-update.page';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
   selector: 'app-agency-list',
@@ -17,7 +18,6 @@ export class AgencyListPage implements OnInit {
   public agencies: Agency[] = [];
 
   searchStr = "";
-  private miLoading: HTMLIonLoadingElement;
   niTems:number;
 
   constructor(
@@ -25,8 +25,8 @@ export class AgencyListPage implements OnInit {
     private toast: ToastController,
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private loading: LoadingController,
-    private pt:Platform) { }
+    private pt:Platform,
+    private uts:UtilService) { }
 
   ngOnInit() {
   }
@@ -41,11 +41,9 @@ export class AgencyListPage implements OnInit {
     
     let newAgencies:Agency[]=[];
     
+    this.uts.presentLoading();
+
     if(this.agencies.length==0){ //inicio
-      
-      if(!event){ //si event, el reset ya tiene loading...
-        this.presentLoading();
-      }
       
       this.infinite.disabled=false;
       newAgencies=await this.as.getAllPaged(this.niTems,0);
@@ -61,9 +59,8 @@ export class AgencyListPage implements OnInit {
     if(event){
       event.target.complete();
     }
-    else{
-      this.loading.dismiss();
-    }
+    
+    this.uts.hideLoading();
   }
 
   public async edit(agency:Agency){
@@ -85,19 +82,19 @@ export class AgencyListPage implements OnInit {
   }
 
   public async delete(agency:Agency){
-    await this.presentLoading();
+    await this.uts.presentLoading();
     const result:boolean=await this.as.delete(agency);
     let i=this.agencies.indexOf(agency,0);
     
-    await this.miLoading.dismiss();
+    await this.uts.hideLoading();
     if(result){
       if(i>-1){
         this.agencies.splice(i,1);
       }
-      this.presentToast("Agencia eliminada correctamente.","success");
+      this.uts.presentToast("Agencia eliminada correctamente.","success");
     }
     else{
-      this.presentToast("Error al eliminar la agencia...","danger");
+      this.uts.presentToast("Error al eliminar la agencia...","danger");
     }
   }
 
@@ -135,22 +132,6 @@ export class AgencyListPage implements OnInit {
         this.infinite.disabled=true;
       }
     }
-  }
-
-  async presentLoading() {
-    this.miLoading = await this.loading.create({
-      message: ''
-    });
-    await this.miLoading.present();
-  }
-
-  async presentToast(msg: string, clr: string) {
-    const miToast = await this.toast.create({
-      message: msg,
-      duration: 2000,
-      color: clr
-    });
-    miToast.present();
   }
 
   public onSearchChange(event) {
