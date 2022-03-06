@@ -15,12 +15,12 @@ import { UtilService } from 'src/app/services/util.service';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
     AgencyCreatePageRoutingModule,
 
     FormsModule,
     ReactiveFormsModule
+
   ],
   providers:[AgencyService,InsuranceCompanyService,UtilService],
   declarations: [AgencyCreatePage]

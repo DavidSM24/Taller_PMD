@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-agency-saw',
@@ -9,7 +9,9 @@ export class AgencySawPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+
+  async ngOnInit() {
+    
   }
 
 }
