@@ -64,21 +64,28 @@ export class AgencyListPage implements OnInit {
   }
 
   public async edit(agency:Agency){
-    const modal = await this.modalCtrl.create({
-      component: AgencyUpdatePage,
-      componentProps: {
-        agency:agency
+    try {
+      const modal = await this.modalCtrl.create({
+        component: AgencyUpdatePage,
+        cssClass: 'fullscreen',
+        componentProps: {
+          'agency':agency
+        }
+        //
+      });
+  
+      await modal.present();
+  
+      const resp=await modal.onDidDismiss();
+  
+      if(resp.data!=null){
+        let i:number=this.agencies.indexOf(agency);
+        this.agencies[i]=resp.data.newNote;
       }
-    });
-
-    await modal.present();
-
-    const resp=await modal.onDidDismiss();
-
-    if(resp.data!=null){
-      let i:number=this.agencies.indexOf(agency);
-      this.agencies[i]=resp.data.newAgency;
+    } catch (error) {
+      console.log(error);
     }
+    
   }
 
   public async delete(agency:Agency){
