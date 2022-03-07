@@ -4,8 +4,10 @@ import { ExchangeGift } from '../models/ExchangeGift';
 import { ExchangeGiftService } from '../services/exchange-gift.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilService } from '../services/util.service';
-import { IonToggle, PickerOptions } from '@ionic/angular';
+import { IonToggle, PickerController, PickerOptions } from '@ionic/angular';
 import { Gift } from '../models/Gift';
+import { AgencyService } from '../services/agency.service';
+import { GiftService } from '../services/gift.service';
 @Component({
   selector: 'app-tab5',
   templateUrl: './tab5.page.html',
@@ -16,10 +18,15 @@ export class Tab5Page {
   public mygift:Gift=null;
   public myagency:Agency;
   public gifts: Gift[];
+  public agencies: Agency[];
+
   @ViewChild(IonToggle) toggle: IonToggle;
   constructor(private exser: ExchangeGiftService,
     private fb: FormBuilder,
-    private uts:UtilService) {
+    private uts:UtilService,
+    private pickerController:PickerController,
+    private giftserv:GiftService,
+    private ageserv:AgencyService) {
 
       this.formExchange=this.fb.group({
         dateEchange: ["",Validators.required],
@@ -53,7 +60,7 @@ export class Tab5Page {
     }
   }
 
-  async showPicker() {
+  async showGiftsPicker() {
     let options: PickerOptions = {
       buttons: [
         {
@@ -63,13 +70,13 @@ export class Tab5Page {
         {
           text:'Ok',
           handler:(value:any) => {
-            this.insurance=value.Compañías.value;
+            this.mygift=value.Regalos.value;
           }
         }
       ],
       columns:[{
-        name:'Compañías',
-        options:this.getColumnOptions()
+        name:'Regalos',
+        options:this.getGiftColumnOptions()
       }]
     };
 
@@ -77,10 +84,55 @@ export class Tab5Page {
     picker.present()
   }
 
-  getColumnOptions(){
+  getGiftColumnOptions(){
     let options = [];
     this.gifts.forEach(x => {
       options.push({text:x.name,value:x});
+    });
+    return options;
+  }
+  async ionViewWillEnter() {
+    
+    this.uts.presentLoading();
+    this.gifts=await this.giftserv.getAll();
+    this.agencies=await this.ageserv.getAll();
+    
+    if(this.agencies.length<=0&&this.gifts.length<=0){
+      this.uts.presentToast('','danger');
+    }
+    this.uts.hideLoading();
+    console.log(this.gifts);
+    console.log(this.agencies);
+  }
+
+  async showAgenciesPicker() {
+    let options: PickerOptions = {
+      buttons: [
+        {
+          text: "Cancel",
+          role: 'cancel'
+        },
+        {
+          text:'Ok',
+          handler:(value:any) => {
+            this.myagency=value.Agencias.value;
+          }
+        }
+      ],
+      columns:[{
+        name:'Agencias',
+        options:this.getAgenciesColumnOptions()
+      }]
+    };
+
+    let picker = await this.pickerController.create(options);
+    picker.present()
+  }
+
+  getAgenciesColumnOptions(){
+    let options = [];
+    this.agencies.forEach(x => {
+      options.push({text:x.zipCode,value:x});
     });
     return options;
   }

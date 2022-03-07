@@ -8,7 +8,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="body">
-    <form [formGroup]="formTest" class="ion-padding">
+    <form [formGroup]="formExchange" class="ion-padding">
       <div class="formulario">
       <ion-grid>
         
@@ -47,8 +47,11 @@
           </ion-col>
 
           <ion-col sizeSm="2" sizeLg="2">
-            <ion-button expand="block" shape="round">
+            <ion-button expand="block" shape="round" (click)="showAgenciesPicker()" *ngIf="this.myagency==null">
               Seleccionar
+            </ion-button>
+            <ion-button expand="block" shape="round" (click)="showAgenciesPicker()" *ngIf="this.myagency!=null">
+              {{this.myagency.zipCode}}
             </ion-button>
           </ion-col>
         </ion-row>
@@ -59,14 +62,17 @@
           </ion-col>
 
           <ion-col sizeSm="2" sizeLg="2">
-            <ion-button expand="block" shape="round">
+            <ion-button expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift==null">
               Seleccionar
+            </ion-button>
+            <ion-button expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift!=null">
+              {{this.mygift.name}}
             </ion-button>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col size="12">
-            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" class="button">
+            <ion-button (click)="CreateUser()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button">
               Crear Regalo Intercambio
             </ion-button>
           </ion-col>
