@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonToggle, LoadingController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
+import { UtilService } from '../../../services/util.service';
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.page.html',
@@ -11,14 +12,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserCreatePage  {
   @ViewChild(IonToggle) toggle: IonToggle;
-  private myuser:User
   public miLoading:HTMLIonLoadingElement;
-  private miToast:HTMLIonToastElement;
   public formUser:FormGroup;
   constructor(private usserv: UserService,
     private fb: FormBuilder,
-    private loading:LoadingController,
-    private toast:ToastController) {
+    private uts:UtilService) {
     this.formUser=this.fb.group({
         code: ["",Validators.required],
         password: ["",Validators.required],
@@ -35,31 +33,17 @@ export class UserCreatePage  {
         email:this.formUser.get("email").value,
         name:this.formUser.get("name").value
       }
-      await this.presentLoading();
+      this.uts.presentLoading();
       
       try{
         let id=await this.usserv.createOrUpdate(newUser);
-        this.miLoading && this.miLoading.dismiss();
-        await this.presentToast("Regalo agregada correctamente","success");
+        this.uts.hideLoading;
+        this.uts.presentToast("Regalo agregada correctamente","success");
         this.formUser.reset();
       }catch(err){
         
-        this.miLoading && this.miLoading.dismiss();
-        await this.presentToast("Error agregando Regalo","danger");
+        this.uts.hideLoading;
+        this.uts.presentToast("Error agregando Regalo","danger");
       }
-  }
-  async presentLoading() {
-    this.miLoading = await this.loading.create({
-      message: ''
-    });
-    await this.miLoading.present();
-  }
-  async presentToast(msg:string,clr:string) {
-    this.miToast = await this.toast.create({
-      message: msg,
-      duration: 2000,
-      color:clr
-    });
-    this.miToast.present();
   }
 }

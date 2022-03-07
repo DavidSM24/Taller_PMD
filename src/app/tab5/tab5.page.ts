@@ -1,45 +1,87 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Agency } from '../models/Agency';
 import { ExchangeGift } from '../models/ExchangeGift';
 import { ExchangeGiftService } from '../services/exchange-gift.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilService } from '../services/util.service';
+import { IonToggle, PickerOptions } from '@ionic/angular';
+import { Gift } from '../models/Gift';
 @Component({
   selector: 'app-tab5',
   templateUrl: './tab5.page.html',
   styleUrls: ['./tab5.page.scss'],
 })
 export class Tab5Page {
-  public formTest:FormGroup;
-  
-  constructor(private ex: ExchangeGiftService,
-    private fb: FormBuilder) {
+  public formExchange:FormGroup;
+  public mygift:Gift=null;
+  public myagency:Agency;
+  public gifts: Gift[];
+  @ViewChild(IonToggle) toggle: IonToggle;
+  constructor(private exser: ExchangeGiftService,
+    private fb: FormBuilder,
+    private uts:UtilService) {
 
-      this.formTest=this.fb.group({
-        
+      this.formExchange=this.fb.group({
+        dateEchange: ["",Validators.required],
+        observations: ["",Validators.required]
       });
     }
+    public async CreateUser(): Promise<void> {
+      if(this.mygift!=null&&this.myagency!=null){
 
-  public test_GetAll() {
-    this.ex.getAll();
-  }
-  public test_GetAllPaged(limit: number, offset: number) {
-    this.ex.getAllPaged(limit, offset);
-  }
-  public test_GetById(id: number) {
-    this.ex.getById(id);
-  }
-  public test_getByDeliveredPaged(delivered:Boolean, element: number, page: number) {
-    this.ex.getByDeliveredPaged(delivered,element,page);
-  }
-  public getByAgencyPaged(agency:Agency, element: number, page: number) {
-    this.ex.getByAgencyPaged(agency,element,page);
-  }
-  public async test_Delete() {
-    let toDrop: ExchangeGift[] = await this.ex.getAll();
-    let last: ExchangeGift = toDrop[toDrop.length - 1];
-    console.log(last);
-    if (toDrop != null) {
-      console.log(await this.ex.delete(last));
+      
+      let newExchange: ExchangeGift = {
+        dateEchange: this.formExchange.get("dateEchange").value,
+        observations: this.formExchange.get("observations").value,
+        isDelivered: this.toggle.checked,
+        agency: this.myagency,
+        gift: this.mygift
+      }
+      
+      this.uts.presentLoading();
+      
+      try{
+        let id=await this.exser.createOrUpdate(newExchange);
+        this.uts.hideLoading;
+        this.uts.presentToast("Regalo agregada correctamente","success");
+        this.formExchange.reset();
+      }catch(err){
+        
+        this.uts.hideLoading;
+        this.uts.presentToast("Error agregando Regalo","danger");
+      }
     }
+  }
+
+  async showPicker() {
+    let options: PickerOptions = {
+      buttons: [
+        {
+          text: "Cancel",
+          role: 'cancel'
+        },
+        {
+          text:'Ok',
+          handler:(value:any) => {
+            this.insurance=value.Compañías.value;
+          }
+        }
+      ],
+      columns:[{
+        name:'Compañías',
+        options:this.getColumnOptions()
+      }]
+    };
+
+    let picker = await this.pickerController.create(options);
+    picker.present()
+  }
+
+  getColumnOptions(){
+    let options = [];
+    this.gifts.forEach(x => {
+      options.push({text:x.name,value:x});
+    });
+    return options;
   }
 }
