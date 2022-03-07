@@ -24,21 +24,84 @@ const routes = [
         path: '',
         component: _tab_administrator_page__WEBPACK_IMPORTED_MODULE_0__.TabAdministratorPage,
         children: [
+            //pedidos
             {
-                path: 'exchange-gift-list',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_exchangeGift_exchange-gift-list_exchange-gift-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gift-list/exchange-gift-list.module */ 6243)).then(m => m.ExchangeGiftListPageModule)
+                path: 'exchange-gift',
+                children: [
+                    {
+                        path: 'list',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_exchangeGift_exchange-gift-list_exchange-gift-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gift-list/exchange-gift-list.module */ 6243)).then(m => m.ExchangeGiftListPageModule)
+                    },
+                    {
+                        path: 'update',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_exchangeGift_exchange-gif-update_exchange-gif-update_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gif-update/exchange-gif-update.module */ 9890)).then(m => m.ExchangeGifUpdatePageModule)
+                    },
+                    {
+                        path: 'saw',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_exchangeGift_exchange-gif-saw_exchange-gif-saw_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gif-saw/exchange-gif-saw.module */ 2142)).then(m => m.ExchangeGifSawPageModule)
+                    }
+                ]
             },
+            //Reparaciones
             {
-                path: 'car-repair-list',
-                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-list_car-repair-list_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-list/car-repair-list.module */ 2225)).then(m => m.CarRepairListPageModule)
+                path: 'car-repair',
+                children: [
+                    {
+                        path: 'list',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-list_car-repair-list_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-list/car-repair-list.module */ 2225)).then(m => m.CarRepairListPageModule)
+                    },
+                    {
+                        path: 'saw',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-saw_car-repair-saw_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-saw/car-repair-saw.module */ 6589)).then(m => m.CarRepairSawPageModule)
+                    },
+                    {
+                        path: 'update',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-update_car-repair-update_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-update/car-repair-update.module */ 2529)).then(m => m.CarRepairUpdatePageModule)
+                    }
+                ]
             },
+            //Agencias
             {
-                path: 'agency-list',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_agency_agency-list_agency-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-list/agency-list.module */ 9947)).then(m => m.AgencyListPageModule)
+                path: 'agency',
+                children: [
+                    {
+                        path: 'list',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-update_agency-update_page_ts"), __webpack_require__.e("src_app_administrator_agency_agency-list_agency-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-list/agency-list.module */ 9947)).then(m => m.AgencyListPageModule)
+                    },
+                    {
+                        path: 'saw',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_agency_agency-saw_agency-saw_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-saw/agency-saw.module */ 879)).then(m => m.AgencySawPageModule)
+                    },
+                    {
+                        path: 'update',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-update_agency-update_page_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-update/agency-update.module */ 7264)).then(m => m.AgencyUpdatePageModule)
+                    },
+                    {
+                        path: 'create',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-create_agency-create_module_ts"), __webpack_require__.e("src_app_services_util_service_ts-_35870")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-create/agency-create.module */ 8333)).then(m => m.AgencyCreatePageModule)
+                    }
+                ]
             },
+            //Regalos
             {
-                path: 'gif-list',
-                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_gift_gif-list_gif-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-list/gif-list.module */ 1789)).then(m => m.GifListPageModule)
+                path: 'gift',
+                children: [
+                    {
+                        path: 'list',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_gift_gif-list_gif-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-list/gif-list.module */ 1789)).then(m => m.GifListPageModule)
+                    }, {
+                        path: 'create',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_services_util_service_ts-_35871")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-create/gif-create.module */ 4844)).then(m => m.GifCreatePageModule)
+                    },
+                    {
+                        path: 'saw',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_gift_gif-saw_gif-saw_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-saw/gif-saw.module */ 2728)).then(m => m.GifSawPageModule)
+                    },
+                    {
+                        path: 'update',
+                        loadChildren: () => __webpack_require__.e(/*! import() */ "common").then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-update/gif-update.module */ 8458)).then(m => m.GifUpdatePageModule)
+                    }
+                ]
             },
             {
                 path: '',
@@ -154,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!--\r\n<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>TabAdministrator</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n-->\r\n<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button tab=\"exchange-gift-list\">\r\n      <ion-icon name=\"mail\"></ion-icon>\r\n      <ion-label>Pedidos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"car-repair-list\">\r\n      <ion-icon name=\"car\"></ion-icon>\r\n      <ion-label>Reparaciones</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"agency-list\">\r\n      <ion-icon name=\"business\"></ion-icon>\r\n      <ion-label>Agencias</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"gif-list\">\r\n      <ion-icon name=\"gift\"></ion-icon>\r\n      <ion-label>Regalos</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!--\r\n<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>TabAdministrator</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n-->\r\n<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button tab=\"exchange-gift/list\">\r\n      <ion-icon name=\"mail\"></ion-icon>\r\n      <ion-label>Pedidos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"car-repair/list\">\r\n      <ion-icon name=\"car\"></ion-icon>\r\n      <ion-label>Reparaciones</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"agency/list\">\r\n      <ion-icon name=\"business\"></ion-icon>\r\n      <ion-label>Agencias</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"gift/list\">\r\n      <ion-icon name=\"gift\"></ion-icon>\r\n      <ion-label>Regalos</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n\r\n");
 
 /***/ }),
 

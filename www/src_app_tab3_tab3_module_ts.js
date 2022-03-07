@@ -101,12 +101,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Tab3Page": () => (/* binding */ Tab3Page)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tab3_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tab3.page.html */ 8752);
 /* harmony import */ var _tab3_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab3.page.scss */ 4170);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 4001);
 /* harmony import */ var _services_agency_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/agency.service */ 9574);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _services_insurance_company_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/insurance-company.service */ 7639);
+
+
 
 
 
@@ -114,11 +118,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let Tab3Page = class Tab3Page {
-    constructor(as, fb) {
+    constructor(as, fb, is, pickerController) {
         this.as = as;
         this.fb = fb;
-        this.formTest = this.fb.group({
-            img: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required]
+        this.is = is;
+        this.pickerController = pickerController;
+        this.insurance = null;
+        this.formAgency = this.fb.group({
+            zipCode: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required],
+            address: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required],
+            location: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required],
+            phoneNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required]
+        });
+    }
+    ionViewWillEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.companies = yield this.is.getAll();
+            if (this.companies.length > 0) {
+            }
         });
     }
     test_GetAll() {
@@ -137,11 +154,30 @@ let Tab3Page = class Tab3Page {
         this.as.getByisActivePaged(available, limit, offset);
     }
     test_Create() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            if (this.insurance != null) {
+                let ag = yield this.as.getById(7);
+                let newGift = {
+                    zipCode: this.formAgency.get("zipCode").value,
+                    address: this.formAgency.get("address").value,
+                    location: this.formAgency.get("location").value,
+                    phoneNumber: this.formAgency.get("phoneNumber").value,
+                    amount: 0,
+                    points: 0,
+                    pointsRedeemed: 0,
+                    myInsuranceCompany: this.insurance,
+                    myCarRepairs: [],
+                    myExchangesGifts: [],
+                    myUser: ag.myUser,
+                    active: this.toggle.checked
+                };
+                console.log(newGift);
+                newGift = yield this.as.createOrUpdate(newGift);
+            }
         });
     }
     test_Update() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             let toDrop = yield this.as.getAll();
             let last = toDrop[toDrop.length - 1];
             last.address = "se ha modificadoo 666";
@@ -152,7 +188,7 @@ let Tab3Page = class Tab3Page {
         });
     }
     test_Delete() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             let toDrop = yield this.as.getAll();
             let last = toDrop[toDrop.length - 1];
             console.log(last);
@@ -161,19 +197,51 @@ let Tab3Page = class Tab3Page {
             }
         });
     }
-    changeListener($event) {
-        this.file = $event.target.files[0];
-        console.log(this.file);
-    }
     segmentChanged(event) {
+    }
+    showPicker() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            let options = {
+                buttons: [
+                    {
+                        text: "Cancel",
+                        role: 'cancel'
+                    },
+                    {
+                        text: 'Ok',
+                        handler: (value) => {
+                            this.insurance = value.Compañías.value;
+                        }
+                    }
+                ],
+                columns: [{
+                        name: 'Compañías',
+                        options: this.getColumnOptions()
+                    }]
+            };
+            let picker = yield this.pickerController.create(options);
+            picker.present();
+        });
+    }
+    getColumnOptions() {
+        let options = [];
+        this.companies.forEach(x => {
+            options.push({ text: x.cia_Name, value: x });
+        });
+        return options;
     }
 };
 Tab3Page.ctorParameters = () => [
     { type: _services_agency_service__WEBPACK_IMPORTED_MODULE_2__.AgencyService },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder }
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormBuilder },
+    { type: _services_insurance_company_service__WEBPACK_IMPORTED_MODULE_3__.InsuranceCompanyService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.PickerController }
 ];
-Tab3Page = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+Tab3Page.propDecorators = {
+    toggle: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.ViewChild, args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonToggle,] }]
+};
+Tab3Page = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-tab3',
         template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tab3_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_tab3_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -194,7 +262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>\r\n      Prueba Agencia\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <div class=\"body\">\r\n    <form [formGroup]=\"formTest\" class=\"ion-padding\">\r\n      <div class=\"formulario\">\r\n      <ion-grid>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Código Zip:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input type=\"number\" class=\"customInput\" formControlName=\"zipCode\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Dirección:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"address\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Localidad:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"location\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Localidad:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"phoneNumber\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Total:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"amount\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Puntos Actuales:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"points\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Puntos Gastados:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"pointsRedeemed\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"9\" sizeLg=\"1\">\r\n            Activa\r\n          </ion-col>\r\n          <ion-col sizeSm=\"3\" sizeLg=\"11  \">\r\n            <ion-item  lines=\"none\">\r\n              No<ion-toggle></ion-toggle>Si\r\n           </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"2\" sizeLg=\"2\">\r\n            <ion-label>Compañía de Seguros:</ion-label>\r\n          </ion-col>\r\n\r\n          <ion-col sizeSm=\"2\" sizeLg=\"2\">\r\n            <ion-button expand=\"block\" shape=\"round\">\r\n              Seleccionar\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"2\" sizeLg=\"2\">\r\n            <ion-label>Usuario:</ion-label>\r\n          </ion-col>\r\n\r\n          <ion-col sizeSm=\"2\" sizeLg=\"2\">\r\n            <ion-button expand=\"block\" shape=\"round\">\r\n              Seleccionar\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"12\">\r\n            <ion-button expand=\"block\" shape=\"round\" style=\"margin-top: 2% !important;\" class=\"button\">\r\n              Crear Agencia\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    </form>\r\n\r\n  <div *ngIf=\"false\">\r\n\r\n\r\n    <ion-button (click)=\"test_GetAll()\" expand=\"block\" shape=\"round\">\r\n      Prueba getAll()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetAllPaged(15,0)\" expand=\"block\" shape=\"round\">\r\n      Prueba getAllPaged()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetById(7)\" expand=\"block\" shape=\"round\">\r\n      Prueba getById()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetByUserNamePaged('no',15,0)\" expand=\"block\" shape=\"round\">\r\n      Prueba getByUserNamePaged()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetByisActivePaged(true,15,0)\" expand=\"block\" shape=\"round\">\r\n      Prueba getByIsActivePaged()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_Update()\" expand=\"block\" shape=\"round\">\r\n      Prueba createUpdate\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_Delete()\" expand=\"block\" shape=\"round\">\r\n      Prueba delete\r\n    </ion-button>\r\n\r\n    <ion-button routerLink=\"/tab-administrator/agency-list\" expand=\"block\" shape=\"round\">\r\n      Prueba delete\r\n    </ion-button>\r\n\r\n  </div>\r\n</div>\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>\r\n      Prueba Agencia\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <div class=\"body\">\r\n    <form [formGroup]=\"formAgency\" class=\"ion-padding\">\r\n      <div class=\"formulario\">\r\n      <ion-grid>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Código Zip:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input type=\"number\" class=\"customInput\" formControlName=\"zipCode\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Dirección:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"address\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Localidad:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"location\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Número de Teléfono:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"phoneNumber\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"9\" sizeLg=\"1\">\r\n            Activa:\r\n          </ion-col>\r\n          <ion-col sizeSm=\"3\" sizeLg=\"11  \">\r\n            <ion-item  lines=\"none\">\r\n              No<ion-toggle></ion-toggle>Si\r\n           </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"2\" sizeLg=\"2\">\r\n            <ion-label>Compañía de Seguros:</ion-label>\r\n          </ion-col>\r\n\r\n          <ion-col sizeSm=\"2\" sizeLg=\"2\">\r\n\r\n            <ion-button expand=\"block\" shape=\"round\" (click)=\"showPicker()\" *ngIf=\"this.insurance==null\">\r\n              Seleccionar\r\n            </ion-button>\r\n\r\n            <ion-button expand=\"block\" shape=\"round\" (click)=\"showPicker()\" *ngIf=\"this.insurance!=null\">\r\n              {{this.insurance.cia_Name}}\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"6\">\r\n            <ion-button (click)=\"test_Create()\" expand=\"block\" shape=\"round\" class=\"button\">\r\n              Cancelar\r\n            </ion-button>\r\n          </ion-col>\r\n\r\n          <ion-col size=\"6\">\r\n            <ion-button (click)=\"test_Create()\" expand=\"block\" shape=\"round\" style=\"margin-top: 2% !important;\" class=\"button\" [disabled]=\"this.formAgency.invalid||this.insurance==null\">\r\n              Crear Agencia\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    </form>\r\n\r\n  <div *ngIf=\"false\">\r\n\r\n\r\n    <ion-button (click)=\"test_GetAll()\" expand=\"block\" shape=\"round\">\r\n      Prueba getAll()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetAllPaged(15,0)\" expand=\"block\" shape=\"round\">\r\n      Prueba getAllPaged()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetById(7)\" expand=\"block\" shape=\"round\">\r\n      Prueba getById()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetByUserNamePaged('no',15,0)\" expand=\"block\" shape=\"round\">\r\n      Prueba getByUserNamePaged()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_GetByisActivePaged(true,15,0)\" expand=\"block\" shape=\"round\">\r\n      Prueba getByIsActivePaged()\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_Update()\" expand=\"block\" shape=\"round\">\r\n      Prueba createUpdate\r\n    </ion-button>\r\n\r\n    <ion-button (click)=\"test_Delete()\" expand=\"block\" shape=\"round\">\r\n      Prueba delete\r\n    </ion-button>\r\n\r\n    <ion-button routerLink=\"/tab-administrator/agency-list\" expand=\"block\" shape=\"round\">\r\n      Prueba delete\r\n    </ion-button>\r\n\r\n  </div>\r\n</div>\r\n</ion-content>");
 
 /***/ }),
 

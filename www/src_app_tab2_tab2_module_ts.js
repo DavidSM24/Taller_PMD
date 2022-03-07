@@ -98,19 +98,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Tab2Page": () => (/* binding */ Tab2Page)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tab2_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tab2.page.html */ 2040);
 /* harmony import */ var _tab2_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab2.page.scss */ 282);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _services_gift_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/gift.service */ 4483);
 
 
 
 
 
+
+
 let Tab2Page = class Tab2Page {
-    constructor(gs) {
+    constructor(gs, fb) {
         this.gs = gs;
+        this.fb = fb;
+        this.file = null;
+        this.formGift = this.fb.group({
+            name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
+            points: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
+        });
     }
     test_GetAll() {
         this.gs.getAll();
@@ -128,11 +138,27 @@ let Tab2Page = class Tab2Page {
         this.gs.getByAvailablePaged(available, limit, offset);
     }
     test_Create() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            console.log(this.toggle.checked);
+            if (this.extension) {
+                if (this.extension == ("image/jpg")
+                    || this.extension == ("image/jpeg")
+                    || this.extension == "image/png") {
+                    console.log("entro?");
+                    let newGift = {
+                        name: this.formGift.get("name").value,
+                        points: this.formGift.get("points").value,
+                        available: this.toggle.checked,
+                        picture: '',
+                        exchangeGifts: []
+                    };
+                    newGift = yield this.gs.createOrUpdate(newGift, this.file);
+                }
+            }
         });
     }
     test_Update() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             let toDrop = yield this.gs.getAll();
             let last = toDrop[toDrop.length - 1];
             last.name = "hola1";
@@ -145,7 +171,7 @@ let Tab2Page = class Tab2Page {
         });
     }
     test_Delete() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             let toDrop = yield this.gs.getAll();
             let last = toDrop[toDrop.length - 1];
             console.log(last);
@@ -155,15 +181,35 @@ let Tab2Page = class Tab2Page {
         });
     }
     changeListener($event) {
-        this.file = $event.target.files[0];
-        console.log(this.file);
+        try {
+            if ($event) {
+                let extension = $event.target.files[0].type.toString();
+                if (extension == ("image/jpeg")
+                    || extension == ("image/png")) {
+                    this.file = $event.target.files[0];
+                    this.extension = this.file.type;
+                }
+                else {
+                    this.file = null;
+                }
+            }
+        }
+        catch (error) {
+            //alert
+            this.file = null;
+        }
+        console.log(this.file.type);
     }
 };
 Tab2Page.ctorParameters = () => [
-    { type: _services_gift_service__WEBPACK_IMPORTED_MODULE_2__.GiftService }
+    { type: _services_gift_service__WEBPACK_IMPORTED_MODULE_2__.GiftService },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder }
 ];
-Tab2Page = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+Tab2Page.propDecorators = {
+    toggle: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.ViewChild, args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonToggle,] }]
+};
+Tab2Page = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-tab2',
         template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tab2_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_tab2_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -184,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>\r\n      Pruebas Gif\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  \r\n  <div class=\"body\">\r\n  \r\n  \r\n    <form [formGroup]=\"formTest\" class=\"ion-padding\">\r\n      <div class=\"formulario\">\r\n      <ion-grid>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Nombre:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input type=\"text\" class=\"customInput\" formControlName=\"name\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Puntos:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"points\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"9\" sizeLg=\"1\">\r\n            Disponible\r\n          </ion-col>\r\n          <ion-col sizeSm=\"3\" sizeLg=\"11  \">\r\n            <ion-item  lines=\"none\">\r\n              Si<ion-toggle></ion-toggle>No\r\n           </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n        \r\n          <ion-col size=\"12\">\r\n            <ion-input type=\"file\" (change)=\"changeListener($event)\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"12\">\r\n            <ion-button expand=\"block\" shape=\"round\" style=\"margin-top: 2% !important;\" class=\"button\">\r\n              Crear Regalo\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    </form>\r\n  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n  <div *ngIf=\"false\">\r\n  <ion-label></ion-label>\r\n\r\n  <ion-button (click)=\"test_GetAll()\" expand=\"block\" shape=\"round\">\r\n    Prueba getAll()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetAllPaged(15,0)\" expand=\"block\" shape=\"round\">\r\n    Prueba getAllPaged()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetById(1)\" expand=\"block\" shape=\"round\">\r\n    Prueba getById()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetByNamePaged('go',15,0)\" expand=\"block\" shape=\"round\">\r\n    Prueba getByNamePaged()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetByAvailablePaged(true,15,0)\" expand=\"block\" shape=\"round\">\r\n    Prueba getByAvailablePaged()\r\n  </ion-button>\r\n  <div>\r\n\r\n    <form [formGroup]=\"formTest\">\r\n      <ion-item>\r\n        <ion-label>Título:</ion-label>\r\n        <ion-input class=\"customInput\" type=\"text\" formControlName=\"title\"></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>Descripción:</ion-label>\r\n        <ion-textarea class=\"customInput\" formControlName=\"description\"></ion-textarea>\r\n      </ion-item>\r\n\r\n    </form>\r\n\r\n    <ion-button (click)=\"test_Create()\" expand=\"block\" shape=\"round\">\r\n      Prueba create\r\n    </ion-button>\r\n    <ion-button (click)=\"test_Update()\" expand=\"block\" shape=\"round\">\r\n      Prueba update\r\n    </ion-button>\r\n\r\n  </div>\r\n\r\n  <ion-button (click)=\"test_Delete()\" expand=\"block\" shape=\"round\">\r\n    Prueba delete\r\n  </ion-button>\r\n\r\n  <ion-input type=\"file\" placeholder=\"Awesome Input\" formControlName=\"img\" accept=\"image/*\" (change)=\"changeListener($event)\"></ion-input>\r\n\r\n  <ion-img [src]=\"img\"></ion-img>\r\n  </div>\r\n</div>\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>\r\n      Pruebas Gif\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  \r\n  <div class=\"body\">\r\n  \r\n  \r\n    <form [formGroup]=\"formGift\" class=\"ion-padding\">\r\n      <div class=\"formulario\">\r\n      <ion-grid>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Nombre:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input type=\"text\" class=\"customInput\" formControlName=\"name\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Puntos:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"points\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"9\" sizeLg=\"1\">\r\n            Disponible\r\n          </ion-col>\r\n          <ion-col sizeSm=\"3\" sizeLg=\"11  \">\r\n            <ion-item  lines=\"none\">\r\n              No<ion-toggle></ion-toggle>Si\r\n           </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n        \r\n          <ion-col size=\"12\">\r\n            <ion-input type=\"file\" accept=\".jpg,.jpeg,.png\" (change)=\"changeListener($event)\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"12\">\r\n            <ion-button expand=\"block\" shape=\"round\" style=\"margin-top: 2% !important;\" (click)=\"test_Create()\" class=\"button\" [disabled]=\"this.formGift.invalid||this.file==null\">\r\n              Crear Regalo\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    </form>\r\n  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n  <div *ngIf=\"false\">\r\n  <ion-label></ion-label>\r\n\r\n  <ion-button (click)=\"test_GetAll()\" expand=\"block\" shape=\"round\">\r\n    Prueba getAll()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetAllPaged(15,0)\" expand=\"block\" shape=\"round\">\r\n    Prueba getAllPaged()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetById(1)\" expand=\"block\" shape=\"round\">\r\n    Prueba getById()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetByNamePaged('go',15,0)\" expand=\"block\" shape=\"round\">\r\n    Prueba getByNamePaged()\r\n  </ion-button>\r\n\r\n  <ion-button (click)=\"test_GetByAvailablePaged(true,15,0)\" expand=\"block\" shape=\"round\">\r\n    Prueba getByAvailablePaged()\r\n  </ion-button>\r\n  <div>\r\n\r\n    <ion-button (click)=\"test_Create()\" expand=\"block\" shape=\"round\">\r\n      Prueba create\r\n    </ion-button>\r\n    <ion-button (click)=\"test_Update()\" expand=\"block\" shape=\"round\">\r\n      Prueba update\r\n    </ion-button>\r\n\r\n  </div>\r\n\r\n  <ion-button (click)=\"test_Delete()\" expand=\"block\" shape=\"round\">\r\n    Prueba delete\r\n  </ion-button>\r\n\r\n  <ion-input type=\"file\" placeholder=\"Awesome Input\" formControlName=\"img\" accept=\"image/*\" (change)=\"changeListener($event)\"></ion-input>\r\n\r\n  <ion-img [src]=\"img\"></ion-img>\r\n  </div>\r\n</div>\r\n</ion-content>");
 
 /***/ }),
 

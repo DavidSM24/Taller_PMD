@@ -1384,5 +1384,13 @@ ion-icon {
 .secondary {
   color: #22388c !important;
 }
+.customInput .native-input {
+  border-radius: 2.5rem !important;
+}
+ion-modal.fullscreen {
+  --width: 100%;
+  --height: 100%;
+  --border-radius: 0;
+}
 
 /*# sourceMappingURL=styles.css.map*/

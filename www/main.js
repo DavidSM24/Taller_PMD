@@ -36,23 +36,7 @@ const routes = [
     },
     {
         path: 'login',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
-    },
-    {
-        path: 'agency-list',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_agency_agency-list_agency-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/agency/agency-list/agency-list.module */ 9947)).then(m => m.AgencyListPageModule)
-    },
-    {
-        path: 'gif-list',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_gift_gif-list_gif-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/gift/gif-list/gif-list.module */ 1789)).then(m => m.GifListPageModule)
-    },
-    {
-        path: 'car-repair-list',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-list_car-repair-list_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/carRepair/car-repair-list/car-repair-list.module */ 2225)).then(m => m.CarRepairListPageModule)
-    },
-    {
-        path: 'exchange-gift-list',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_exchangeGift_exchange-gift-list_exchange-gift-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/exchangeGift/exchange-gift-list/exchange-gift-list.module */ 6243)).then(m => m.ExchangeGiftListPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
     },
     {
         path: 'tab-administrator',
@@ -60,7 +44,19 @@ const routes = [
     },
     {
         path: '**',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
+    },
+    {
+        path: 'user-create',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
+    },
+    {
+        path: 'user-list',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_user_user-list_user-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-list/user-list.module */ 5605)).then(m => m.UserListPageModule)
+    },
+    {
+        path: 'user-update',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_user_user-update_user-update_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-update/user-update.module */ 7476)).then(m => m.UserUpdatePageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -498,7 +494,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module) => {
 
 "use strict";
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */";
+module.exports = "ion-modal.fullscreen {\n  --width: 100%;\n  --height: 100%;\n  --border-radius: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7QUFDSiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tbW9kYWwuZnVsbHNjcmVlbiB7XHJcbiAgICAtLXdpZHRoOiAxMDAlO1xyXG4gICAgLS1oZWlnaHQ6IDEwMCU7XHJcbiAgICAtLWJvcmRlci1yYWRpdXM6IDA7XHJcbiAgfVxyXG5cclxuIl19 */";
 
 /***/ })
 
