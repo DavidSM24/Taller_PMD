@@ -37,16 +37,23 @@ export class GifUpdatePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.img = this.gift.picture;
-    this.file = await this.http.get("https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/" + this.gift.picture, { responseType: 'blob' }).subscribe((resp: any) => {
-      this.file = resp;
+    
+    try {
+      this.img = this.gift.picture;
+      this.file = await this.http.get("https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/" + this.gift.picture, { responseType: 'blob' }).subscribe((resp: any) => {
+        this.file = resp;
+  
+      });
+  
+      this.formGift = this.fb.group({
+        name: [this.gift.name, Validators.required],
+        points: [this.gift.points, Validators.required],
+      }); 
+    } catch (error) {
+      
+    }
 
-    });
-
-    this.formGift = this.fb.group({
-      name: [this.gift.name, Validators.required],
-      points: [this.gift.points, Validators.required],
-    });
+    
   }
 
   public async edit(): Promise<void> {
@@ -78,6 +85,10 @@ export class GifUpdatePage implements OnInit {
     this.modalCtrl.dismiss({
       newGift:newGift
     })
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 
   public changeListener($event): void {
