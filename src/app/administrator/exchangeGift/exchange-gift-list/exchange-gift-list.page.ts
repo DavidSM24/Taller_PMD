@@ -88,4 +88,10 @@ export class ExchangeGiftListPage {
     });
    await alert.present();
   }
+
+  public async reset(event){
+    this.infinite.disabled=false;
+    this.exGifts=[];
+    this.cargaExGifts(event);
+  }
 }

@@ -28,7 +28,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
               id: miexgift.id,
               dateEchange: miexgift.dateEchange,
               observations:miexgift.observations,
-              isDelivered: miexgift.isDelivered,
+              delivered: miexgift.delivered,
               agency: miexgift.agency,
               gift: miexgift.gift
             }
@@ -61,7 +61,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
             id: miexgift.id,
               dateEchange: miexgift.dateEchange,
               observations:miexgift.observations,
-              isDelivered: miexgift.isDelivered,
+              delivered: miexgift.delivered,
               agency: miexgift.agency,
               gift: miexgift.gift
           }
@@ -98,7 +98,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
             id: miexgift.id,
               dateEchange: miexgift.dateEchange,
               observations:miexgift.observations,
-              isDelivered: miexgift.isDelivered,
+              delivered: miexgift.delivered,
               agency: miexgift.agency,
               gift: miexgift.gift
           }
