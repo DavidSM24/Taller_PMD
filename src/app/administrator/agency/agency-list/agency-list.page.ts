@@ -14,36 +14,33 @@ export class AgencyListPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
-  private n:number=0;
   public agencies: Agency[] = [];
 
   searchStr = "";
-  niTems:number;
+  niTems: number;
 
   constructor(
     private as: AgencyService,
-    private toast: ToastController,
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private pt:Platform,
-    private uts:UtilService) { }
+    private pt: Platform,
+    private uts: UtilService) { }
 
   ngOnInit() {
   }
 
   async ionViewWillEnter() {
-    this.niTems=  Math.ceil(this.pt.height()/20+10);
+    this.niTems = Math.ceil(this.pt.height() / 20 + 10);
     await this.loadAgencies();
-    this.n=this.agencies.length;
   }
 
   public async loadAgencies(event?) {
-    
+
     let newAgencies:Agency[]=[];
     
-    this.uts.presentLoading();
-
     if(this.agencies.length==0){ //inicio
+      
+      this.uts.presentLoading();
       
       this.infinite.disabled=false;
       newAgencies=await this.as.getAllPaged(this.niTems,0);
@@ -59,50 +56,51 @@ export class AgencyListPage implements OnInit {
     if(event){
       event.target.complete();
     }
-    
+    else{
+     
+    }
     this.uts.hideLoading();
   }
 
-  public async edit(agency:Agency){
-    
+  public async edit(agency: Agency) {
     try {
       const modal = await this.modalCtrl.create({
         component: AgencyUpdatePage,
         cssClass: 'fullscreen',
         componentProps: {
-          agency:agency
+          'agency': agency
         }
         //
       });
-  
+
       await modal.present();
-  
-      const resp=await modal.onDidDismiss();
-  
-      if(resp.data!=null){
-        let i:number=this.agencies.indexOf(agency);
-        this.agencies[i]=resp.data.newNote;
+
+      const resp = await modal.onDidDismiss();
+
+      if (resp.data != null) {
+        let i: number = this.agencies.indexOf(agency);
+        this.agencies[i] = resp.data.newNote;
       }
     } catch (error) {
       console.log(error);
     }
-    
+
   }
 
-  public async delete(agency:Agency){
+  public async delete(agency: Agency) {
     await this.uts.presentLoading();
-    const result:boolean=await this.as.delete(agency);
-    let i=this.agencies.indexOf(agency,0);
-    
+    const result: boolean = await this.as.delete(agency);
+    let i = this.agencies.indexOf(agency, 0);
+
     await this.uts.hideLoading();
-    if(result){
-      if(i>-1){
-        this.agencies.splice(i,1);
+    if (result) {
+      if (i > -1) {
+        this.agencies.splice(i, 1);
       }
-      this.uts.presentToast("Agencia eliminada correctamente.","success");
+      this.uts.presentToast("Agencia eliminada correctamente.", "success");
     }
-    else{
-      this.uts.presentToast("Error al eliminar la agencia...","danger");
+    else {
+      this.uts.presentToast("Error al eliminar la agencia...", "danger");
     }
   }
 
@@ -131,13 +129,13 @@ export class AgencyListPage implements OnInit {
   }
 
   public async infiniteLoad($event) {
-    let newAgencies:Agency[]=[];
-    if(!this.infinite.disabled){
-      newAgencies=await this.as.getAllPaged(this.niTems,this.agencies.length);
-      this.agencies=this.agencies.concat(newAgencies);
+    let newAgencies: Agency[] = [];
+    if (!this.infinite.disabled) {
+      newAgencies = await this.as.getAllPaged(this.niTems, this.agencies.length);
+      this.agencies = this.agencies.concat(newAgencies);
 
-      if(newAgencies.length<30){
-        this.infinite.disabled=true;
+      if (newAgencies.length < 30) {
+        this.infinite.disabled = true;
       }
     }
   }
@@ -146,10 +144,9 @@ export class AgencyListPage implements OnInit {
     this.searchStr = event.detail.value;
   }
 
-  public async reset(event){
-    this.n=0;
-    this.infinite.disabled=false;
-    this.agencies=[];
+  public async reset(event) {
+    this.infinite.disabled = false;
+    this.agencies = [];
     this.loadAgencies(event);
   }
 }
