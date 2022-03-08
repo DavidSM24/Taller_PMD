@@ -79,7 +79,7 @@ export class AgencyListPage implements OnInit {
 
       if (resp.data != null) {
         let i: number = this.agencies.indexOf(agency);
-        this.agencies[i] = resp.data.newNote;
+        this.agencies[i] = resp.data.newAgency;
       }
     } catch (error) {
       console.log(error);

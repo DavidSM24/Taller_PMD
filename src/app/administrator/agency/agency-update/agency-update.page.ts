@@ -62,6 +62,8 @@ export class AgencyUpdatePage implements OnInit {
 
   public async edit() {
 
+    this.uts.presentLoading();
+
      let A: Agency = {
        id: this.agency.id,
        zipCode: this.formAgency.get("zipCode").value,
@@ -79,9 +81,11 @@ export class AgencyUpdatePage implements OnInit {
      }
 
      A = await this.as.createOrUpdate(A);
-    
+     
+     this.uts.hideLoading();
+
      this.modalCtrl.dismiss({
-       newNote:A
+       newAgency:A
      })
   }
 
