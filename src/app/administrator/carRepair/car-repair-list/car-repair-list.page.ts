@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
+import { UtilService } from 'src/app/services/util.service';
 import { CarRepairSawPage } from '../car-repair-saw/car-repair-saw.page';
 import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
 
@@ -23,7 +24,7 @@ export class CarRepairListPage implements OnInit {
 
   constructor(
     private cS:CarRepairService,
-    private toast:ToastController,
+    private uts:UtilService,
     private alertCtrl:AlertController,
     private modalCtrl:ModalController,
     private loading:LoadingController,
@@ -60,7 +61,7 @@ export class CarRepairListPage implements OnInit {
     if(this.carRepairs.length==0){
 
         if(!event){
-          this.presentLoading();
+         await this.uts.presentLoading();
         }
 
       this.infinite.disabled=false;
@@ -74,14 +75,14 @@ export class CarRepairListPage implements OnInit {
       }
       }catch(error){
         console.log(error);
-        this.presentToast("Error de carga","danger");
+       await this.uts.presentToast("Error de carga","danger");
       }finally{
         if(event){
          
           event.target.complete();
     
         }else{
-          this.loading.dismiss();
+          await this.uts.hideLoading();
         }
       }
     }   
@@ -94,40 +95,50 @@ export class CarRepairListPage implements OnInit {
    */
   public async edit(carRepair:CarRepair){
 
-    const modal = await this.modalCtrl.create({
-      component: CarRepairUpdatePage,
-      //hoja de estilos
-      cssClass: 'my-modal-class',
-      //pasar datos al modal
-      
-      componentProps: {
-        'carRepair':carRepair
+    try {
+      this.uts.presentLoading();
+      const modal = await this.modalCtrl.create({
+        component: CarRepairUpdatePage,
+        //hoja de estilos
+        cssClass: 'my-modal-class',
+        //pasar datos al modal
         
-        
-      }
-    });
-   
-  
-    return await modal.present();
+        componentProps: {
+          'carRepair':carRepair
+          
+          
+        }
+      });
+     
+      this.uts.hideLoading();
+      return await modal.present();
+    } catch (error) {
+      this.uts.hideLoading();
+    }
 
   }
   public async saw(carRepair:CarRepair){
-
-    const modal = await this.modalCtrl.create({
-      component: CarRepairSawPage,
-      //hoja de estilos
-      cssClass: 'my-modal-class',
-      //pasar datos al modal
+    try {
+      this.uts.presentLoading();
+      const modal = await this.modalCtrl.create({
+        component: CarRepairSawPage,
+        //hoja de estilos
+        cssClass: 'my-modal-class',
+        //pasar datos al modal
+        
+        componentProps: {
+          'carRepair':carRepair
+          
+          
+        }
+      });
+     
+      this.uts.hideLoading();
+      return await modal.present();
       
-      componentProps: {
-        'carRepair':carRepair
-        
-        
-      }
-    });
-   
-  
-    return await modal.present();
+    } catch (error) {
+      this.uts.hideLoading();
+    }
 
   }
 
@@ -139,7 +150,7 @@ export class CarRepairListPage implements OnInit {
 
   public async delete(carRepair:CarRepair){
     try {
-    await this.presentLoading();
+    await this.uts.presentLoading();
     const result:boolean=await this.cS.delete(carRepair);//borra la reparación y guarda si se ha borrado
     let i=this.carRepairs.indexOf(carRepair,0);//se comprueba si la reparación esta en la lista
     if(result){
@@ -147,15 +158,15 @@ export class CarRepairListPage implements OnInit {
         this.carRepairs.splice(i,1);//borra la reparación de la lista
       }
 
-      this.presentToast("La reparación ha sido eliminada correctamente.","success");
+      this.uts.presentToast("La reparación ha sido eliminada correctamente.","success");
     }else{
-      this.presentToast("Error al borrar la reparación","danger");
+      this.uts.presentToast("Error al borrar la reparación","danger");
     }
     } catch (error) {
-      this.presentToast("Nose ha podido borrar la reparación, intentelo más tarde","danger");
+      this.uts.presentToast("Nose ha podido borrar la reparación, intentelo más tarde","danger");
     }finally{
       try {
-        await this.miLoading.dismiss();
+        await this.uts.hideLoading();
       } catch (error) {
         
       }
@@ -244,21 +255,7 @@ export class CarRepairListPage implements OnInit {
   }
 
 
-  public async presentLoading() {
-    this.miLoading = await this.loading.create({
-      message: ''
-    });
-    await this.miLoading.present();
-  }
-
-  public async presentToast(msg: string, clr: string) {
-    const miToast = await this.toast.create({
-      message: msg,
-      duration: 2000,
-      color: clr
-    });
-    miToast.present();
-  }
+  
 
   public onSearchChange(event) {
     this.searchStr = event.detail.value;
