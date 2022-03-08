@@ -17,6 +17,8 @@ import { UtilService } from '../../../services/util.service';
 export class UserCreatePage {
   @ViewChild(IonToggle) toggle: IonToggle;
 
+  public admin:boolean=false;
+
   public miLoading: HTMLIonLoadingElement;
   public formUser: FormGroup;
 
@@ -153,6 +155,12 @@ export class UserCreatePage {
       options.push({text:x.cia_Name,value:x});
     });
     return options;
+  }
+
+  public changeAdmin(){
+    console.log(this.admin);
+    this.admin=!this.admin;
+    console.log(this.admin);
   }
 }
 export interface PickerColumn {
