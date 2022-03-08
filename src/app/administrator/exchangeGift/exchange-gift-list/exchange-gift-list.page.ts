@@ -76,15 +76,6 @@ export class ExchangeGiftListPage {
     }
     await this.miLoading.dismiss();
   }
-  public async cargaInfinita($event){
-    console.log("CARGAND");
-    let nuevosExGifts=await this.exs.getAll();
-    if(nuevosExGifts.length<10){
-      $event.target.disabled=true;
-    }
-    this.exGifts=this.exGifts.concat(nuevosExGifts);
-    $event.target.complete();
-  }
   async presentLoading() {
     this.miLoading = await this.loading.create({
       message: ''

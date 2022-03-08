@@ -9,7 +9,7 @@
 
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Encuentra el Usuario que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+    <ion-searchbar placeholder="Encuentra el Usuario que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
 
     <ion-row class="header-row">
       <ion-col size="1" style="border: 0px !important;">
@@ -52,7 +52,7 @@
 
   <ion-grid class="ion-text-center">
 
-    <ion-row let *ngFor="let user of this.users" class="row">
+    <ion-row let *ngFor="let user of this.users | filter:searchTerm" class="row">
       
       <ion-col size="1">
         <ion-text>
@@ -95,10 +95,7 @@
 
 
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="cargaInfinita($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+
 </div>
   
 </ion-content>

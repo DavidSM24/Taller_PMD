@@ -8,6 +8,7 @@ import { UserListPageRoutingModule } from './user-list-routing.module';
 
 import { UserListPage } from './user-list.page';
 import { UserUpdatePage } from '../user-update/user-update.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { UserUpdatePage } from '../user-update/user-update.page';
     FormsModule,
     IonicModule,
     UserListPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   declarations: [UserListPage, UserUpdatePage]
 })
