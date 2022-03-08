@@ -64,7 +64,7 @@
         </ion-col>
         <ion-col sizeSm="2" sizeLg="11  ">
           <ion-item  lines="none" (click)="changeAdmin()">
-            No<ion-toggle ></ion-toggle>Si
+            No<ion-toggle></ion-toggle>Si
          </ion-item>
         </ion-col>
       </ion-row>
@@ -118,7 +118,7 @@
             Activa:
           </ion-col>
           <ion-col sizeSm="3" sizeLg="11  ">
-            <ion-item  lines="none">
+            <ion-item  lines="none" (click)="changeActive()">
               No<ion-toggle></ion-toggle>Si
            </ion-item>
           </ion-col>
@@ -148,13 +148,13 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6">
-          <ion-button expand="block" shape="round" class="button">
+          <ion-button expand="block" shape="round" class="button" routerLink="/tab-administrator/agency/list">
             Cancelar
           </ion-button>
         </ion-col>
   
         <ion-col size="6">
-          <ion-button (click)="CreateUser()" expand="block" shape="round" style="margin-top: 2% !important;" class="button" [disabled]="this.formAgency.invalid||this.insurance==null">
+          <ion-button (click)="CreateUser()" expand="block" shape="round" style="margin-top: 2% !important;" class="button" [disabled]="((!this.admin)&&this.formAgency.invalid)||this.formUser.invalid||((!this.admin)&&this.formAgency.invalid)||((!this.admin)&&this.insurance==null)">
             Crear
           </ion-button>
         </ion-col>
