@@ -17,13 +17,10 @@ import { Agency } from '../../../models/Agency';
     CommonModule,
     IonicModule,
     AgencyListPageRoutingModule,
-
     FormsModule,
-    
-    
-
+    ReactiveFormsModule
   ],
   providers:[AgencyService,UtilService],
-  declarations: [AgencyListPage]
+  declarations: [AgencyListPage,AgencyUpdatePage]
 })
 export class AgencyListPageModule {}
