@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-car-repair-update',
@@ -15,9 +16,9 @@ export class CarRepairUpdatePage implements OnInit {
   @Input() carRepair:CarRepair;
 
   public formCarRepair:FormGroup;
-  public id:number;
-  private oldCarRepair:CarRepair;
+  public id:number; 
   private newCarRepair:CarRepair;
+  /*
   public validator=this.formBuilder.group({
     operation:['',[Validators.required]],
     carPlate:['',[Validators.required]],
@@ -32,24 +33,27 @@ export class CarRepairUpdatePage implements OnInit {
     dateRepair:[''],
     repaired:['',[Validators.required]]
 
-  });
+  });*/
 
   constructor(
     private modalController: ModalController,
     private carRepairService:CarRepairService,
     private formBuilder:FormBuilder,
     private activateRoute:ActivatedRoute,
+    private uts:UtilService
   ) {
    
    }
 
   ngOnInit() {
+
+    console.log(this.carRepair);
     this.formCarRepair=this.formBuilder.group({
-      operation:[this.carRepair.operation,[Validators.required]],
+    operation:[this.carRepair.operation,[Validators.required]],
     carPlate:[this.carRepair.carPlate,[Validators.required]],
     model:[this.carRepair.model,[Validators.required]],
     brandCar:[this.carRepair.brandCar,[Validators.required]],
-    clientName:[this.carRepair.clientName,[Validators.required]],
+    clienteName:[this.carRepair.clienteName,[Validators.required]],
     nor:[this.carRepair.nor,[Validators.required]],
     amount:[this.carRepair.amount],
     asigPoints:[this.carRepair.asigPoints],
@@ -59,26 +63,10 @@ export class CarRepairUpdatePage implements OnInit {
     repaired:[this.carRepair.repaired,[Validators.required]]
     });
   }
-  async ionViewDidEnter(){
-     
-    this.oldCarRepair={
-      id:this.carRepair.id,
-    operation:this.carRepair.operation,
-    carPlate:this.carRepair.carPlate,
-    model:this.carRepair.model,
-    brandCar:this.carRepair.brandCar,
-    clientName:this.carRepair.clientName,
-    dateOrder:this.carRepair.dateOrder,
-    nor:this.carRepair.nor,
-    amount:this.carRepair.amount,
-    dateRepair:this.carRepair.dateRepair,
-    asigPoints:this.carRepair.asigPoints,
-    repaired:this.carRepair.repaired,
-    myAgency:this.carRepair.myAgency
-
-    }
+  async ionViewDidEnter(){     
+   
   }
-
+/*
   public setCarRepair():void{
     this.validator=this.formBuilder.group({
     operation:[this.carRepair?.operation,[Validators.required]],
@@ -94,7 +82,7 @@ export class CarRepairUpdatePage implements OnInit {
     dateRepair:[this.carRepair?.dateRepair],
     repaired:[this.carRepair?.repaired,[Validators.required]]
     });
-  }
+  }*/
 
   /**
    * Método que guarda la nota una vez editada
@@ -106,8 +94,8 @@ export class CarRepairUpdatePage implements OnInit {
       carPlate:this.carRepair.carPlate,
       model:this.carRepair.model,
       brandCar:this.carRepair.brandCar,
-      clientName:this.formCarRepair.get("clientName").value,
-      dateOrder:this.carRepair.dateOrder,
+      clienteName:this.formCarRepair.get("clienteName").value,
+      dateOrder:this.formCarRepair.get("dateOrder").value,
       nor:this.formCarRepair.get("nor").value,
       amount:this.formCarRepair.get("amount").value,
       dateRepair:this.formCarRepair.get("dateRepair").value,
@@ -116,12 +104,13 @@ export class CarRepairUpdatePage implements OnInit {
       myAgency:this.carRepair.myAgency
     }
     try {
-      console.log("Nuevo"+this.newCarRepair.operation);
-      this.carRepairService.createOrUpdate(this.newCarRepair);
-      //añadir un toast
-      console.log(this.carRepairService.getById(this.newCarRepair.id));
+      
+      this.newCarRepair=await this.carRepairService.createOrUpdate(this.newCarRepair);
+      this.uts.presentToast("Se ha gurdadado correctamente","success");
+      console.log(this.newCarRepair);
       this.closeModal();
     } catch (error) {
+      this.uts.presentToast("Fallo al guradar","danger");
       console.log(error);
     }
   }

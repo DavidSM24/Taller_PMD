@@ -6,7 +6,7 @@ export interface CarRepair{
     carPlate:string,
     model:string,
     brandCar:string,
-    clientName:string,
+    clienteName:string,
     dateOrder:Date,
     nor:number,
     amount:number,
