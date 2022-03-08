@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
+import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
 
 @Component({
   selector: 'app-car-repair-saw',
@@ -33,6 +35,7 @@ export class CarRepairSawPage implements OnInit {
   });
 
   constructor(
+    private modalController: ModalController,
     private carRepairService:CarRepairService,
     private formBuilder:FormBuilder,
     private routes:Router,
@@ -80,5 +83,38 @@ export class CarRepairSawPage implements OnInit {
 
   public goUpdatePage(){
     this.routes.navigateByUrl('tab-administrator/car-repair/update');
+  }
+
+  
+  /**
+   * Método que actualiza una reparación mediante un modal
+   * @param carRepair Reparación que se quiera modificar
+   */
+   public async edit(){
+
+    const modal = await this.modalController.create({
+      component: CarRepairUpdatePage,
+      //hoja de estilos
+      cssClass: 'my-modal-class',
+      //pasar datos al modal
+      
+      componentProps: {
+        'carRepair':this.carRepair
+        
+        
+      }
+    });
+   
+  try {
+    return await modal.present();
+    this.modalController.dismiss();
+    
+  } catch (error) {
+    
+  }
+
+  }
+  public closeModal(){
+    this.modalController.dismiss();
   }
 }

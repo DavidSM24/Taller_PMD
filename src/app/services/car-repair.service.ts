@@ -225,19 +225,16 @@ export class CarRepairService {
     */
    public async createOrUpdate(carRepair:CarRepair):Promise<CarRepair>{
      if(carRepair!=null){
-       if(carRepair.operation!=null
-        &&carRepair.carPlate!=null
-        &&carRepair.model!=null
-        &&carRepair.brandCar!=null
-        &&carRepair.clientName!=null
-        &&carRepair.dateOrder!=null
-        &&carRepair.nor!=null
-        &&carRepair.amount!=null
-        &&carRepair.dateRepair!=null
-        &&carRepair.asigPoints!=null
-        &&carRepair.repaired!=null
-        &&carRepair.myAgency!=null){
+       if(carRepair.carPlate!=null
+        //&&carRepair.model!=null
+        //&&carRepair.brandCar!=null
+       // &&carRepair.clientName!=null
+        //&&carRepair.dateOrder!=null        
+        //&&carRepair.repaired!=null
+        //&&carRepair.myAgency!=null
+        ){
           const body=carRepair;
+          console.log("Entra?"+body);
 
           return new Promise(resolve=>{
             this.http.post(this.URLDatabase+this.endpoint,body).subscribe((data:any)=>{
