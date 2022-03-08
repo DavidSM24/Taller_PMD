@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -9,17 +9,20 @@ import { GifListPageRoutingModule } from './gif-list-routing.module';
 import { GifListPage } from './gif-list.page';
 import { GiftService } from '../../../services/gift.service';
 import { UtilService } from '../../../services/util.service';
+import { GifUpdatePage } from '../gif-update/gif-update.page';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
-    GifListPageRoutingModule
+    GifListPageRoutingModule,
+
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     GiftService,
     UtilService],
-  declarations: [GifListPage]
+  declarations: [GifListPage,GifUpdatePage]
 })
 export class GifListPageModule {}

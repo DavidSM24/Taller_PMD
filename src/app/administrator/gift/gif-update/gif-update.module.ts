@@ -15,6 +15,6 @@ import { GifUpdatePage } from './gif-update.page';
     IonicModule,
     GifUpdatePageRoutingModule
   ],
-  declarations: [GifUpdatePage]
+  declarations: []
 })
 export class GifUpdatePageModule {}
