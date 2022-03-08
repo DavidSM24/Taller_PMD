@@ -43,7 +43,7 @@ export class ExchangeGifCreatePage {
       let newExchange: ExchangeGift = {
         dateEchange: this.formExchange.get("dateEchange").value,
         observations: this.formExchange.get("observations").value,
-        isDelivered: this.toggle.checked,
+        delivered: this.toggle.checked,
         agency: this.myagency,
         gift: this.mygift
       }

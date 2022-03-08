@@ -89,4 +89,9 @@ private miLoading:HTMLIonLoadingElement;
     });
    await alert.present();
   }
+  public async reset(event){
+    this.infinite.disabled=false;
+    this.users=[];
+    this.cargaUsers(event);
+  }
 }

@@ -4,7 +4,7 @@ export interface ExchangeGift{
     id?:string,
     dateEchange: Date,
     observations: string,
-    isDelivered: boolean,
+    delivered: boolean,
     agency:Agency,
     gift:Gift
 }
