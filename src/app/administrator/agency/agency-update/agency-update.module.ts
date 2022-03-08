@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,13 +15,9 @@ import { InsuranceCompanyService } from 'src/app/services/insurance-company.serv
   imports: [
     CommonModule,
     IonicModule,
-    AgencyUpdatePageRoutingModule,
-
-    FormsModule,
-    ReactiveFormsModule,
-    InsuranceCompanyService
+    AgencyUpdatePageRoutingModule
   ],
-  providers:[AgencyService,UtilService,InsuranceCompanyService],
+  providers:[AgencyService,UtilService],
   declarations: [AgencyUpdatePage]
 })
 export class AgencyUpdatePageModule {}
