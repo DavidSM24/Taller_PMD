@@ -26,24 +26,30 @@ export class UserCreatePage  {
   }
 
   public async CreateUser(): Promise<void> {
-      let newUser: User = {
-        code:this.formUser.get("code").value,
-        password:this.formUser.get("password").value,
-        administrator:this.toggle.checked,
-        email:this.formUser.get("email").value,
-        name:this.formUser.get("name").value
-      }
-      this.uts.presentLoading();
-      
-      try{
-        let id=await this.usserv.createOrUpdate(newUser);
-        this.uts.hideLoading;
-        this.uts.presentToast("Regalo agregada correctamente","success");
-        this.formUser.reset();
-      }catch(err){
+    this.uts.presentLoading();
+      try {
+        let newUser: User = {
+          code:this.formUser.get("code").value,
+          password:this.formUser.get("password").value,
+          administrator:this.toggle.checked,
+          email:this.formUser.get("email").value,
+          name:this.formUser.get("name").value
+        }
         
-        this.uts.hideLoading;
-        this.uts.presentToast("Error agregando Regalo","danger");
+        
+        try{
+          await this.usserv.createOrUpdate(newUser);
+          
+          this.uts.presentToast("Regalo agregada correctamente","success");
+          this.formUser.reset();
+        }catch(err){
+          this.uts.presentToast("Error agregando Regalo","danger");
+        }
+        
+      } catch (error) {
+        this.uts.hideLoading();
+        console.log(error)
       }
+      this.uts.hideLoading();
   }
 }

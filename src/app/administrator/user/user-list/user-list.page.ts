@@ -7,16 +7,18 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-list.page.html',
   styleUrls: ['./user-list.page.scss'],
 })
-export class UserListPage implements OnInit {
-public users:User[]=[];public exGifts:User[]=[];
+export class UserListPage {
+public users:User[]=[];
 @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
 private miLoading:HTMLIonLoadingElement;
   constructor(private usser:UserService,private loading:LoadingController,
     private toast:ToastController,
     private alerta: AlertController) { }
 
-  ngOnInit() {
-  }
+    async ionViewDidEnter(){
+      await this.cargaUsers();
+    }
+
   public async cargaUsers(event?){
     if(this.infinite){
       this.infinite.disabled=false;
@@ -24,9 +26,9 @@ private miLoading:HTMLIonLoadingElement;
     if(!event){
       await this.presentLoading();
     }
-    this.exGifts=[];
+    this.users=[];
     try{
-      this.exGifts=await this.usser.getAll();
+      this.users=await this.usser.getAll();
     }catch(err){
       console.error(err);
       await this.presentToast("Error cargando datos","danger");
@@ -45,7 +47,7 @@ private miLoading:HTMLIonLoadingElement;
     if(nuevosExGifts.length<10){
       $event.target.disabled=true;
     }
-    this.exGifts=this.exGifts.concat(nuevosExGifts);
+    this.users=this.users.concat(nuevosExGifts);
     $event.target.complete();
   }
   async presentLoading() {
@@ -59,7 +61,7 @@ private miLoading:HTMLIonLoadingElement;
     await this.usser.delete(user);
     let i=this.users.indexOf(user,0);
     if(i>-1){
-      this.exGifts.splice(i,1);
+      this.users.splice(i,1);
     }
     await this.miLoading.dismiss();
   }

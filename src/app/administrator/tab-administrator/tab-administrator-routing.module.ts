@@ -23,6 +23,10 @@ const routes: Routes = [
           {
             path: 'saw',
             loadChildren: () => import('../exchangeGift/exchange-gif-saw/exchange-gif-saw.module').then( m => m.ExchangeGifSawPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () => import('../exchangeGift/exchange-gif-create/exchange-gif-create.module').then( m => m.ExchangeGifCreatePageModule)
           }
         ]
       },
@@ -89,7 +93,24 @@ const routes: Routes = [
           }
         ]
       },
-      
+
+      //Users
+      {
+        path:'user',
+        children:[
+          {
+            path: 'list',
+            loadChildren: () => import('../user/user-list/user-list.module').then( m => m.UserListPageModule)
+          }, {
+            path: 'create',
+            loadChildren: () => import('../user/user-create/user-create.module').then( m => m.UserCreatePageModule)
+          },
+          {
+            path: 'update',
+            loadChildren: () => import('../user/user-update/user-update.module').then( m => m.UserUpdatePageModule)
+          }
+        ]
+      },
       {
         path: '',
         redirectTo: '/tabs/about',

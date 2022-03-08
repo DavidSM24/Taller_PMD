@@ -9,7 +9,7 @@ import { ExchangeGift } from '../models/ExchangeGift';
 })
 export class ExchangeGiftService {
 
-  endpoint: string = "/exchangegift";
+  endpoint: string = "/exchangeGifts";
 
   URLDatabase: string;
   constructor(public http: HttpClient) {

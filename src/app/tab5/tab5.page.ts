@@ -33,7 +33,7 @@ export class Tab5Page {
         observations: ["",Validators.required]
       });
     }
-    public async CreateUser(): Promise<void> {
+    public async CreateExgift(): Promise<void> {
       if(this.mygift!=null&&this.myagency!=null){
 
       
@@ -48,7 +48,7 @@ export class Tab5Page {
       this.uts.presentLoading();
       
       try{
-        let id=await this.exser.createOrUpdate(newExchange);
+        await this.exser.createOrUpdate(newExchange);
         this.uts.hideLoading;
         this.uts.presentToast("Regalo agregada correctamente","success");
         this.formExchange.reset();
