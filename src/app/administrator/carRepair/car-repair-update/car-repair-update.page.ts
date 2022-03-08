@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
 
@@ -34,6 +35,7 @@ export class CarRepairUpdatePage implements OnInit {
   });
 
   constructor(
+    private modalController: ModalController,
     private carRepairService:CarRepairService,
     private formBuilder:FormBuilder,
     private activateRoute:ActivatedRoute,
@@ -91,6 +93,40 @@ export class CarRepairUpdatePage implements OnInit {
     dateOrder:[this.carRepair?.dateOrder,[Validators.required]],
     dateRepair:[this.carRepair?.dateRepair],
     repaired:[this.carRepair?.repaired,[Validators.required]]
-    })
+    });
+  }
+
+  /**
+   * Método que guarda la nota una vez editada
+   */
+  public async editCarRepair(){
+    this.newCarRepair={
+      id:this.carRepair.id,
+      operation:this.formCarRepair.get("operation").value,
+      carPlate:this.carRepair.carPlate,
+      model:this.carRepair.model,
+      brandCar:this.carRepair.brandCar,
+      clientName:this.formCarRepair.get("clientName").value,
+      dateOrder:this.carRepair.dateOrder,
+      nor:this.formCarRepair.get("nor").value,
+      amount:this.formCarRepair.get("amount").value,
+      dateRepair:this.formCarRepair.get("dateRepair").value,
+      asigPoints:this.formCarRepair.get("asigPoints").value,
+      repaired:this.formCarRepair.get("repaired").value,
+      myAgency:this.carRepair.myAgency
+    }
+    try {
+      console.log("Nuevo"+this.newCarRepair.operation);
+      this.carRepairService.createOrUpdate(this.newCarRepair);
+      //añadir un toast
+      console.log(this.carRepairService.getById(this.newCarRepair.id));
+      this.closeModal();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public closeModal(){
+    this.modalController.dismiss();
   }
 }
