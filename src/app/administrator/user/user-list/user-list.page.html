@@ -56,7 +56,7 @@
       
       <ion-col size="1">
         <ion-text>
-          <ion-icon name="pencil" style="color:#22388c;cursor:pointer"></ion-icon>
+          <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="edit(user)"></ion-icon>
         </ion-text>
       </ion-col>
       
@@ -86,7 +86,7 @@
         
         <ion-col size="1">
           <ion-text>
-            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="mensagealerta(exchangeGift)"></ion-icon>
+            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="mensagealerta(user)"></ion-icon>
           </ion-text>
         </ion-col>
     </ion-row>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
+import { UserUpdatePage } from '../user-update/user-update.page';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.page.html',
@@ -13,6 +14,7 @@ public users:User[]=[];
 private miLoading:HTMLIonLoadingElement;
   constructor(private usser:UserService,private loading:LoadingController,
     private toast:ToastController,
+    private modalCtrl: ModalController,
     private alerta: AlertController) { }
 
     async ionViewDidEnter(){
@@ -72,6 +74,29 @@ private miLoading:HTMLIonLoadingElement;
       color:clr
     });
     miToast.present();
+  }
+  public async edit(user: User) {
+    try {
+      const modal = await this.modalCtrl.create({
+        component: UserUpdatePage,
+        cssClass: 'fullscreen',
+        componentProps: {
+          'user': user
+        }
+      });
+
+      await modal.present();
+
+      const resp = await modal.onDidDismiss();
+
+      if (resp.data != null) {
+        let i: number = this.users.indexOf(user);
+        this.users[i] = resp.data.newUser;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   }
   public async mensagealerta(n:any){
     const alert = await this.alerta.create({
