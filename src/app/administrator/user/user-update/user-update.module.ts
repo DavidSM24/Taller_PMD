@@ -11,10 +11,9 @@ import { UserUpdatePage } from './user-update.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
     UserUpdatePageRoutingModule
   ],
-  declarations: [UserUpdatePage]
+  declarations: []
 })
 export class UserUpdatePageModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 @Component({
   selector: 'app-exchange-gift-list',
   templateUrl: './exchange-gift-list.page.html',
@@ -14,11 +15,38 @@ export class ExchangeGiftListPage {
   constructor(private exs:ExchangeGiftService,
     private loading:LoadingController,
     private toast:ToastController,
-    private alerta: AlertController,) { }
+    private alerta: AlertController,
+    private modalCtrl: ModalController) { }
 
     async ionViewDidEnter(){
       await this.cargaExGifts();
     }
+
+    public async edit(exchange: ExchangeGift) {
+      try {
+        const modal = await this.modalCtrl.create({
+          component: ExchangeGifUpdatePage,
+          cssClass: 'fullscreen',
+          componentProps: {
+            'exchange': exchange
+          }
+          //
+        });
+  
+        await modal.present();
+  
+        const resp = await modal.onDidDismiss();
+  
+        if (resp.data != null) {
+          let i: number = this.exGifts.indexOf(exchange);
+          this.exGifts[i] = resp.data.newNote;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+  
+    }
+
   public async cargaExGifts(event?){
     if(this.infinite){
       this.infinite.disabled=false;
@@ -72,6 +100,7 @@ export class ExchangeGiftListPage {
     });
     miToast.present();
   }
+  
   public async mensagealerta(n:any){
     const alert = await this.alerta.create({
       header: 'Eliminar',

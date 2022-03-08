@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      Crear Regalos Intercambiados
+      Crea Pedido
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -72,7 +72,7 @@
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col size="12">
-            <ion-button (click)="CreateExgift()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button">
+            <ion-button (click)="CreateExgift()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formExchange.invalid">
               Crear Regalo Intercambio
             </ion-button>
           </ion-col>
