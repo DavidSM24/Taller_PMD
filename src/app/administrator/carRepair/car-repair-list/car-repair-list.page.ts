@@ -70,7 +70,7 @@ export class CarRepairListPage implements OnInit {
       this.carRepairs=this.carRepairs.concat(newCarRepair);
       if(newCarRepair.length<this.nItems){
       this.infinite.disabled=true;
-  
+        console.log(this.carRepairs);
       }
       }catch(error){
         console.log(error);

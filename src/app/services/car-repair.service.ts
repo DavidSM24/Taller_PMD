@@ -41,8 +41,8 @@ export class CarRepairService {
               carPlate:carRepair.carPlate,
               model:carRepair.model,
               brandCar:carRepair.brandCar,
-              clientName:carRepair.clientName,
-              dateOrder:carRepair.Date,
+              clienteName:carRepair.clienteName,
+              dateOrder:carRepair.dateOrder,
               nor:carRepair.nor,
               amount:carRepair.amount,
               dateRepair:carRepair.dateRepair,
@@ -106,7 +106,7 @@ export class CarRepairService {
             carPlate:a.carPlate,
             model:a.model,
             brandCar:a.brandCar,
-            clientName:a.clientName,
+            clienteName:a.clienteName,
             dateOrder:a.dateOrder,
             nor:a.nor,
             amount:a.amount,
@@ -234,7 +234,7 @@ export class CarRepairService {
         //&&carRepair.myAgency!=null
         ){
           const body=carRepair;
-          console.log("Entra?"+body);
+          console.log(body);
 
           return new Promise(resolve=>{
             this.http.post(this.URLDatabase+this.endpoint,body).subscribe((data:any)=>{
