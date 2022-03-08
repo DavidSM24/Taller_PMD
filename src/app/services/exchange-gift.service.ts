@@ -26,7 +26,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
           for (let miexgift of data) {
             const tmp: ExchangeGift = {
               id: miexgift.id,
-              dateEchange: miexgift.dateEchange,
+              dateExchange: miexgift.dateExchange,
               observations:miexgift.observations,
               delivered: miexgift.delivered,
               agency: miexgift.agency,
@@ -59,7 +59,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
         if (miexgift.id) {
           const tmp: ExchangeGift = {
             id: miexgift.id,
-              dateEchange: miexgift.dateEchange,
+            dateExchange: miexgift.dateExchange,
               observations:miexgift.observations,
               delivered: miexgift.delivered,
               agency: miexgift.agency,
@@ -96,7 +96,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
         this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miexgift: any) => {
           let result: ExchangeGift = {
             id: miexgift.id,
-              dateEchange: miexgift.dateEchange,
+            dateExchange: miexgift.dateExchange,
               observations:miexgift.observations,
               delivered: miexgift.delivered,
               agency: miexgift.agency,

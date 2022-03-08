@@ -11,10 +11,9 @@ import { ExchangeGifUpdatePage } from './exchange-gif-update.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
     ExchangeGifUpdatePageRoutingModule
   ],
-  declarations: [ExchangeGifUpdatePage]
+  declarations: []
 })
 export class ExchangeGifUpdatePageModule {}
