@@ -39,7 +39,7 @@ export class GifUpdatePage implements OnInit {
   async ngOnInit() {
     
     try {
-      this.img = this.gift.picture;
+      
       this.file = await this.http.get("https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/" + this.gift.picture, { responseType: 'blob' }).subscribe((resp: any) => {
         this.file = resp;
   
@@ -55,7 +55,10 @@ export class GifUpdatePage implements OnInit {
 
     
   }
-
+  async ionViewWillEnter() {
+    this.img = "https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/"+this.gift.picture;
+  }
+  
   public async edit(): Promise<void> {
 
     this.uts.presentLoading();
@@ -100,6 +103,7 @@ export class GifUpdatePage implements OnInit {
           || extension == ("image/png")) {
           this.file = $event.target.files[0];
           this.extension = this.file.type;
+          this.img=URL.createObjectURL(this.file);
         }
         else {
           this.file = null;

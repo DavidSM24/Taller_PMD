@@ -9,7 +9,11 @@
 <ion-content [fullscreen]="true">
   
   <div class="body">
-  
+    <div class="ion-padding" *ngIf="this.img!=null">    
+      <center>
+        <ion-img class="img" [src]="this.img"></ion-img>
+      </center>
+    </div>
     <form [formGroup]="formGift" class="ion-padding">
       <div class="formulario">
       <ion-grid>
