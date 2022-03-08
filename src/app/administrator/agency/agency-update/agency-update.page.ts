@@ -61,8 +61,6 @@ export class AgencyUpdatePage implements OnInit {
   }
 
   public async edit() {
-  
-    console.log(this.agency.myCarRepairs);
 
      let A: Agency = {
        id: this.agency.id,
@@ -73,7 +71,7 @@ export class AgencyUpdatePage implements OnInit {
        amount: 0,
        points: 0,
        pointsRedeemed: 0,
-       myInsuranceCompany: this.agency.myInsuranceCompany,
+       myInsuranceCompany: this.insurance,
        myCarRepairs: this.agency.myCarRepairs,
        myExchangesGifts: this.agency.myExchangesGifts,
        myUser: this.agency.myUser,

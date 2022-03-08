@@ -65,8 +65,6 @@ export class AgencyListPage implements OnInit {
 
   public async edit(agency:Agency){
     
-    console.log(agency);
-    
     try {
       const modal = await this.modalCtrl.create({
         component: AgencyUpdatePage,
