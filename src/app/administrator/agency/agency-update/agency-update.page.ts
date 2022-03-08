@@ -48,8 +48,6 @@ export class AgencyUpdatePage implements OnInit {
     } catch (error) {
       console.log(error);
     }
-
-    
   }
 
   async ionViewWillEnter() {
@@ -63,31 +61,30 @@ export class AgencyUpdatePage implements OnInit {
   }
 
   public async edit() {
-    
-    
-    console.log(this.formAgency.get("zipCode").value);
-    
-    // let A: Agency = {
-    //   id: this.agency.id,
-    //   zipCode: this.formAgency.get("zipCode").value,
-    //   address: this.formAgency.get("address").value,
-    //   location: this.formAgency.get("location").value,
-    //   phoneNumber: this.formAgency.get("phoneNumber").value,
-    //   amount: 0,
-    //   points: 0,
-    //   pointsRedeemed: 0,
-    //   myInsuranceCompany: this.agency.myInsuranceCompany,
-    //   myCarRepairs: this.agency.myCarRepairs,
-    //   myExchangesGifts: this.agency.myExchangesGifts,
-    //   myUser: this.agency.myUser,
-    //   active: this.toggle.checked
-    // }
+  
+    console.log(this.agency.myCarRepairs);
 
-    // A = await this.as.createOrUpdate(A);
+     let A: Agency = {
+       id: this.agency.id,
+       zipCode: this.formAgency.get("zipCode").value,
+       address: this.formAgency.get("address").value,
+       location: this.formAgency.get("location").value,
+       phoneNumber: this.formAgency.get("phoneNumber").value,
+       amount: 0,
+       points: 0,
+       pointsRedeemed: 0,
+       myInsuranceCompany: this.agency.myInsuranceCompany,
+       myCarRepairs: this.agency.myCarRepairs,
+       myExchangesGifts: this.agency.myExchangesGifts,
+       myUser: this.agency.myUser,
+       active: this.toggle.checked
+     }
+
+     A = await this.as.createOrUpdate(A);
     
-    // this.modalCtrl.dismiss({
-    //   newNote:A
-    // })
+     this.modalCtrl.dismiss({
+       newNote:A
+     })
   }
 
   close() {

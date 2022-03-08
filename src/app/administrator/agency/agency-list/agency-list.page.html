@@ -49,7 +49,7 @@
 
   <ion-grid class="ion-text-center">
 
-    <ion-row let *ngFor="let agency of this.agencies" class="row">
+    <ion-row let *ngFor="let agency of this.agencies;let i=index" class="row">
       
       <ion-col size="1">
         <ion-text>
