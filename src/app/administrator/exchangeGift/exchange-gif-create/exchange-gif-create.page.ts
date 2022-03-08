@@ -31,7 +31,7 @@ export class ExchangeGifCreatePage {
     private ageserv:AgencyService) {
 
       this.formExchange=this.fb.group({
-        dateEchange: ["",Validators.required],
+        dateExchange: ["",Validators.required],
         observations: ["",Validators.required]
       });
     }
@@ -41,7 +41,7 @@ export class ExchangeGifCreatePage {
       if(this.mygift!=null&&this.myagency!=null){
 
       let newExchange: ExchangeGift = {
-        dateEchange: this.formExchange.get("dateEchange").value,
+        dateExchange: this.formExchange.get("dateExchange").value,
         observations: this.formExchange.get("observations").value,
         delivered: this.toggle.checked,
         agency: this.myagency,

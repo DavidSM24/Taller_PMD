@@ -38,7 +38,7 @@ export class Tab5Page {
 
       
       let newExchange: ExchangeGift = {
-        dateEchange: this.formExchange.get("dateEchange").value,
+        dateExchange: this.formExchange.get("dateEchange").value,
         observations: this.formExchange.get("observations").value,
         delivered: this.toggle.checked,
         agency: this.myagency,

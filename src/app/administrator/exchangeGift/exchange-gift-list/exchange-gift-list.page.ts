@@ -30,7 +30,6 @@ export class ExchangeGiftListPage {
           componentProps: {
             'exchange': exchange
           }
-          //
         });
   
         await modal.present();
@@ -39,7 +38,7 @@ export class ExchangeGiftListPage {
   
         if (resp.data != null) {
           let i: number = this.exGifts.indexOf(exchange);
-          this.exGifts[i] = resp.data.newNote;
+          this.exGifts[i] = resp.data.newExchange;
         }
       } catch (error) {
         console.log(error);
