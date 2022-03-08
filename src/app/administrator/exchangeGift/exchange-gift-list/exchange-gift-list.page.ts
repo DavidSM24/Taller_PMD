@@ -7,7 +7,7 @@ import { AlertController, IonInfiniteScroll, LoadingController, ModalController,
   templateUrl: './exchange-gift-list.page.html',
   styleUrls: ['./exchange-gift-list.page.scss'],
 })
-export class ExchangeGiftListPage implements OnInit {
+export class ExchangeGiftListPage {
   public exGifts:ExchangeGift[]=[];
   @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
   private miLoading:HTMLIonLoadingElement;
@@ -16,8 +16,9 @@ export class ExchangeGiftListPage implements OnInit {
     private toast:ToastController,
     private alerta: AlertController,) { }
 
-  ngOnInit() {
-  }
+    async ionViewDidEnter(){
+      await this.cargaExGifts();
+    }
   public async cargaExGifts(event?){
     if(this.infinite){
       this.infinite.disabled=false;

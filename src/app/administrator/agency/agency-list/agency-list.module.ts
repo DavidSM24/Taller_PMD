@@ -18,7 +18,8 @@ import { Agency } from '../../../models/Agency';
     IonicModule,
     AgencyListPageRoutingModule,
 
-    FormsModule
+    FormsModule,
+    
     
 
   ],
