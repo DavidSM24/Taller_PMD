@@ -30,15 +30,19 @@ const routes = [
                 children: [
                     {
                         path: 'list',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_exchangeGift_exchange-gift-list_exchange-gift-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gift-list/exchange-gift-list.module */ 6243)).then(m => m.ExchangeGiftListPageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_exchange-gift_service_ts-src_app_-a3801a"), __webpack_require__.e("default-src_app_administrator_exchangeGift_exchange-gif-update_exchange-gif-update_page_ts"), __webpack_require__.e("src_app_administrator_exchangeGift_exchange-gift-list_exchange-gift-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gift-list/exchange-gift-list.module */ 6243)).then(m => m.ExchangeGiftListPageModule)
                     },
                     {
                         path: 'update',
-                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_exchangeGift_exchange-gif-update_exchange-gif-update_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gif-update/exchange-gif-update.module */ 9890)).then(m => m.ExchangeGifUpdatePageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_exchange-gift_service_ts-src_app_-a3801a"), __webpack_require__.e("default-src_app_administrator_exchangeGift_exchange-gif-update_exchange-gif-update_page_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gif-update/exchange-gif-update.module */ 9890)).then(m => m.ExchangeGifUpdatePageModule)
                     },
                     {
                         path: 'saw',
                         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_exchangeGift_exchange-gif-saw_exchange-gif-saw_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gif-saw/exchange-gif-saw.module */ 2142)).then(m => m.ExchangeGifSawPageModule)
+                    },
+                    {
+                        path: 'create',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_exchange-gift_service_ts-src_app_-a3801a"), __webpack_require__.e("default-src_app_administrator_exchangeGift_exchange-gif-create_exchange-gif-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../exchangeGift/exchange-gif-create/exchange-gif-create.module */ 2632)).then(m => m.ExchangeGifCreatePageModule)
                     }
                 ]
             },
@@ -48,15 +52,15 @@ const routes = [
                 children: [
                     {
                         path: 'list',
-                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-list_car-repair-list_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-list/car-repair-list.module */ 2225)).then(m => m.CarRepairListPageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_carRepair_car-repair-update_car-repair-update_page_ts"), __webpack_require__.e("default-src_app_administrator_carRepair_car-repair-saw_car-repair-saw_page_ts"), __webpack_require__.e("src_app_administrator_carRepair_car-repair-list_car-repair-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-list/car-repair-list.module */ 2225)).then(m => m.CarRepairListPageModule)
                     },
                     {
-                        path: 'saw',
-                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-saw_car-repair-saw_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-saw/car-repair-saw.module */ 6589)).then(m => m.CarRepairSawPageModule)
+                        path: 'saw/:id',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_carRepair_car-repair-update_car-repair-update_page_ts"), __webpack_require__.e("default-src_app_administrator_carRepair_car-repair-saw_car-repair-saw_page_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-saw/car-repair-saw.module */ 6589)).then(m => m.CarRepairSawPageModule)
                     },
                     {
-                        path: 'update',
-                        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_carRepair_car-repair-update_car-repair-update_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-update/car-repair-update.module */ 2529)).then(m => m.CarRepairUpdatePageModule)
+                        path: 'update/:id',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_carRepair_car-repair-update_car-repair-update_page_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ../carRepair/car-repair-update/car-repair-update.module */ 2529)).then(m => m.CarRepairUpdatePageModule)
                     }
                 ]
             },
@@ -78,7 +82,7 @@ const routes = [
                     },
                     {
                         path: 'create',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-create_agency-create_module_ts"), __webpack_require__.e("src_app_services_util_service_ts-_35870")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-create/agency-create.module */ 8333)).then(m => m.AgencyCreatePageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-create_agency-create_module_ts"), __webpack_require__.e("src_app_services_util_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-create/agency-create.module */ 8333)).then(m => m.AgencyCreatePageModule)
                     }
                 ]
             },
@@ -88,10 +92,10 @@ const routes = [
                 children: [
                     {
                         path: 'list',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_gift_gif-list_gif-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-list/gif-list.module */ 1789)).then(m => m.GifListPageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_gift_gif-update_gif-update_page_ts"), __webpack_require__.e("src_app_administrator_gift_gif-list_gif-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-list/gif-list.module */ 1789)).then(m => m.GifListPageModule)
                     }, {
                         path: 'create',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_services_util_service_ts-_35871")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-create/gif-create.module */ 4844)).then(m => m.GifCreatePageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_gift_gif-create_gif-create_module_ts"), __webpack_require__.e("src_app_services_gift_service_ts-src_app_services_util_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-create/gif-create.module */ 4844)).then(m => m.GifCreatePageModule)
                     },
                     {
                         path: 'saw',
@@ -99,7 +103,24 @@ const routes = [
                     },
                     {
                         path: 'update',
-                        loadChildren: () => __webpack_require__.e(/*! import() */ "common").then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-update/gif-update.module */ 8458)).then(m => m.GifUpdatePageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_gift_gif-update_gif-update_page_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ../gift/gif-update/gif-update.module */ 8458)).then(m => m.GifUpdatePageModule)
+                    }
+                ]
+            },
+            //Users
+            {
+                path: 'user',
+                children: [
+                    {
+                        path: 'list',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_user_user-update_user-update_page_ts"), __webpack_require__.e("src_app_administrator_user_user-list_user-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../user/user-list/user-list.module */ 5605)).then(m => m.UserListPageModule)
+                    }, {
+                        path: 'create',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
+                    },
+                    {
+                        path: 'update',
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_user_user-update_user-update_page_ts"), __webpack_require__.e("src_app_administrator_user_user-update_user-update_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../user/user-update/user-update.module */ 7476)).then(m => m.UserUpdatePageModule)
                     }
                 ]
             },
@@ -161,7 +182,7 @@ TabAdministratorPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
             _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
             _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
-            _tab_administrator_routing_module__WEBPACK_IMPORTED_MODULE_0__.TabAdministratorPageRoutingModule
+            _tab_administrator_routing_module__WEBPACK_IMPORTED_MODULE_0__.TabAdministratorPageRoutingModule,
         ],
         declarations: [_tab_administrator_page__WEBPACK_IMPORTED_MODULE_1__.TabAdministratorPage]
     })

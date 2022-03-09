@@ -43,8 +43,8 @@ let AgencyService = class AgencyService {
                                 pointsRedeemed: a.pointsRedeemed,
                                 active: a.active,
                                 myInsuranceCompany: a.myInsuranceCompany,
-                                myCarRepairs: a.mycarRepairs,
-                                myExchangesGifts: a.myExchangeGifts,
+                                myCarRepairs: a.myCarRepairs,
+                                myExchangesGifts: a.myExchangesGifts,
                                 myUser: a.myUser
                             };
                             agencies.push(tmp);
@@ -124,11 +124,12 @@ let AgencyService = class AgencyService {
                 return agency;
             }
             else {
+                console.log(agency);
                 const body = agency;
                 return new Promise(resolve => {
                     this.http.post(this.URLDatabase + this.endpoint, body).subscribe((data) => {
-                        console.log(data);
                         agency = data;
+                        console.log(data);
                         resolve(agency);
                     }, error => {
                         console.log(error);

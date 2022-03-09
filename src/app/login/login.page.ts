@@ -30,8 +30,8 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-    
+  async ngOnInit() {
+
     if(this.authS.isLogged()){
       if(this.authS.user.administrator){
         this.router.navigate(['/tab-administrator/agency/list']);
@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
           correct = true;
 
         }
-        this.uts.hideLoading();
+        await this.uts.hideLoading();
         if (correct) {
           //iniciar sesión... 
           

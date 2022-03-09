@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { LocalStorageService } from './local-storage.service';
 import { User } from '../models/User';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class AuthService {
   public async logout() {
     await this.storage.removeItem('tallerUser');
     this.user = null;
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
   public async keepSession() {
     await this.storage.setItem('tallerUser', JSON.stringify(this.user));

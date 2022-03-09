@@ -2,7 +2,17 @@
     background: #717499;
     background-size: cover;
     min-height: 100%;
+
+    ion-card{
+      height: 60%;
+      width: 40%;
+      ion-img{
+        border: 0.10cm solid black;
+      }
+    }
   }
+
+  
   
   .formulario{
     margin-top: 1.5%;
@@ -25,7 +35,6 @@
         border-radius: 2.5rem;
   }
 
-  .img{
-    border: 5px solid rgb(0, 0, 0);
-  }
+
+  
   
