@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IonDatetime, ModalController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
 import { UtilService } from 'src/app/services/util.service';
+
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-car-repair-update',
@@ -14,9 +16,17 @@ import { UtilService } from 'src/app/services/util.service';
 export class CarRepairUpdatePage implements OnInit {
 
   @Input() carRepair:CarRepair;
+  //variables para la fecha
+  @ViewChild(IonDatetime) datetime: IonDatetime;
+  public dateValue = '';
+  public dateRepair;
+  public value;
+  public formatedString;
 
   public formCarRepair:FormGroup;
   public id:number; 
+  
+  
   private newCarRepair:CarRepair;
   /*
   public validator=this.formBuilder.group({
@@ -42,12 +52,15 @@ export class CarRepairUpdatePage implements OnInit {
     private activateRoute:ActivatedRoute,
     private uts:UtilService
   ) {
+    
    
    }
 
   ngOnInit() {
    // let date:Date=this.carRepair.dateOrder;
    // console.log(date.getMonth);
+    this.value=this.change(this.carRepair.dateOrder);
+    this.dateRepair=this.change(this.carRepair.dateRepair)
     this.formCarRepair=this.formBuilder.group({
     operation:[this.carRepair.operation,[Validators.required]],
     carPlate:[this.carRepair.carPlate,[Validators.required]],
@@ -84,7 +97,7 @@ export class CarRepairUpdatePage implements OnInit {
       dateOrder:this.formCarRepair.get("dateOrder").value,
       nor:this.formCarRepair.get("nor").value,
       amount:this.formCarRepair.get("amount").value,
-      dateRepair:this.formCarRepair.get("dateRepair").value,
+      dateRepair:this.formatedString,
       asigPoints:this.formCarRepair.get("asigPoints").value,
       repaired:this.formCarRepair.get("repaired").value,
       myAgency:this.carRepair.myAgency
@@ -110,4 +123,26 @@ export class CarRepairUpdatePage implements OnInit {
     let date:Date=this.formCarRepair.get("dateOrder").value;
     console.log()
   }
+
+  confirm() {
+    this.datetime.confirm(true);
+  }
+  
+  reset() {
+    this.datetime.reset();
+  }
+
+  formatDate(value: string) {
+    return format(parseISO(value), 'yyyy-MM-dd HH:mm:SS');
+  }
+
+  change(event){
+    console.log(event);
+    this.dateValue=event;
+    this.formatedString=this.formatDate(this.dateValue);
+    this.dateRepair=this.formatedString;
+    console.log(this.formatedString);
+    
+  }
+
 }
