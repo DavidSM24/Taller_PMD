@@ -12,7 +12,7 @@ import { UtilService } from '../../../services/util.service';
 })
 export class GifListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
-
+  
   private n:number=0;
   public gifts: Gift[] = [];
 
@@ -38,20 +38,20 @@ export class GifListPage implements OnInit {
 
   public async loadgifts(event?) {
     
-    let newgifts:Gift[]=[];
+    let newGifts:Gift[]=[];
     
     if(this.gifts.length==0){ //inicio
       
       this.uts.presentLoading();
       
       this.infinite.disabled=false;
-      newgifts=await this.gs.getAllPaged(this.niTems,0);
+      newGifts=await this.gs.getAllPaged(this.niTems,0);
       
-      this.gifts=this.gifts.concat(newgifts);
+      this.gifts=this.gifts.concat(newGifts);
 
     }
 
-    if(newgifts.length<this.niTems){
+    if(newGifts.length<this.niTems){
       this.infinite.disabled=true;
     }
 
@@ -138,14 +138,32 @@ export class GifListPage implements OnInit {
   }
 
   public onSearchChange(event) {
-    this.searchStr = event.detail.value;
+    this.searchStr=event.detail.value;
+    console.log(this.searchStr);
+
+    let list:Gift[]=[];
+
+    let lenght=this.searchStr.length;
+    if(lenght>1){
+      this.gifts.forEach(gift=>{
+        if(gift.name.includes(this.searchStr)){
+          list.push(gift);
+        }
+        
+      })
+      this.gifts=list;
+
+    }
+    else if(lenght<1){
+      this.reset(null); 
+      this.uts.hideLoading();
+    }
   }
 
   public async reset(event){
-    this.n=0;
-    this.infinite.disabled=false;
-    this.gifts=[];
-    this.loadgifts(event);
+    this.infinite.disabled = false;
+    this.gifts = [];
+    this.loadgifts(event)
   }
 
 }

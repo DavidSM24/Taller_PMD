@@ -11,6 +11,7 @@ import { AgencyService } from '../../../services/agency.service';
 import { UtilService } from '../../../services/util.service';
 import { AgencyUpdatePage } from '../agency-update/agency-update.page';
 import { Agency } from '../../../models/Agency';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { Agency } from '../../../models/Agency';
     IonicModule,
     AgencyListPageRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers:[AgencyService,UtilService],
   declarations: [AgencyListPage,AgencyUpdatePage]

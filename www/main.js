@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_tabs_tabs_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./tabs/tabs.module */ 9483)).then(m => m.TabsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_auth_service_ts"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
     },
     {
         path: 'tab4',
@@ -36,7 +36,7 @@ const routes = [
     },
     {
         path: 'login',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_auth_service_ts"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
     },
     {
         path: 'tab-administrator',
@@ -44,11 +44,11 @@ const routes = [
     },
     {
         path: '**',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_auth_service_ts"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
     },
     {
         path: 'user-create',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts-src_-cd7bf6"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
     },
     {
         path: 'user-list',
