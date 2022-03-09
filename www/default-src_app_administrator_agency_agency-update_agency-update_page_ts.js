@@ -66,26 +66,27 @@ let AgencyUpdatePage = class AgencyUpdatePage {
     }
     edit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-            console.log(this.formAgency.get("zipCode").value);
-            // let A: Agency = {
-            //   id: this.agency.id,
-            //   zipCode: this.formAgency.get("zipCode").value,
-            //   address: this.formAgency.get("address").value,
-            //   location: this.formAgency.get("location").value,
-            //   phoneNumber: this.formAgency.get("phoneNumber").value,
-            //   amount: 0,
-            //   points: 0,
-            //   pointsRedeemed: 0,
-            //   myInsuranceCompany: this.agency.myInsuranceCompany,
-            //   myCarRepairs: this.agency.myCarRepairs,
-            //   myExchangesGifts: this.agency.myExchangesGifts,
-            //   myUser: this.agency.myUser,
-            //   active: this.toggle.checked
-            // }
-            // A = await this.as.createOrUpdate(A);
-            // this.modalCtrl.dismiss({
-            //   newNote:A
-            // })
+            this.uts.presentLoading();
+            let A = {
+                id: this.agency.id,
+                zipCode: this.formAgency.get("zipCode").value,
+                address: this.formAgency.get("address").value,
+                location: this.formAgency.get("location").value,
+                phoneNumber: this.formAgency.get("phoneNumber").value,
+                amount: this.agency.amount,
+                points: this.agency.points,
+                pointsRedeemed: this.agency.pointsRedeemed,
+                myInsuranceCompany: this.insurance,
+                myCarRepairs: this.agency.myCarRepairs,
+                myExchangesGifts: this.agency.myExchangesGifts,
+                myUser: this.agency.myUser,
+                active: this.toggle.checked
+            };
+            A = yield this.as.createOrUpdate(A);
+            this.uts.hideLoading();
+            this.modalCtrl.dismiss({
+                newAgency: A
+            });
         });
     }
     close() {
@@ -216,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>\r\n      Prueba Agencia\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <div class=\"body\">\r\n    <form [formGroup]=\"formAgency\" class=\"ion-padding\">\r\n      <div class=\"formulario\">\r\n      <ion-grid>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Cód. Zip:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input type=\"number\" class=\"customInput\" formControlName=\"zipCode\" Disabled></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Dirección:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"address\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Localidad:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"location\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Número de Teléfono:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"phoneNumber\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"rem\">\r\n            Activa:\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-item  lines=\"none\">\r\n              No<ion-toggle></ion-toggle>Si\r\n           </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"rem\">\r\n            <ion-label>Compañía de Seguros:</ion-label>\r\n          </ion-col>\r\n\r\n          <ion-col>\r\n\r\n            <ion-button expand=\"block\" shape=\"round\" (click)=\"showPicker()\" >\r\n              {{this.insurance.cia_Name}}\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"6\">\r\n            <ion-button expand=\"block\" shape=\"round\" class=\"button\" (click)=\"close()\">\r\n              Cancelar\r\n            </ion-button>\r\n          </ion-col>\r\n\r\n          <ion-col size=\"6\">\r\n            <ion-button (click)=\"edit()\" expand=\"block\" shape=\"round\" style=\"margin-top: 2% !important;\" class=\"button\" [disabled]=\"this.formAgency.invalid||this.insurance==null\">\r\n              Actualizar Agencia\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    </form>\r\n\r\n</div>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>\r\n      Prueba Agencia\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <div class=\"body\">\r\n    <form [formGroup]=\"formAgency\" class=\"ion-padding\">\r\n      <div class=\"formulario\">\r\n      <ion-grid>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Cód. Zip:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input type=\"number\" class=\"customInput\" formControlName=\"zipCode\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Dirección:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"address\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Localidad:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input class=\"customInput\" type=\"text\" formControlName=\"location\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col>\r\n            <ion-label>Número de Teléfono:</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"phoneNumber\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"rem\">\r\n            Activa:\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-item  lines=\"none\">\r\n              No<ion-toggle [checked]=\"this.agency.active\"></ion-toggle>Si\r\n           </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        \r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"rem\">\r\n            <ion-label>Compañía de Seguros:</ion-label>\r\n          </ion-col>\r\n\r\n          <ion-col>\r\n\r\n            <ion-button expand=\"block\" shape=\"round\" (click)=\"showPicker()\" >\r\n              {{this.insurance.cia_Name}}\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"6\">\r\n            <ion-button expand=\"block\" shape=\"round\" class=\"button\" (click)=\"close()\">\r\n              Cancelar\r\n            </ion-button>\r\n          </ion-col>\r\n\r\n          <ion-col size=\"6\">\r\n            <ion-button (click)=\"edit()\" expand=\"block\" shape=\"round\" style=\"margin-top: 2% !important;\" class=\"button\" [disabled]=\"this.formAgency.invalid||this.insurance==null\">\r\n              Actualizar\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    </form>\r\n\r\n</div>\r\n</ion-content>\r\n");
 
 /***/ }),
 

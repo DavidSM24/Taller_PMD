@@ -37,18 +37,28 @@ export class GifUpdatePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.img = this.gift.picture;
-    this.file = await this.http.get("https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/" + this.gift.picture, { responseType: 'blob' }).subscribe((resp: any) => {
-      this.file = resp;
+    
+    try {
+      
+      this.file = await this.http.get("https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/" + this.gift.picture, { responseType: 'blob' }).subscribe((resp: any) => {
+        this.file = resp;
+  
+      });
+  
+      this.formGift = this.fb.group({
+        name: [this.gift.name, Validators.required],
+        points: [this.gift.points, Validators.required],
+      }); 
+    } catch (error) {
+      
+    }
 
-    });
-
-    this.formGift = this.fb.group({
-      name: [this.gift.name, Validators.required],
-      points: [this.gift.points, Validators.required],
-    });
+    
   }
-
+  async ionViewWillEnter() {
+    this.img = "https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/"+this.gift.picture;
+  }
+  
   public async edit(): Promise<void> {
 
     this.uts.presentLoading();
@@ -80,6 +90,10 @@ export class GifUpdatePage implements OnInit {
     })
   }
 
+  close() {
+    this.modalCtrl.dismiss();
+  }
+
   public changeListener($event): void {
     try {
       if ($event) {
@@ -89,6 +103,7 @@ export class GifUpdatePage implements OnInit {
           || extension == ("image/png")) {
           this.file = $event.target.files[0];
           this.extension = this.file.type;
+          this.img=URL.createObjectURL(this.file);
         }
         else {
           this.file = null;

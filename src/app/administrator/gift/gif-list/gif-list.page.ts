@@ -67,6 +67,7 @@ export class GifListPage implements OnInit {
   public async edit(gift:Gift){
     const modal = await this.modalCtrl.create({
       component: GifUpdatePage,
+      cssClass:"fullscreen",
       componentProps: {
         gift:gift
       }

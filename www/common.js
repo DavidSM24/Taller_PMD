@@ -212,19 +212,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AgencyUpdatePageModule": () => (/* binding */ AgencyUpdatePageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 8267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _agency_update_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./agency-update-routing.module */ 7879);
-/* harmony import */ var _agency_update_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./agency-update.page */ 2483);
-/* harmony import */ var _services_agency_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/agency.service */ 9574);
-/* harmony import */ var _services_util_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/util.service */ 371);
-/* harmony import */ var src_app_services_insurance_company_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/insurance-company.service */ 7639);
-
-
-
+/* harmony import */ var _services_agency_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/agency.service */ 9574);
+/* harmony import */ var _services_util_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/util.service */ 371);
 
 
 
@@ -234,18 +228,15 @@ __webpack_require__.r(__webpack_exports__);
 
 let AgencyUpdatePageModule = class AgencyUpdatePageModule {
 };
-AgencyUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
+AgencyUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_7__.CommonModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule,
-            _agency_update_routing_module__WEBPACK_IMPORTED_MODULE_0__.AgencyUpdatePageRoutingModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__.ReactiveFormsModule,
-            src_app_services_insurance_company_service__WEBPACK_IMPORTED_MODULE_4__.InsuranceCompanyService
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
+            _agency_update_routing_module__WEBPACK_IMPORTED_MODULE_0__.AgencyUpdatePageRoutingModule
         ],
-        providers: [_services_agency_service__WEBPACK_IMPORTED_MODULE_2__.AgencyService, _services_util_service__WEBPACK_IMPORTED_MODULE_3__.UtilService, src_app_services_insurance_company_service__WEBPACK_IMPORTED_MODULE_4__.InsuranceCompanyService],
-        declarations: [_agency_update_page__WEBPACK_IMPORTED_MODULE_1__.AgencyUpdatePage]
+        providers: [_services_agency_service__WEBPACK_IMPORTED_MODULE_1__.AgencyService, _services_util_service__WEBPACK_IMPORTED_MODULE_2__.UtilService],
+        declarations: []
     })
 ], AgencyUpdatePageModule);
 
@@ -253,20 +244,20 @@ AgencyUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 7573:
-/*!****************************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-create/gif-create-routing.module.ts ***!
-  \****************************************************************************/
+/***/ 2776:
+/*!*****************************************************************************************!*\
+  !*** ./src/app/administrator/carRepair/car-repair-saw/car-repair-saw-routing.module.ts ***!
+  \*****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GifCreatePageRoutingModule": () => (/* binding */ GifCreatePageRoutingModule)
+/* harmony export */   "CarRepairSawPageRoutingModule": () => (/* binding */ CarRepairSawPageRoutingModule)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 3252);
-/* harmony import */ var _gif_create_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gif-create.page */ 6196);
+/* harmony import */ var _car_repair_saw_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-repair-saw.page */ 7584);
 
 
 
@@ -274,89 +265,40 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        component: _gif_create_page__WEBPACK_IMPORTED_MODULE_0__.GifCreatePage
+        component: _car_repair_saw_page__WEBPACK_IMPORTED_MODULE_0__.CarRepairSawPage
     }
 ];
-let GifCreatePageRoutingModule = class GifCreatePageRoutingModule {
+let CarRepairSawPageRoutingModule = class CarRepairSawPageRoutingModule {
 };
-GifCreatePageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+CarRepairSawPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forChild(routes)],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule],
     })
-], GifCreatePageRoutingModule);
+], CarRepairSawPageRoutingModule);
 
 
 
 /***/ }),
 
-/***/ 4844:
-/*!********************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-create/gif-create.module.ts ***!
-  \********************************************************************/
+/***/ 6589:
+/*!*********************************************************************************!*\
+  !*** ./src/app/administrator/carRepair/car-repair-saw/car-repair-saw.module.ts ***!
+  \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GifCreatePageModule": () => (/* binding */ GifCreatePageModule)
+/* harmony export */   "CarRepairSawPageModule": () => (/* binding */ CarRepairSawPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 8267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 8099);
-/* harmony import */ var _gif_create_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gif-create-routing.module */ 7573);
-/* harmony import */ var _gif_create_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gif-create.page */ 6196);
-/* harmony import */ var _services_gift_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/gift.service */ 4483);
-/* harmony import */ var _services_util_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/util.service */ 371);
-
-
-
-
-
-
-
-
-
-let GifCreatePageModule = class GifCreatePageModule {
-};
-GifCreatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.NgModule)({
-        imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_6__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule,
-            _gif_create_routing_module__WEBPACK_IMPORTED_MODULE_0__.GifCreatePageRoutingModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.ReactiveFormsModule
-        ],
-        providers: [_services_gift_service__WEBPACK_IMPORTED_MODULE_2__.GiftService, _services_util_service__WEBPACK_IMPORTED_MODULE_3__.UtilService],
-        declarations: [_gif_create_page__WEBPACK_IMPORTED_MODULE_1__.GifCreatePage]
-    })
-], GifCreatePageModule);
-
-
-
-/***/ }),
-
-/***/ 6196:
-/*!******************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-create/gif-create.page.ts ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GifCreatePage": () => (/* binding */ GifCreatePage)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_create_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./gif-create.page.html */ 3351);
-/* harmony import */ var _gif_create_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gif-create.page.scss */ 3357);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 8346);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
-/* harmony import */ var src_app_services_gift_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/gift.service */ 4483);
-/* harmony import */ var src_app_services_util_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/util.service */ 371);
+/* harmony import */ var _car_repair_saw_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-repair-saw-routing.module */ 2776);
+/* harmony import */ var _car_repair_saw_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./car-repair-saw.page */ 7584);
+/* harmony import */ var src_app_services_car_repair_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/car-repair.service */ 7928);
 
 
 
@@ -365,104 +307,184 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let GifCreatePage = class GifCreatePage {
-    constructor(gs, fb, uts) {
-        this.gs = gs;
-        this.fb = fb;
-        this.uts = uts;
-        this.file = null;
-        this.formGift = this.fb.group({
-            name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required],
-            points: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required],
-        });
-    }
-    create() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.uts.presentLoading();
-            if (this.extension) {
-                if (this.extension == ("image/jpg")
-                    || this.extension == ("image/jpeg")
-                    || this.extension == "image/png") {
-                    console.log("entro?");
-                    let newGift = {
-                        name: this.formGift.get("name").value,
-                        points: this.formGift.get("points").value,
-                        available: this.toggle.checked,
-                        picture: '',
-                        exchangeGifts: []
-                    };
-                    newGift = yield this.gs.createOrUpdate(newGift, this.file);
-                    if (newGift.id) {
-                        this.formGift.reset();
-                        this.uts.presentToast('El regalo se ha creado correctamente.', 'success');
-                    }
-                    else {
-                        this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger');
-                    }
-                }
-            }
-            this.uts.hideLoading();
-        });
-    }
-    test_Update() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            let toDrop = yield this.gs.getAll();
-            let last = toDrop[toDrop.length - 1];
-            last.name = "hola1";
-            console.log(last);
-            if (toDrop != null) {
-                last = yield this.gs.createOrUpdate(last, this.file);
-                console.log(last);
-                this.img = "https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/" + last.picture;
-            }
-        });
-    }
-    test_Delete() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            let toDrop = yield this.gs.getAll();
-            let last = toDrop[toDrop.length - 1];
-            console.log(last);
-            if (toDrop != null) {
-                console.log(yield this.gs.delete(last));
-            }
-        });
-    }
-    changeListener($event) {
-        try {
-            if ($event) {
-                let extension = $event.target.files[0].type.toString();
-                if (extension == ("image/jpeg")
-                    || extension == ("image/png")) {
-                    this.file = $event.target.files[0];
-                    this.extension = this.file.type;
-                }
-                else {
-                    this.file = null;
-                }
-            }
-        }
-        catch (error) {
-            //alert
-            this.file = null;
-        }
-        console.log(this.file.type);
-    }
+let CarRepairSawPageModule = class CarRepairSawPageModule {
 };
-GifCreatePage.ctorParameters = () => [
-    { type: src_app_services_gift_service__WEBPACK_IMPORTED_MODULE_2__.GiftService },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormBuilder },
-    { type: src_app_services_util_service__WEBPACK_IMPORTED_MODULE_3__.UtilService }
-];
-GifCreatePage.propDecorators = {
-    toggle: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.ViewChild, args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonToggle,] }]
-};
-GifCreatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
-        selector: 'app-gif-create',
-        template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_create_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_gif_create_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+CarRepairSawPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
+            _car_repair_saw_routing_module__WEBPACK_IMPORTED_MODULE_0__.CarRepairSawPageRoutingModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.ReactiveFormsModule
+        ],
+        providers: [
+            src_app_services_car_repair_service__WEBPACK_IMPORTED_MODULE_2__.CarRepairService
+        ],
+        declarations: [_car_repair_saw_page__WEBPACK_IMPORTED_MODULE_1__.CarRepairSawPage]
     })
-], GifCreatePage);
+], CarRepairSawPageModule);
+
+
+
+/***/ }),
+
+/***/ 2369:
+/*!***********************************************************************************************!*\
+  !*** ./src/app/administrator/carRepair/car-repair-update/car-repair-update-routing.module.ts ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CarRepairUpdatePageRoutingModule": () => (/* binding */ CarRepairUpdatePageRoutingModule)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 3252);
+/* harmony import */ var _car_repair_update_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-repair-update.page */ 3022);
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _car_repair_update_page__WEBPACK_IMPORTED_MODULE_0__.CarRepairUpdatePage
+    }
+];
+let CarRepairUpdatePageRoutingModule = class CarRepairUpdatePageRoutingModule {
+};
+CarRepairUpdatePageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule],
+    })
+], CarRepairUpdatePageRoutingModule);
+
+
+
+/***/ }),
+
+/***/ 2529:
+/*!***************************************************************************************!*\
+  !*** ./src/app/administrator/carRepair/car-repair-update/car-repair-update.module.ts ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CarRepairUpdatePageModule": () => (/* binding */ CarRepairUpdatePageModule)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _car_repair_update_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-repair-update-routing.module */ 2369);
+/* harmony import */ var _car_repair_update_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./car-repair-update.page */ 3022);
+/* harmony import */ var src_app_services_car_repair_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/car-repair.service */ 7928);
+
+
+
+
+
+
+
+
+let CarRepairUpdatePageModule = class CarRepairUpdatePageModule {
+};
+CarRepairUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
+            _car_repair_update_routing_module__WEBPACK_IMPORTED_MODULE_0__.CarRepairUpdatePageRoutingModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.ReactiveFormsModule
+        ],
+        providers: [
+            src_app_services_car_repair_service__WEBPACK_IMPORTED_MODULE_2__.CarRepairService
+        ],
+        declarations: [_car_repair_update_page__WEBPACK_IMPORTED_MODULE_1__.CarRepairUpdatePage]
+    })
+], CarRepairUpdatePageModule);
+
+
+
+/***/ }),
+
+/***/ 8697:
+/*!******************************************************************************************************!*\
+  !*** ./src/app/administrator/exchangeGift/exchange-gif-update/exchange-gif-update-routing.module.ts ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ExchangeGifUpdatePageRoutingModule": () => (/* binding */ ExchangeGifUpdatePageRoutingModule)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 3252);
+/* harmony import */ var _exchange_gif_update_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./exchange-gif-update.page */ 8667);
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _exchange_gif_update_page__WEBPACK_IMPORTED_MODULE_0__.ExchangeGifUpdatePage
+    }
+];
+let ExchangeGifUpdatePageRoutingModule = class ExchangeGifUpdatePageRoutingModule {
+};
+ExchangeGifUpdatePageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule],
+    })
+], ExchangeGifUpdatePageRoutingModule);
+
+
+
+/***/ }),
+
+/***/ 9890:
+/*!**********************************************************************************************!*\
+  !*** ./src/app/administrator/exchangeGift/exchange-gif-update/exchange-gif-update.module.ts ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ExchangeGifUpdatePageModule": () => (/* binding */ ExchangeGifUpdatePageModule)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _exchange_gif_update_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./exchange-gif-update-routing.module */ 8697);
+
+
+
+
+
+let ExchangeGifUpdatePageModule = class ExchangeGifUpdatePageModule {
+};
+ExchangeGifUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__.CommonModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonicModule,
+            _exchange_gif_update_routing_module__WEBPACK_IMPORTED_MODULE_0__.ExchangeGifUpdatePageRoutingModule
+        ],
+        declarations: []
+    })
+], ExchangeGifUpdatePageModule);
 
 
 
@@ -515,14 +537,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GifUpdatePageModule": () => (/* binding */ GifUpdatePageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 8267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _gif_update_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gif-update-routing.module */ 6971);
-/* harmony import */ var _gif_update_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gif-update.page */ 6667);
-
 
 
 
@@ -531,53 +551,17 @@ __webpack_require__.r(__webpack_exports__);
 
 let GifUpdatePageModule = class GifUpdatePageModule {
 };
-GifUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
+GifUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonicModule,
             _gif_update_routing_module__WEBPACK_IMPORTED_MODULE_0__.GifUpdatePageRoutingModule
         ],
-        declarations: [_gif_update_page__WEBPACK_IMPORTED_MODULE_1__.GifUpdatePage]
+        declarations: []
     })
 ], GifUpdatePageModule);
-
-
-
-/***/ }),
-
-/***/ 6667:
-/*!******************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-update/gif-update.page.ts ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GifUpdatePage": () => (/* binding */ GifUpdatePage)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_update_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./gif-update.page.html */ 881);
-/* harmony import */ var _gif_update_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gif-update.page.scss */ 5795);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-
-
-
-
-let GifUpdatePage = class GifUpdatePage {
-    constructor() { }
-    ngOnInit() {
-    }
-};
-GifUpdatePage.ctorParameters = () => [];
-GifUpdatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
-        selector: 'app-gif-update',
-        template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_gif_update_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_gif_update_page_scss__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], GifUpdatePage);
 
 
 
@@ -657,534 +641,6 @@ ExploreContainerComponentModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decora
 
 /***/ }),
 
-/***/ 63:
-/*!***************************************************!*\
-  !*** ./src/app/services/exchange-gift.service.ts ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ExchangeGiftService": () => (/* binding */ ExchangeGiftService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 3981);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
-
-
-
-
-let ExchangeGiftService = class ExchangeGiftService {
-    constructor(http) {
-        this.http = http;
-        this.endpoint = "/exchangegift";
-        this.URLDatabase = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.herokuConfig.url;
-    }
-    getListData(endpoint) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let users = [];
-            return new Promise(resolve => {
-                this.http.get(endpoint).subscribe((data) => {
-                    if (data != null && data.length > 0) {
-                        for (let miexgift of data) {
-                            const tmp = {
-                                id: miexgift.id,
-                                dateEchange: miexgift.dateEchange,
-                                observations: miexgift.observations,
-                                isDelivered: miexgift.isDelivered,
-                                agency: miexgift.agency,
-                                gift: miexgift.gift
-                            };
-                            users.push(tmp);
-                        }
-                    }
-                    console.log(data);
-                    resolve(users);
-                }, error => {
-                    console.log(error);
-                });
-            });
-        });
-    }
-    getAllPaged(element, page) {
-        return this.getListData(this.URLDatabase + this.endpoint + "/element/" + element + "/page/" + page);
-    }
-    getAll() {
-        return this.getListData(this.URLDatabase + this.endpoint);
-    }
-    getById(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let exchangegift = null;
-            return new Promise(resolve => {
-                this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miexgift) => {
-                    if (miexgift.id) {
-                        const tmp = {
-                            id: miexgift.id,
-                            dateEchange: miexgift.dateEchange,
-                            observations: miexgift.observations,
-                            isDelivered: miexgift.isDelivered,
-                            agency: miexgift.agency,
-                            gift: miexgift.gift
-                        };
-                        exchangegift = tmp;
-                    }
-                    console.log(exchangegift);
-                    resolve(exchangegift);
-                }, error => {
-                    console.log(error);
-                    console.log(exchangegift);
-                    resolve(exchangegift);
-                });
-            });
-        });
-    }
-    getByDeliveredPaged(delivered, element, page) {
-        return this.getListData(this.URLDatabase + this.endpoint + "/delivered/" + delivered + "/element/" + element + "/page/" + page);
-    }
-    getByAgencyPaged(agency, element, page) {
-        if (agency != null) {
-            return this.getListData(this.URLDatabase + this.endpoint + "/id_agency/" + agency.id + "/element/" + element + "/page/" + page);
-        }
-        else {
-            let result;
-            return result;
-        }
-    }
-    createOrUpdate(exgift) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            if (exgift != null) {
-                const body = exgift;
-                return new Promise(resolve => {
-                    this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miexgift) => {
-                        let result = {
-                            id: miexgift.id,
-                            dateEchange: miexgift.dateEchange,
-                            observations: miexgift.observations,
-                            isDelivered: miexgift.isDelivered,
-                            agency: miexgift.agency,
-                            gift: miexgift.gift
-                        };
-                        resolve(result);
-                    }, error => {
-                        console.log(error);
-                        resolve(exgift);
-                    });
-                });
-            }
-        });
-    }
-    delete(exgift) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return new Promise(resolve => {
-                this.http.delete(this.URLDatabase + this.endpoint, { body: exgift }).subscribe(() => {
-                    resolve(true);
-                }, error => {
-                    console.log(error);
-                    resolve(false);
-                });
-            });
-        });
-    }
-};
-ExchangeGiftService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
-];
-ExchangeGiftService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
-        providedIn: 'root'
-    })
-], ExchangeGiftService);
-
-
-
-/***/ }),
-
-/***/ 4483:
-/*!******************************************!*\
-  !*** ./src/app/services/gift.service.ts ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GiftService": () => (/* binding */ GiftService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 3981);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
-
-
-
-
-let GiftService = class GiftService {
-    constructor(http) {
-        this.http = http;
-        this.endpoint = "/gifts";
-        this.URLDatabase = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.herokuConfig.url;
-    }
-    getListData(endpoint) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let gifts = [];
-            return new Promise(resolve => {
-                this.http.get(endpoint).subscribe((data) => {
-                    if (data != null && data.length > 0) {
-                        for (let g of data) {
-                            const tmp = {
-                                id: g.id,
-                                name: g.name,
-                                points: g.points,
-                                picture: g.picture,
-                                exchangeGifts: [],
-                                available: g.available
-                            };
-                            for (let eg of g.exchangeGifts) {
-                                tmp.exchangeGifts.push(eg);
-                            }
-                            gifts.push(tmp);
-                        }
-                    }
-                    console.log(data);
-                    resolve(gifts);
-                }, error => {
-                    console.log(error);
-                });
-            });
-        });
-    }
-    getAll() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + this.endpoint);
-        });
-    }
-    getAllPaged(limit, offset) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + this.endpoint + "/element/" + limit + "/page/" + offset);
-        });
-    }
-    getById(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let gift = null;
-            return new Promise(resolve => {
-                this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((data) => {
-                    if (data.id) {
-                        const tmp = {
-                            id: data.id,
-                            name: data.name,
-                            points: data.points,
-                            picture: data.picture,
-                            exchangeGifts: [],
-                            available: data.available
-                        };
-                        for (let eg of data.exchangeGifts) {
-                            tmp.exchangeGifts.push(eg);
-                        }
-                        gift = tmp;
-                    }
-                    console.log(gift);
-                    resolve(gift);
-                }, error => {
-                    console.log(error);
-                    console.log(gift);
-                    resolve(gift);
-                });
-            });
-        });
-    }
-    getByNamePaged(name, limit, offset) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + this.endpoint + "/name/" + name + "/element/" + limit + "/page/" + offset);
-        });
-    }
-    getByAvailablePaged(available, limit, offset) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + this.endpoint + "/available/" + available + "/element/" + limit + "/page/" + offset);
-        });
-    }
-    createOrUpdate(gift, ImageFile) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            console.log(gift);
-            if (gift == null
-                || gift.name == null
-                || gift.name == ("")
-                || ImageFile == null) {
-                console.log("El campo name esta nulo o no contiene caracteres.");
-                return gift;
-            }
-            else {
-                const body = gift;
-                return new Promise(resolve => {
-                    let formData = new FormData();
-                    formData.append('g', new Blob([JSON.stringify(gift)], {
-                        type: 'application/json'
-                    }));
-                    formData.append('file', ImageFile);
-                    this.http.post(this.URLDatabase + this.endpoint, formData).subscribe((data) => {
-                        console.log(data);
-                        resolve(data);
-                    }, error => {
-                        console.log(error);
-                        resolve(error);
-                    });
-                });
-            }
-        });
-    }
-    delete(gift) {
-        return new Promise(resolve => {
-            this.http.delete(this.URLDatabase + this.endpoint, { body: gift }).subscribe(() => {
-                resolve(true);
-            }, error => {
-                console.log(error);
-                resolve(false);
-            });
-        });
-    }
-};
-GiftService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
-];
-GiftService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
-        providedIn: 'root'
-    })
-], GiftService);
-
-
-
-/***/ }),
-
-/***/ 7524:
-/*!******************************************!*\
-  !*** ./src/app/services/user.service.ts ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "UserService": () => (/* binding */ UserService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 3981);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
-
-
-
-
-let UserService = class UserService {
-    constructor(http) {
-        this.http = http;
-        this.endpoint = "/users";
-        this.URLDatabase = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.herokuConfig.url;
-    }
-    getListData(endpoint) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let users = [];
-            return new Promise(resolve => {
-                this.http.get(endpoint).subscribe((data) => {
-                    if (data != null && data.length > 0) {
-                        for (let miuser of data) {
-                            const tmp = {
-                                id: miuser.id,
-                                code: miuser.code,
-                                password: miuser.password,
-                                administrator: miuser.administrator,
-                                email: miuser.email,
-                                name: miuser.name
-                            };
-                            users.push(tmp);
-                        }
-                    }
-                    console.log(data);
-                    resolve(users);
-                }, error => {
-                    console.log(error);
-                });
-            });
-        });
-    }
-    getAllPaged(element, page) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + this.endpoint + "/element/" + element + "/page/" + page);
-        });
-    }
-    getAll() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + this.endpoint);
-        });
-    }
-    getById(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let user = null;
-            return new Promise(resolve => {
-                this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miuser) => {
-                    if (miuser.id) {
-                        const tmp = {
-                            id: miuser.id,
-                            code: miuser.code,
-                            password: miuser.password,
-                            administrator: miuser.administrator,
-                            email: miuser.email,
-                            name: miuser.name
-                        };
-                        user = tmp;
-                    }
-                    console.log(user);
-                    resolve(user);
-                }, error => {
-                    console.log(error);
-                    console.log(user);
-                    resolve(user);
-                });
-            });
-        });
-    }
-    getByAvailable() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + this.endpoint + "/available");
-        });
-    }
-    getByCode(code) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let user = null;
-            return new Promise(resolve => {
-                this.http.get(this.URLDatabase + this.endpoint + "/code/" + code).subscribe((miuser) => {
-                    if (miuser.code) {
-                        const tmp = {
-                            id: miuser.id,
-                            code: miuser.code,
-                            password: miuser.password,
-                            administrator: miuser.administrator,
-                            email: miuser.email,
-                            name: miuser.name
-                        };
-                        user = tmp;
-                    }
-                    console.log(user);
-                    resolve(user);
-                }, error => {
-                    console.log(error);
-                    console.log(user);
-                    resolve(user);
-                });
-            });
-        });
-    }
-    getByName(name) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            let user = null;
-            return new Promise(resolve => {
-                this.http.get(this.URLDatabase + this.endpoint + "/name/" + name).subscribe((miuser) => {
-                    if (miuser.name) {
-                        const tmp = {
-                            id: miuser.id,
-                            code: miuser.code,
-                            password: miuser.password,
-                            administrator: miuser.administrator,
-                            email: miuser.email,
-                            name: miuser.name
-                        };
-                        user = tmp;
-                    }
-                    console.log(user);
-                    resolve(user);
-                }, error => {
-                    console.log(error);
-                    console.log(user);
-                    resolve(user);
-                });
-            });
-        });
-    }
-    getAllUserAgenciesPaged(administrator, element, page) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + "/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
-        });
-    }
-    getAllAdminPaged(administrator, element, page) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return this.getListData(this.URLDatabase + "/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
-        });
-    }
-    createOrUpdate(user) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            if (user != null) {
-                const body = user;
-                return new Promise(resolve => {
-                    this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miuser) => {
-                        let result = {
-                            id: miuser.id,
-                            code: miuser.code,
-                            password: miuser.password,
-                            administrator: miuser.administrator,
-                            email: miuser.email,
-                            name: miuser.name
-                        };
-                        resolve(result);
-                    }, error => {
-                        console.log(error);
-                        resolve(user);
-                    });
-                });
-            }
-        });
-    }
-    delete(user) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            return new Promise(resolve => {
-                this.http.delete(this.URLDatabase + this.endpoint, { body: user }).subscribe(() => {
-                    resolve(true);
-                }, error => {
-                    console.log(error);
-                    resolve(false);
-                });
-            });
-        });
-    }
-};
-UserService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
-];
-UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
-        providedIn: 'root'
-    })
-], UserService);
-
-
-
-/***/ }),
-
-/***/ 3351:
-/*!***********************************************************************************************************************************!*\
-  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/administrator/gift/gif-create/gif-create.page.html ***!
-  \***********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>\r\n      Pruebas Gif\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  \r\n  <div class=\"body\">\r\n  \r\n  \r\n    <form [formGroup]=\"formGift\" class=\"ion-padding\">\r\n      <div class=\"formulario\">\r\n      <ion-grid>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Nombre:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input type=\"text\" class=\"customInput\" formControlName=\"name\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"1\" sizeLg=\"1\">\r\n            <ion-label>Puntos:</ion-label>\r\n          </ion-col>\r\n          <ion-col sizeSm=\"11\" sizeLg=\"11\">\r\n            <ion-input class=\"customInput\" type=\"number\" formControlName=\"points\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col sizeSm=\"9\" sizeLg=\"1\">\r\n            Disponible\r\n          </ion-col>\r\n          <ion-col sizeSm=\"3\" sizeLg=\"11  \">\r\n            <ion-item  lines=\"none\">\r\n              No<ion-toggle></ion-toggle>Si\r\n           </ion-item>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n        \r\n          <ion-col size=\"12\">\r\n            <ion-input type=\"file\" accept=\".jpg,.jpeg,.png\" (change)=\"changeListener($event)\"></ion-input>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-row class=\"ion-align-items-center\">\r\n          <ion-col size=\"12\">\r\n            <ion-button expand=\"block\" shape=\"round\" style=\"margin-top: 2% !important;\" (click)=\"create()\" class=\"button\" [disabled]=\"this.formGift.invalid||this.file==null\">\r\n              Crear Regalo\r\n            </ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    </form>\r\n  \r\n</div>\r\n</ion-content>\r\n");
-
-/***/ }),
-
-/***/ 881:
-/*!***********************************************************************************************************************************!*\
-  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/administrator/gift/gif-update/gif-update.page.html ***!
-  \***********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>GifUpdate</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n");
-
-/***/ }),
-
 /***/ 9651:
 /*!***********************************************************************************************************************************!*\
   !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/explore-container/explore-container.component.html ***!
@@ -1196,26 +652,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div id=\"container\">\n  <strong>{{ name }}</strong>\n  <p>Explore <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://ionicframework.com/docs/components\">UI Components</a></p>\n</div>");
-
-/***/ }),
-
-/***/ 3357:
-/*!********************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-create/gif-create.page.scss ***!
-  \********************************************************************/
-/***/ ((module) => {
-
-module.exports = ".body {\n  background: #717499;\n  background-size: cover;\n  min-height: 100%;\n}\n\n.formulario {\n  margin-top: 1.5%;\n  padding: 2%;\n  border-top: 2px double gray;\n  border: 1px solid;\n  border-color: \"primary\";\n  border-radius: 2.5rem;\n  background-color: white;\n  margin-bottom: 4%;\n}\n\n.button {\n  --background: #22388c;\n}\n\n.customInput {\n  border: 1px solid gray;\n  border-color: \"primary\";\n  border-radius: 2.5rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdpZi1jcmVhdGUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0FBQ0o7O0FBRUU7RUFDRSxnQkFBQTtFQUNBLFdBQUE7RUFDQSwyQkFBQTtFQUNBLGlCQUFBO0VBQ0EsdUJBQUE7RUFDQSxxQkFBQTtFQUNBLHVCQUFBO0VBQ0EsaUJBQUE7QUFDSjs7QUFFRTtFQUNFLHFCQUFBO0FBQ0o7O0FBRUU7RUFDTSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EscUJBQUE7QUFDUiIsImZpbGUiOiJnaWYtY3JlYXRlLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ib2R5e1xyXG4gICAgYmFja2dyb3VuZDogIzcxNzQ5OTtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XHJcbiAgICBtaW4taGVpZ2h0OiAxMDAlO1xyXG4gIH1cclxuICBcclxuICAuZm9ybXVsYXJpb3tcclxuICAgIG1hcmdpbi10b3A6IDEuNSU7XHJcbiAgICBwYWRkaW5nOiAyJTtcclxuICAgIGJvcmRlci10b3A6IDJweCBkb3VibGUgZ3JheTtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkO1xyXG4gICAgYm9yZGVyLWNvbG9yOiBcInByaW1hcnlcIjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDIuNXJlbTtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogNCU7XHJcbiAgfVxyXG4gIFxyXG4gIC5idXR0b257XHJcbiAgICAtLWJhY2tncm91bmQ6ICMyMjM4OGM7XHJcbiAgfVxyXG4gIFxyXG4gIC5jdXN0b21JbnB1dHtcclxuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCBncmF5O1xyXG4gICAgICAgIGJvcmRlci1jb2xvcjogXCJwcmltYXJ5XCI7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMi41cmVtO1xyXG4gIH1cclxuICBcclxuICBcclxuICAiXX0= */";
-
-/***/ }),
-
-/***/ 5795:
-/*!********************************************************************!*\
-  !*** ./src/app/administrator/gift/gif-update/gif-update.page.scss ***!
-  \********************************************************************/
-/***/ ((module) => {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJnaWYtdXBkYXRlLnBhZ2Uuc2NzcyJ9 */";
 
 /***/ }),
 

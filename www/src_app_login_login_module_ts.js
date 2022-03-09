@@ -694,6 +694,7 @@ let LoginPage = class LoginPage {
         this.uts = uts;
         this.authS = authS;
         this.router = router;
+        this.complete = false;
         this.formLogin = this.fb.group({
             code: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern("[0-9]*")],
             pass: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required]
@@ -701,7 +702,11 @@ let LoginPage = class LoginPage {
     }
     ngOnInit() {
         if (this.authS.isLogged()) {
-            this.router.navigate(['/tab-administrator/agency/list']);
+            if (this.authS.user.administrator) {
+                this.router.navigate(['/tab-administrator/agency/list']);
+            }
+            else {
+            }
         }
     }
     ionViewWillEnter() {
@@ -713,6 +718,7 @@ let LoginPage = class LoginPage {
             catch (error) {
             }
         }
+        this.complete = true;
     }
     login() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
@@ -732,7 +738,11 @@ let LoginPage = class LoginPage {
                         this.authS.user = user;
                         yield this.authS.keepSession();
                         console.log("inciando...");
-                        this.router.navigate(['/tab-administrator/agency/list']);
+                        if (user.administrator) {
+                            this.router.navigate(['/tab-administrator/agency/list']);
+                        }
+                        else {
+                        }
                     }
                     catch (error) {
                         console.log(error);
@@ -931,6 +941,208 @@ LocalStorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 
 /***/ }),
 
+/***/ 7524:
+/*!******************************************!*\
+  !*** ./src/app/services/user.service.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UserService": () => (/* binding */ UserService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 3981);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
+
+
+
+
+let UserService = class UserService {
+    constructor(http) {
+        this.http = http;
+        this.endpoint = "/users";
+        this.URLDatabase = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.herokuConfig.url;
+    }
+    getListData(endpoint) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let users = [];
+            return new Promise(resolve => {
+                this.http.get(endpoint).subscribe((data) => {
+                    if (data != null && data.length > 0) {
+                        for (let miuser of data) {
+                            const tmp = {
+                                id: miuser.id,
+                                code: miuser.code,
+                                password: miuser.password,
+                                administrator: miuser.administrator,
+                                email: miuser.email,
+                                name: miuser.name
+                            };
+                            users.push(tmp);
+                        }
+                    }
+                    console.log(data);
+                    resolve(users);
+                }, error => {
+                    console.log(error);
+                });
+            });
+        });
+    }
+    getAllPaged(element, page) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + this.endpoint + "/element/" + element + "/page/" + page);
+        });
+    }
+    getAll() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + this.endpoint);
+        });
+    }
+    getById(id) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let user = null;
+            return new Promise(resolve => {
+                this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miuser) => {
+                    if (miuser.id) {
+                        const tmp = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        user = tmp;
+                    }
+                    console.log(user);
+                    resolve(user);
+                }, error => {
+                    console.log(error);
+                    console.log(user);
+                    resolve(user);
+                });
+            });
+        });
+    }
+    getByAvailable() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + this.endpoint + "/available");
+        });
+    }
+    getByCode(code) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let user = null;
+            return new Promise(resolve => {
+                this.http.get(this.URLDatabase + this.endpoint + "/code/" + code).subscribe((miuser) => {
+                    if (miuser.code) {
+                        const tmp = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        user = tmp;
+                    }
+                    console.log(user);
+                    resolve(user);
+                }, error => {
+                    console.log(error);
+                    console.log(user);
+                    resolve(user);
+                });
+            });
+        });
+    }
+    getByName(name) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let user = null;
+            return new Promise(resolve => {
+                this.http.get(this.URLDatabase + this.endpoint + "/name/" + name).subscribe((miuser) => {
+                    if (miuser.name) {
+                        const tmp = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        user = tmp;
+                    }
+                    console.log(user);
+                    resolve(user);
+                }, error => {
+                    console.log(error);
+                    console.log(user);
+                    resolve(user);
+                });
+            });
+        });
+    }
+    getAllUserAgenciesPaged(administrator, element, page) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + "/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+        });
+    }
+    getAllAdminPaged(administrator, element, page) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + "/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+        });
+    }
+    createOrUpdate(user) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            if (user != null) {
+                const body = user;
+                return new Promise(resolve => {
+                    this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miuser) => {
+                        let result = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        resolve(result);
+                    }, error => {
+                        console.log(error);
+                        resolve(user);
+                    });
+                });
+            }
+        });
+    }
+    delete(user) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return new Promise(resolve => {
+                this.http.delete(this.URLDatabase + this.endpoint, { body: user }).subscribe(() => {
+                    resolve(true);
+                }, error => {
+                    console.log(error);
+                    resolve(false);
+                });
+            });
+        });
+    }
+};
+UserService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
+];
+UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+        providedIn: 'root'
+    })
+], UserService);
+
+
+
+/***/ }),
+
 /***/ 371:
 /*!******************************************!*\
   !*** ./src/app/services/util.service.ts ***!
@@ -1000,7 +1212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n\r\n<div style=\"background-color: white; width: 100%; height: 100%;\">\r\n  <div>\r\n    \r\n    <div class=\"login\">\r\n      <ion-img src=\"../../assets/images/logo.png\"></ion-img>\r\n      <form [formGroup]=\"formLogin\">\r\n        <h1>Login</h1>\r\n        <div class=\"group\">\r\n          <label for=\"code\" class=\"label\" style=\"margin-bottom:3% !important;\">Código</label>\r\n          <input id=\"code\" type=\"number\" class=\"input\" formControlName=\"code\">\r\n        </div>\r\n        <div class=\"group\">\r\n          <label for=\"pass\" class=\"label\" style=\"margin-bottom:3% !important;\">Contraseña</label>\r\n          <input id=\"pass\" type=\"password\" class=\"input\" data-type=\"pass\" formControlName=\"pass\">\r\n        </div>\r\n\r\n        <div class=\"wrapper\">\r\n          <div class=\"link_wrapper\">\r\n            <a (click)=\"login()\">Iniciar</a>\r\n            <div class=\"icon\">\r\n              <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 268.832 268.832\">\r\n                <path d=\"M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z\"/>\r\n              </svg>\r\n            </div>\r\n          </div>\r\n          \r\n        </div>\r\n        \r\n      </form>\r\n\r\n\r\n\r\n    </div>\r\n\r\n  </div>\r\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\r\n<div  style=\"background-color: white; width: 100%; height: 100%;\">\r\n  <div>\r\n    \r\n    <div class=\"login\">\r\n      <ion-img src=\"../../assets/images/logo.png\"></ion-img>\r\n      <form [formGroup]=\"formLogin\">\r\n        <h1>Login</h1>\r\n        <div class=\"group\">\r\n          <label for=\"code\" class=\"label\" style=\"margin-bottom:3% !important;\">Código</label>\r\n          <input id=\"code\" type=\"number\" class=\"input\" formControlName=\"code\">\r\n        </div>\r\n        <div class=\"group\">\r\n          <label for=\"pass\" class=\"label\" style=\"margin-bottom:3% !important;\">Contraseña</label>\r\n          <input id=\"pass\" type=\"password\" class=\"input\" data-type=\"pass\" formControlName=\"pass\">\r\n        </div>\r\n\r\n        <div class=\"wrapper\">\r\n          <div class=\"link_wrapper\">\r\n            <a (click)=\"login()\">Iniciar</a>\r\n            <div class=\"icon\">\r\n              <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 268.832 268.832\">\r\n                <path d=\"M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z\"/>\r\n              </svg>\r\n            </div>\r\n          </div>\r\n          \r\n        </div>\r\n        \r\n      </form>\r\n\r\n\r\n\r\n    </div>\r\n\r\n  </div>\r\n</div>");
 
 /***/ }),
 

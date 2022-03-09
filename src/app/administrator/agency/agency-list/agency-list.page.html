@@ -1,11 +1,13 @@
 <ion-header [translucent]="false">
+  
   <ion-toolbar color="primary">
-    
+
     <ion-title>Lista de Agencias</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" routerLink="/tab-administrator/user/create"></ion-icon>
       <ion-icon class="icon-logout" slot="end" name="person" style="zoom:1.5;cursor:pointer" routerLink="/tab-administrator/user/list"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
@@ -22,11 +24,11 @@
       </ion-col>
 
       <ion-col  size="3.3" style="border: 0px !important;">
-        <ion-text>Puntos</ion-text>
+        <ion-text>Localidad</ion-text>
       </ion-col>
 
       <ion-col size="3.3" style="border: 0px !important;">
-        <ion-text>Acumulado</ion-text>
+        <ion-text>Puntos</ion-text>
       </ion-col>
       
       <ion-col size="1" style="border: 0px !important;">
@@ -65,13 +67,13 @@
 
         <ion-col size="3.3">
           <ion-text>
-            {{agency.points}}
+            {{agency.location}}
           </ion-text>
         </ion-col>
   
         <ion-col size="3.3">
           <ion-text>
-            {{agency.amount}} €
+            {{agency.points}}
           </ion-text>
         </ion-col>
 

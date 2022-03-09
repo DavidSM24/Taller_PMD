@@ -4,13 +4,12 @@
     <ion-title>Lista de Regalos</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" ></ion-icon>
-      <ion-icon slot="end" name="person" style="zoom:1.5;cursor:pointer;"></ion-icon>
+      <ion-icon routerLink="/tab-administrator/gift/create" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" ></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar color="dark" placeholder="Encuentra el regalo que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+    <ion-searchbar placeholder="Encuentra el regalo que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
     <ion-row #rowItem class="header-row">
       <ion-col size="1" style="border: 0px !important;">

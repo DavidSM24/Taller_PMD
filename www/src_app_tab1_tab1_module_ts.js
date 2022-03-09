@@ -1,6 +1,208 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_tab1_tab1_module_ts"],{
 
+/***/ 7524:
+/*!******************************************!*\
+  !*** ./src/app/services/user.service.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UserService": () => (/* binding */ UserService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 3981);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
+
+
+
+
+let UserService = class UserService {
+    constructor(http) {
+        this.http = http;
+        this.endpoint = "/users";
+        this.URLDatabase = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.herokuConfig.url;
+    }
+    getListData(endpoint) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let users = [];
+            return new Promise(resolve => {
+                this.http.get(endpoint).subscribe((data) => {
+                    if (data != null && data.length > 0) {
+                        for (let miuser of data) {
+                            const tmp = {
+                                id: miuser.id,
+                                code: miuser.code,
+                                password: miuser.password,
+                                administrator: miuser.administrator,
+                                email: miuser.email,
+                                name: miuser.name
+                            };
+                            users.push(tmp);
+                        }
+                    }
+                    console.log(data);
+                    resolve(users);
+                }, error => {
+                    console.log(error);
+                });
+            });
+        });
+    }
+    getAllPaged(element, page) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + this.endpoint + "/element/" + element + "/page/" + page);
+        });
+    }
+    getAll() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + this.endpoint);
+        });
+    }
+    getById(id) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let user = null;
+            return new Promise(resolve => {
+                this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miuser) => {
+                    if (miuser.id) {
+                        const tmp = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        user = tmp;
+                    }
+                    console.log(user);
+                    resolve(user);
+                }, error => {
+                    console.log(error);
+                    console.log(user);
+                    resolve(user);
+                });
+            });
+        });
+    }
+    getByAvailable() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + this.endpoint + "/available");
+        });
+    }
+    getByCode(code) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let user = null;
+            return new Promise(resolve => {
+                this.http.get(this.URLDatabase + this.endpoint + "/code/" + code).subscribe((miuser) => {
+                    if (miuser.code) {
+                        const tmp = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        user = tmp;
+                    }
+                    console.log(user);
+                    resolve(user);
+                }, error => {
+                    console.log(error);
+                    console.log(user);
+                    resolve(user);
+                });
+            });
+        });
+    }
+    getByName(name) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            let user = null;
+            return new Promise(resolve => {
+                this.http.get(this.URLDatabase + this.endpoint + "/name/" + name).subscribe((miuser) => {
+                    if (miuser.name) {
+                        const tmp = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        user = tmp;
+                    }
+                    console.log(user);
+                    resolve(user);
+                }, error => {
+                    console.log(error);
+                    console.log(user);
+                    resolve(user);
+                });
+            });
+        });
+    }
+    getAllUserAgenciesPaged(administrator, element, page) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + "/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+        });
+    }
+    getAllAdminPaged(administrator, element, page) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return this.getListData(this.URLDatabase + "/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+        });
+    }
+    createOrUpdate(user) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            if (user != null) {
+                const body = user;
+                return new Promise(resolve => {
+                    this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miuser) => {
+                        let result = {
+                            id: miuser.id,
+                            code: miuser.code,
+                            password: miuser.password,
+                            administrator: miuser.administrator,
+                            email: miuser.email,
+                            name: miuser.name
+                        };
+                        resolve(result);
+                    }, error => {
+                        console.log(error);
+                        resolve(user);
+                    });
+                });
+            }
+        });
+    }
+    delete(user) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            return new Promise(resolve => {
+                this.http.delete(this.URLDatabase + this.endpoint, { body: user }).subscribe(() => {
+                    resolve(true);
+                }, error => {
+                    console.log(error);
+                    resolve(false);
+                });
+            });
+        });
+    }
+};
+UserService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient }
+];
+UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+        providedIn: 'root'
+    })
+], UserService);
+
+
+
+/***/ }),
+
 /***/ 8383:
 /*!*********************************************!*\
   !*** ./src/app/tab1/tab1-routing.module.ts ***!

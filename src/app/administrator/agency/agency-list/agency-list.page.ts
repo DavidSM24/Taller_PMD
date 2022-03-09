@@ -4,6 +4,7 @@ import { Agency } from 'src/app/models/Agency';
 import { AgencyService } from '../../../services/agency.service';
 import { AgencyUpdatePage } from '../agency-update/agency-update.page';
 import { UtilService } from '../../../services/util.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-agency-list',
@@ -24,7 +25,8 @@ export class AgencyListPage implements OnInit {
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
     private pt: Platform,
-    private uts: UtilService) { }
+    private uts: UtilService,
+    private authS:AuthService) { }
 
   ngOnInit() {
   }
@@ -148,5 +150,9 @@ export class AgencyListPage implements OnInit {
     this.infinite.disabled = false;
     this.agencies = [];
     this.loadAgencies(event);
+  }
+
+  public logout(){
+    this.authS.logout();
   }
 }

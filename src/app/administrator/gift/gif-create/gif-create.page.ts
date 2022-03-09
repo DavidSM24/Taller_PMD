@@ -95,6 +95,7 @@ export class GifCreatePage {
         ||extension==("image/png")){
           this.file = $event.target.files[0];
           this.extension=this.file.type;
+          this.img=URL.createObjectURL(this.file);
         }
         else{
           this.file=null;

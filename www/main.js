@@ -28,7 +28,7 @@ const routes = [
     },
     {
         path: 'tab5',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_tab5_tab5_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tab5/tab5.module */ 1853)).then(m => m.Tab5PageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_exchange-gift_service_ts-src_app_-a3801a"), __webpack_require__.e("src_app_tab5_tab5_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tab5/tab5.module */ 1853)).then(m => m.Tab5PageModule)
     },
     {
         path: 'tab6',
@@ -36,7 +36,7 @@ const routes = [
     },
     {
         path: 'login',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
     },
     {
         path: 'tab-administrator',
@@ -44,19 +44,19 @@ const routes = [
     },
     {
         path: '**',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 9549)).then(m => m.LoginPageModule)
     },
     {
         path: 'user-create',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
     },
     {
         path: 'user-list',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_user_user-list_user-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-list/user-list.module */ 5605)).then(m => m.UserListPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_user_user-update_user-update_page_ts"), __webpack_require__.e("src_app_administrator_user_user-list_user-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-list/user-list.module */ 5605)).then(m => m.UserListPageModule)
     },
     {
         path: 'user-update',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_administrator_user_user-update_user-update_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-update/user-update.module */ 7476)).then(m => m.UserUpdatePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_user_user-update_user-update_page_ts"), __webpack_require__.e("src_app_administrator_user_user-update_user-update_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-update/user-update.module */ 7476)).then(m => m.UserUpdatePageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
