@@ -87,22 +87,38 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-          <ion-col   sizeSm="7" sizeLg="2">
+         
+          <ion-col sizeSm="2" sizeLg="2">
             <ion-label>Fecha de alta</ion-label>
           </ion-col>
-          <ion-col  sizeSm="7" sizeLg="4" >
-            <ion-input class="customInput"  formControlName="dateOrder"></ion-input>
+          <ion-col sizeSm="4" sizeLg="4">
+            <ion-input class="customInput" Disabled type="text" formControlName="dateOrder"></ion-input>
           </ion-col>
-         
          
         </ion-row> 
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="7" sizeLg="2">
-            <ion-label>Fecha de reparación</ion-label>
+          <ion-col   sizeSm="2" sizeLg="2">
+            <ion-item button="true" id="open-date-input">
+              <ion-label>Fecha de Reparacion</ion-label>
+              <ion-text slot="end">{{ dateRepair }}</ion-text>
+              <ion-popover             
+              trigger="open-date-input" show-backdrop="false"side="end" >
+              <ng-template>
+                <app-date-time-pickup
+              
+               [date_format]="'yyyy-MM-dd'"
+               (datePickerValue)="change($event)"
+               ></app-date-time-pickup>
+
+              </ng-template>
+              </ion-popover>
+            </ion-item>
           </ion-col>
-          <ion-col  sizeSm="7" sizeLg="4">
-            <ion-input class="customInput"  formControlName="dateRepair"></ion-input>
+          <ion-col sizeSm="4" sizeLg="4">
+            <ion-input class="customInput" Disabled type="text" formControlName="dateRepair"></ion-input>
           </ion-col>
+         
+         
         </ion-row> 
         <ion-row class="ion-align-items-center">
           <ion-col  sizeSm="7" sizeLg="2">

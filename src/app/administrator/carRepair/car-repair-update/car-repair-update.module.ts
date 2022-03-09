@@ -8,6 +8,7 @@ import { CarRepairUpdatePageRoutingModule } from './car-repair-update-routing.mo
 
 import { CarRepairUpdatePage } from './car-repair-update.page';
 import { CarRepairService } from 'src/app/services/car-repair.service';
+import { DateTimePickupComponent } from 'src/app/components/date-time-pickup/date-time-pickup.component';
 
 @NgModule({
   imports: [
@@ -18,11 +19,16 @@ import { CarRepairService } from 'src/app/services/car-repair.service';
 
     FormsModule,
     ReactiveFormsModule
+    
+    
   ],
   providers:[
     CarRepairService
 
   ],
-  declarations: [CarRepairUpdatePage]
+  declarations: [
+    CarRepairUpdatePage,
+    DateTimePickupComponent                  
+  ]
 })
 export class CarRepairUpdatePageModule {}
