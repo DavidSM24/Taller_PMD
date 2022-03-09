@@ -17,7 +17,7 @@ export class CarRepairListPage implements OnInit {
 
   private n:number=0;
   public carRepairs:CarRepair[]=[];
-  private searchStr="";
+  private searchStr:string="";
   private miLoading:HTMLIonLoadingElement;
   private nItems:number; //variable que almacena el número de elemetenos que caben dentro de la página
 
@@ -260,11 +260,44 @@ export class CarRepairListPage implements OnInit {
     miToast.present();
   }
 
-  public onSearchChange(event) {
+  /**
+   * Método que se activa cuando se escribe algo en la barra de búsqueda
+   * Para buscar reparaciones por matrícula, dueño del coche, operación 
+   * y nombre de la agencia
+   * @param event 
+   */
+  public async onSearchChange(event) {
     this.searchStr = event.detail.value;
+    console.log(this.searchStr);
+    let carR:CarRepair[]=[]
+    const value:string=event.detail.value;
+    const length=this.searchStr.length;
+    if(length>1){
+      this.carRepairs.forEach(repair=>{
+        if(repair.brandCar.includes(value)||repair.clienteName.includes(value)
+        ||repair.operation.toLocaleString().includes(value)
+        ||repair.myAgency.myUser.name.includes(value)){
+          carR.push(repair);
+        }
+        });
+        this.carRepairs=carR;
+    }else if(length<1){
+      try {
+        await this.reset();
+        
+      } catch (error) {
+        
+      }
+     
+
+    } 
   }
 
-  public async reset(event){
+  /**
+   * Método que reinicia la lista de reparaciones
+   * @param event 
+   */
+  public async reset(event?){
     this.n=0;
     this.infinite.disabled=false;
     this.carRepairs=[];

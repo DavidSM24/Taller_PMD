@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CarRepairListPageRoutingModule } from './car-repair-list-routing.module';
 
 import { CarRepairListPage } from './car-repair-list.page';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -17,6 +17,7 @@ import { CarRepairListPage } from './car-repair-list.page';
     IonicModule,
     CarRepairListPageRoutingModule,
 
+    Ng2SearchPipeModule,
     ReactiveFormsModule
   ],
   declarations: [CarRepairListPage]
