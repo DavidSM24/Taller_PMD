@@ -15,8 +15,9 @@ import { Storage } from '@capacitor/storage';
 export class LoginPage implements OnInit {
 
   public formLogin: FormGroup;
+  public complete:boolean=false;
 
-  constructor(
+    constructor(
     private fb: FormBuilder,
     private us: UserService,
     private uts: UtilService,
@@ -30,8 +31,15 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    
     if(this.authS.isLogged()){
-      this.router.navigate(['/tab-administrator/agency/list']);
+      if(this.authS.user.administrator){
+        this.router.navigate(['/tab-administrator/agency/list']);
+      }
+      else{
+
+      }
+      
     }
   }
 
@@ -45,6 +53,7 @@ export class LoginPage implements OnInit {
       }
       
     }
+    this.complete=true;
   }
 
   public async login() {
@@ -68,7 +77,13 @@ export class LoginPage implements OnInit {
             this.authS.user=user;
             await this.authS.keepSession();
             console.log("inciando...")
-            this.router.navigate(['/tab-administrator/agency/list']);
+            
+            if(user.administrator){
+              this.router.navigate(['/tab-administrator/agency/list']);
+            }
+            else{
+
+            }
           } catch (error) {
             console.log(error);
           }
