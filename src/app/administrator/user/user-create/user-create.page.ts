@@ -17,6 +17,9 @@ import { UtilService } from '../../../services/util.service';
 export class UserCreatePage {
   @ViewChild(IonToggle) toggle: IonToggle;
 
+  public admin: boolean = false;
+  public active: boolean = false;
+
   public miLoading: HTMLIonLoadingElement;
   public formUser: FormGroup;
 
@@ -63,19 +66,51 @@ export class UserCreatePage {
       let newUser: User = {
         code: this.formUser.get("code").value,
         password: this.formUser.get("password").value,
-        administrator: this.toggle.checked,
+        administrator: this.admin,
         email: this.formUser.get("email").value,
         name: this.formUser.get("name").value
       }
 
-
       try {
-        await this.usserv.createOrUpdate(newUser);
+        newUser=await this.usserv.createOrUpdate(newUser);
 
-        this.uts.presentToast("Regalo agregada correctamente", "success");
+        this.uts.presentToast("Usuario agregado correctamente", "success");
         this.formUser.reset();
+
+        if (!this.admin) {
+          if (this.insurance != null) {
+            let ag: Agency = await this.as.getById(7);
+  
+  
+            let newAgency: Agency = {
+              zipCode: this.formAgency.get("zipCode").value,
+              address: this.formAgency.get("address").value,
+              location: this.formAgency.get("location").value,
+              phoneNumber: this.formAgency.get("phoneNumber").value,
+              amount: 0,
+              points: 0,
+              pointsRedeemed: 0,
+              myInsuranceCompany: this.insurance,
+              myCarRepairs: [],
+              myExchangesGifts: [],
+              myUser: newUser,
+              active: this.active
+            }
+  
+            console.log(newAgency);
+            newAgency = await this.as.createOrUpdate(newAgency);
+            if (newAgency.id) {
+              this.formAgency.reset();
+              this.uts.presentToast('La agencia se ha creado correctamente.', 'success');
+            }
+            else {
+              this.uts.presentToast('Un error ha surgido al intentar crear la agencia.', 'danger');
+            }
+  
+          }
+        }
       } catch (err) {
-        this.uts.presentToast("Error agregando Regalo", "danger");
+        this.uts.presentToast("Error agregando Usuario", "danger");
       }
 
     } catch (error) {
@@ -85,44 +120,7 @@ export class UserCreatePage {
     this.uts.hideLoading();
   }
 
-  public async createAgency(): Promise<void> {
-
-    this.uts.presentLoading();
-
-    if (this.insurance != null) {
-      let ag: Agency = await this.as.getById(7);
-
-
-      let newAgency: Agency = {
-        zipCode: this.formAgency.get("zipCode").value,
-        address: this.formAgency.get("address").value,
-        location: this.formAgency.get("location").value,
-        phoneNumber: this.formAgency.get("phoneNumber").value,
-        amount: 0,
-        points: 0,
-        pointsRedeemed: 0,
-        myInsuranceCompany: this.insurance,
-        myCarRepairs: [],
-        myExchangesGifts: [],
-        myUser: ag.myUser,
-        active: this.toggle.checked
-      }
-
-      console.log(newAgency);
-
-      newAgency = await this.as.createOrUpdate(newAgency);
-      if (newAgency.id) {
-        this.formAgency.reset();
-        this.uts.presentToast('La agencia se ha creado correctamente.', 'success');
-      }
-      else {
-        this.uts.presentToast('Un error ha surgido al intentar crear la agencia.', 'danger');
-      }
-
-      this.uts.hideLoading();
-    }
-  }
-
+  
   async showPicker() {
     let options: PickerOptions = {
       buttons: [
@@ -131,15 +129,15 @@ export class UserCreatePage {
           role: 'cancel'
         },
         {
-          text:'Ok',
-          handler:(value:any) => {
-            this.insurance=value.Compañías.value;
+          text: 'Ok',
+          handler: (value: any) => {
+            this.insurance = value.Compañías.value;
           }
         }
       ],
-      columns:[{
-        name:'Compañías',
-        options:this.getColumnOptions()
+      columns: [{
+        name: 'Compañías',
+        options: this.getColumnOptions()
       }]
     };
 
@@ -147,12 +145,20 @@ export class UserCreatePage {
     picker.present()
   }
 
-  getColumnOptions(){
+  getColumnOptions() {
     let options = [];
     this.companies.forEach(x => {
-      options.push({text:x.cia_Name,value:x});
+      options.push({ text: x.cia_Name, value: x });
     });
     return options;
+  }
+
+  public changeAdmin() {
+    this.admin = !this.admin;
+  }
+
+  public changeActive() {
+    this.active = !this.active;
   }
 }
 export interface PickerColumn {

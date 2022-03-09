@@ -15,7 +15,8 @@ import { UserUpdatePage } from '../user-update/user-update.page';
     FormsModule,
     IonicModule,
     UserListPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   declarations: [UserListPage, UserUpdatePage]
 })
