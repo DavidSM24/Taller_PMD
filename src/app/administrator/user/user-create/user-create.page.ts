@@ -16,7 +16,6 @@ import { UtilService } from '../../../services/util.service';
 })
 export class UserCreatePage {
   @ViewChild(IonToggle) toggle: IonToggle;
-
   public admin: boolean = false;
   public active: boolean = false;
 

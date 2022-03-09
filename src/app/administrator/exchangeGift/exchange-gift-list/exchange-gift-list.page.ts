@@ -10,6 +10,7 @@ import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-updat
 })
 export class ExchangeGiftListPage {
   public exGifts:ExchangeGift[]=[];
+  public searchTerm:string;
   @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
   private miLoading:HTMLIonLoadingElement;
   constructor(private exs:ExchangeGiftService,
