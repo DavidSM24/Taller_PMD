@@ -70,7 +70,7 @@ const routes = [
                 children: [
                     {
                         path: 'list',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-update_agency-update_page_ts"), __webpack_require__.e("src_app_administrator_agency_agency-list_agency-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-list/agency-list.module */ 9947)).then(m => m.AgencyListPageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts-src_-cd7bf6"), __webpack_require__.e("default-src_app_services_auth_service_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_agency_agency-list_agency-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-list/agency-list.module */ 9947)).then(m => m.AgencyListPageModule)
                     },
                     {
                         path: 'saw',
@@ -78,11 +78,11 @@ const routes = [
                     },
                     {
                         path: 'update',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-update_agency-update_page_ts"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-update/agency-update.module */ 7264)).then(m => m.AgencyUpdatePageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts-src_-cd7bf6"), __webpack_require__.e("common")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-update/agency-update.module */ 7264)).then(m => m.AgencyUpdatePageModule)
                     },
                     {
                         path: 'create',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("default-src_app_administrator_agency_agency-create_agency-create_module_ts"), __webpack_require__.e("src_app_services_util_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-create/agency-create.module */ 8333)).then(m => m.AgencyCreatePageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts-src_-cd7bf6"), __webpack_require__.e("default-src_app_administrator_agency_agency-create_agency-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../agency/agency-create/agency-create.module */ 8333)).then(m => m.AgencyCreatePageModule)
                     }
                 ]
             },
@@ -116,7 +116,7 @@ const routes = [
                         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_user_user-update_user-update_page_ts"), __webpack_require__.e("src_app_administrator_user_user-list_user-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../user/user-list/user-list.module */ 5605)).then(m => m.UserListPageModule)
                     }, {
                         path: 'create',
-                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
+                        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_agency_service_ts-src_app_services_insurance-company_service_ts-src_-cd7bf6"), __webpack_require__.e("src_app_administrator_user_user-create_user-create_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ../user/user-create/user-create.module */ 1490)).then(m => m.UserCreatePageModule)
                     },
                     {
                         path: 'update',

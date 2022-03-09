@@ -10,6 +10,7 @@ import { GifListPage } from './gif-list.page';
 import { GiftService } from '../../../services/gift.service';
 import { UtilService } from '../../../services/util.service';
 import { GifUpdatePage } from '../gif-update/gif-update.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { GifUpdatePage } from '../gif-update/gif-update.page';
     GifListPageRoutingModule,
 
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     GiftService,

@@ -20,6 +20,9 @@ export class AgencyListPage implements OnInit {
   searchStr = "";
   niTems: number;
 
+
+  filter:string;
+
   constructor(
     private as: AgencyService,
     private AlertCtrl: AlertController,
@@ -154,5 +157,28 @@ export class AgencyListPage implements OnInit {
 
   public logout(){
     this.authS.logout();
+  }
+
+  async searchChange(event){
+    this.searchStr=event.detail.value;
+    console.log(this.searchStr);
+
+    let list:Agency[]=[];
+
+    let lenght=this.searchStr.length;
+    if(lenght>1){
+      this.agencies.forEach(agency=>{
+        if(agency.location.includes(this.searchStr)){
+          list.push(agency);
+        }
+        
+      })
+      this.agencies=list;
+
+    }
+    else if(lenght<1){
+      this.reset(null); 
+      this.uts.hideLoading();
+    }
   }
 }
