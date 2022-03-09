@@ -10,6 +10,7 @@ import { UserUpdatePage } from '../user-update/user-update.page';
 })
 export class UserListPage {
 public users:User[]=[];
+public searchTerm:string;
 @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
 private miLoading:HTMLIonLoadingElement;
   constructor(private usser:UserService,private loading:LoadingController,
@@ -43,15 +44,7 @@ private miLoading:HTMLIonLoadingElement;
     }
   }
 
-  public async cargaInfinita($event){
-    console.log("CARGAND");
-    let nuevosExGifts=await this.usser.getAll();
-    if(nuevosExGifts.length<10){
-      $event.target.disabled=true;
-    }
-    this.users=this.users.concat(nuevosExGifts);
-    $event.target.complete();
-  }
+
   async presentLoading() {
     this.miLoading = await this.loading.create({
       message: ''
