@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 import { UserUpdatePage } from '../user-update/user-update.page';
@@ -9,16 +9,19 @@ import { UserUpdatePage } from '../user-update/user-update.page';
   styleUrls: ['./user-list.page.scss'],
 })
 export class UserListPage {
+private niTems: number;
 public users:User[]=[];
 public searchTerm:string;
 @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
 private miLoading:HTMLIonLoadingElement;
   constructor(private usser:UserService,private loading:LoadingController,
     private toast:ToastController,
+    private pt: Platform,
     private modalCtrl: ModalController,
     private alerta: AlertController) { }
 
     async ionViewDidEnter(){
+      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
       await this.cargaUsers();
     }
 
@@ -31,7 +34,8 @@ private miLoading:HTMLIonLoadingElement;
     }
     this.users=[];
     try{
-      this.users=await this.usser.getAll();
+      this.users=await this.usser.getAllPaged(this.niTems,0);
+      
     }catch(err){
       console.error(err);
       await this.presentToast("Error cargando datos","danger");
@@ -112,4 +116,16 @@ private miLoading:HTMLIonLoadingElement;
     this.users=[];
     this.cargaUsers(event);
   }
+  public async infiniteLoad($event) {
+    let newUsers: User[] = [];
+    if (!this.infinite.disabled) {
+      newUsers = await this.usser.getAllPaged(this.niTems, this.users.length);
+      this.users = this.users.concat(newUsers);
+
+      if (newUsers.length < 30) {
+        this.infinite.disabled = true;
+      }
+    }
+  }
+
 }

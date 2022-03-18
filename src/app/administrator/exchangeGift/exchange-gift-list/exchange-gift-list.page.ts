@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 @Component({
   selector: 'app-exchange-gift-list',
@@ -10,6 +10,7 @@ import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-updat
 })
 export class ExchangeGiftListPage {
   public exGifts:ExchangeGift[]=[];
+  private niTems:number;
   public searchTerm:string;
   @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
   private miLoading:HTMLIonLoadingElement;
@@ -17,9 +18,11 @@ export class ExchangeGiftListPage {
     private loading:LoadingController,
     private toast:ToastController,
     private alerta: AlertController,
+    private pt: Platform,
     private modalCtrl: ModalController) { }
 
     async ionViewDidEnter(){
+      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
       await this.cargaExGifts();
     }
 
@@ -56,7 +59,7 @@ export class ExchangeGiftListPage {
     }
     this.exGifts=[];
     try{
-      this.exGifts=await this.exs.getAll();
+      this.exGifts=await this.exs.getAllPaged(this.niTems, this.exGifts.length);;
     }catch(err){
       console.error(err);
       await this.presentToast("Error cargando datos","danger");
@@ -108,7 +111,17 @@ export class ExchangeGiftListPage {
     });
    await alert.present();
   }
+  public async infiniteLoad($event) {
+    let newExchange: ExchangeGift[] = [];
+    if (!this.infinite.disabled) {
+      newExchange = await this.exs.getAllPaged(this.niTems, this.exGifts.length);
+      this.exGifts = this.exGifts.concat(newExchange);
 
+      if (newExchange.length < 30) {
+        this.infinite.disabled = true;
+      }
+    }
+  }
   public async reset(event){
     this.infinite.disabled=false;
     this.exGifts=[];
