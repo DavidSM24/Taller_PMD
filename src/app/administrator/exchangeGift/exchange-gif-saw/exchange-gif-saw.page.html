@@ -1,9 +1,81 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>ExchangeGifSaw</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Visualizacion de Pedido
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <div class="body">
+    
+      <div class="formulario">
+      <ion-grid>
 
+        <ion-card class="ion-align-items-center">
+          
+            <ion-img  [src]="this.img"></ion-img>
+          
+        </ion-card>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Fecha de Intercambio:</ion-label>
+          </ion-col>
+          <ion-col sizeSm="11" sizeLg="11">
+            <ion-text>
+              {{this.exchangesaw.dateExchange}}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-label>Observaciones:</ion-label>
+          </ion-col>
+          <ion-text>
+            {{this.exchangesaw.observations}}
+          </ion-text>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="9" sizeLg="1">
+            Entregado:
+          </ion-col>
+          <ion-col size="2.5" *ngIf="this.exchangesaw.delivered">
+            <ion-text>
+              Si
+            </ion-text>
+          </ion-col>
+  
+          <ion-col size="2.5" *ngIf="!this.exchangesaw.delivered">
+            <ion-text>
+              No
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col sizeSm="2" sizeLg="2">
+            <ion-label>Agencia:</ion-label>
+          </ion-col>
+
+          <ion-col sizeSm="1" sizeLg="1">
+            <ion-text>
+              {{this.exchangesaw.agency.zipCode}}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12">
+            <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formEditExchange.invalid">
+              Cerrar Visualizacion
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    
+</div>
 </ion-content>

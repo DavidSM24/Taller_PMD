@@ -147,5 +147,7 @@ export class ExchangeGifUpdatePage implements OnInit {
     });
     return options;
   }
-
+  close() {
+    this.modalCtrl.dismiss();
+  }
 }

@@ -9,6 +9,7 @@ import { ExchangeGiftListPageRoutingModule } from './exchange-gift-list-routing.
 import { ExchangeGiftListPage } from './exchange-gift-list.page';
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ReactiveFormsModule,
     Ng2SearchPipeModule
   ],
-  declarations: [ExchangeGiftListPage ,ExchangeGifUpdatePage]
+  declarations: [ExchangeGiftListPage ,ExchangeGifUpdatePage, ExchangeGifSawPage]
 })
 export class ExchangeGiftListPageModule {}

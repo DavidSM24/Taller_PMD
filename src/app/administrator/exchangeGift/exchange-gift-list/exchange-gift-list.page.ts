@@ -3,6 +3,7 @@ import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
+import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
 @Component({
   selector: 'app-exchange-gift-list',
   templateUrl: './exchange-gift-list.page.html',
@@ -42,6 +43,30 @@ export class ExchangeGiftListPage {
   
         if (resp.data != null) {
           let i: number = this.exGifts.indexOf(exchange);
+          this.exGifts[i] = resp.data.newExchange;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+  
+    }
+
+    public async saw(exchangesaw: ExchangeGift) {
+      try {
+        const modal = await this.modalCtrl.create({
+          component: ExchangeGifSawPage,
+          cssClass: 'fullscreen',
+          componentProps: {
+            'exchangesaw': exchangesaw
+          }
+        });
+  
+        await modal.present();
+  
+        const resp = await modal.onDidDismiss();
+  
+        if (resp.data != null) {
+          let i: number = this.exGifts.indexOf(exchangesaw);
           this.exGifts[i] = resp.data.newExchange;
         }
       } catch (error) {

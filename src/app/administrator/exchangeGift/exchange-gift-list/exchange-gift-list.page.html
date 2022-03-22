@@ -54,12 +54,16 @@
 
     <ion-row let *ngFor="let exchangeGift of this.exGifts | filter:searchTerm" class="row">
       
-      <ion-col size="1">
+      <ion-col size="0.7">
         <ion-text>
           <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="edit(exchangeGift)"></ion-icon>
         </ion-text>
       </ion-col>
-      
+      <ion-col size="0.3">
+        <ion-text>
+          <ion-icon name="eye-outline" style="color:#22388c;cursor:pointer" (click)="saw(exchangeGift)"></ion-icon>
+        </ion-text>
+      </ion-col>
       <ion-col size="2.5">
         <ion-text>
             {{exchangeGift.dateExchange}}
@@ -78,12 +82,18 @@
           </ion-text>
         </ion-col>
 
-        <ion-col size="2.5">
+        <ion-col size="2.5" *ngIf="exchangeGift.delivered">
           <ion-text>
-            {{exchangeGift.isDelivered}}
+            Si
           </ion-text>
         </ion-col>
-        
+
+        <ion-col size="2.5" *ngIf="!exchangeGift.delivered">
+          <ion-text>
+            No
+          </ion-text>
+        </ion-col>
+
         <ion-col size="1">
           <ion-text>
             <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="mensagealerta(exchangeGift)"></ion-icon>
