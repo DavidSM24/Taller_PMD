@@ -4,6 +4,7 @@ import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
+import { UtilService } from 'src/app/services/util.service';
 @Component({
   selector: 'app-exchange-gift-list',
   templateUrl: './exchange-gift-list.page.html',
@@ -21,7 +22,7 @@ export class ExchangeGiftListPage {
     private alerta: AlertController,
     private pt: Platform,
     private modalCtrl: ModalController) { }
-
+    private uts:UtilService
     async ionViewDidEnter(){
       this.niTems = Math.ceil(this.pt.height() / 20 + 10);
       await this.cargaExGifts();
@@ -119,7 +120,31 @@ export class ExchangeGiftListPage {
     });
     miToast.present();
   }
-  
+
+  public onSearchChange(event) {
+    this.searchTerm=event.detail.value;
+    console.log(this.searchTerm);
+
+    let list:ExchangeGift[]=[];
+
+    let lenght=this.searchTerm.length;
+    if(lenght>1){
+      this.exGifts.forEach(exgift=>{
+        if(exgift.agency.zipCode.toString().includes(this.searchTerm)||exgift.dateExchange.toString().includes(this.searchTerm)){
+          list.push(exgift);
+        }
+        
+        
+      })
+      this.exGifts=list;
+
+    }
+    else if(lenght<1){
+      this.reset(null); 
+      this.uts.hideLoading();
+    }
+  }
+
   public async mensagealerta(n:any){
     const alert = await this.alerta.create({
       header: 'Eliminar',

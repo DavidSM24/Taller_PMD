@@ -18,6 +18,9 @@ export class ExchangeGifSawPage implements OnInit {
     this.img=this.exchangesaw.gift.picture;
     console.log(this.img);
   }
+  async ionViewWillEnter() {
+    this.img = "https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/"+this.exchangesaw.gift.picture;
+  }
   close() {
     this.modalCtrl.dismiss();
   }
