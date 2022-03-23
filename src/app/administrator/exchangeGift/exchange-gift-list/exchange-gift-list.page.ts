@@ -148,15 +148,18 @@ export class ExchangeGiftListPage {
   public async mensagealerta(n:any){
     const alert = await this.alerta.create({
       header: 'Eliminar',
-      message: '¿Desea eliminar Este Regalo Intercambiado?',
-      buttons: [{
-          text: 'Cancelar',
-          handler: (blah) => {}},
-          {text: 'Eliminar',
+      message: '¿Desea eliminar este Pedido?',
+      buttons: [
+        {text: 'Eliminar',
+        cssClass: 'rojo',
           handler: () => {
             this.borra(n)
           }
-        }
+        },{
+          text: 'Cancelar',
+          cssClass: 'secondary',
+          handler: (blah) => {}},
+          
       ]
     });
    await alert.present();

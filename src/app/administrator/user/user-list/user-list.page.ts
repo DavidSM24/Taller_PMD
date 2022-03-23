@@ -99,14 +99,16 @@ private miLoading:HTMLIonLoadingElement;
     const alert = await this.alerta.create({
       header: 'Eliminar',
       message: '¿Desea eliminar Este Regalo Intercambiado?',
-      buttons: [{
+      buttons: [{text: 'Eliminar',
+      cssClass: 'rojo',
+      handler: () => {
+        this.borra(n)
+      }
+      },{
           text: 'Cancelar',
-          handler: (blah) => {}},
-          {text: 'Eliminar',
-          handler: () => {
-            this.borra(n)
-          }
-        }
+          cssClass: 'secondary',
+          handler: (blah) => {}}
+          
       ]
     });
    await alert.present();

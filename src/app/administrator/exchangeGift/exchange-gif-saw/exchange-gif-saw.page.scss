@@ -2,9 +2,19 @@
     background: #717499;
     background-size: cover;
     min-height: 100%;
-}
 
-.formulario{
+    ion-card{
+      height: 25%;
+      width: 25%;
+      ion-img{
+        border: 0.10cm solid black;
+      }
+    }
+  }
+
+  
+  
+  .formulario{
     margin-top: 1.5%;
     padding: 2%;
     border-top: 2px double gray;
@@ -13,14 +23,18 @@
     border-radius: 2.5rem;
     background-color: white;
     margin-bottom: 4%;
-}
-
-.button{
+  }
+  
+  .button{
     --background: #22388c;
-}
-
-.customInput{
+  }
+  
+  .customInput{
         border: 1px solid gray;
         border-color: "primary";
         border-radius: 2.5rem;
-}
+  }
+
+
+  
+  

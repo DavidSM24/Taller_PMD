@@ -65,14 +65,14 @@
             <ion-button expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift==null">
               Seleccionar
             </ion-button>
-            <ion-button expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift!=null">
+            <ion-button  expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift!=null">
               {{this.mygift.name}}
             </ion-button>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col size="12">
-            <ion-button (click)="CreateExgift()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formExchange.invalid">
+            <ion-button (click)="CreateExgift()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formExchange.invalid || this.myagency==null || this.mygift==null">
               Crear Pedido
             </ion-button>
           </ion-col>

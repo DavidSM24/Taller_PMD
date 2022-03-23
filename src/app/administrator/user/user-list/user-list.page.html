@@ -77,10 +77,16 @@
             {{user.name}}
           </ion-text>
         </ion-col>
-
-        <ion-col size="2.5">
+        
+        <ion-col size="2.5" *ngIf="user.administrator">
           <ion-text>
-            {{user.administrator}}
+            Si
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="2.5" *ngIf="!user.administrator">
+          <ion-text>
+            No
           </ion-text>
         </ion-col>
         
