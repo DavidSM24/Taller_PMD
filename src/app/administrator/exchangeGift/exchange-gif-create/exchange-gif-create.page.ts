@@ -36,9 +36,14 @@ export class ExchangeGifCreatePage {
       });
     }
     public async CreateExgift(): Promise<void> {
+      
+      
+      
       try {
         this.uts.presentLoading();
       if(this.mygift!=null&&this.myagency!=null){
+
+        console.log(this.myagency);
 
       let newExchange: ExchangeGift = {
         dateExchange: this.formExchange.get("dateExchange").value,
@@ -51,6 +56,8 @@ export class ExchangeGifCreatePage {
       try{
         await this.exser.createOrUpdate(newExchange);
         
+
+
         this.uts.presentToast("Regalo agregada correctamente","success");
         this.formExchange.reset();
 
@@ -122,7 +129,8 @@ export class ExchangeGifCreatePage {
         },
         {
           text:'Ok',
-          handler:(value:any) => {
+          handler:(value) => {
+            console.log(value.Agencias.value)
             this.myagency=value.Agencias.value;
           }
         }
@@ -140,7 +148,7 @@ export class ExchangeGifCreatePage {
   getAgenciesColumnOptions(){
     let options = [];
     this.agencies.forEach(x => {
-      options.push({text:x.zipCode,value:x});
+      options.push({text:x.myUser.name,value:x});
     });
     return options;
   }

@@ -43,7 +43,8 @@ export class AgencyUpdatePage implements OnInit {
       zipCode: [this.agency.zipCode, Validators.required],
       address: [this.agency.address, Validators.required],
       location: [this.agency.location, Validators.required],
-      phoneNumber: [this.agency.phoneNumber, Validators.required]
+      phoneNumber: [this.agency.phoneNumber, Validators.required],
+      points: [this.agency.points, Validators.required]
     });
     } catch (error) {
       console.log(error);

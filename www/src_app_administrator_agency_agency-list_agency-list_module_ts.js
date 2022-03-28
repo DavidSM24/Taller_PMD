@@ -62,16 +62,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AgencyListPageModule": () => (/* binding */ AgencyListPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 8267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _agency_list_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./agency-list-routing.module */ 8584);
 /* harmony import */ var _agency_list_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./agency-list.page */ 1137);
 /* harmony import */ var _services_agency_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/agency.service */ 9574);
 /* harmony import */ var _services_util_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/util.service */ 371);
 /* harmony import */ var _agency_update_agency_update_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../agency-update/agency-update.page */ 2483);
+/* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng2-search-filter */ 4352);
+
 
 
 
@@ -84,14 +86,15 @@ __webpack_require__.r(__webpack_exports__);
 
 let AgencyListPageModule = class AgencyListPageModule {
 };
-AgencyListPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
+AgencyListPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_7__.CommonModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_8__.CommonModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonicModule,
             _agency_list_routing_module__WEBPACK_IMPORTED_MODULE_0__.AgencyListPageRoutingModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__.ReactiveFormsModule
+            _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
+            ng2_search_filter__WEBPACK_IMPORTED_MODULE_5__.Ng2SearchPipeModule
         ],
         providers: [_services_agency_service__WEBPACK_IMPORTED_MODULE_2__.AgencyService, _services_util_service__WEBPACK_IMPORTED_MODULE_3__.UtilService],
         declarations: [_agency_list_page__WEBPACK_IMPORTED_MODULE_1__.AgencyListPage, _agency_update_agency_update_page__WEBPACK_IMPORTED_MODULE_4__.AgencyUpdatePage]
@@ -257,6 +260,26 @@ let AgencyListPage = class AgencyListPage {
     logout() {
         this.authS.logout();
     }
+    searchChange(event) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.searchStr = event.detail.value;
+            console.log(this.searchStr);
+            let list = [];
+            let lenght = this.searchStr.length;
+            if (lenght > 1) {
+                this.agencies.forEach(agency => {
+                    if (agency.location.includes(this.searchStr)) {
+                        list.push(agency);
+                    }
+                });
+                this.agencies = list;
+            }
+            else if (lenght < 1) {
+                this.reset(null);
+                this.uts.hideLoading();
+            }
+        });
+    }
 };
 AgencyListPage.ctorParameters = () => [
     { type: _services_agency_service__WEBPACK_IMPORTED_MODULE_2__.AgencyService },
@@ -291,7 +314,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"false\">\r\n  \r\n  <ion-toolbar color=\"primary\">\r\n\r\n    <ion-title>Lista de Agencias</ion-title>\r\n\r\n    <ion-buttons style=\"margin-right: 1%;\" slot=\"end\">\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"add-circle\" style=\"zoom:1.5;cursor:pointer\" routerLink=\"/tab-administrator/user/create\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"person\" style=\"zoom:1.5;cursor:pointer\" routerLink=\"/tab-administrator/user/list\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"log-out-outline\" (click)=\"logout() \" style=\"zoom:1.7;cursor:pointer\"></ion-icon>\r\n    </ion-buttons>\r\n\r\n  </ion-toolbar>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-searchbar placeholder=\"Encuentra la agencia que estás buscando...\" inputmode=\"text\" type=\"text\" (ionChange)=\"onSearchChange($event)\" showCancelButton=\"always\"></ion-searchbar>\r\n\r\n    <ion-row class=\"header-row\">\r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"3.3\" style=\"border: 0px !important;\">\r\n        <ion-text>Compañía</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col  size=\"3.3\" style=\"border: 0px !important;\">\r\n        <ion-text>Localidad</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"3.3\" style=\"border: 0px !important;\">\r\n        <ion-text>Puntos</ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-toolbar>\r\n  \r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" style=\"background-color: white;\">\r\n\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"reset($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <div class=\"body\">\r\n  \r\n\r\n  <ion-grid class=\"ion-text-center\">\r\n\r\n    <ion-row let *ngFor=\"let agency of this.agencies;let i=index\" class=\"row\">\r\n      \r\n      <ion-col size=\"1\">\r\n        <ion-text>\r\n          <ion-icon name=\"pencil\" style=\"color:#22388c;cursor:pointer\" (click)=\"edit(agency)\"></ion-icon>\r\n        </ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"3.4\">\r\n        <ion-text>\r\n            {{agency.myInsuranceCompany.cia_Name}}\r\n        </ion-text>\r\n      </ion-col>\r\n\r\n        <ion-col size=\"3.3\">\r\n          <ion-text>\r\n            {{agency.location}}\r\n          </ion-text>\r\n        </ion-col>\r\n  \r\n        <ion-col size=\"3.3\">\r\n          <ion-text>\r\n            {{agency.points}}\r\n          </ion-text>\r\n        </ion-col>\r\n\r\n        <ion-col size=\"1\">\r\n          <ion-text>\r\n            <ion-icon name=\"trash\" color=\"danger\" style=\"cursor: pointer;\" (click)=\"showDeleteMenu(agency)\"></ion-icon>\r\n          </ion-text>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-grid>\r\n\r\n\r\n\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"infiniteLoad($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n</div>\r\n  \r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header [translucent]=\"false\">\r\n  \r\n  <ion-toolbar color=\"primary\">\r\n\r\n    <ion-title>Lista de Agencias</ion-title>\r\n\r\n    <ion-buttons style=\"margin-right: 1%;\" slot=\"end\">\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"add-circle\" style=\"zoom:1.5;cursor:pointer\" routerLink=\"/tab-administrator/user/create\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"person\" style=\"zoom:1.5;cursor:pointer\" routerLink=\"/tab-administrator/user/list\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"log-out-outline\" (click)=\"logout() \" style=\"zoom:1.7;cursor:pointer\"></ion-icon>\r\n    </ion-buttons>\r\n\r\n  </ion-toolbar>\r\n  <ion-toolbar color=\"primary\" (ionChange)=\"searchChange($event)\">\r\n    <ion-searchbar placeholder=\"Encuentra la agencia que estás buscando...\" inputmode=\"text\" type=\"text\" (ionChange)=\"onSearchChange($event)\" showCancelButton=\"always\"></ion-searchbar>\r\n\r\n    <ion-row class=\"header-row\">\r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"3.3\" style=\"border: 0px !important;\">\r\n        <ion-text>Compañía</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col  size=\"3.3\" style=\"border: 0px !important;\">\r\n        <ion-text>Localidad</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"3.3\" style=\"border: 0px !important;\">\r\n        <ion-text>Puntos</ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-toolbar>\r\n  \r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" style=\"background-color: white;\">\r\n\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"reset($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <div class=\"body\">\r\n  \r\n\r\n  <ion-grid class=\"ion-text-center\">\r\n\r\n  <ion-row let *ngFor=\"let agency of this.agencies;let i=index\" class=\"row\">\r\n      \r\n      <ion-col size=\"1\">\r\n        <ion-text>\r\n          <ion-icon name=\"pencil\" style=\"color:#22388c;cursor:pointer\" (click)=\"edit(agency)\"></ion-icon>\r\n        </ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"3.4\">\r\n        <ion-text>\r\n            {{agency.myInsuranceCompany.cia_Name}}\r\n        </ion-text>\r\n      </ion-col>\r\n\r\n        <ion-col size=\"3.3\">\r\n          <ion-text>\r\n            {{agency.location}}\r\n          </ion-text>\r\n        </ion-col>\r\n  \r\n        <ion-col size=\"3.3\">\r\n          <ion-text>\r\n            {{agency.points}}\r\n          </ion-text>\r\n        </ion-col>\r\n\r\n        <ion-col size=\"1\">\r\n          <ion-text>\r\n            <ion-icon name=\"trash\" color=\"danger\" style=\"cursor: pointer;\" (click)=\"showDeleteMenu(agency)\"></ion-icon>\r\n          </ion-text>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-grid>\r\n\r\n\r\n\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"infiniteLoad($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n</div>\r\n  \r\n</ion-content>\r\n");
 
 /***/ }),
 

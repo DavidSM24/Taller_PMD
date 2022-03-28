@@ -9,7 +9,7 @@
 
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Encuentra el regalo intercambiado que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
+    <ion-searchbar placeholder="Encuentra el regalo intercambiado que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
 
     <ion-row class="header-row">
       <ion-col size="1" style="border: 0px !important;">
@@ -43,9 +43,6 @@
 
 <ion-content [fullscreen]="true" style="background-color: white;">
 
-  <ion-refresher slot="fixed" (ionRefresh)="reset($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
 
   <div class="body">
   
@@ -68,7 +65,7 @@
 
         <ion-col size="2.5">
           <ion-text>
-            {{exchangeGift.agency.zipCode}}
+            {{exchangeGift.agency.myUser.name}}
           </ion-text>
         </ion-col>
   

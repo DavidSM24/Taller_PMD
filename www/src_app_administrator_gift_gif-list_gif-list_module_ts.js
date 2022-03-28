@@ -62,16 +62,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GifListPageModule": () => (/* binding */ GifListPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 8267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _gif_list_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gif-list-routing.module */ 106);
 /* harmony import */ var _gif_list_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gif-list.page */ 6760);
 /* harmony import */ var _services_gift_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/gift.service */ 4483);
 /* harmony import */ var _services_util_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/util.service */ 371);
 /* harmony import */ var _gif_update_gif_update_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../gif-update/gif-update.page */ 6667);
+/* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng2-search-filter */ 4352);
+
 
 
 
@@ -84,14 +86,15 @@ __webpack_require__.r(__webpack_exports__);
 
 let GifListPageModule = class GifListPageModule {
 };
-GifListPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
+GifListPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_7__.CommonModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_8__.CommonModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonicModule,
             _gif_list_routing_module__WEBPACK_IMPORTED_MODULE_0__.GifListPageRoutingModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__.ReactiveFormsModule
+            _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
+            ng2_search_filter__WEBPACK_IMPORTED_MODULE_5__.Ng2SearchPipeModule
         ],
         providers: [
             _services_gift_service__WEBPACK_IMPORTED_MODULE_2__.GiftService,
@@ -153,14 +156,14 @@ let GifListPage = class GifListPage {
     }
     loadgifts(event) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            let newgifts = [];
+            let newGifts = [];
             if (this.gifts.length == 0) { //inicio
                 this.uts.presentLoading();
                 this.infinite.disabled = false;
-                newgifts = yield this.gs.getAllPaged(this.niTems, 0);
-                this.gifts = this.gifts.concat(newgifts);
+                newGifts = yield this.gs.getAllPaged(this.niTems, 0);
+                this.gifts = this.gifts.concat(newGifts);
             }
-            if (newgifts.length < this.niTems) {
+            if (newGifts.length < this.niTems) {
                 this.infinite.disabled = true;
             }
             if (event) {
@@ -243,10 +246,24 @@ let GifListPage = class GifListPage {
     }
     onSearchChange(event) {
         this.searchStr = event.detail.value;
+        console.log(this.searchStr);
+        let list = [];
+        let lenght = this.searchStr.length;
+        if (lenght > 1) {
+            this.gifts.forEach(gift => {
+                if (gift.name.includes(this.searchStr)) {
+                    list.push(gift);
+                }
+            });
+            this.gifts = list;
+        }
+        else if (lenght < 1) {
+            this.reset(null);
+            this.uts.hideLoading();
+        }
     }
     reset(event) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.n = 0;
             this.infinite.disabled = false;
             this.gifts = [];
             this.loadgifts(event);

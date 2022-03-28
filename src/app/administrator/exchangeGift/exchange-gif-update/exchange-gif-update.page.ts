@@ -143,7 +143,7 @@ export class ExchangeGifUpdatePage implements OnInit {
   getAgenciesColumnOptions(){
     let options = [];
     this.agencies.forEach(x => {
-      options.push({text:x.zipCode,value:x});
+      options.push({text:x.myUser.name,value:x});
     });
     return options;
   }

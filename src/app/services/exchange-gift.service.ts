@@ -89,6 +89,9 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     
   }
   public async createOrUpdate(exgift:ExchangeGift):Promise<ExchangeGift>{
+    
+    console.log(exgift)
+    
     if (exgift != null) {
       const body=exgift;
       return new Promise(resolve => {
@@ -97,10 +100,10 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
           let result: ExchangeGift = {
             id: miexgift.id,
             dateExchange: miexgift.dateExchange,
-              observations:miexgift.observations,
-              delivered: miexgift.delivered,
-              agency: miexgift.agency,
-              gift: miexgift.gift
+            observations:miexgift.observations,
+            delivered: miexgift.delivered,
+            agency: miexgift.agency,
+            gift: miexgift.gift
           }
           resolve(result);
         }, error => {
