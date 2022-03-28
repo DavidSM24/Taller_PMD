@@ -52,7 +52,7 @@ const routes = [
     },
     {
         path: 'user-list',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_user_user-update_user-update_page_ts"), __webpack_require__.e("src_app_administrator_user_user-list_user-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-list/user-list.module */ 5605)).then(m => m.UserListPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_administrator_user_user-update_user-update_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_administrator_user_user-list_user-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./administrator/user/user-list/user-list.module */ 5605)).then(m => m.UserListPageModule)
     },
     {
         path: 'user-update',

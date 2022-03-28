@@ -97,7 +97,7 @@ export class CarRepairListPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CarRepairUpdatePage,
       //hoja de estilos
-      cssClass: 'my-modal-class',
+      cssClass: 'fullscreen',
       //pasar datos al modal
       
       componentProps: {

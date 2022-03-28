@@ -62,13 +62,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CarRepairListPageModule": () => (/* binding */ CarRepairListPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 8267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _car_repair_list_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-repair-list-routing.module */ 6066);
 /* harmony import */ var _car_repair_list_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./car-repair-list.page */ 9519);
+/* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng2-search-filter */ 4352);
+
 
 
 
@@ -78,14 +80,15 @@ __webpack_require__.r(__webpack_exports__);
 
 let CarRepairListPageModule = class CarRepairListPageModule {
 };
-CarRepairListPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
+CarRepairListPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
             _car_repair_list_routing_module__WEBPACK_IMPORTED_MODULE_0__.CarRepairListPageRoutingModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.ReactiveFormsModule
+            ng2_search_filter__WEBPACK_IMPORTED_MODULE_2__.Ng2SearchPipeModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.ReactiveFormsModule
         ],
         declarations: [_car_repair_list_page__WEBPACK_IMPORTED_MODULE_1__.CarRepairListPage]
     })
@@ -168,6 +171,7 @@ let CarRepairListPage = class CarRepairListPage {
                     this.carRepairs = this.carRepairs.concat(newCarRepair);
                     if (newCarRepair.length < this.nItems) {
                         this.infinite.disabled = true;
+                        console.log(this.carRepairs);
                     }
                 }
                 catch (error) {
@@ -338,9 +342,42 @@ let CarRepairListPage = class CarRepairListPage {
             miToast.present();
         });
     }
+    /**
+     * Método que se activa cuando se escribe algo en la barra de búsqueda
+     * Para buscar reparaciones por matrícula, dueño del coche, operación
+     * y nombre de la agencia
+     * @param event
+     */
     onSearchChange(event) {
-        this.searchStr = event.detail.value;
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.searchStr = event.detail.value;
+            console.log(this.searchStr);
+            let carR = [];
+            const value = event.detail.value;
+            const length = this.searchStr.length;
+            if (length > 1) {
+                this.carRepairs.forEach(repair => {
+                    if (repair.brandCar.includes(value) || repair.clienteName.includes(value)
+                        || repair.operation.toLocaleString().includes(value)
+                        || repair.myAgency.myUser.name.includes(value)) {
+                        carR.push(repair);
+                    }
+                });
+                this.carRepairs = carR;
+            }
+            else if (length < 1) {
+                try {
+                    yield this.reset();
+                }
+                catch (error) {
+                }
+            }
+        });
     }
+    /**
+     * Método que reinicia la lista de reparaciones
+     * @param event
+     */
     reset(event) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             this.n = 0;
@@ -384,7 +421,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>CarRepairList</ion-title>\r\n\r\n    <ion-buttons style=\"margin-right: 1%;\" slot=\"end\">\r\n      <ion-icon class=\"icon-logout\"  slot=\"end\" name=\"add-circle\" style=\"zoom:1.5\" (click)=\"goCreatePage()\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"person\" style=\"zoom:1.5\"></ion-icon>\r\n    </ion-buttons>\r\n\r\n    \r\n  </ion-toolbar>\r\n\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-searchbar placeholder=\"Encuentra la agencia que estás buscando...\" inputmode=\"text\" type=\"text\" (ionChange)=\"onSearchChange($event)\" showCancelButton=\"always\"></ion-searchbar>\r\n\r\n    <ion-row class=\"header-row\">\r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Operación</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col  size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Matrícula</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Agencia</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Reparado</ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-toolbar>\r\n  \r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" style=\"background-color: white;\">\r\n\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"reset($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <div class=\"body\">\r\n  \r\n\r\n  <ion-grid class=\"ion-text-center\">\r\n\r\n    <ion-row let *ngFor=\"let carRepair of this.carRepairs\" class=\"row\" >\r\n      \r\n      <ion-col size=\"1\">\r\n        <ion-text>\r\n          <ion-icon name=\"pencil\" style=\"color:#22388c;cursor:pointer\" (click)=\"edit(carRepair)\"></ion-icon>\r\n        </ion-text>\r\n      </ion-col>\r\n\r\n      \r\n      <ion-col size=\"2.5\" (click)=\"saw(carRepair)\">\r\n        <ion-text class=\"pointerText\">\r\n            {{carRepair.operation}}\r\n        </ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"2.5\"(click)=\"saw(carRepair)\">\r\n        <ion-text class=\"pointerText\">\r\n            {{carRepair.carPlate}}\r\n        </ion-text>\r\n      </ion-col>\r\n\r\n        <ion-col size=\"2.5\"(click)=\"saw(carRepair)\">\r\n          <ion-text class=\"pointerText\">\r\n            {{carRepair.myAgency.myUser.name}}\r\n          </ion-text>\r\n        </ion-col>\r\n  \r\n        <ion-col size=\"2.5\"(click)=\"saw(carRepair)\">\r\n          <ion-text class=\"pointerText\">\r\n            {{carRepair.repaired}} \r\n          </ion-text>\r\n        </ion-col>\r\n\r\n        <ion-col size=\"1\">\r\n          <ion-text>\r\n            <ion-icon name=\"trash\" color=\"danger\" style=\"cursor: pointer;\" (click)=\"showDeleteMenu(carRepair)\"></ion-icon>\r\n          </ion-text>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-grid>\r\n\r\n\r\n\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"infiniteLoad($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n</div>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>CarRepairList</ion-title>\r\n\r\n    <ion-buttons style=\"margin-right: 1%;\" slot=\"end\">\r\n      <ion-icon class=\"icon-logout\"  slot=\"end\" name=\"add-circle\" style=\"zoom:1.5\" (click)=\"goCreatePage()\"></ion-icon>\r\n      <ion-icon class=\"icon-logout\" slot=\"end\" name=\"person\" style=\"zoom:1.5\"></ion-icon>\r\n    </ion-buttons>\r\n\r\n    \r\n  </ion-toolbar>\r\n\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-searchbar placeholder=\"Encuentra la reparación que estás buscando...\" inputmode=\"text\" type=\"text\"\r\n    debounce=\"1000\" (ionChange)=\"onSearchChange($event)\" showCancelButton=\"always\"></ion-searchbar>\r\n\r\n    <ion-row class=\"header-row\">\r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Operación</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col  size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Matrícula</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Agencia</ion-text>\r\n      </ion-col>\r\n\r\n      <ion-col size=\"2.5\" style=\"border: 0px !important;\">\r\n        <ion-text>Reparado</ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"1\" style=\"border: 0px !important;\">\r\n        <ion-text></ion-text>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-toolbar>\r\n  \r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" style=\"background-color: white;\">\r\n\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"reset($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n  <div class=\"body\">\r\n  \r\n\r\n  <ion-grid class=\"ion-text-center\">\r\n\r\n    <ion-row let *ngFor=\"let carRepair of this.carRepairs\" class=\"row\" >\r\n      \r\n      <ion-col size=\"1\">\r\n        <ion-text>\r\n          <ion-icon name=\"pencil\" style=\"color:#22388c;cursor:pointer\" (click)=\"edit(carRepair)\"></ion-icon>\r\n        </ion-text>\r\n      </ion-col>\r\n\r\n      \r\n      <ion-col size=\"2.5\" (click)=\"saw(carRepair)\">\r\n        <ion-text class=\"pointerText\">\r\n            {{carRepair.operation}}\r\n        </ion-text>\r\n      </ion-col>\r\n      \r\n      <ion-col size=\"2.5\"(click)=\"saw(carRepair)\">\r\n        <ion-text class=\"pointerText\">\r\n            {{carRepair.carPlate}}\r\n        </ion-text>\r\n      </ion-col>\r\n\r\n        <ion-col size=\"2.5\"(click)=\"saw(carRepair)\">\r\n          <ion-text class=\"pointerText\">\r\n            {{carRepair.myAgency.myUser.name}}\r\n          </ion-text>\r\n        </ion-col>\r\n  \r\n        <ion-col size=\"2.5\"(click)=\"saw(carRepair)\">\r\n          <ion-text class=\"pointerText\">\r\n            {{carRepair.repaired}} \r\n          </ion-text>\r\n        </ion-col>\r\n\r\n        <ion-col size=\"1\">\r\n          <ion-text>\r\n            <ion-icon name=\"trash\" color=\"danger\" style=\"cursor: pointer;\" (click)=\"showDeleteMenu(carRepair)\"></ion-icon>\r\n          </ion-text>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-grid>\r\n\r\n\r\n\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"infiniteLoad($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n</div>\r\n</ion-content>\r\n");
 
 /***/ }),
 

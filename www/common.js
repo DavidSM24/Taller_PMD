@@ -165,6 +165,112 @@ const searchSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/
 
 /***/ }),
 
+/***/ 4352:
+/*!**************************************************************************!*\
+  !*** ./node_modules/ng2-search-filter/__ivy_ngcc__/ng2-search-filter.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Ng2SearchPipeModule": () => (/* binding */ Ng2SearchPipeModule),
+/* harmony export */   "Ng2SearchPipe": () => (/* binding */ Ng2SearchPipe)
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 4001);
+
+
+
+class Ng2SearchPipe {
+    /**
+     * @param {?} items object from array
+     * @param {?} term term's search
+     * @return {?}
+     */
+    transform(items, term) {
+        if (!term || !items)
+            return items;
+        return Ng2SearchPipe.filter(items, term);
+    }
+    /**
+     *
+     * @param {?} items List of items to filter
+     * @param {?} term  a string term to compare with every property of the list
+     *
+     * @return {?}
+     */
+    static filter(items, term) {
+        const /** @type {?} */ toCompare = term.toLowerCase();
+        /**
+         * @param {?} item
+         * @param {?} term
+         * @return {?}
+         */
+        function checkInside(item, term) {
+            for (let /** @type {?} */ property in item) {
+                if (item[property] === null || item[property] == undefined) {
+                    continue;
+                }
+                if (typeof item[property] === 'object') {
+                    if (checkInside(item[property], term)) {
+                        return true;
+                    }
+                }
+                if (item[property].toString().toLowerCase().includes(toCompare)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return items.filter(function (item) {
+            return checkInside(item, term);
+        });
+    }
+}
+Ng2SearchPipe.ɵfac = function Ng2SearchPipe_Factory(t) { return new (t || Ng2SearchPipe)(); };
+Ng2SearchPipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "filter", type: Ng2SearchPipe, pure: false });
+Ng2SearchPipe.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: Ng2SearchPipe, factory: Ng2SearchPipe.ɵfac });
+/**
+ * @nocollapse
+ */
+Ng2SearchPipe.ctorParameters = () => [];
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](Ng2SearchPipe, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__.Pipe,
+        args: [{
+                name: 'filter',
+                pure: false
+            }]
+    }, {
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__.Injectable
+    }], null, null); })();
+
+class Ng2SearchPipeModule {
+}
+Ng2SearchPipeModule.ɵfac = function Ng2SearchPipeModule_Factory(t) { return new (t || Ng2SearchPipeModule)(); };
+Ng2SearchPipeModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: Ng2SearchPipeModule });
+Ng2SearchPipeModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({});
+/**
+ * @nocollapse
+ */
+Ng2SearchPipeModule.ctorParameters = () => [];
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](Ng2SearchPipeModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__.NgModule,
+        args: [{
+                declarations: [Ng2SearchPipe],
+                exports: [Ng2SearchPipe]
+            }]
+    }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](Ng2SearchPipeModule, { declarations: [Ng2SearchPipe], exports: [Ng2SearchPipe] }); })();
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+
+
+
+/***/ }),
+
 /***/ 7879:
 /*!************************************************************************************!*\
   !*** ./src/app/administrator/agency/agency-update/agency-update-routing.module.ts ***!
@@ -524,14 +630,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CarRepairUpdatePageModule": () => (/* binding */ CarRepairUpdatePageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 8267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 8267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _car_repair_update_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-repair-update-routing.module */ 2369);
 /* harmony import */ var _car_repair_update_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./car-repair-update.page */ 3022);
 /* harmony import */ var src_app_services_car_repair_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/car-repair.service */ 7928);
+/* harmony import */ var src_app_components_date_time_pickup_date_time_pickup_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/components/date-time-pickup/date-time-pickup.component */ 1944);
+
 
 
 
@@ -542,20 +650,23 @@ __webpack_require__.r(__webpack_exports__);
 
 let CarRepairUpdatePageModule = class CarRepairUpdatePageModule {
 };
-CarRepairUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
+CarRepairUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_6__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule,
             _car_repair_update_routing_module__WEBPACK_IMPORTED_MODULE_0__.CarRepairUpdatePageRoutingModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.ReactiveFormsModule
+            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.ReactiveFormsModule
         ],
         providers: [
             src_app_services_car_repair_service__WEBPACK_IMPORTED_MODULE_2__.CarRepairService
         ],
-        declarations: [_car_repair_update_page__WEBPACK_IMPORTED_MODULE_1__.CarRepairUpdatePage]
+        declarations: [
+            _car_repair_update_page__WEBPACK_IMPORTED_MODULE_1__.CarRepairUpdatePage,
+            src_app_components_date_time_pickup_date_time_pickup_component__WEBPACK_IMPORTED_MODULE_3__.DateTimePickupComponent
+        ]
     })
 ], CarRepairUpdatePageModule);
 
@@ -714,6 +825,76 @@ GifUpdatePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
 
 /***/ }),
 
+/***/ 1944:
+/*!***************************************************************************!*\
+  !*** ./src/app/components/date-time-pickup/date-time-pickup.component.ts ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateTimePickupComponent": () => (/* binding */ DateTimePickupComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_date_time_pickup_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./date-time-pickup.component.html */ 3875);
+/* harmony import */ var _date_time_pickup_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./date-time-pickup.component.scss */ 6473);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 7366);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 2498);
+
+
+
+
+
+
+let DateTimePickupComponent = class DateTimePickupComponent {
+    constructor() {
+        this.type = 'date';
+        this.min = "2022-03-09";
+        this.max = "2050-12-31";
+        this.value = new Date(Date.now()).toISOString();
+        this.datePickerValue = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
+        this.dateValue = '';
+    }
+    ngOnInit() {
+    }
+    confirm() {
+        this.datetime.confirm(true);
+    }
+    reset() {
+        this.datetime.reset();
+    }
+    formatDate(value, date_format = 'dd MMM yyyy') {
+        return (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(value), date_format);
+    }
+    change(value) {
+        this.dateValue = this.formatDate(value, this.date_format);
+        this.datePickerValue.emit(this.dateValue);
+    }
+};
+DateTimePickupComponent.ctorParameters = () => [];
+DateTimePickupComponent.propDecorators = {
+    datetime: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.ViewChild, args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonDatetime,] }],
+    type: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }],
+    min: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }],
+    max: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }],
+    value: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }],
+    date_format: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }],
+    datePickerValue: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Output }]
+};
+DateTimePickupComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
+        selector: 'app-date-time-pickup',
+        template: _C_Users_david_Documents_2DAM_PMDM_Ionic_taller_PMD_node_modules_ngtools_webpack_src_loaders_direct_resource_js_date_time_pickup_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_date_time_pickup_component_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], DateTimePickupComponent);
+
+
+
+/***/ }),
+
 /***/ 7447:
 /*!*******************************************************************************************************************************************!*\
   !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/administrator/agency/agency-update/agency-update.page.html ***!
@@ -728,6 +909,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 3875:
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/components/date-time-pickup/date-time-pickup.component.html ***!
+  \********************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-datetime \r\n#datetime\r\n[value]=\"value\"\r\n(ionChange)=\"change(datetime.value)\"\r\n value=\"2022-03-09T13:47:20.789\"\r\n[presentation]=\"type\"\r\n[min]=\"min\"\r\n[max]=\"max\"\r\n></ion-datetime>\r\n");
+
+/***/ }),
+
 /***/ 4478:
 /*!****************************************************************************!*\
   !*** ./src/app/administrator/agency/agency-update/agency-update.page.scss ***!
@@ -735,6 +930,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module) => {
 
 module.exports = ".body {\n  background: #717499;\n  background-size: cover;\n  min-height: 100%;\n}\n\n.formulario {\n  margin-top: 1.5%;\n  padding: 2%;\n  border-top: 2px double gray;\n  border: 1px solid;\n  border-color: \"primary\";\n  border-radius: 2.5rem;\n  background-color: white;\n  margin-bottom: 4%;\n}\n\n.button {\n  --background: #22388c;\n}\n\n.customInput {\n  border: 1px solid gray;\n  border-color: \"primary\";\n  border-radius: 2.5rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFnZW5jeS11cGRhdGUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0FBQ0o7O0FBRUE7RUFDSSxnQkFBQTtFQUNBLFdBQUE7RUFDQSwyQkFBQTtFQUNBLGlCQUFBO0VBQ0EsdUJBQUE7RUFDQSxxQkFBQTtFQUNBLHVCQUFBO0VBQ0EsaUJBQUE7QUFDSjs7QUFFQTtFQUNJLHFCQUFBO0FBQ0o7O0FBRUE7RUFDUSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EscUJBQUE7QUFDUiIsImZpbGUiOiJhZ2VuY3ktdXBkYXRlLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ib2R5e1xyXG4gICAgYmFja2dyb3VuZDogIzcxNzQ5OTtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XHJcbiAgICBtaW4taGVpZ2h0OiAxMDAlO1xyXG59XHJcblxyXG4uZm9ybXVsYXJpb3tcclxuICAgIG1hcmdpbi10b3A6IDEuNSU7XHJcbiAgICBwYWRkaW5nOiAyJTtcclxuICAgIGJvcmRlci10b3A6IDJweCBkb3VibGUgZ3JheTtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkO1xyXG4gICAgYm9yZGVyLWNvbG9yOiBcInByaW1hcnlcIjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDIuNXJlbTtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogNCU7XHJcbn1cclxuXHJcbi5idXR0b257XHJcbiAgICAtLWJhY2tncm91bmQ6ICMyMjM4OGM7XHJcbn1cclxuXHJcbi5jdXN0b21JbnB1dHtcclxuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCBncmF5O1xyXG4gICAgICAgIGJvcmRlci1jb2xvcjogXCJwcmltYXJ5XCI7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMi41cmVtO1xyXG59Il19 */";
+
+/***/ }),
+
+/***/ 6473:
+/*!*****************************************************************************!*\
+  !*** ./src/app/components/date-time-pickup/date-time-pickup.component.scss ***!
+  \*****************************************************************************/
+/***/ ((module) => {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJkYXRlLXRpbWUtcGlja3VwLmNvbXBvbmVudC5zY3NzIn0= */";
 
 /***/ })
 
