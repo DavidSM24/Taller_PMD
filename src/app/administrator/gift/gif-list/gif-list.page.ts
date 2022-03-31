@@ -146,7 +146,8 @@ export class GifListPage implements OnInit {
     let lenght=this.searchStr.length;
     if(lenght>1){
       this.gifts.forEach(gift=>{
-        if(gift.name.includes(this.searchStr)){
+        if(gift.name.includes(this.searchStr)
+        ||gift.points.toString().includes(this.searchStr)){
           list.push(gift);
         }
         
