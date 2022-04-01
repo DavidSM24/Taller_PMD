@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
   <div class="body">
     <center>
       <ion-card class="ion-align-items-center">
@@ -15,51 +15,59 @@
         
       </ion-card>
     </center>
-      <div class="formulario">
+      <div class="formulario" >
       <ion-grid>
         
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="2" sizeLg="2">
             <ion-label>Fecha de Intercambio:</ion-label>
           </ion-col>
+          <div class="fin">
             <ion-text>
               {{this.exchangesaw.dateExchange}}
             </ion-text>
+            </div>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="2" sizeLg="2">
             <ion-label>Observaciones:</ion-label>
           </ion-col>
+          <div class="fin">
           <ion-text>
             {{this.exchangesaw.observations}}
           </ion-text>
+         </div>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="2" sizeLg="2">
             Entregado:
           </ion-col>
-          <ion-col size="2.5" *ngIf="this.exchangesaw.delivered">
-            <ion-text>
-            Si
-            </ion-text>
-          </ion-col>
-  
-          <ion-col size="2.5" *ngIf="!this.exchangesaw.delivered">
-            <ion-text>
-            No
-            </ion-text>
-          </ion-col>
+            <div class="fin">
+              <ion-col size="2.5" *ngIf="this.exchangesaw.delivered">
+                <ion-text>
+              Si
+                </ion-text>
+              </ion-col>
+      
+              <ion-col size="2.5" *ngIf="!this.exchangesaw.delivered">
+                <ion-text>
+              No
+                </ion-text>
+              </ion-col>
+          </div>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="2" sizeLg="2">
             <ion-label>Agencia:</ion-label>
           </ion-col>
+          <div class="fin">
             <ion-text>
               {{this.exchangesaw.agency.zipCode}}
             </ion-text>
+            </div>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
