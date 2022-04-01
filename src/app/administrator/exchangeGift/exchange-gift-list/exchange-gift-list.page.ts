@@ -121,30 +121,6 @@ export class ExchangeGiftListPage {
     miToast.present();
   }
 
-  public onSearchChange(event) {
-    this.searchTerm=event.detail.value;
-    console.log(this.searchTerm);
-
-    let list:ExchangeGift[]=[];
-
-    let lenght=this.searchTerm.length;
-    if(lenght>1){
-      this.exGifts.forEach(exgift=>{
-        if(exgift.agency.zipCode.toString().includes(this.searchTerm)||exgift.dateExchange.toString().includes(this.searchTerm)){
-          list.push(exgift);
-        }
-        
-        
-      })
-      this.exGifts=list;
-
-    }
-    else if(lenght<1){
-      this.reset(null); 
-      this.uts.hideLoading();
-    }
-  }
-
   public async mensagealerta(n:any){
     const alert = await this.alerta.create({
       header: 'Eliminar',

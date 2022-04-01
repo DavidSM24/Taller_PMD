@@ -71,7 +71,13 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-          <ion-col size="12">
+          <ion-col size="6">
+            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" routerLink="/tab-administrator/exchange-gift/list" class="button">
+              Cancelar
+            </ion-button>
+          </ion-col>
+  
+          <ion-col size="6">
             <ion-button (click)="CreateExgift()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formExchange.invalid || this.myagency==null || this.mygift==null">
               Crear Pedido
             </ion-button>
