@@ -11,105 +11,106 @@
       <ion-grid>
         
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Operación</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="11" sizeLg="9">
             <ion-input type="number" Disabled class="customInput" formControlName="operation"></ion-input>
           </ion-col>
         </ion-row>
         
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Matrícula</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="11" sizeLg="9">
             <ion-input class="customInput" Disabled type="text" formControlName="carPlate"></ion-input>
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Modelo</ion-label>
           </ion-col>
-          <ion-col sizeSm="5" sizeLg="11">
+          <ion-col sizeSm="5" sizeLg="9">
             <ion-input class="customInput" Disabled type="text" formControlName="model"></ion-input>
           </ion-col>          
         </ion-row>
         
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Marca</ion-label>
           </ion-col>
-          <ion-col sizeSm="5" sizeLg="11">
+          <ion-col sizeSm="5" sizeLg="9">
             <ion-input class="customInput" Disabled type="text" formControlName="brandCar"></ion-input>
           </ion-col>
         </ion-row>
         
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Cliente</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="11" sizeLg="9">
             <ion-input class="customInput" Disabled type="text" formControlName="clientName"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>NOR</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="11" sizeLg="9">
             <ion-input class="customInput" Disabled type="number" formControlName="nor"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Coste</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="11" sizeLg="9">
             <ion-input class="customInput" Disabled type="number" formControlName="amount"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Puntos</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="11" sizeLg="9">
             <ion-input class="customInput" Disabled type="number" formControlName="asigPoints"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Agencia</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="11" sizeLg="9">
             <ion-input class="customInput" Disabled type="text" formControlName="myAgency"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-          <ion-col   sizeSm="7" sizeLg="1.5">
+          <ion-col   sizeSm="7" sizeLg="3">
             <ion-label>Fecha de alta</ion-label>
           </ion-col>
-          <ion-col  sizeSm="7" sizeLg="1.5" >
-            <ion-input class="customInput" Disabled type="date" formControlName="dateOrder"></ion-input>
+          <ion-col  sizeSm="7" sizeLg="4" >
+            <ion-input class="customInput" Disabled type="text" formControlName="dateOrder"></ion-input>
           </ion-col>
          
          
         </ion-row> 
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="7" sizeLg="1.5">
+          <ion-col sizeSm="7" sizeLg="3">
             <ion-label>Fecha de reparación</ion-label>
           </ion-col>
-          <ion-col  sizeSm="7" sizeLg="1.5">
+          <ion-col  sizeSm="7" sizeLg="4">
             <ion-input class="customInput" Disabled type="date" formControlName="dateRepair"></ion-input>
           </ion-col>
         </ion-row> 
         <ion-row class="ion-align-items-center">
-          <ion-col  sizeSm="7" sizeLg="1.5">
+          <ion-col  sizeSm="7" sizeLg="3">
             Reparado
           </ion-col>
           <ion-col sizeSm="7" sizeLg="1.5">
-            <ion-input class="customInput" Disabled type="text" formControlName="repaired"></ion-input>
+            <ion-icon *ngIf="carRepair.repaired" name="checkmark-circle"  style="color: #39ff14; zoom: 2.0;"></ion-icon>
+           <ion-icon *ngIf="!carRepair.repaired" name="close-circle" style="color: red; zoom: 2.0;"></ion-icon>
           
           </ion-col>
         </ion-row> 
