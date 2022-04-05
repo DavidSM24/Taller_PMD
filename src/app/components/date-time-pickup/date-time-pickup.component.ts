@@ -33,7 +33,7 @@ export class DateTimePickupComponent implements OnInit {
     this.datetime.reset();
   }
 
-  formatDate(value: string, date_format= 'dd MMM yyyy') {
+  formatDate(value: string, date_format= 'dd MMM yyyy:mm:SS') {
     return format(parseISO(value),date_format);
   }
 

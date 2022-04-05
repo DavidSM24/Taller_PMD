@@ -20,6 +20,7 @@ export class CarRepairUpdatePage implements OnInit {
   @ViewChild(IonDatetime) datetime: IonDatetime;
   public dateValue = '';
   public dateRepair;
+  public dateOrder:Date;
   public value;
   public formatedString;
 
@@ -28,28 +29,12 @@ export class CarRepairUpdatePage implements OnInit {
   
   
   private newCarRepair:CarRepair;
-  /*
-  public validator=this.formBuilder.group({
-    operation:['',[Validators.required]],
-    carPlate:['',[Validators.required]],
-    model:['',[Validators.required]],
-    brandCar:['',[Validators.required]],
-    clientName:['',[Validators.required]],
-    nor:['',[Validators.required]],
-    amount:[''],
-    asigPoints:[''],
-    myAgency:[''],
-    dateOrder:['',[Validators.required]],
-    dateRepair:[''],
-    repaired:['',[Validators.required]]
 
-  });*/
 
   constructor(
     private modalController: ModalController,
     private carRepairService:CarRepairService,
     private formBuilder:FormBuilder,
-    private activateRoute:ActivatedRoute,
     private uts:UtilService
   ) {
     
@@ -57,11 +42,14 @@ export class CarRepairUpdatePage implements OnInit {
    }
 
   ngOnInit() {
-   // let date:Date=this.carRepair.dateOrder;
-   // console.log(date.getMonth);
-    this.value=this.change(this.carRepair.dateOrder);
-    this.dateRepair=this.change(this.carRepair.dateRepair)
+    
+    //console.log("Init "+this.dateOrder.getDay);
+    if(this.carRepair.dateRepair){
+      this.change(this.carRepair.dateRepair)
+    }
+
     this.formCarRepair=this.formBuilder.group({
+
     operation:[this.carRepair.operation,[Validators.required]],
     carPlate:[this.carRepair.carPlate,[Validators.required]],
     model:[this.carRepair.model,[Validators.required]],
@@ -74,7 +62,8 @@ export class CarRepairUpdatePage implements OnInit {
     dateOrder:[this.carRepair.dateOrder,[Validators.required]],
     dateRepair:[this.carRepair.dateRepair],
     repaired:[this.carRepair.repaired,[Validators.required]]
-    });
+    
+  });
   }
   async ionViewDidEnter(){     
    
@@ -85,9 +74,9 @@ export class CarRepairUpdatePage implements OnInit {
    * Método que guarda la nota una vez editada
    */
   public async editCarRepair(){
-   this.dateFormat();
     
     this.newCarRepair={
+
       id:this.carRepair.id,
       operation:this.formCarRepair.get("operation").value,
       carPlate:this.carRepair.carPlate,
@@ -101,13 +90,13 @@ export class CarRepairUpdatePage implements OnInit {
       asigPoints:this.formCarRepair.get("asigPoints").value,
       repaired:this.formCarRepair.get("repaired").value,
       myAgency:this.carRepair.myAgency
+   
     }
     try {
       
       this.newCarRepair=await this.carRepairService.createOrUpdate(this.newCarRepair);
       
       this.uts.presentToast("Se ha gurdadado correctamente","success");
-      console.log(this.newCarRepair);
       this.closeModal();
     } catch (error) {
       this.uts.presentToast("Fallo al guradar","danger");
@@ -117,11 +106,6 @@ export class CarRepairUpdatePage implements OnInit {
 
   public closeModal(){
     this.modalController.dismiss();
-  }
-
-  public dateFormat(){
-    let date:Date=this.formCarRepair.get("dateOrder").value;
-    console.log()
   }
 
   confirm() {
@@ -136,13 +120,19 @@ export class CarRepairUpdatePage implements OnInit {
     return format(parseISO(value), 'yyyy-MM-dd HH:mm:SS');
   }
 
+  
+
+
+
+
   change(event){
     console.log(event);
     this.dateValue=event;
-    this.formatedString=this.formatDate(this.dateValue);
+    this.formatedString=this.formatDate(this.dateValue);    
     this.dateRepair=this.formatedString;
-    console.log(this.formatedString);
     
+   
   }
+  
 
 }
