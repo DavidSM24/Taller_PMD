@@ -106,9 +106,14 @@ export class CarRepairListPage implements OnInit {
         
       }
     });
-   
-  
-    return await modal.present();
+     
+    await modal.present();
+
+    const resp=await modal.onDidDismiss();
+    if(resp.data !=null){
+      let i:number=this.carRepairs.indexOf(carRepair);
+      this.carRepairs[i]=resp.data.newCarRepair;
+    }
 
   }
   public async saw(carRepair:CarRepair){
