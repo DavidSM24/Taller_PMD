@@ -1,12 +1,13 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { IonDatetime, ModalController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
 import { UtilService } from 'src/app/services/util.service';
 
 import { format, parseISO } from 'date-fns';
+import { DatePipe } from '@angular/common';
+import { DateTimeServiceService } from 'src/app/services/date-time-service.service';
 
 @Component({
   selector: 'app-car-repair-update',
@@ -18,16 +19,21 @@ export class CarRepairUpdatePage implements OnInit {
   @Input() carRepair:CarRepair;
   //variables para la fecha
   @ViewChild(IonDatetime) datetime: IonDatetime;
-  public dateValue = '';
+  //Guarda la fecha con el formato de españa
+  public spanishDateOrder:string;
+  //Guarda la fecha con un formato legible para el ion-dateTime
+  public stringDateOrder:string;
+   //Guarda la fecha de la reparación con el formato de españa
+   public spanishDateRepair:string;
+   //Guarda la fecha de la reparación con un formato legible para el ion-dateTime
+   public stringDateRepair:string;
+   public dateValue = '';
   public dateRepair;
-  public dateOrder:Date;
+  public dateOrder;
   public value;
   public formatedString;
-
   public formCarRepair:FormGroup;
-  public id:number; 
-  
-  
+  public id:number;   
   private newCarRepair:CarRepair;
 
 
@@ -35,18 +41,23 @@ export class CarRepairUpdatePage implements OnInit {
     private modalController: ModalController,
     private carRepairService:CarRepairService,
     private formBuilder:FormBuilder,
-    private uts:UtilService
+    private uts:UtilService,
+    private dateTimeService:DateTimeServiceService
+   
   ) {
     
    
    }
 
   ngOnInit() {
-    
-    //console.log("Init "+this.dateOrder.getDay);
+    this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateOrder);
+    this.stringDateOrder=this.dateTimeService.formatString(""+this.carRepair.dateOrder);
     if(this.carRepair.dateRepair){
-      this.change(this.carRepair.dateRepair)
+      this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);    
+      this.stringDateRepair=this.dateTimeService.formatString(""+this.carRepair.dateRepair);
     }
+   
+    
 
     this.formCarRepair=this.formBuilder.group({
 
@@ -74,7 +85,7 @@ export class CarRepairUpdatePage implements OnInit {
    * Método que guarda la nota una vez editada
    */
   public async editCarRepair(){
-    
+   
     this.newCarRepair={
 
       id:this.carRepair.id,
@@ -113,26 +124,38 @@ export class CarRepairUpdatePage implements OnInit {
   }
   
   reset() {
-    this.datetime.reset();
+    this.datetime.cancel(true);
   }
 
-  formatDate(value: string) {
+  /**
+   * Metodo para darle formato a la fecha y que se pueda guardar en la base de datos
+   * @param value 
+   * @returns fecha con el formato yyyy-MM-ddTHH:mm
+   */
+  formatDate(value: string):string {
     return format(parseISO(value), 'yyyy-MM-dd HH:mm:SS');
   }
 
+
   
-
-
-
-
-  change(event){
-    console.log(event);
+ 
+  changeDateRepair(event){
+    this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(event);    
+    this.stringDateRepair=this.dateTimeService.formatString(event);
     this.dateValue=event;
-    this.formatedString=this.formatDate(this.dateValue);    
-    this.dateRepair=this.formatedString;
-    
-   
+    this.formatedString=this.formatDate(this.dateValue);
+
   }
+  /**
+   * Metodo que se activa cuando se produce un cambio en la fecha de entrada de la reparación
+   * @param event 
+   */
+  changeDateOrder(event){
+    
+    this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(event);    
+    this.stringDateOrder=this.dateTimeService.formatString(event);
+  }
+
   
 
 }
