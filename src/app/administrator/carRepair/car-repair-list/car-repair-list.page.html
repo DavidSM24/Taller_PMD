@@ -9,12 +9,12 @@
 
   <ion-toolbar color="primary">
     <ion-row class="ion-align-items-center">
-      <ion-col sizeSm="4" sizeLg="4">
+      <ion-col sizeSm="9.5" sizeLg="9.5">
         <ion-searchbar  placeholder="Encuentra la reparación que estás buscando..." inputmode="text" type="text"
         debounce="1000" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
       </ion-col>
-      <ion-col sizeSm="4" sizeLg="4">
+      <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">
              
           <ion-item>
             <ion-label>Estado del vehículo</ion-label>
@@ -100,9 +100,8 @@
         </ion-col>
   
         <ion-col size="2.5"(click)="saw(carRepair)">
-          <ion-text class="pointerText">
-            {{carRepair.repaired}} 
-          </ion-text>
+          <ion-icon *ngIf="carRepair.repaired" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
+          <ion-icon *ngIf="!carRepair.repaired" name="close-circle" style="color: red;"></ion-icon>
         </ion-col>
 
         <ion-col size="1">
