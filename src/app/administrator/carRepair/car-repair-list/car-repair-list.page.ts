@@ -17,6 +17,7 @@ export class CarRepairListPage implements OnInit {
 
   private n:number=0;
   public carRepairs:CarRepair[]=[];
+  public carRepairsStore:CarRepair[]=[];
   private searchStr:string="";
   private miLoading:HTMLIonLoadingElement;
   private nItems:number; //variable que almacena el número de elemetenos que caben dentro de la página
@@ -68,9 +69,10 @@ export class CarRepairListPage implements OnInit {
       try{
       newCarRepair=await this.cS.getAllPaged(this.nItems,0);
       this.carRepairs=this.carRepairs.concat(newCarRepair);
+      this.storageCarRepairs();
       if(newCarRepair.length<this.nItems){
       this.infinite.disabled=true;
-        console.log(this.carRepairs);
+        
       }
       }catch(error){
         console.log(error);
@@ -304,12 +306,18 @@ export class CarRepairListPage implements OnInit {
     } 
   }
   
+  /**
+   * Método que muestra en la vista los coches que correspondan con el estado seleccionado el Ion-Select
+   * @param event 
+   */
   public async setCarByStatus(event?){
+    
     let carR:CarRepair[]=[]
     const value:string=event.detail.value;
+     
 
     if("false".match(value)){
-      this.carRepairs.forEach(repair=>{
+      this.carRepairsStore.forEach(repair=>{
         if(!repair.repaired){
           carR.push(repair);
         }
@@ -317,11 +325,12 @@ export class CarRepairListPage implements OnInit {
       this.carRepairs=carR;
 
     } else if("true".match(value)){
-      this.carRepairs.forEach(repair=>{
+      this.carRepairsStore.forEach(repair=>{
         if(repair.repaired){
           carR.push(repair);
         }
       });
+      console.log(carR);
       this.carRepairs=carR;
     }else if("all".match(value)) {
       this.reset();
@@ -337,6 +346,11 @@ export class CarRepairListPage implements OnInit {
     this.infinite.disabled=false;
     this.carRepairs=[];
     this.loadCarRepair(event);
+    
+  }
+
+  public storageCarRepairs(){
+    this.carRepairsStore=this.carRepairs;
   }
 
 }
