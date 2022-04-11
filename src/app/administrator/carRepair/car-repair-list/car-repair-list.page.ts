@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarRepairService } from 'src/app/services/car-repair.service';
 import { CarRepairSawPage } from '../car-repair-saw/car-repair-saw.page';
 import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
@@ -29,7 +30,8 @@ export class CarRepairListPage implements OnInit {
     private modalCtrl:ModalController,
     private loading:LoadingController,
     private routes:Router,
-    private pt:Platform//para saber el dispositivo
+    private pt:Platform,//para saber el dispositivo
+    private authS:AuthService
 
   ) {
 
@@ -351,6 +353,11 @@ export class CarRepairListPage implements OnInit {
 
   public storageCarRepairs(){
     this.carRepairsStore=this.carRepairs;
+  }
+
+
+  public logout(){
+    this.authS.logout();
   }
 
 }
