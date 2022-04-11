@@ -249,6 +249,7 @@ export class CarRepairListPage implements OnInit {
   }
 
 
+  //Metodo que muestra el loading
   public async presentLoading() {
     this.miLoading = await this.loading.create({
       message: ''
@@ -256,6 +257,7 @@ export class CarRepairListPage implements OnInit {
     await this.miLoading.present();
   }
 
+  //Método que muestra un toast
   public async presentToast(msg: string, clr: string) {
     const miToast = await this.toast.create({
       message: msg,
@@ -300,6 +302,30 @@ export class CarRepairListPage implements OnInit {
      
 
     } 
+  }
+  
+  public async setCarByStatus(event?){
+    let carR:CarRepair[]=[]
+    const value:string=event.detail.value;
+
+    if("false".match(value)){
+      this.carRepairs.forEach(repair=>{
+        if(!repair.repaired){
+          carR.push(repair);
+        }
+      });
+      this.carRepairs=carR;
+
+    } else if("true".match(value)){
+      this.carRepairs.forEach(repair=>{
+        if(repair.repaired){
+          carR.push(repair);
+        }
+      });
+      this.carRepairs=carR;
+    }else if("all".match(value)) {
+      this.reset();
+    }
   }
 
   /**
