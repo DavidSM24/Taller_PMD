@@ -277,8 +277,12 @@ export class CarRepairListPage implements OnInit {
     let carR:CarRepair[]=[]
     const value:string=event.detail.value;
     const length=this.searchStr.length;
+    //Comprueba que hay algo introducido
     if(length>1){
       this.carRepairs.forEach(repair=>{
+        //Compara si lo introducido en la barra de busqueda coincide con
+        //cualquiera de los siguientes campos:
+        //matrícula, nombre del dueño del coche, operación o nombre de la agencia
         if(repair.brandCar.includes(value)||repair.clienteName.includes(value)
         ||repair.operation.toLocaleString().includes(value)
         ||repair.myAgency.myUser.name.includes(value)){
