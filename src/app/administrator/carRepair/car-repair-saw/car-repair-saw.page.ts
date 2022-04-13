@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
-import { CarRepairService } from 'src/app/services/car-repair.service';
+import { DateTimeServiceService } from 'src/app/services/date-time-service.service';
 import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
 
 @Component({
@@ -18,6 +18,9 @@ export class CarRepairSawPage implements OnInit {
   public formCarRepair:FormGroup;
   public id:number;
   private oldCarRepair:CarRepair;
+  private spanishDateOrder:string;
+  private spanishDateRepair:string;
+
   public validator=this.formBuilder.group({
     operation:['',[Validators.required]],
     carPlate:['',[Validators.required]],
@@ -36,15 +39,17 @@ export class CarRepairSawPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private carRepairService:CarRepairService,
     private formBuilder:FormBuilder,
     private routes:Router,
-    private activateRoute:ActivatedRoute,
-
+    private dateTimeService:DateTimeServiceService
   ) { }
 
   ngOnInit() {
-    console.log(this.carRepair);
+    this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateOrder);
+    if(this.carRepair.dateRepair){
+      this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);
+    }
+    
     this.formCarRepair=this.formBuilder.group({
       operation:[this.carRepair.operation,[Validators.required]],
     carPlate:[this.carRepair.carPlate,[Validators.required]],
@@ -55,8 +60,8 @@ export class CarRepairSawPage implements OnInit {
     amount:[this.carRepair.amount],
     asigPoints:[this.carRepair.asigPoints],
     myAgency:[this.carRepair.myAgency.myUser.name],
-    dateOrder:[this.carRepair.dateOrder,[Validators.required]],
-    dateRepair:[this.carRepair.dateRepair],
+    dateOrder:[this.spanishDateOrder,[Validators.required]],
+    dateRepair:[this.spanishDateRepair],
     repaired:[this.carRepair.repaired,[Validators.required]]
     });
   }
@@ -107,7 +112,7 @@ export class CarRepairSawPage implements OnInit {
    
   try {
     return await modal.present();
-    this.modalController.dismiss();
+   
     
   } catch (error) {
     
