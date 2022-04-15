@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./administrator/tab-administrator/tab-administrator.module').then( m => m.TabAdministratorPageModule)
   },
   {
+    path: 'tab-user',
+    loadChildren: () => import('./user/tab-user/tab-user.module').then( m => m.TabUserPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -41,50 +45,7 @@ const routes: Routes = [
   {
     path: 'user-update',
     loadChildren: () => import('./administrator/user/user-update/user-update.module').then( m => m.UserUpdatePageModule)
-  },  {
-    path: 'tab-user',
-    loadChildren: () => import('./user/tab-user/tab-user.module').then( m => m.TabUserPageModule)
-  },
-  {
-    path: 'gift-list',
-    loadChildren: () => import('./user/gift/gift-list/gift-list.module').then( m => m.GiftListPageModule)
-  },
-  {
-    path: 'gift-saw',
-    loadChildren: () => import('./user/gift/gift-saw/gift-saw.module').then( m => m.GiftSawPageModule)
-  },
-  {
-    path: 'exchange-gift-list',
-    loadChildren: () => import('./user/exchangeGift/exchange-gift-list/exchange-gift-list.module').then( m => m.ExchangeGiftListPageModule)
-  },
-  {
-    path: 'exchange-gift-saw',
-    loadChildren: () => import('./user/exchangeGift/exchange-gift-saw/exchange-gift-saw.module').then( m => m.ExchangeGiftSawPageModule)
-  },
-  {
-    path: 'car-repair-list',
-    loadChildren: () => import('./user/carRepair/car-repair-list/car-repair-list.module').then( m => m.CarRepairListPageModule)
-  },
-  {
-    path: 'car-repair-create',
-    loadChildren: () => import('./user/carRepair/car-repair-create/car-repair-create.module').then( m => m.CarRepairCreatePageModule)
-  },
-  {
-    path: 'car-repair-saw',
-    loadChildren: () => import('./user/carRepair/car-repair-saw/car-repair-saw.module').then( m => m.CarRepairSawPageModule)
-  },
-  {
-    path: 'car-repair-update',
-    loadChildren: () => import('./user/carRepair/car-repair-update/car-repair-update.module').then( m => m.CarRepairUpdatePageModule)
-  },
-  {
-    path: 'agency-update',
-    loadChildren: () => import('./user/agency/agency-update/agency-update.module').then( m => m.AgencyUpdatePageModule)
-  },
-
-
-  
-
+  }
 ];
 @NgModule({
   imports: [
