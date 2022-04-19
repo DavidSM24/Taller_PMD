@@ -5,6 +5,7 @@ import { AlertController, IonInfiniteScroll, LoadingController, ModalController,
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
 import { UtilService } from 'src/app/services/util.service';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-exchange-gift-list',
   templateUrl: './exchange-gift-list.page.html',
@@ -12,6 +13,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class ExchangeGiftListPage {
   public exGifts:ExchangeGift[]=[];
+  public exGiftsx:ExchangeGift[]=[];
   private niTems:number;
   public searchTerm:string;
   @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
@@ -21,7 +23,8 @@ export class ExchangeGiftListPage {
     private toast:ToastController,
     private alerta: AlertController,
     private pt: Platform,
-    private modalCtrl: ModalController) { }
+    private modalCtrl: ModalController,
+    private authS:AuthService) { }
     private uts:UtilService
     async ionViewDidEnter(){
       this.niTems = Math.ceil(this.pt.height() / 20 + 10);
@@ -52,6 +55,32 @@ export class ExchangeGiftListPage {
   
     }
 
+    public async setbyExGiftByStatus(event?){
+    
+      let exgif:ExchangeGift[]=[]
+      const value:string=event.detail.value;
+       
+  
+      if("false".match(value)){
+        this.exGiftsx.forEach(repair=>{
+          if(!repair.delivered){
+            exgif.push(repair);
+          }
+        });
+        this.exGifts=exgif;
+  
+      } else if("true".match(value)){
+        this.exGiftsx.forEach(x=>{
+          if(x.delivered){
+            exgif.push(x);
+          }
+        });
+        console.log(exgif);
+        this.exGifts=exgif;
+      }else if("all".match(value)) {
+        this.reset();
+      }
+    }
     public async saw(exchangesaw: ExchangeGift) {
       try {
         const modal = await this.modalCtrl.create({
@@ -75,7 +104,9 @@ export class ExchangeGiftListPage {
       }
   
     }
-
+    public storageexchanges(){
+      this.exGiftsx=this.exGifts;
+    }
   public async cargaExGifts(event?){
     if(this.infinite){
       this.infinite.disabled=false;
@@ -86,6 +117,7 @@ export class ExchangeGiftListPage {
     this.exGifts=[];
     try{
       this.exGifts=await this.exs.getAllPaged(this.niTems, this.exGifts.length);;
+      this.storageexchanges();
     }catch(err){
       console.error(err);
       await this.presentToast("Error cargando datos","danger");
@@ -151,9 +183,12 @@ export class ExchangeGiftListPage {
       }
     }
   }
-  public async reset(event){
+  public async reset(event?){
     this.infinite.disabled=false;
     this.exGifts=[];
     this.cargaExGifts(event);
+  }
+  public logout(){
+    this.authS.logout();
   }
 }

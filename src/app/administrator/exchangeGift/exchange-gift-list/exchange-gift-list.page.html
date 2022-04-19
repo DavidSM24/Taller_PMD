@@ -5,12 +5,27 @@
 
     <ion-buttons style="margin-right: 1%;" slot="end">
       <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" routerLink="/tab-administrator/exchange-gift/create"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
   <ion-toolbar color="primary">
+    <ion-row class="ion-align-items-center">
+    <ion-col sizeSm="9.5" sizeLg="9.5">
     <ion-searchbar placeholder="Encuentra el regalo intercambiado que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
-
+    </ion-col>
+    <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">     
+          <ion-item>
+            <ion-label>Estado del vehículo</ion-label>
+            <ion-select (ionChange)="setbyExGiftByStatus($event)" interface="popover" multiple="false">
+              <ion-select-option value="true">Entregado</ion-select-option>
+              <ion-select-option value="false">Pendiente</ion-select-option>
+              <ion-select-option value="all">Todos</ion-select-option>
+             
+            </ion-select>
+          </ion-item>
+      </ion-col>
+    </ion-row>
     <ion-row class="header-row">
       <ion-col size="1" style="border: 0px !important;">
         <ion-text></ion-text>
@@ -82,17 +97,12 @@
           </ion-text>
         </ion-col>
 
-        <ion-col size="2.5" *ngIf="exchangeGift.delivered">
-          <ion-text>
-            Si
-          </ion-text>
+        <ion-col size="2.5">
+          <ion-icon *ngIf="exchangeGift.delivered" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
+          <ion-icon *ngIf="!exchangeGift.delivered" name="close-circle" style="color: red;"></ion-icon>
         </ion-col>
 
-        <ion-col size="2.5" *ngIf="!exchangeGift.delivered">
-          <ion-text>
-            No
-          </ion-text>
-        </ion-col>
+
 
         <ion-col size="1">
           <ion-text>
