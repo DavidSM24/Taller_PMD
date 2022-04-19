@@ -37,7 +37,7 @@ export class ExchangeGiftListPage {
           component: ExchangeGifUpdatePage,
           cssClass: 'fullscreen',
           componentProps: {
-            'exchange': exchange
+            exchange: exchange
           }
         });
   

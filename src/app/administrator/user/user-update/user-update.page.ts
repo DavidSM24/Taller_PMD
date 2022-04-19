@@ -42,6 +42,7 @@ export class UserUpdatePage implements OnInit{
   }
   public async EditUser(): Promise<void> {
         let userEditado: User = {
+          id:this.user.id,
           code:this.formEditUser.get("code").value,
           password:this.formEditUser.get("password").value,
           administrator:this.toggle.checked,

@@ -58,13 +58,13 @@ export class ExchangeGifCreatePage {
         
 
 
-        this.uts.presentToast("Regalo agregada correctamente","success");
+        this.uts.presentToast("Pedido agregada correctamente","success");
         this.formExchange.reset();
 
       }catch(err){
         
         
-        this.uts.presentToast("Error agregando Regalo","danger");
+        this.uts.presentToast("Error agregando Pedido","danger");
       }
     }
    }catch(error){

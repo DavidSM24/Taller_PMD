@@ -54,8 +54,9 @@ export class ExchangeGifUpdatePage implements OnInit {
 
     public async EditExgift(): Promise<void> {
       if(this.mygift!=null&&this.myagency!=null){
-
+        this.uts.presentLoading();
       let Exchangeeditado: ExchangeGift = {
+        id:this.exchange.id,
         dateExchange: this.formEditExchange.get("dateExchange").value,
         observations: this.formEditExchange.get("observations").value,
         delivered: this.toggle.checked,
@@ -63,6 +64,14 @@ export class ExchangeGifUpdatePage implements OnInit {
         gift: this.mygift
       }
       Exchangeeditado = await this.excser.createOrUpdate(Exchangeeditado);
+      if (Exchangeeditado.id) {
+        this.formEditExchange.reset();
+        this.uts.presentToast('El regalo se ha creado correctamente.', 'success');
+      }
+      else {
+        this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger');
+      }
+      this.uts.hideLoading();
       this.modalCtrl.dismiss({
         newExchange:Exchangeeditado
       })
