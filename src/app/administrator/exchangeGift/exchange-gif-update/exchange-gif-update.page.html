@@ -13,28 +13,28 @@
       <ion-grid>
         
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1.5" sizeLg="1.5">
             <ion-label>Fecha de Intercambio:</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="10.5" sizeLg="10.5">
             <ion-input formControlName="dateExchange" class="customInput" type="date"></ion-input>
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="1" sizeLg="1">
+          <ion-col sizeSm="1.5" sizeLg="1.5">
             <ion-label>Observaciones:</ion-label>
           </ion-col>
-          <ion-col sizeSm="11" sizeLg="11">
+          <ion-col sizeSm="10.5" sizeLg="10.5">
             <ion-textarea formControlName="observations"  class="customInput" type="text"></ion-textarea>
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="9" sizeLg="1">
+          <ion-col sizeSm="1.5" sizeLg="1.5">
             Entregado:
           </ion-col>
-          <ion-col sizeSm="3" sizeLg="11  ">
+          <ion-col sizeSm="10.5" sizeLg="10.5">
             <ion-item  lines="none">
               No<ion-toggle></ion-toggle>Si
            </ion-item>
@@ -42,11 +42,11 @@
         </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="2" sizeLg="2">
+          <ion-col sizeSm="1.5" sizeLg="1.5">
             <ion-label>Agencia:</ion-label>
           </ion-col>
 
-          <ion-col sizeSm="2" sizeLg="2">
+          <ion-col sizeSm="3" sizeLg="3">
             <ion-button expand="block" shape="round" (click)="showAgenciesPicker()" *ngIf="this.myagency==null">
               Seleccionar
             </ion-button>
@@ -57,11 +57,11 @@
         </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="2" sizeLg="2">
+          <ion-col sizeSm="1.5" sizeLg="1.5">
             <ion-label>Regalo:</ion-label>
           </ion-col>
 
-          <ion-col sizeSm="2" sizeLg="2">
+          <ion-col sizeSm="3" sizeLg="3">
             <ion-button expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift==null">
               Seleccionar
             </ion-button>

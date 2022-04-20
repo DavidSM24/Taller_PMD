@@ -56,7 +56,6 @@ export class ExchangeGiftListPage {
       try {
         const modal = await this.modalCtrl.create({
           component: ExchangeGifSawPage,
-          cssClass: 'fullscreen',
           componentProps: {
             'exchangesaw': exchangesaw
           }

@@ -17,70 +17,73 @@
 
       </center>
     </div>
-      <div class="formulario" >
-      <ion-grid>
+    <div class="ion-padding">
+      <div class="formulario">
+        <ion-grid>
+          
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4.2">
+              <ion-label>Fecha de Intercambio:</ion-label>
+            </ion-col>
+            <div>
+              <ion-text>
+                {{this.exchangesaw.dateExchange}}
+              </ion-text>
+              </div>
+          </ion-row>
+  
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4.2">
+              <ion-label>Observaciones:</ion-label>
+            </ion-col>
+            <div>
+            <ion-text>
+              {{this.exchangesaw.observations}}
+            </ion-text>
+           </div>
+          </ion-row>
+  
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4.2">
+              Entregado:
+            </ion-col>
+              <div>
+                <ion-col *ngIf="this.exchangesaw.delivered">
+                  <ion-text>
+                Si
+                  </ion-text>
+                </ion-col>
         
-        <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="2" sizeLg="2">
-            <ion-label>Fecha de Intercambio:</ion-label>
-          </ion-col>
-          <div class="fin">
-            <ion-text>
-              {{this.exchangesaw.dateExchange}}
-            </ion-text>
+                <ion-col *ngIf="!this.exchangesaw.delivered">
+                  <ion-text>
+                No
+                  </ion-text>
+                </ion-col>
             </div>
-        </ion-row>
-
-        <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="2" sizeLg="2">
-            <ion-label>Observaciones:</ion-label>
-          </ion-col>
-          <div class="fin">
-          <ion-text>
-            {{this.exchangesaw.observations}}
-          </ion-text>
-         </div>
-        </ion-row>
-
-        <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="2" sizeLg="2">
-            Entregado:
-          </ion-col>
-            <div class="fin">
-              <ion-col size="2.5" *ngIf="this.exchangesaw.delivered">
-                <ion-text>
-              Si
-                </ion-text>
-              </ion-col>
-      
-              <ion-col size="2.5" *ngIf="!this.exchangesaw.delivered">
-                <ion-text>
-              No
-                </ion-text>
-              </ion-col>
-          </div>
-        </ion-row>
-
-        <ion-row class="ion-align-items-center">
-          <ion-col sizeSm="2" sizeLg="2">
-            <ion-label>Agencia:</ion-label>
-          </ion-col>
-          <div class="fin">
-            <ion-text>
-              {{this.exchangesaw.agency.zipCode}}
-            </ion-text>
-            </div>
-        </ion-row>
-
-        <ion-row class="ion-align-items-center">
-          <ion-col size="12">
-            <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formEditExchange.invalid">
-              Cerrar Visualizacion
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+          </ion-row>
+  
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4.2">
+              <ion-label>Agencia:</ion-label>
+            </ion-col>
+            <div>
+              <ion-text>
+                {{this.exchangesaw.agency.zipCode}}
+              </ion-text>
+              </div>
+          </ion-row>
+  
+          <ion-row class="ion-align-items-center">
+            <ion-col size="12">
+              <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formEditExchange.invalid">
+                Cerrar Visualizacion
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
     </div>
+      
     
 </div>
 </ion-content>

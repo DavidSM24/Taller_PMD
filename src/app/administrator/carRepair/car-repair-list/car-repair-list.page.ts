@@ -125,7 +125,6 @@ export class CarRepairListPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CarRepairSawPage,
       //hoja de estilos
-      cssClass: 'my-modal-class',
       //pasar datos al modal
       
       componentProps: {
@@ -189,8 +188,8 @@ export class CarRepairListPage implements OnInit {
         },
         {
           text:'Cancelar',
-          cssClass:'secundary',
-          role:'cancel'
+          cssClass:'secondary',
+          role:'cancel',
 
         }
       ]
