@@ -36,8 +36,8 @@ export class LoginPage implements OnInit {
       if(this.authS.user.administrator){
         this.router.navigate(['/tab-administrator/agency/list']);
       }
-      else{
-
+      else if(!this.authS.user.administrator){
+        this.router.navigate(['/tab-user/gift/list']);
       }
       
     }
@@ -47,7 +47,12 @@ export class LoginPage implements OnInit {
     if(this.authS.isLogged()){
       console.log(this.authS.isLogged());
       try {
-        this.router.navigate(['/tab-administrator/agency/list']); 
+        if(this.authS.user.administrator){
+          this.router.navigate(['/tab-administrator/agency/list']);
+        }
+        else if(!this.authS.user.administrator){
+          this.router.navigate(['/tab-user/gift/list']);
+        } 
       } catch (error) {
         
       }
@@ -78,11 +83,11 @@ export class LoginPage implements OnInit {
             await this.authS.keepSession();
             console.log("inciando...")
             
-            if(user.administrator){
+            if(this.authS.user.administrator){
               this.router.navigate(['/tab-administrator/agency/list']);
             }
-            else{
-
+            else if(!this.authS.user.administrator){
+              this.router.navigate(['/tab-user/gift/list']);
             }
           } catch (error) {
             console.log(error);
