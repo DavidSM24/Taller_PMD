@@ -5,28 +5,16 @@
 }
 
 .formulario{
-    margin-top: 1.5%;
-    padding: 2%;
-    border-top: 2px double gray;
-    border: 1px solid;
-    border-color: "primary";
-    border-radius: 2.5rem;
-    background-color: white;
-    margin-bottom: 4%;
+  margin: 1.5rem;
 }
 
-.button{
-    --background: #22388c;
-}
-
-.customInput{
-        border: 1px solid gray;
-        border-color: "primary";
-        border-radius: 2.5rem;
-}
 .secundaryInput{
     margin-left: 5%;
 }
 .date{
     margin-left: 20%;
+}
+
+.button{
+  --background: #22388c;
 }
