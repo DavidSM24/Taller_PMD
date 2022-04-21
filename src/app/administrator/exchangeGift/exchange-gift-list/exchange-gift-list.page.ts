@@ -62,17 +62,17 @@ export class ExchangeGiftListPage {
        
   
       if("false".match(value)){
-        this.exGiftsx.forEach(repair=>{
-          if(!repair.delivered){
-            exgif.push(repair);
+        this.exGiftsx.forEach(status=>{
+          if(!status.delivered){
+            exgif.push(status);
           }
         });
         this.exGifts=exgif;
   
       } else if("true".match(value)){
-        this.exGiftsx.forEach(x=>{
-          if(x.delivered){
-            exgif.push(x);
+        this.exGiftsx.forEach(status=>{
+          if(status.delivered){
+            exgif.push(status);
           }
         });
         console.log(exgif);
@@ -103,9 +103,7 @@ export class ExchangeGiftListPage {
       }
   
     }
-    public storageexchanges(){
-      this.exGiftsx=this.exGifts;
-    }
+
   public async cargaExGifts(event?){
     if(this.infinite){
       this.infinite.disabled=false;
@@ -116,7 +114,7 @@ export class ExchangeGiftListPage {
     this.exGifts=[];
     try{
       this.exGifts=await this.exs.getAllPaged(this.niTems, this.exGifts.length);;
-      this.storageexchanges();
+      this.exGiftsx=this.exGifts;
     }catch(err){
       console.error(err);
       await this.presentToast("Error cargando datos","danger");

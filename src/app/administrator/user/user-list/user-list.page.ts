@@ -11,6 +11,7 @@ import { UserUpdatePage } from '../user-update/user-update.page';
 export class UserListPage {
 private niTems: number;
 public users:User[]=[];
+public usersx:User[]=[];
 public searchTerm:string;
 @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
 private miLoading:HTMLIonLoadingElement;
@@ -35,7 +36,7 @@ private miLoading:HTMLIonLoadingElement;
     this.users=[];
     try{
       this.users=await this.usser.getAllPaged(this.niTems,0);
-      
+      this.usersx=this.users;
     }catch(err){
       console.error(err);
       await this.presentToast("Error cargando datos","danger");
@@ -95,6 +96,34 @@ private miLoading:HTMLIonLoadingElement;
     }
 
   }
+
+  
+  public async setbyUserRol(event?){
+    
+    let userol:User[]=[]
+    const value:string=event.detail.value;
+     
+
+    if("false".match(value)){
+      this.usersx.forEach(rol=>{
+        if(!rol.administrator){
+          userol.push(rol);
+        }
+      });
+      this.users=userol;
+
+    } else if("true".match(value)){
+      this.usersx.forEach(rol=>{
+        if(rol.administrator){
+          userol.push(rol);
+        }
+      });
+      this.users=userol;
+    }else if("all".match(value)) {
+      this.reset();
+    }
+  }
+
   public async mensagealerta(n:any){
     const alert = await this.alerta.create({
       header: 'Eliminar',
@@ -113,7 +142,7 @@ private miLoading:HTMLIonLoadingElement;
     });
    await alert.present();
   }
-  public async reset(event){
+  public async reset(event?){
     this.infinite.disabled=false;
     this.users=[];
     this.cargaUsers(event);

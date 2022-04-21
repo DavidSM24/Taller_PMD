@@ -11,7 +11,22 @@
 
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Encuentra el Usuario que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
+    <ion-row class="ion-align-items-center">
+      <ion-col sizeSm="9.5" sizeLg="9.5">
+        <ion-searchbar placeholder="Encuentra el Usuario que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
+      </ion-col>
+      <ion-col sizeSm="2.5" sizeLg="2.5" class="selector"> 
+        <ion-item>
+          <ion-label>Tipo De Usuario</ion-label>
+          <ion-select (ionChange)="setbyUserRol($event)" interface="popover" multiple="false">
+            <ion-select-option value="true">Administrador</ion-select-option>
+            <ion-select-option value="false">Cliente</ion-select-option>
+            <ion-select-option value="all">Todos</ion-select-option>
+           
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
     <ion-row class="header-row">
       <ion-col size="1" style="border: 0px !important;">
@@ -80,17 +95,12 @@
           </ion-text>
         </ion-col>
         
-        <ion-col size="2.5" *ngIf="user.administrator">
-          <ion-text>
-            Si
-          </ion-text>
+
+        <ion-col size="2.5">
+          <ion-icon *ngIf="user.administrator" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
+          <ion-icon *ngIf="!user.administrator" name="close-circle" style="color: red;"></ion-icon>
         </ion-col>
 
-        <ion-col size="2.5" *ngIf="!user.administrator">
-          <ion-text>
-            No
-          </ion-text>
-        </ion-col>
         
         <ion-col size="1">
           <ion-text>
