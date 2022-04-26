@@ -86,9 +86,7 @@ export class CarRepairSawPage implements OnInit {
     }
   }
 
-  public goUpdatePage(){
-    this.routes.navigateByUrl('tab-administrator/car-repair/update');
-  }
+  
 
   
   /**
