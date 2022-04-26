@@ -123,6 +123,12 @@ export class CarRepairListPage implements OnInit {
     }
 
   }
+
+   /**
+     * Método que carga el modal de los datos de una reparación
+     * @param carRepair 
+     * @returns 
+     */
   public async saw(carRepair:CarRepair){
 
     const modal = await this.modalCtrl.create({
@@ -131,12 +137,9 @@ export class CarRepairListPage implements OnInit {
       //pasar datos al modal
       
       componentProps: {
-        'carRepair':carRepair
-        
-        
+        'carRepair':carRepair        
       }
-    });
-   
+    });   
   
     return await modal.present();
 
@@ -146,8 +149,6 @@ export class CarRepairListPage implements OnInit {
    * Método que borra una reparación de la base de datos
    * @param carRepair reparación que se quiera eliminar
    */
-
-
   public async delete(carRepair:CarRepair){
     try {
     await this.presentLoading();
@@ -352,12 +353,16 @@ export class CarRepairListPage implements OnInit {
     this.loadCarRepair(event);
     
   }
-
+  /**
+   * Método que guarda las reparaciones en un almacen
+   */
   public storageCarRepairs(){
     this.carRepairsStore=this.carRepairs;
   }
 
-
+  /**
+   * Método que permite al usuario cerrar la sesión
+   */
   public logout(){
     this.authS.logout();
   }
