@@ -17,8 +17,11 @@ export class CarRepairListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   private n:number=0;
+  //variable que muestra las reparaciones en pantalla
   public carRepairs:CarRepair[]=[];
+  //variable que guarda las reparaciones mientras se muestran otras en pantalla
   public carRepairsStore:CarRepair[]=[];
+  //variable que guarda las letras de la barra de busqueda
   private searchStr:string="";
   private miLoading:HTMLIonLoadingElement;
   private nItems:number; //variable que almacena el número de elemetenos que caben dentro de la página
