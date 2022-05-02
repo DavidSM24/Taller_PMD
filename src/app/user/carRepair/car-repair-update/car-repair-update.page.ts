@@ -44,8 +44,9 @@ export class CarRepairUpdatePage implements OnInit {
      //se crea la fecha en formato español
      if(this.carRepair.dateOrder){
        this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateOrder);
-       this.stringDateOrder=this.dateTimeService.formatString(""+this.carRepair.dateOrder);
-     }
+       this.formatedString=this.dateTimeService.formatString(""+this.carRepair.dateOrder);
+      console.log(this.stringDateOrder);
+      }
      //compruba si exite una fecha de reparación previa, en caso de que exista se preparan las variables para mostrarlas en el html
      if(this.carRepair.dateRepair){
        this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);    

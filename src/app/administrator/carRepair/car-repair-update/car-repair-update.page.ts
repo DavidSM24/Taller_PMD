@@ -53,7 +53,7 @@ export class CarRepairUpdatePage implements OnInit {
     //compruba si exite una fecha de reparación previa, en caso de que exista se preparan las variables para mostrarlas en el html
     if(this.carRepair.dateRepair){
       this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);    
-      this.stringDateRepair=this.dateTimeService.formatString(""+this.carRepair.dateRepair);
+      this.formatedString=this.dateTimeService.formatString(""+this.carRepair.dateRepair);
     }
    
     
