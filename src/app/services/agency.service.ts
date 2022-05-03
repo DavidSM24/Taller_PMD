@@ -8,12 +8,15 @@ import { Agency } from '../models/Agency';
 })
 export class AgencyService {
 
+  public added?:boolean;
+
   endpoint: string = "/agencies";
 
   URLDatabase: string;
 
   constructor(public http: HttpClient) {
     this.URLDatabase = environment.herokuConfig.url;
+    console.log(this.added);
   }
 
   private async getListData(endpoint: string): Promise<Agency[]> {

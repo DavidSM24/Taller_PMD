@@ -9,12 +9,13 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NavControlService } from './services/nav-control.service';
+import { AgencyService } from './services/agency.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NavControlService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NavControlService, AgencyService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

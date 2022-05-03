@@ -98,6 +98,9 @@ export class UserCreatePage {
   
             console.log(newAgency);
             newAgency = await this.as.createOrUpdate(newAgency);
+            this.as.added=true;
+            console.log("he cambiado added a true");
+            console.log(this.as.added);
             if (newAgency.id) {
               this.formAgency.reset();
               this.uts.presentToast('La agencia se ha creado correctamente.', 'success');

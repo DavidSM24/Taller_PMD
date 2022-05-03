@@ -22,7 +22,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ReactiveFormsModule,
     Ng2SearchPipeModule
   ],
-  providers:[AgencyService,UtilService],
+  providers:[UtilService],
   declarations: [AgencyListPage,AgencyUpdatePage]
 })
 export class AgencyListPageModule {}
