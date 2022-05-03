@@ -35,8 +35,18 @@ export class AgencyListPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    this.niTems = Math.ceil(this.pt.height() / 20 + 10);
-    await this.loadAgencies();
+    
+    console.log(this.as.added);
+    
+    if(this.as.added){
+      
+      this.reset(null);
+      this.as.added=false;
+    }
+    else{
+      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
+      await this.loadAgencies();
+    }
   }
 
   public async loadAgencies(event?) {

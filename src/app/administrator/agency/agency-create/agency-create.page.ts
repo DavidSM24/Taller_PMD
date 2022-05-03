@@ -38,6 +38,8 @@ export class AgencyCreatePage {
 
   async ionViewWillEnter() {
     
+    console.log("en agency-cretae");
+
     this.uts.presentLoading();
     this.companies=await this.is.getAll();
     if(this.companies.length<=0){
@@ -75,6 +77,8 @@ export class AgencyCreatePage {
       if(newAgency.id){
         this.formAgency.reset();
         this.uts.presentToast('La agencia se ha creado correctamente.','success');
+        this.as.added=true;
+        
       }
       else{
         this.uts.presentToast('Un error ha surgido al intentar crear la agencia.','danger');
