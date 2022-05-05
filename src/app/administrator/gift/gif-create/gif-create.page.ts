@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IonToggle } from '@ionic/angular';
 import { Gift } from 'src/app/models/Gift';
 import { GiftService } from 'src/app/services/gift.service';
 import { UtilService } from 'src/app/services/util.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gif-create',
@@ -14,8 +15,7 @@ export class GifCreatePage {
 
   @ViewChild(IonToggle) toggle: IonToggle;
 
-  public formGift:FormGroup;
-
+  public formGift: FormGroup;
   public img:string;
   public formTest: FormGroup;
   public file: any=null;
@@ -24,7 +24,8 @@ export class GifCreatePage {
   constructor(
     private gs: GiftService,
     private fb: FormBuilder,
-    private uts:UtilService) { 
+    private uts:UtilService,
+    private router:Router) {
 
       this.formGift = this.fb.group({
         name: ["", Validators.required],
@@ -33,9 +34,9 @@ export class GifCreatePage {
     }
 
   public async create(): Promise<void> {
-  
+
     this.uts.presentLoading();
-    
+
     if(this.extension){
       if(this.extension==("image/jpg")
       ||this.extension==("image/jpeg")
@@ -50,9 +51,10 @@ export class GifCreatePage {
           picture: '',
           exchangeGifts: []
         }
-        
+
         newGift=await this.gs.createOrUpdate(newGift,this.file);
         if(newGift.id){
+          this.gs.added=true;
           this.formGift.reset();
           this.uts.presentToast('El regalo se ha creado correctamente.','success');
         }
@@ -89,7 +91,7 @@ export class GifCreatePage {
   public changeListener($event) : void {
     try {
       if($event){
-        
+
         let extension:string=$event.target.files[0].type.toString();
         if(extension==("image/jpeg")
         ||extension==("image/png")){
@@ -105,7 +107,7 @@ export class GifCreatePage {
       //alert
       this.file=null;
     }
-    
+
     console.log(this.file.type);
   }
 

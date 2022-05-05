@@ -12,7 +12,7 @@ import { UtilService } from '../../../services/util.service';
 })
 export class GifListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
-  
+
   private n:number=0;
   public gifts: Gift[] = [];
 
@@ -25,28 +25,39 @@ export class GifListPage implements OnInit {
     private modalCtrl: ModalController,
     private pt:Platform,
     private uts:UtilService) { }
-    
+
   ngOnInit() {
   }
 
   async ionViewWillEnter() {
-    this.niTems=  Math.ceil(this.pt.height()/20+10);
-    await this.loadgifts();
-    this.n=this.gifts.length;
+
+    if(this.gs.added){
+
+      this.reset(null);
+      this.gs.added=false;
+    }
+    else{
+      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
+      await this.loadgifts();
+    }
 
   }
 
+  public getAdded(list:Gift[]){
+    this.gifts=list;
+  }
+
   public async loadgifts(event?) {
-    
+
     let newGifts:Gift[]=[];
-    
+
     if(this.gifts.length==0){ //inicio
-      
+
       this.uts.presentLoading();
-      
+
       this.infinite.disabled=false;
       newGifts=await this.gs.getAllPaged(this.niTems,0);
-      
+
       this.gifts=this.gifts.concat(newGifts);
 
     }
@@ -59,7 +70,7 @@ export class GifListPage implements OnInit {
       event.target.complete();
     }
     else{
-     
+
     }
     this.uts.hideLoading();
   }
@@ -87,7 +98,7 @@ export class GifListPage implements OnInit {
     await this.uts.presentLoading();
     const result:boolean=await this.gs.delete(gift);
     let i=this.gifts.indexOf(gift,0);
-    
+
     await this.uts.hideLoading();;
     if(result){
       if(i>-1){
@@ -126,7 +137,7 @@ export class GifListPage implements OnInit {
 
   public async infiniteLoad($event) {
     let newgifts:Gift[]=[];
-    
+
     if(!this.infinite.disabled){
       newgifts=await this.gs.getAllPaged(this.niTems,this.gifts.length);
       this.gifts=this.gifts.concat(newgifts);
@@ -150,13 +161,13 @@ export class GifListPage implements OnInit {
         ||gift.points.toString().includes(this.searchStr)){
           list.push(gift);
         }
-        
+
       })
       this.gifts=list;
 
     }
     else if(lenght<1){
-      this.reset(null); 
+      this.reset(null);
       this.uts.hideLoading();
     }
   }
