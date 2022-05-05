@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class GiftService {
 
+  public added:boolean=false;
+
   endpoint: string = "/gifts";
 
   URLDatabase: string;
