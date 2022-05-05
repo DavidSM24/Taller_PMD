@@ -55,6 +55,7 @@ export class GifCreatePage {
         newGift=await this.gs.createOrUpdate(newGift,this.file);
         if(newGift.id){
           this.gs.added=true;
+          console.log(this.gs.added);
           this.formGift.reset();
           this.uts.presentToast('El regalo se ha creado correctamente.','success');
         }

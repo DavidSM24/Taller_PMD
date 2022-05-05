@@ -20,7 +20,7 @@ import { UtilService } from '../../../services/util.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers:[GiftService,UtilService],
+  providers:[UtilService],
   declarations: [GifCreatePage]
 })
 export class GifCreatePageModule {}

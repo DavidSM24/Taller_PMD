@@ -31,6 +31,8 @@ export class GifListPage implements OnInit {
 
   async ionViewWillEnter() {
 
+    console.log(this.gs.added);
+
     if(this.gs.added){
 
       this.reset(null);
