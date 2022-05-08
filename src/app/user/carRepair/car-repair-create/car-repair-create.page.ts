@@ -9,6 +9,7 @@ import { CarRepairService } from 'src/app/services/car-repair.service';
 import { DateTimeServiceService } from 'src/app/services/date-time-service.service';
 import { UtilService } from 'src/app/services/util.service';
 import { format, parseISO } from 'date-fns';
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-car-repair-create',
   templateUrl: './car-repair-create.page.html',
@@ -34,14 +35,10 @@ export class CarRepairCreatePage implements OnInit {
   public myAgency:Agency;
 
   public formCarRepair:FormGroup;
+  public validator;
   public carRepairs:CarRepair;
 
-  private toast:ToastController;
-  private loading:LoadingController;
-  private miLoading:HTMLIonLoadingElement;
-
-
-  
+ 
 
   constructor(
     private carRepairService:CarRepairService,
@@ -50,7 +47,8 @@ export class CarRepairCreatePage implements OnInit {
     private utilService:UtilService,
     private authService:AuthService,
     private agencyService:AgencyService,
-    private dateTimeService:DateTimeServiceService
+    private dateTimeService:DateTimeServiceService,
+    private router:Router
 
   ) {
     this.createFormGroup();
@@ -60,7 +58,14 @@ export class CarRepairCreatePage implements OnInit {
   ngOnInit() {
     this.getMyAgency();
   }
+
+  onSubmit(){
+    this.create();
+  }
   
+  /**
+   * Método que guarda la reparación en la base de datos
+   */
   public async create():Promise<void>{
     this.utilService.presentLoading();
     if(this.myAgency!=null){
@@ -83,6 +88,7 @@ export class CarRepairCreatePage implements OnInit {
       if(newCarRepair.id){
         this.formCarRepair.reset();
         this.utilService.presentToast("La reparación se ha guardado correctamente",'success');
+        this.routeCarRepairList();
       }else{
         this.utilService.presentToast("Ha surgido un error al intentar crear la reparacion",'danger')
       }
@@ -133,6 +139,15 @@ export class CarRepairCreatePage implements OnInit {
     });
   }
 
+  /**
+   * Método que devuelve un booleano que muestra esta bien relleno el formulario
+   */
+  get errorControl() {
+    return this.formCarRepair.controls;
+  }
+
+  
+
     //Métodos para cerrar y abrir el modal de DateTime
    /**
    * Metodo que se usa en el ion-DateTime para confirmar la fecha elegida
@@ -166,6 +181,13 @@ export class CarRepairCreatePage implements OnInit {
    */
   formatDate(value: string):string {
     return format(parseISO(value), 'yyyy-MM-dd HH:mm:SS');
+  }
+
+  /**
+   * Método que cambia a la página con todas las reparaciones
+   */
+  public routeCarRepairList(){
+    this.router.navigateByUrl('tab-user/car-repair/list');
   }
 
 }
