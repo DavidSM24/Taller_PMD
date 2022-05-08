@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { Agency } from 'src/app/models/Agency';
 import { CarRepair } from 'src/app/models/CarRepair';
+import { AgencyService } from 'src/app/services/agency.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarRepairService } from 'src/app/services/car-repair.service';
+import { UtilService } from 'src/app/services/util.service';
 import { CarRepairSawPage } from '../car-repair-saw/car-repair-saw.page';
 import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page';
 
@@ -26,22 +29,29 @@ export class CarRepairListPage implements OnInit {
   private miLoading:HTMLIonLoadingElement;
   private nItems:number; //variable que almacena el número de elemetenos que caben dentro de la página
 
+  private idAgency:Number;
+  private myAgency:Agency;
+
   constructor(
     private cS:CarRepairService,
     private toast:ToastController,
     private alertCtrl:AlertController,
     private modalCtrl:ModalController,
     private loading:LoadingController,
+    private utilService:UtilService,
+    private agencyService:AgencyService,
     private routes:Router,
     private pt:Platform,//para saber el dispositivo
-    private authS:AuthService
+    private authService:AuthService
   ) { }
 
   ngOnInit() {
     
+    
   }
 
   async ionViewWillEnter(){
+    await this.getMyAgency();
     this.nItems=Math.ceil(this.pt.height()/20+10);
     try {
       await this.loadCarRepair();
@@ -72,7 +82,9 @@ export class CarRepairListPage implements OnInit {
       this.infinite.disabled=false;
 
       try{
-      newCarRepair=await this.cS.getAllPaged(this.nItems,0);
+        console.log("id agencia -->"+this.myAgency.id)
+      newCarRepair=await this.cS.getByAgencyPaged(this.myAgency.id,this.nItems,0);
+      console.log(newCarRepair)
       this.carRepairs=this.carRepairs.concat(newCarRepair);
       this.storageCarRepairs();
       if(newCarRepair.length<this.nItems){
@@ -299,8 +311,37 @@ export class CarRepairListPage implements OnInit {
    * Método que permite al usuario cerrar la sesión
    */
   public logout(){
-    this.authS.logout();
+    this.authService.logout();
   }  
+
+   /**
+   * Método que obtiene el id de la agencia conectada
+   */
+    public async getMyAgency(){
+
+      let agencys:Agency[];
+  
+      try{
+        this.utilService.presentLoading();
+        agencys= await this.agencyService.getByUserNamePaged(this.authService.user.name,100,0);
+      if(agencys.length>0){
+        agencys.forEach(agency=>{
+          if(agency.myUser.id==this.authService.user.id){
+            this.myAgency=agency;
+            this.idAgency=agency.id;
+            console.log("id-->"+this.idAgency);
+            this.utilService.hideLoading();
+          }
+        });
+      }
+        
+      }catch{
+        this.utilService.presentToast("Fallo al cargar","danger");
+  
+      }
+  
+      
+    }
 
 
   //Métodos auxiliares
@@ -316,7 +357,7 @@ export class CarRepairListPage implements OnInit {
       if(!this.infinite.disabled){
   
         try {
-          newCarRepairs=await this.cS.getAllPaged(this.nItems,this.carRepairs.length);
+          newCarRepairs=await this.cS.getByAgencyPaged(this.myAgency.id,this.nItems,this.carRepairs.length);
           this.carRepairs=this.carRepairs.concat(newCarRepairs);
           if(newCarRepairs.length<30){
             this.infinite.disabled=true;

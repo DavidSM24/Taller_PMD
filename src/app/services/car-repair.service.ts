@@ -63,6 +63,10 @@ export class CarRepairService {
     });
    }
 
+   public async getByAgencyPaged(idAgency:number,limit:number,offset:number):Promise<CarRepair[]>{
+     return this.getListData(this.URLDatabase+this.endpoint+"/agency/"+idAgency+"/elements/"+limit+"/page/"+offset);
+   }
+
    /**
     * Metodo que devuelve una promesa de todas las reparaciones de la base de datos
     * @returns Promise<CarRepair[]> con todas las reparaciones de la base de datos
