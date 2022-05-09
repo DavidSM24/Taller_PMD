@@ -1,9 +1,57 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>giftList</ion-title>
+<ion-header [translucent]="false">
+  <ion-toolbar color="primary">
+    
+    <ion-title>Lista de Pedidos</ion-title>
+
+    <ion-buttons style="margin-right: 1%;" slot="end">
+      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" routerLink="/tab-administrator/exchange-gift/create"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
+    </ion-buttons>
+
   </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-row class="ion-align-items-center">
+    <ion-col sizeSm="9.5" sizeLg="9.5">
+    <ion-searchbar placeholder="Encuentra el regalo intercambiado que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
+    </ion-col>
+    </ion-row>
+    <ion-row class="header-row">
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Fecha de Intercambio</ion-text>
+      </ion-col>
+
+      <ion-col  size="2.5" style="border: 0px !important;">
+        <ion-text>Nombre de Agencia</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Nombre de Regalo</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Entregado</ion-text>
+      </ion-col>
+
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+  
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" style="background-color: white;">
 
+  
+
+  <div class="body">
+  
+
+
+</div>
 </ion-content>
