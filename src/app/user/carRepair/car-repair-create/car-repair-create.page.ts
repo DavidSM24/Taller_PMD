@@ -23,8 +23,6 @@ export class CarRepairCreatePage implements OnInit {
    //Guarda la fecha con el formato de españa
    public spanishDateOrder:string;
  
-   //Guarda la fecha de la reparación con el formato de españa
-   public spanishDateRepair:string;
    //Guarda la fecha de la reparación con un formato legible para el ion-dateTime
    public stringDateOrder:string;
    //variable que guarda los datos proporcionados por el evento del ion-dateTime
@@ -57,6 +55,7 @@ export class CarRepairCreatePage implements OnInit {
 
   ngOnInit() {
     this.getMyAgency();
+    this.setDate();
   }
 
   onSubmit(){
@@ -75,7 +74,7 @@ export class CarRepairCreatePage implements OnInit {
         model:this.formCarRepair.get("model").value,
         brandCar:this.formCarRepair.get("brandCar").value,
         clienteName:this.formCarRepair.get("clienteName").value,
-        dateOrder:new Date(Date.now()),
+        dateOrder:this.formatedString,
         nor:0,
         amount:0,
         dateRepair:null,
@@ -163,6 +162,13 @@ export class CarRepairCreatePage implements OnInit {
     }
 
     ////Métodos para cambiar la fecha
+    setDate(){
+      let date:Date=new Date(Date.now());
+      this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(date.toISOString());
+      this.formatedString=this.dateTimeService.formatString(date.toISOString());
+      
+
+    }
    /**
    * Método que asigna la fecha de reparación cuando el usuario pulsa el botón de aceptar en el ión date time
    * @param event 
