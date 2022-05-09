@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { User } from 'src/app/models/User';
@@ -19,7 +20,8 @@ private miLoading:HTMLIonLoadingElement;
     private toast:ToastController,
     private pt: Platform,
     private modalCtrl: ModalController,
-    private alerta: AlertController) { }
+    private alerta: AlertController,
+    private authS:AuthService) { }
 
     async ionViewDidEnter(){
       this.niTems = Math.ceil(this.pt.height() / 20 + 10);
@@ -157,6 +159,9 @@ private miLoading:HTMLIonLoadingElement;
         this.infinite.disabled = true;
       }
     }
+  }
+  public logout(){
+    this.authS.logout();
   }
 
 }

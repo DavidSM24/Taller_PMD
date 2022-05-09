@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gift-list.page.scss'],
 })
 export class GiftListPage implements OnInit {
-
-  constructor() { }
+  public searchTerm:string;
+  constructor(private authS:AuthService) { }
 
   ngOnInit() {
   }
-
+  public logout(){
+    this.authS.logout();
+  }
 }
