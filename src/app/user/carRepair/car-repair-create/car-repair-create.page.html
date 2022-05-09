@@ -51,6 +51,9 @@
             </ion-col>
             <ion-col sizeSm="5" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="model" required="true"></ion-input>
+              <span class="invalid" *ngIf="errorControl.model.errors?.required">
+                Debe rellenar este campo
+              </span>              
             </ion-col>
           </ion-row>
 
@@ -60,6 +63,9 @@
             </ion-col>
             <ion-col sizeSm="5" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="brandCar" required="true"></ion-input>
+              <span class="invalid" *ngIf="errorControl.brandCar.errors?.required">
+                Debe rellenar este campo
+              </span>
             </ion-col>
           </ion-row>
 
@@ -69,6 +75,9 @@
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="clienteName" required="true"></ion-input>
+              <span class="invalid" *ngIf="errorControl.clienteName.errors?.required">
+                Debe rellenar este campo
+              </span>
             </ion-col>
           </ion-row>
           

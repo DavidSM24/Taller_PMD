@@ -51,6 +51,11 @@ export class CarRepairListPage implements OnInit {
   }
 
   async ionViewWillEnter(){
+    
+    
+  }
+
+  async ionViewDidEnter(){
     await this.getMyAgency();
     this.nItems=Math.ceil(this.pt.height()/20+10);
     try {
@@ -59,7 +64,6 @@ export class CarRepairListPage implements OnInit {
     } catch (error) {
       
     }
-    
   }
 
   //Métodos de los servicios
@@ -82,7 +86,7 @@ export class CarRepairListPage implements OnInit {
       this.infinite.disabled=false;
 
       try{
-        console.log("id agencia -->"+this.myAgency.id)
+       
       newCarRepair=await this.cS.getByAgencyPaged(this.myAgency.id,this.nItems,0);
       console.log(newCarRepair)
       this.carRepairs=this.carRepairs.concat(newCarRepair);
