@@ -48,7 +48,7 @@ export class ExchangeGiftListPage implements OnInit {
       this.uts.presentLoading();
 
       //this.infinite.disabled=false;
-      newExchanges=await this.exs.getByAgencyPaged(null,this.niTems,0);
+      newExchanges=await this.exs.getAllPaged(this.niTems,0);
 
       this.exchanges=this.exchanges.concat(newExchanges);
 
