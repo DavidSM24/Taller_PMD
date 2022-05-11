@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ExchangeGiftListPageRoutingModule } from './exchange-gift-list-routing.module';
 
 import { ExchangeGiftListPage } from './exchange-gift-list.page';
+import { UtilService } from '../../../services/util.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ExchangeGiftListPage } from './exchange-gift-list.page';
     IonicModule,
     ExchangeGiftListPageRoutingModule
   ],
-  declarations: [ExchangeGiftListPage]
+  declarations: [ExchangeGiftListPage],
+  providers: [UtilService]
 })
 export class ExchangeGiftListPageModule {}

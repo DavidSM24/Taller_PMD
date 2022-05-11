@@ -1,7 +1,43 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>exchangeGiftList</ion-title>
+<ion-header [translucent]="false">
+
+  <ion-toolbar color="primary">
+
+    <ion-title>Lista de Agencias</ion-title>
+
+    <ion-buttons style="margin-right: 1%;" slot="end">
+      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" routerLink="/tab-administrator/user/create"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" style="zoom:1.3;cursor:pointer;content: url( ../../../../assets/icon/user_list.png);" routerLink="/tab-administrator/user/list"></ion-icon>
+      <ion-icon class="icon-logout" slot="end" name="log-out-outline" style="zoom:1.7;cursor:pointer"></ion-icon>
+    </ion-buttons>
+
   </ion-toolbar>
+  <ion-toolbar color="primary" (ionChange)="searchChange($event)">
+    <ion-searchbar placeholder="Encuentra el canjee que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+
+    <ion-row class="header-row">
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+
+      <ion-col size="3.3" style="border: 0px !important;">
+        <ion-text>Regalo</ion-text>
+      </ion-col>
+
+      <ion-col  size="3.3" style="border: 0px !important;">
+        <ion-text>Puntos</ion-text>
+      </ion-col>
+
+      <ion-col size="3.3" style="border: 0px !important;">
+        <ion-text>Fecha de canje</ion-text>
+      </ion-col>
+
+      <ion-col size="1" style="border: 0px !important;">
+        <ion-text></ion-text>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
