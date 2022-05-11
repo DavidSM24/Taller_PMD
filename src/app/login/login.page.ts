@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { UtilService } from '../services/util.service';
 import { Storage } from '@capacitor/storage';
+import { Agency } from '../models/Agency';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,7 @@ export class LoginPage implements OnInit {
       else if(!this.authS.user.administrator){
         this.router.navigate(['/tab-user/gift/list']);
       }
-      
+
     }
   }
 
@@ -52,11 +53,11 @@ export class LoginPage implements OnInit {
         }
         else if(!this.authS.user.administrator){
           this.router.navigate(['/tab-user/gift/list']);
-        } 
+        }
       } catch (error) {
-        
+
       }
-      
+
     }
     this.complete=true;
   }
@@ -76,23 +77,24 @@ export class LoginPage implements OnInit {
         }
         await this.uts.hideLoading();
         if (correct) {
-          //iniciar sesión... 
-          
+          //iniciar sesión...
+
           try {
             this.authS.user=user;
             await this.authS.keepSession();
             console.log("inciando...")
-            
+
             if(this.authS.user.administrator){
               this.router.navigate(['/tab-administrator/agency/list']);
             }
             else if(!this.authS.user.administrator){
+              //insertar agencia en authS
               this.router.navigate(['/tab-user/gift/list']);
             }
           } catch (error) {
             console.log(error);
           }
-          
+
         }
         else {
           this.uts.presentToast("Usuario o contraseña incorrecta...", "danger")

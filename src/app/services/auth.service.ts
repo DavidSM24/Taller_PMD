@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { LocalStorageService } from './local-storage.service';
 import { User } from '../models/User';
 import { UtilService } from './util.service';
+import { Agency } from '../models/Agency';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,14 @@ import { UtilService } from './util.service';
 export class AuthService {
 
   public user: any;
+  public agency?:Agency;
   private isAndroid = false;
 
   constructor(
     private storage: LocalStorageService,
     private platform: Platform,
     private router: Router) {
-    
+
       this.loadSession();
     }
   public async loadSession() {
@@ -31,10 +33,10 @@ export class AuthService {
       catch(error){
         this.user=null;
       }
-      
+
     }
   }
-  
+
   public async logout() {
     await this.storage.removeItem('tallerUser');
     this.user = null;
