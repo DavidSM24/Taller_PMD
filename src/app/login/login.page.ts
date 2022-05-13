@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { UtilService } from '../services/util.service';
 import { Storage } from '@capacitor/storage';
 import { Agency } from '../models/Agency';
+import { AgencyService } from '../services/agency.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginPage implements OnInit {
     private us: UserService,
     private uts: UtilService,
     private authS:AuthService,
-    private router:Router) {
+    private router:Router,
+    private as:AgencyService) {
 
     this.formLogin = this.fb.group({
       code: ["", Validators.required, Validators.pattern("[0-9]*")],
@@ -88,7 +90,8 @@ export class LoginPage implements OnInit {
               this.router.navigate(['/tab-administrator/agency/list']);
             }
             else if(!this.authS.user.administrator){
-              //insertar agencia en authS
+              this.authS.agency=await this.as.getByUsercode(user.code);
+              console.log(this.authS.agency);
               this.router.navigate(['/tab-user/gift/list']);
             }
           } catch (error) {

@@ -19,6 +19,44 @@ export class AgencyService {
     console.log(this.added);
   }
 
+  public async getData(endpoint:string): Promise<Agency> {
+
+    let agency: Agency = null;
+
+    return new Promise(resolve => {
+      this.http.get(endpoint).subscribe((a: any) => {
+
+        if (a.id) {
+          const tmp: Agency = {
+            id: a.id,
+            zipCode: a.zipCode,
+            address: a.address,
+            location: a.location,
+            phoneNumber: a.phoneNumber,
+            amount: a.amount,
+            points: a.points,
+            pointsRedeemed: a.pointsRedeemed,
+            active: a.active,
+            myInsuranceCompany: a.myInsuranceCompany,
+            myCarRepairs: a.mycarRepairs,
+            myExchangesGifts: a.myExchangeGifts,
+            myUser: a.myUser
+          }
+
+          agency = tmp;
+        }
+
+        console.log(agency);
+
+        resolve(agency);
+      }, error => {
+        console.log(error);
+        console.log(agency);
+        resolve(agency);
+      });
+    });
+  }
+
   private async getListData(endpoint: string): Promise<Agency[]> {
     let agencies: Agency[] = [];
 
@@ -65,41 +103,12 @@ export class AgencyService {
   }
 
   public async getById(id: number): Promise<Agency> {
+    return this.getData(this.URLDatabase + this.endpoint + "/id/"+id);
+  }
 
-    let agency: Agency = null;
-
-    return new Promise(resolve => {
-      this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((a: any) => {
-
-        if (a.id) {
-          const tmp: Agency = {
-            id: a.id,
-            zipCode: a.zipCode,
-            address: a.address,
-            location: a.location,
-            phoneNumber: a.phoneNumber,
-            amount: a.amount,
-            points: a.points,
-            pointsRedeemed: a.pointsRedeemed,
-            active: a.active,
-            myInsuranceCompany: a.myInsuranceCompany,
-            myCarRepairs: a.mycarRepairs,
-            myExchangesGifts: a.myExchangeGifts,
-            myUser: a.myUser
-          }
-
-          agency = tmp;
-        }
-
-        console.log(agency);
-
-        resolve(agency);
-      }, error => {
-        console.log(error);
-        console.log(agency);
-        resolve(agency);
-      });
-    });
+  public async getByUsercode(usercode: number): Promise<Agency> {
+    return await this.getById(119);
+    //return this.getData(this.URLDatabase + this.endpoint + "/usercode/"+usercode);
   }
 
   public async getByUserNamePaged(username: string, limit: number, offset: number): Promise<Agency[]> {

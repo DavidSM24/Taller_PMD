@@ -48,7 +48,8 @@ export class ExchangeGiftListPage implements OnInit {
       this.uts.presentLoading();
 
       //this.infinite.disabled=false;
-      newExchanges=await this.exs.getAllPaged(this.niTems,0);
+      console.log(this.authS.agency);
+      newExchanges=await this.exs.getByAgencyPaged(this.authS.agency,this.niTems,0);
 
       this.exchanges=this.exchanges.concat(newExchanges);
 
