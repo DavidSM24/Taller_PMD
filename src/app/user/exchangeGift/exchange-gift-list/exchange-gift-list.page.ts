@@ -1,9 +1,10 @@
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExchangeGiftService } from '../../../services/exchange-gift.service';
-import { AlertController, IonInfiniteScroll, Platform } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, Platform, ModalController } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ExchangeGiftSawPage } from '../exchange-gift-saw/exchange-gift-saw.page';
 
 @Component({
   selector: 'app-exchange-gift-list',
@@ -26,7 +27,8 @@ export class ExchangeGiftListPage implements OnInit {
     private AlertCtrl: AlertController,
     private pt: Platform,
     private uts: UtilService,
-    private authS:AuthService
+    private authS:AuthService,
+    private modalCtrl:ModalController
   ) { }
 
   ngOnInit() {
@@ -111,6 +113,25 @@ export class ExchangeGiftListPage implements OnInit {
       this.reset(null);
       this.uts.hideLoading();
     }
+  }
+
+  public async show(exchange: ExchangeGift) {
+    try {
+      const modal = await this.modalCtrl.create({
+        component: ExchangeGiftSawPage,
+        cssClass: 'fullscreen',
+        componentProps: {
+          'exchange': exchange
+        }
+        //
+      });
+
+      await modal.present();
+
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
 }

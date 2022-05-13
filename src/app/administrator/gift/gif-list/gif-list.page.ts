@@ -4,6 +4,7 @@ import { Gift } from 'src/app/models/Gift';
 import { GiftService } from '../../../services/gift.service';
 import { GifUpdatePage } from '../gif-update/gif-update.page';
 import { UtilService } from '../../../services/util.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-gif-list',
@@ -24,7 +25,8 @@ export class GifListPage implements OnInit {
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
     private pt:Platform,
-    private uts:UtilService) { }
+    private uts:UtilService,
+    private authS:AuthService) { }
 
   ngOnInit() {
   }
@@ -178,6 +180,10 @@ export class GifListPage implements OnInit {
     this.infinite.disabled = false;
     this.gifts = [];
     this.loadgifts(event)
+  }
+
+  public logout(){
+    this.authS.logout();
   }
 
 }
