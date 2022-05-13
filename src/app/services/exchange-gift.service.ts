@@ -77,21 +77,21 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     });
   }
   public getByDeliveredPaged(delivered:Boolean, element: number, page: number):Promise<ExchangeGift[]>{
-    return this.getListData(this.URLDatabase + this.endpoint +"/delivered/"+ delivered + "/element/" + element + "/page/" + page);
+    return this.getListData(this.URLDatabase + this.endpoint +"/delivered/"+ delivered + "/element/" + element + "/paged/" + page);
   }
   public getByAgencyPaged(agency:Agency, element: number, page: number):Promise<ExchangeGift[]>{
     if(agency!=null){
-      return this.getListData(this.URLDatabase + this.endpoint +"/id_agency/"+ agency.id + "/element/" + element + "/page/" + page);
+      return this.getListData(this.URLDatabase + this.endpoint +"/id_agency/"+ agency.id + "/element/" + element + "/paged/" + page);
     }else{
       let result:Promise<ExchangeGift[]>
       return result;
     }
-    
+
   }
   public async createOrUpdate(exgift:ExchangeGift):Promise<ExchangeGift>{
-    
+
     console.log(exgift)
-    
+
     if (exgift != null) {
       const body=exgift;
       return new Promise(resolve => {

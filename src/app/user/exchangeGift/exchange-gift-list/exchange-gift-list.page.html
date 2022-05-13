@@ -2,7 +2,7 @@
 
   <ion-toolbar color="primary">
 
-    <ion-title>Lista de Agencias</ion-title>
+    <ion-title>Lista de Canjees</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
       <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" routerLink="/tab-administrator/user/create"></ion-icon>
@@ -15,25 +15,19 @@
     <ion-searchbar placeholder="Encuentra el canjee que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
     <ion-row class="header-row">
-      <ion-col size="1" style="border: 0px !important;">
-        <ion-text></ion-text>
-      </ion-col>
 
-      <ion-col size="3.3" style="border: 0px !important;">
+      <ion-col size="4" style="border: 0px !important;">
         <ion-text>Regalo</ion-text>
       </ion-col>
 
-      <ion-col  size="3.3" style="border: 0px !important;">
+      <ion-col  size="4" style="border: 0px !important;">
         <ion-text>Puntos</ion-text>
       </ion-col>
 
-      <ion-col size="3.3" style="border: 0px !important;">
+      <ion-col size="4" style="border: 0px !important;">
         <ion-text>Fecha de canje</ion-text>
       </ion-col>
 
-      <ion-col size="1" style="border: 0px !important;">
-        <ion-text></ion-text>
-      </ion-col>
     </ion-row>
 
   </ion-toolbar>
@@ -41,31 +35,46 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
 
-    <ion-item-sliding *ngFor="let exchange of exchanges;let i=index">
-      <ion-item-options side="start">
-        <ion-item-option color="primary">
-          <ion-icon name="create" style="zoom:3.0"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+  <ion-refresher slot="fixed" (ionRefresh)="reset($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-      <ion-item>
-        <ion-label>
-          <h2>{{exchange.gift.name}}</h2>
-          <p>
-
-          </p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item-options side="end">
-        <ion-item-option color="danger" expandable>
-          <ion-icon name="remove-circle" style="zoom:3.0"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+  <div class="body">
 
 
-  </ion-list>
+  <ion-grid class="ion-text-center">
+
+  <ion-row let *ngFor="let exchange of this.exchanges;let i=index" class="row">
+
+      <ion-col size="4">
+        <ion-text>
+            {{exchange.gift.name}}
+        </ion-text>
+      </ion-col>
+
+        <ion-col size="4">
+          <ion-text>
+            {{exchange.gift.points}}
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-text>
+            {{exchange.dateExchange}}
+          </ion-text>
+        </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="infiniteLoad($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>
+
 </ion-content>
