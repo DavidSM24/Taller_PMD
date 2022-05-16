@@ -1,3 +1,4 @@
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { GiftListPage } from './gift-list.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    GiftListPageRoutingModule
+    GiftListPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [GiftListPage]
 })

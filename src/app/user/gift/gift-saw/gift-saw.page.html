@@ -1,9 +1,67 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>giftSaw</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Canjear Pedido
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" >
+  <div class="body">
+    <div class="ion-padding">    
+      <center>
+        
+        <ion-card>
+          <ion-img  [src]="this.img"></ion-img>
+        </ion-card>
 
+      </center>
+    </div>
+    <div class="ion-padding">
+      <div class="formulario">
+        <ion-grid>
+          
+          <ion-row class="ion-align-items-center">
+            <ion-col size="6" class="columleft">
+              <ion-label >Nombre : </ion-label>
+            </ion-col>
+            <div>
+              <ion-text class="columright">
+                {{this.giftsaw.name}}
+              </ion-text>
+              </div>
+          </ion-row>
+  
+          <ion-row class="ion-align-items-center">
+            <ion-col size="6" class="columleft">
+              <ion-label >Precio : </ion-label>
+            </ion-col>
+            <div>
+            <ion-text class="columright">
+              {{this.giftsaw.points}} Puntos
+            </ion-text>
+           </div>
+          </ion-row>
+  
+          <ion-row class="ion-align-items-center">
+            <ion-col size="12">
+              
+
+              <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" >
+                Realizar Transacción
+              </ion-button>
+
+              <p></p>
+              <p></p>
+              <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button2">
+                Cancelar Transacción
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+      
+    
+</div>
 </ion-content>

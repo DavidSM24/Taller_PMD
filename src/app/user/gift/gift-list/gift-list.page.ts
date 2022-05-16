@@ -1,5 +1,10 @@
+import { GiftSawPage } from './../gift-saw/gift-saw.page';
+import { IonInfiniteScroll, Platform, ModalController } from '@ionic/angular';
+import { UtilService } from './../../../services/util.service';
+import { GiftService } from './../../../services/gift.service';
+import { Gift } from 'src/app/models/Gift';
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-gift-list',
@@ -7,12 +12,101 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gift-list.page.scss'],
 })
 export class GiftListPage implements OnInit {
-  public searchTerm:string;
-  constructor(private authS:AuthService) { }
+  @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+  public searchTerm: string;
+  private niTems: number;
+  public img:string;
+  public gifts: Gift[] = [];
+  constructor(private authS: AuthService, private gs: GiftService,
+    private modalCtrl: ModalController,
+    private uts: UtilService,
+    private pt: Platform) { }
 
   ngOnInit() {
   }
-  public logout(){
+
+  async ionViewWillEnter() {
+
+    console.log(this.gs.added);
+
+    if (this.gs.added) {
+
+      this.reset(null);
+      this.gs.added = false;
+    }
+    else {
+      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
+      await this.loadgifts();
+    }
+
+  }
+
+  public async loadgifts(event?) {
+
+    let newGifts: Gift[] = [];
+
+    if (this.gifts.length == 0) { //inicio
+
+      this.uts.presentLoading();
+
+      this.infinite.disabled = false;
+      newGifts = await this.gs.getAllPaged(this.niTems, 0);
+
+      this.gifts = this.gifts.concat(newGifts);
+
+    }
+
+    if (newGifts.length < this.niTems) {
+      this.infinite.disabled = true;
+    }
+
+    if (event) {
+      event.target.complete();
+    }
+    else {
+
+    }
+    this.uts.hideLoading();
+  }
+  public async infiniteLoad($event) {
+    let newgifts: Gift[] = [];
+
+    if (!this.infinite.disabled) {
+      newgifts = await this.gs.getAllPaged(this.niTems, this.gifts.length);
+      this.gifts = this.gifts.concat(newgifts);
+
+      if (newgifts.length < this.niTems) {
+        this.infinite.disabled = true;
+      }
+    }
+  }
+
+  public async reset(event) {
+    this.infinite.disabled = false;
+    this.gifts = [];
+    this.loadgifts(event)
+  }
+
+  public logout() {
     this.authS.logout();
+  }
+  public async buy(giftsaw: Gift) {
+    try {
+      const modal = await this.modalCtrl.create({
+        component: GiftSawPage,
+        cssClass: "fullscreen",
+        componentProps: {
+          'giftsaw': giftsaw
+        }
+      });
+      await modal.present();
+      const resp = await modal.onDidDismiss();
+      if (resp.data != null) {
+        let i: number = this.gifts.indexOf(giftsaw);
+        this.gifts[i] = resp.data.newGift;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

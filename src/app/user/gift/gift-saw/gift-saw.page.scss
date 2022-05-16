@@ -1,0 +1,39 @@
+.body{
+    background: #717499;
+    background-size: cover;
+    min-height: 100%;
+  
+    ion-card{
+      height: 25%;
+      width: 25%;
+      ion-img{
+        border: 0.10cm solid black;
+      }
+    }
+  }
+  
+  
+  .formulario{
+    margin-top: 1.5rem;
+    margin-left: 19.5rem;
+    margin-right: 19.5rem;
+    margin-bottom: 19.5rem;
+  }
+  
+  .button{
+    --background: #9173ff;
+    color: black;
+  }
+  .button2{
+    --background: #ff8282;
+    color: black;
+  }
+  .columleft{
+    text-align: right;
+  }
+  .columright{
+      text-align: end;
+  }
+  
+  
+  
