@@ -134,4 +134,8 @@ export class ExchangeGiftListPage implements OnInit {
 
   }
 
+  public logout(){
+    this.authS.logout();
+  }
+
 }
