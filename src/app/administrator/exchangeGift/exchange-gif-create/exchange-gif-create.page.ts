@@ -36,9 +36,9 @@ export class ExchangeGifCreatePage {
       });
     }
     public async CreateExgift(): Promise<void> {
-      
-      
-      
+
+
+
       try {
         this.uts.presentLoading();
       if(this.mygift!=null&&this.myagency!=null){
@@ -54,16 +54,21 @@ export class ExchangeGifCreatePage {
       }
 
       try{
-        await this.exser.createOrUpdate(newExchange);
-        
+        let result=await this.exser.createOrUpdate(newExchange);
 
+        if(!result){
+          this.uts.presentToast("Error al insertar canje, compruebe los puntos de la agencia y la disponibilidad del regalo.","danger");
+        }
 
-        this.uts.presentToast("Pedido agregada correctamente","success");
-        this.formExchange.reset();
+        else{
+          this.uts.presentToast("Pedido agregada correctamente","success");
+          this.formExchange.reset();
+        }
+
 
       }catch(err){
-        
-        
+
+
         this.uts.presentToast("Error agregando Pedido","danger");
       }
     }
@@ -96,7 +101,7 @@ export class ExchangeGifCreatePage {
 
     let picker = await this.pickerController.create(options);
     picker.present()
-    
+
   }
 
   getGiftColumnOptions(){
@@ -107,11 +112,11 @@ export class ExchangeGifCreatePage {
     return options;
   }
   async ionViewWillEnter() {
-    
+
     this.uts.presentLoading();
     this.gifts=await this.giftserv.getAll();
     this.agencies=await this.ageserv.getAll();
-    
+
     if(this.agencies.length<=0&&this.gifts.length<=0){
       this.uts.presentToast('','danger');
     }

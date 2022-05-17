@@ -108,7 +108,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
           resolve(result);
         }, error => {
           console.log(error);
-          resolve(exgift);
+          resolve(null);
         });
       });
     }

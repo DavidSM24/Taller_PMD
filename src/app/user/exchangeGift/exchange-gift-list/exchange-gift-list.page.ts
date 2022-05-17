@@ -52,7 +52,7 @@ export class ExchangeGiftListPage implements OnInit {
       //this.infinite.disabled=false;
       console.log(this.authS.agency);
       newExchanges=await this.exs.getByAgencyPaged(this.authS.agency,this.niTems,0);
-
+      //newExchanges=await this.exs.getAll();
       this.exchanges=this.exchanges.concat(newExchanges);
 
     }

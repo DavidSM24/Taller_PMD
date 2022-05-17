@@ -1,7 +1,7 @@
 
 
   ion-col {
-    border-bottom: 1px solid #4b4b4d;
+    //border-bottom: 1px solid #4b4b4d;
     ion-text{
       color:#4b4b4d !important;
     }
@@ -22,16 +22,21 @@
     //background: #22388c;
     color: #fff;
     font-size: 1.1rem;
+    background-color: #fff !important;
+    border: 1px solid rgb(179, 179, 179);
+    border-radius: 25px;
+    margin-top:0.6%;
+    margin-bottom: 0.6%;
+    margin-left: 1%;
+    margin-right: 1%;
+    cursor: pointer;
   }
 
   .body{
   /*  background: -webkit-linear-gradient(left, #22388c, #9ba2cc);
     background: linear-gradient(to right, #22388c, #9ba2cc);*/
-    background-color: white;
+    background-color: #f5fbfe !important;
     font-family: 'Roboto', sans-serif;
     color: #4b4b4d;
-  }
-
-  .pointer{
-    cursor: pointer;
+    min-height: 100%;
   }

@@ -1,6 +1,6 @@
 <ion-header [translucent]="false">
 
-  <ion-toolbar color="primary">
+  <ion-toolbar color="medium">
 
     <ion-title>Lista de Canjees</ion-title>
 
@@ -9,7 +9,7 @@
     </ion-buttons>
 
   </ion-toolbar>
-  <ion-toolbar color="primary" (ionChange)="searchChange($event)">
+  <ion-toolbar color="medium" (ionChange)="searchChange($event)">
     <ion-searchbar placeholder="Encuentra el canjee que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
     <ion-row class="header-row">
@@ -32,7 +32,7 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content >
 
   <ion-refresher slot="fixed" (ionRefresh)="reset($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -43,21 +43,21 @@
 
   <ion-grid class="ion-text-center">
 
-  <ion-row let *ngFor="let exchange of this.exchanges;let i=index" class="row">
+  <ion-row (click)="show(exchange)" let *ngFor="let exchange of this.exchanges;let i=index" class="row">
 
-      <ion-col ize="4" (click)="show(exchange)">
+      <ion-col ize="4" >
         <ion-text class="pointer">
             {{exchange.gift.name}}
         </ion-text>
       </ion-col>
 
-        <ion-col  size="4" (click)="show(exchange)">
+        <ion-col  size="4">
           <ion-text class="pointer">
             {{exchange.gift.points}}
           </ion-text>
         </ion-col>
 
-        <ion-col size="4" (click)="show(exchange)">
+        <ion-col size="4">
           <ion-text class="pointer">
             {{exchange.dateExchange}}
           </ion-text>
