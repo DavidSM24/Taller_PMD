@@ -6,6 +6,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class UtilService {
 
+  public active:boolean;
   private miLoading: HTMLIonLoadingElement;
   private miToast: HTMLIonToastElement;
 
@@ -15,14 +16,20 @@ export class UtilService {
   ) { }
 
   async presentLoading() {
-    this.miLoading = await this.loading.create({
-      message: ''
-    });
-    await this.miLoading.present();
+
+    if(!this.active){
+      this.miLoading = await this.loading.create({
+        message: ''
+      });
+      await this.miLoading.present();
+      this.active=true;
+    }
+
   }
 
   async hideLoading(){
-    this.miLoading.dismiss();
+    await this.miLoading.dismiss();
+    this.active=false;
   }
 
   async presentToast(msg: string, clr: string) {
