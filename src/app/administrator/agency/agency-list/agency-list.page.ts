@@ -14,6 +14,7 @@ import { AuthService } from '../../../services/auth.service';
 export class AgencyListPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+  oldInfinite:boolean;
 
   public agencies: Agency[] = [];
   public oldAgencies: Agency []=[];
@@ -59,18 +60,18 @@ export class AgencyListPage implements OnInit {
       await this.uts.presentLoading();
 
       this.infinite.disabled=false;
+      this.oldInfinite=false;
       newAgencies=await this.as.getAllPaged(this.niTems,0);
 
       this.agencies=this.agencies.concat(newAgencies);
       this.oldAgencies=[];
-      this.agencies.forEach((e:Agency)=>{
-        this.oldAgencies.push(e);
-      })
+      this.oldAgencies=this.oldAgencies.concat(newAgencies);
 
     }
 
     if(newAgencies.length<this.niTems){
       this.infinite.disabled=true;
+      this.oldInfinite=true;
     }
 
     if(event){
@@ -153,9 +154,11 @@ export class AgencyListPage implements OnInit {
     if (!this.infinite.disabled) {
       newAgencies = await this.as.getAllPaged(this.niTems, this.agencies.length);
       this.agencies = this.agencies.concat(newAgencies);
+      this.oldAgencies=this.oldAgencies.concat(newAgencies);
 
       if (newAgencies.length < 30) {
         this.infinite.disabled = true;
+        this.oldInfinite=true;
       }
     }
   }
@@ -166,6 +169,7 @@ export class AgencyListPage implements OnInit {
 
   public async reset(event) {
     this.infinite.disabled = false;
+    this.oldInfinite=false;
     this.agencies = [];
     this.loadAgencies(event);
   }
@@ -192,13 +196,13 @@ export class AgencyListPage implements OnInit {
           this.agencies.push(e);
         }
       })
+      this.infinite.disabled=true;
       await this.uts.hideLoading()
     }
     else if(lenght<1){
       this.agencies=[];
-      this.oldAgencies.forEach((e:Agency)=>{
-        this.agencies.push(e);
-      })
+      this.agencies=this.agencies.concat(this.oldAgencies);
+      this.infinite.disabled=this.oldInfinite;
       await this.uts.hideLoading();
     }
   }

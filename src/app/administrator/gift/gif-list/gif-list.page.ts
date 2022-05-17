@@ -13,9 +13,11 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class GifListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+  oldInfinite:boolean;
 
   private n:number=0;
   public gifts: Gift[] = [];
+  public oldGifts: Gift []=[];
 
   searchStr = "";
   private niTems:number;
@@ -60,14 +62,19 @@ export class GifListPage implements OnInit {
       await this.uts.presentLoading();
 
       this.infinite.disabled=false;
+      this.oldInfinite=false;
       newGifts=await this.gs.getAllPaged(this.niTems,0);
 
       this.gifts=this.gifts.concat(newGifts);
+
+      this.oldGifts=[];
+      this.oldGifts=this.oldGifts.concat(newGifts);
 
     }
 
     if(newGifts.length<this.niTems){
       this.infinite.disabled=true;
+      this.oldInfinite=true;
     }
 
     if(event){
@@ -145,9 +152,11 @@ export class GifListPage implements OnInit {
     if(!this.infinite.disabled){
       newgifts=await this.gs.getAllPaged(this.niTems,this.gifts.length);
       this.gifts=this.gifts.concat(newgifts);
+      this.oldGifts=this.oldGifts.concat(newgifts);
 
       if(newgifts.length<this.niTems){
         this.infinite.disabled=true;
+        this.oldInfinite=true;
       }
     }
   }
@@ -157,27 +166,35 @@ export class GifListPage implements OnInit {
     console.log(this.searchStr);
 
     let list:Gift[]=[];
+    this.gifts=[];
 
     let lenght=this.searchStr.length;
     if(lenght>1){
-      this.gifts.forEach(gift=>{
-        if(gift.name.includes(this.searchStr)
-        ||gift.points.toString().includes(this.searchStr)){
-          list.push(gift);
+      //consultar y cambiar lista
+      await this.uts.presentLoading();
+
+      //nombre
+      list=await this.gs.getByNamePaged(this.searchStr,9999,0);
+      list.forEach((e:Gift)=>{
+        if(!this.gifts.includes(e)){
+          this.gifts.push(e);
         }
-
       })
-      this.gifts=list;
 
+      this.infinite.disabled=true;
+      await this.uts.hideLoading()
     }
     else if(lenght<1){
-      this.reset(null);
+      this.gifts=[];
+      this.gifts=this.gifts.concat(this.oldGifts);
+      this.infinite.disabled=this.oldInfinite;
       await this.uts.hideLoading();
     }
   }
 
   public async reset(event){
     this.infinite.disabled = false;
+    this.oldInfinite=false;
     this.gifts = [];
     this.loadgifts(event)
   }
