@@ -47,7 +47,7 @@ export class GiftListPage implements OnInit {
 
     if (this.gifts.length == 0) { //inicio
 
-      this.uts.presentLoading();
+      await this.uts.presentLoading();
 
       this.infinite.disabled = false;
       newGifts = await this.gs.getAllPaged(this.niTems, 0);
@@ -66,7 +66,7 @@ export class GiftListPage implements OnInit {
     else {
 
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
   public async infiniteLoad($event) {
     let newgifts: Gift[] = [];

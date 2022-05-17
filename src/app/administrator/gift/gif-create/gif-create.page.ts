@@ -35,7 +35,7 @@ export class GifCreatePage {
 
   public async create(): Promise<void> {
 
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
 
     if(this.extension){
       if(this.extension==("image/jpg")
@@ -65,7 +65,7 @@ export class GifCreatePage {
       }
     }
 
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   public async test_Update() {

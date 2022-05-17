@@ -28,11 +28,11 @@ export class AgencyUpdatePage implements OnInit {
     private uts:UtilService,
     private is: InsuranceCompanyService,
     private pickerController:PickerController,) {
-      
+
      }
 
   ngOnInit() {
-    
+
     try {
     this.insurance=this.agency.myInsuranceCompany;
     //this.uts.presentLoading();
@@ -53,17 +53,17 @@ export class AgencyUpdatePage implements OnInit {
 
   async ionViewWillEnter() {
 
-    
+
     this.companies=await this.is.getAll();
     if(this.companies.length<=0){
       this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger');
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   public async edit() {
 
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
 
      let A: Agency = {
        id: this.agency.id,
@@ -82,8 +82,8 @@ export class AgencyUpdatePage implements OnInit {
      }
 
      A = await this.as.createOrUpdate(A);
-     
-     this.uts.hideLoading();
+
+     await this.uts.hideLoading();
 
      this.modalCtrl.dismiss({
        newAgency:A
@@ -141,5 +141,5 @@ export interface PickerColumn {
   suffixWidth?: string;
   optionsWidth?: string;
   refresh?: () => void;
-} 
+}
 

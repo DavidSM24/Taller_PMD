@@ -47,7 +47,7 @@ export class ExchangeGiftListPage implements OnInit {
 
     if(this.exchanges.length==0){ //inicio
 
-      this.uts.presentLoading();
+      await this.uts.presentLoading();
 
       //this.infinite.disabled=false;
       console.log(this.authS.agency);
@@ -67,7 +67,7 @@ export class ExchangeGiftListPage implements OnInit {
     else{
 
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   public async infiniteLoad($event) {
@@ -115,18 +115,17 @@ export class ExchangeGiftListPage implements OnInit {
     }
   }
 
-  public async show(exchange: ExchangeGift) {
+  public async show(exchangesaw: ExchangeGift) {
     try {
       const modal = await this.modalCtrl.create({
         component: ExchangeGiftSawPage,
-        cssClass: 'fullscreen',
         componentProps: {
-          'exchange': exchange
+          'exchangesaw': exchangesaw
         }
-        //
       });
 
       await modal.present();
+
 
     } catch (error) {
       console.log(error);

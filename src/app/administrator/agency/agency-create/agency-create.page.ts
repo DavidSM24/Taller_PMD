@@ -37,20 +37,20 @@ export class AgencyCreatePage {
   }
 
   async ionViewWillEnter() {
-    
+
     console.log("en agency-cretae");
 
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
     this.companies=await this.is.getAll();
     if(this.companies.length<=0){
       this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger');
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   public async create(): Promise<void> {
 
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
 
     if(this.insurance!=null){
       let ag: Agency = await this.as.getById(7);
@@ -70,24 +70,24 @@ export class AgencyCreatePage {
         myUser: ag.myUser,
         active: this.toggle.checked
       }
-  
+
       console.log(newAgency);
-  
+
       newAgency = await this.as.createOrUpdate(newAgency);
       if(newAgency.id){
         this.formAgency.reset();
         this.uts.presentToast('La agencia se ha creado correctamente.','success');
         this.as.added=true;
-        
+
       }
       else{
         this.uts.presentToast('Un error ha surgido al intentar crear la agencia.','danger');
       }
 
-      this.uts.hideLoading();
+      await this.uts.hideLoading();
     }
 
-    
+
   }
 
   async showPicker() {
@@ -138,4 +138,4 @@ export interface PickerColumn {
   suffixWidth?: string;
   optionsWidth?: string;
   refresh?: () => void;
-} 
+}

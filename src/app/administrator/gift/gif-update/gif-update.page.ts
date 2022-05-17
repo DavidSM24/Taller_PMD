@@ -37,31 +37,31 @@ export class GifUpdatePage implements OnInit {
   }
 
   async ngOnInit() {
-    
+
     try {
-      
+
       this.file = await this.http.get("https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/" + this.gift.picture, { responseType: 'blob' }).subscribe((resp: any) => {
         this.file = resp;
-  
+
       });
-  
+
       this.formGift = this.fb.group({
         name: [this.gift.name, Validators.required],
         points: [this.gift.points, Validators.required],
-      }); 
+      });
     } catch (error) {
-      
+
     }
 
-    
+
   }
   async ionViewWillEnter() {
     this.img = "https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/"+this.gift.picture;
   }
-  
+
   public async edit(): Promise<void> {
 
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
 
     console.log("entro?");
 
@@ -83,7 +83,7 @@ export class GifUpdatePage implements OnInit {
       this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger');
     }
 
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
 
     this.modalCtrl.dismiss({
       newGift:newGift

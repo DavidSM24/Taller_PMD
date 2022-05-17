@@ -35,11 +35,11 @@ export class AgencyListPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    
+
     console.log(this.as.added);
-    
+
     if(this.as.added){
-      
+
       this.reset(null);
       this.as.added=false;
     }
@@ -52,14 +52,14 @@ export class AgencyListPage implements OnInit {
   public async loadAgencies(event?) {
 
     let newAgencies:Agency[]=[];
-    
+
     if(this.agencies.length==0){ //inicio
-      
-      this.uts.presentLoading();
-      
+
+      await this.uts.presentLoading();
+
       this.infinite.disabled=false;
       newAgencies=await this.as.getAllPaged(this.niTems,0);
-      
+
       this.agencies=this.agencies.concat(newAgencies);
 
     }
@@ -72,9 +72,9 @@ export class AgencyListPage implements OnInit {
       event.target.complete();
     }
     else{
-     
+
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   public async edit(agency: Agency) {
@@ -181,14 +181,14 @@ export class AgencyListPage implements OnInit {
         if(agency.location.includes(this.searchStr)){
           list.push(agency);
         }
-        
+
       })
       this.agencies=list;
 
     }
     else if(lenght<1){
-      this.reset(null); 
-      this.uts.hideLoading();
+      this.reset(null);
+      await this.uts.hideLoading();
     }
   }
 }

@@ -57,7 +57,7 @@ export class GifListPage implements OnInit {
 
     if(this.gifts.length==0){ //inicio
 
-      this.uts.presentLoading();
+      await this.uts.presentLoading();
 
       this.infinite.disabled=false;
       newGifts=await this.gs.getAllPaged(this.niTems,0);
@@ -76,7 +76,7 @@ export class GifListPage implements OnInit {
     else{
 
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   public async edit(gift:Gift){
@@ -152,7 +152,7 @@ export class GifListPage implements OnInit {
     }
   }
 
-  public onSearchChange(event) {
+  public async onSearchChange(event) {
     this.searchStr=event.detail.value;
     console.log(this.searchStr);
 
@@ -172,7 +172,7 @@ export class GifListPage implements OnInit {
     }
     else if(lenght<1){
       this.reset(null);
-      this.uts.hideLoading();
+      await this.uts.hideLoading();
     }
   }
 

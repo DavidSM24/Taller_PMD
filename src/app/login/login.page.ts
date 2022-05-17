@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
     let user: User
     let correct: boolean = false;
 
-      this.uts.presentLoading();
+    await this.uts.presentLoading();
       try {
         let code = await this.formLogin.get("code").value;
         user = await this.us.getByCode(code);
@@ -103,9 +103,9 @@ export class LoginPage implements OnInit {
           this.uts.presentToast("Usuario o contraseña incorrecta...", "danger")
         }
 
-        this.uts.hideLoading();
+        await this.uts.hideLoading();
       } catch (error) {
-        this.uts.hideLoading();
+        await this.uts.hideLoading();
         this.uts.presentToast("Usuario o contraseña incorrecta...", "danger")
       }
 

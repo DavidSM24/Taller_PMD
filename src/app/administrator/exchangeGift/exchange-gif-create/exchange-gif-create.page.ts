@@ -40,7 +40,7 @@ export class ExchangeGifCreatePage {
 
 
       try {
-        this.uts.presentLoading();
+        await this.uts.presentLoading();
       if(this.mygift!=null&&this.myagency!=null){
 
         console.log(this.myagency);
@@ -73,10 +73,10 @@ export class ExchangeGifCreatePage {
       }
     }
    }catch(error){
-    this.uts.hideLoading;
+    await this.uts.hideLoading;
     console.log(error);
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   async showGiftsPicker() {
@@ -113,14 +113,14 @@ export class ExchangeGifCreatePage {
   }
   async ionViewWillEnter() {
 
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
     this.gifts=await this.giftserv.getAll();
     this.agencies=await this.ageserv.getAll();
 
     if(this.agencies.length<=0&&this.gifts.length<=0){
       this.uts.presentToast('','danger');
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
     console.log(this.gifts);
     console.log(this.agencies);
   }
