@@ -12,12 +12,13 @@ import { NavControlService } from './services/nav-control.service';
 import { AgencyService } from './services/agency.service';
 import { GiftService } from './services/gift.service';
 import { AuthService } from './services/auth.service';
+import { UtilService } from './services/util.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NavControlService, AgencyService,GiftService, AuthService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NavControlService, AgencyService,GiftService, AuthService,UtilService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
