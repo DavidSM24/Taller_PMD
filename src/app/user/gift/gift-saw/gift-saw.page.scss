@@ -1,5 +1,5 @@
 .body{
-    background: #717499;
+    background: #f5fbfe;
     background-size: cover;
     min-height: 100%;
   
@@ -21,19 +21,27 @@
   }
   
   .button{
-    --background: #9173ff;
-    color: black;
+    --background: #4083cc;
+    color: white;
   }
   .button2{
     --background: #ff8282;
-    color: black;
+    color: white;
   }
-  .columleft{
-    text-align: right;
+  .colum{
+    border: 0px solid !important;
+    
+    text-align: center;
+    
+    border-radius: 5px;
+    ion-text{
+  
+      text-align: center;
+     
+   
+    }
   }
-  .columright{
-      text-align: end;
-  }
+ 
   
   
   

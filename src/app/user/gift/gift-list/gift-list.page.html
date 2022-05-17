@@ -1,14 +1,14 @@
 <ion-header [translucent]="false">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="medium">
     
     <ion-title>Articulos Disponibles</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon class="icon-logout" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
+      <ion-icon class="ico" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="medium">
     <ion-row class="ion-align-items-center">
     <ion-col>
     <ion-searchbar placeholder="Escribe para encuentrar el Articulo que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
@@ -24,20 +24,22 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div class="body">
-    <ion-list>
-      <ion-item-sliding *ngFor="let gift of this.gifts | filter:searchTerm">  
-        <ion-item *ngIf="gift.available==true" >
-          <ion-label>
+    <ion-list class="list">
+      <ion-item-sliding *ngFor="let gift of this.gifts | filter:searchTerm" class="list">  
+        <ion-item *ngIf="gift.available==true" color="black">
+          <ion-label class="shopbox">
             <div class="leftside">
-              <ion-card>
-                <ion-img  src="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/{{gift.picture}}"></ion-img>
+              <ion-card class="imcage">
+                <ion-img class="image"  src="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/{{gift.picture}}"></ion-img>
                 
               </ion-card>
             </div>
             <div class="rightside">
-              <ion-text><p>{{gift.name}}</p></ion-text>
-              <ion-text><p>Precio: {{gift.points}} Puntos</p></ion-text>   
-              <ion-button (click)="buy(gift)">Canjear Regalo</ion-button>
+              <div class="text">
+                <ion-text><p>{{gift.name}}</p></ion-text>
+                <ion-text><p>Precio: {{gift.points}} Puntos</p></ion-text>   
+                <ion-button (click)="buy(gift)" color="medium">Canjear Regalo</ion-button>
+              </div>
             </div>
           </ion-label>
         </ion-item>

@@ -23,26 +23,67 @@
     color: #fff;
     font-size: 1.1rem;
   }
-
+  .ico{
+    color: rgb(255, 255, 255);
+  }
   .body{
   /*  background: -webkit-linear-gradient(left, #22388c, #9ba2cc);
     background: linear-gradient(to right, #22388c, #9ba2cc);*/
-    background-color: white;
+    background-color: #f5fbfe !important;
     font-family: 'Roboto', sans-serif;
     color: #4b4b4d;
   }
 
+  ion-content{
+    --background: #f5fbfe;
+}
+
   .leftside{
-    position: relative;
+    margin-left: 5%;
     width: 30%;
     float: left;
-    height: 100%;
+    height: 15rem;
+    display: table;
   }
 
-  .rightside{
-    position: relative;
-    width: 70%;
-    float: right;
-    height: 100%;
-    text-align: center;
+  .list{
+    background-color: #f5fbfe;
   }
+  
+  .rightside{
+    
+    width: 65%;
+    float: right;
+    height: 15rem;
+    text-align: center;
+    display: table;
+  }
+
+  .text{
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .imcage{
+    width: 15rem;
+    max-width: 200px;
+    height: 15rem;
+    vertical-align: middle;
+  }
+  .image{
+    width: 100%;
+    max-width: 200px;
+    height: 15rem;
+    vertical-align: middle;
+    box-shadow: inset;
+    border-radius: 25%;
+  }
+
+  .shopbox{
+    background-color: #fff !important;
+    border: 1px solid rgb(179, 179, 179);
+    border-radius: 25px;
+  }
+  ion-item{
+    --inner-border-width: 0; // this removes the inner border width
+ }

@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="medium">
     <ion-title>
       Canjear Pedido
     </ion-title>
@@ -8,6 +8,7 @@
 
 <ion-content [fullscreen]="true" >
   <div class="body">
+    
     <div class="ion-padding">    
       <center>
         
@@ -22,25 +23,23 @@
         <ion-grid>
           
           <ion-row class="ion-align-items-center">
-            <ion-col size="6" class="columleft">
-              <ion-label >Nombre : </ion-label>
-            </ion-col>
+            <ion-col class="colum">
             <div>
-              <ion-text class="columright">
-                {{this.giftsaw.name}}
+              <ion-text class="colum">
+                Nombre : {{this.giftsaw.name}}
               </ion-text>
-              </div>
+            </div>
+          </ion-col>
           </ion-row>
   
           <ion-row class="ion-align-items-center">
-            <ion-col size="6" class="columleft">
-              <ion-label >Precio : </ion-label>
+            <ion-col class="colum">
+              <div>
+                <ion-text>
+                  Precio : {{this.giftsaw.points}} Puntos
+                </ion-text>
+             </div>
             </ion-col>
-            <div>
-            <ion-text class="columright">
-              {{this.giftsaw.points}} Puntos
-            </ion-text>
-           </div>
           </ion-row>
   
           <ion-row class="ion-align-items-center">
