@@ -47,9 +47,9 @@
   <div class="body">
 
 
-  <ion-grid class="ion-text-center">
+  <ion-grid class="ion-text-center" *ngIf="this.exchanges.length> 0">
 
-  <ion-row (click)="show(exchange)" let *ngFor="let exchange of this.exchanges;let i=index" class="row">
+  <ion-row (click)="show(exchange)" let   *ngFor="let exchange of this.exchanges;let i=index" class="row">
 
       <ion-col ize="4" >
         <ion-text class="pointer">

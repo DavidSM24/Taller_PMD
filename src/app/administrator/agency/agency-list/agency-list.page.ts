@@ -16,6 +16,7 @@ export class AgencyListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   public agencies: Agency[] = [];
+  public oldAgencies: Agency []=[];
 
   searchStr = "";
   niTems: number;
@@ -61,6 +62,10 @@ export class AgencyListPage implements OnInit {
       newAgencies=await this.as.getAllPaged(this.niTems,0);
 
       this.agencies=this.agencies.concat(newAgencies);
+      this.oldAgencies=[];
+      this.agencies.forEach((e:Agency)=>{
+        this.oldAgencies.push(e);
+      })
 
     }
 
@@ -174,20 +179,26 @@ export class AgencyListPage implements OnInit {
     console.log(this.searchStr);
 
     let list:Agency[]=[];
+    this.agencies=[];
 
     let lenght=this.searchStr.length;
     if(lenght>1){
-      this.agencies.forEach(agency=>{
-        if(agency.location.includes(this.searchStr)){
-          list.push(agency);
+      //consultar y cambiar lista
+      await this.uts.presentLoading();
+      //username
+      list=await this.as.getByUserNamePaged(this.searchStr,99999,0);
+      list.forEach((e:Agency)=>{
+        if(!this.agencies.includes(e)){
+          this.agencies.push(e);
         }
-
       })
-      this.agencies=list;
-
+      await this.uts.hideLoading()
     }
     else if(lenght<1){
-      this.reset(null);
+      this.agencies=[];
+      this.oldAgencies.forEach((e:Agency)=>{
+        this.agencies.push(e);
+      })
       await this.uts.hideLoading();
     }
   }

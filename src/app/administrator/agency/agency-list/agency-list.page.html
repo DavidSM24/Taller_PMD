@@ -1,5 +1,5 @@
 <ion-header [translucent]="false">
-  
+
   <ion-toolbar color="primary">
 
     <ion-title>Lista de Agencias</ion-title>
@@ -30,14 +30,14 @@
       <ion-col size="3.3" style="border: 0px !important;">
         <ion-text>Puntos</ion-text>
       </ion-col>
-      
+
       <ion-col size="1" style="border: 0px !important;">
         <ion-text></ion-text>
       </ion-col>
     </ion-row>
 
   </ion-toolbar>
-  
+
 </ion-header>
 
 <ion-content [fullscreen]="true" style="background-color: white;">
@@ -47,18 +47,18 @@
   </ion-refresher>
 
   <div class="body">
-  
+
 
   <ion-grid class="ion-text-center">
 
   <ion-row let *ngFor="let agency of this.agencies;let i=index" class="row">
-      
+
       <ion-col size="1">
         <ion-text>
           <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="edit(agency)"></ion-icon>
         </ion-text>
       </ion-col>
-      
+
       <ion-col size="3.4">
         <ion-text>
             {{agency.myInsuranceCompany.cia_Name}}
@@ -70,7 +70,7 @@
             {{agency.location}}
           </ion-text>
         </ion-col>
-  
+
         <ion-col size="3.3">
           <ion-text>
             {{agency.points}}
@@ -93,5 +93,5 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </div>
-  
+
 </ion-content>
