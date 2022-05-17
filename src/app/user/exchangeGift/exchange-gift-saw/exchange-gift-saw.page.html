@@ -22,14 +22,15 @@
         <ion-grid>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
+            <ion-col>
               <ion-label>Fecha de Intercambio:</ion-label>
             </ion-col>
-            <div>
+
+            <ion-col>
               <ion-text>
                 {{this.exchangesaw.dateExchange}}
               </ion-text>
-              </div>
+            </ion-col>
           </ion-row>
 
           <ion-row class="ion-align-items-center">
@@ -63,20 +64,9 @@
           </ion-row>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
-              <ion-label>Agencia:</ion-label>
-            </ion-col>
-            <div>
-              <ion-text>
-                {{this.exchangesaw.agency.zipCode}}
-              </ion-text>
-              </div>
-          </ion-row>
-
-          <ion-row class="ion-align-items-center">
             <ion-col size="12">
               <center>
-                <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button">
+                <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
                   Cerrar Visualizacion
                 </ion-button>
               </center>
