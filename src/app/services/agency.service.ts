@@ -111,12 +111,32 @@ export class AgencyService {
     //return this.getData(this.URLDatabase + this.endpoint + "/usercode/"+usercode);
   }
 
+  public async getByLocation(location:string): Promise<Agency[]> {
+    return this.getListData(this.URLDatabase + this.endpoint + "/location/"+location);
+  }
+
+  public async getByAddress(address:string): Promise<Agency[]> {
+    return this.getListData(this.URLDatabase + this.endpoint + "/address/"+address);
+  }
+
+  public async getByZipcode(zip:number): Promise<Agency[]> {
+    return this.getListData(this.URLDatabase + this.endpoint + "/zipcode/"+zip);
+  }
+
+  public async getByPoints(points:number): Promise<Agency[]> {
+    return this.getListData(this.URLDatabase + this.endpoint + "/points/"+points);
+  }
+
   public async getByUserNamePaged(username: string, limit: number, offset: number): Promise<Agency[]> {
     return this.getListData(this.URLDatabase + this.endpoint + "/username/" + username + "/element/" + limit + "/page/" + offset);
   }
 
   public async getByisActivePaged(active: boolean, limit: number, offset: number): Promise<Agency[]> {
     return this.getListData(this.URLDatabase + this.endpoint + "/active/" + active + "/element/" + limit + "/page/" + offset);
+  }
+
+  public async getByCompany(company:string): Promise<Agency[]> {
+    return this.getListData(this.URLDatabase + this.endpoint + "/company/" + company);
   }
 
   public async createOrUpdate(agency: Agency): Promise<Agency> {
