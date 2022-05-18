@@ -49,6 +49,11 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
   public getAll():Promise<ExchangeGift[]>{
     return this.getListData(this.URLDatabase + this.endpoint);
   }
+
+  public getByDateFilter(date:string):Promise<ExchangeGift[]>{
+    return this.getListData(this.URLDatabase + this.endpoint+ "/date/"+ date);
+  }
+
   public async getById(id: number): Promise<ExchangeGift> {
 
     let exchangegift: ExchangeGift = null;

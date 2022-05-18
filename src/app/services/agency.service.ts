@@ -107,8 +107,8 @@ export class AgencyService {
   }
 
   public async getByUsercode(usercode: number): Promise<Agency> {
-    return await this.getById(94);
-    //return this.getData(this.URLDatabase + this.endpoint + "/usercode/"+usercode);
+    //return await this.getById(94);
+    return this.getData(this.URLDatabase + this.endpoint + "/usercode/"+usercode);
   }
 
   public async getByLocation(location:string): Promise<Agency[]> {

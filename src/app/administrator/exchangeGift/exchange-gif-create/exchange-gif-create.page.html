@@ -11,7 +11,7 @@
     <form [formGroup]="formExchange" class="ion-padding">
       <div class="formulario">
       <ion-grid>
-        
+
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1.5" sizeLg="1.5">
             <ion-label>Fecha de Intercambio:</ion-label>
@@ -51,7 +51,7 @@
               Seleccionar
             </ion-button>
             <ion-button expand="block" shape="round" (click)="showAgenciesPicker()" *ngIf="this.myagency!=null">
-              {{this.myagency.myUser.name}}
+              {{this.myagency.zipCode}}
             </ion-button>
           </ion-col>
         </ion-row>
@@ -76,7 +76,7 @@
               Cancelar
             </ion-button>
           </ion-col>
-  
+
           <ion-col size="6">
             <ion-button (click)="CreateExgift()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formExchange.invalid || this.myagency==null || this.mygift==null">
               Crear Pedido

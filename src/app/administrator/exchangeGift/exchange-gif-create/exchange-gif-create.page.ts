@@ -153,7 +153,7 @@ export class ExchangeGifCreatePage {
   getAgenciesColumnOptions(){
     let options = [];
     this.agencies.forEach(x => {
-      options.push({text:x.myUser.name,value:x});
+      options.push({text:x.myInsuranceCompany.cia_Name+" - "+x.location,value:x});
     });
     return options;
   }
