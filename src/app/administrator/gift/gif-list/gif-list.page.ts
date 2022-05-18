@@ -170,6 +170,7 @@ export class GifListPage implements OnInit {
 
     let lenght=this.searchStr.length;
     if(lenght>1){
+
       //consultar y cambiar lista
       await this.uts.presentLoading();
 
@@ -180,6 +181,16 @@ export class GifListPage implements OnInit {
           this.gifts.push(e);
         }
       })
+
+      //points
+      if(+this.searchStr>0){
+        list=await this.gs.getByPoints(+this.searchStr);
+        list.forEach((e:Gift)=>{
+        if(!this.gifts.includes(e)){
+          this.gifts.push(e);
+        }
+        })
+      }
 
       this.infinite.disabled=true;
       await this.uts.hideLoading()
