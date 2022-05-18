@@ -87,6 +87,7 @@ export class CarRepairCreatePage implements OnInit {
       if(newCarRepair.id){
         this.formCarRepair.reset();
         this.utilService.presentToast("La reparación se ha guardado correctamente",'success');
+        this.carRepairService.added=true;
         this.routeCarRepairList();
       }else{
         this.utilService.presentToast("Ha surgido un error al intentar crear la reparacion",'danger')

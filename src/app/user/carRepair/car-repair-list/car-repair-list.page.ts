@@ -56,14 +56,25 @@ export class CarRepairListPage implements OnInit {
   }
 
   async ionViewDidEnter(){
-    await this.getMyAgency();
-    this.nItems=Math.ceil(this.pt.height()/20+10);
-    try {
-      await this.loadCarRepair();
-      this.n=this.carRepairs.length;
-    } catch (error) {
-      
+
+
+    if(this.cS.added){
+      this.reset(null);
+      this.cS.added=false;
+
+    }else{
+          try {
+          await this.getMyAgency();
+          this.nItems=Math.ceil(this.pt.height()/20+10);
+          
+            await this.loadCarRepair();
+            this.n=this.carRepairs.length;
+          } catch (error) {
+            
+          }
+
     }
+    
   }
 
   //Métodos de los servicios
