@@ -8,6 +8,8 @@ import { CarRepair } from '../models/CarRepair';
 })
 export class CarRepairService {
 
+  public added?:boolean;
+
   endpoint:string="/carRepairs";
 
   URLDatabase:string;
