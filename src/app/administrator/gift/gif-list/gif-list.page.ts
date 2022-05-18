@@ -169,7 +169,7 @@ export class GifListPage implements OnInit {
     this.gifts=[];
 
     let lenght=this.searchStr.length;
-    if(lenght>1){
+    if(lenght>0){
 
       //consultar y cambiar lista
       await this.uts.presentLoading();
