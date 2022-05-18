@@ -11,7 +11,7 @@
     <form [formGroup]="formEditExchange" class="ion-padding">
       <div class="formulario">
       <ion-grid>
-        
+
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1.5" sizeLg="1.5">
             <ion-label>Fecha de Intercambio:</ion-label>
@@ -51,7 +51,7 @@
               Seleccionar
             </ion-button>
             <ion-button expand="block" shape="round" (click)="showAgenciesPicker()" *ngIf="this.myagency!=null">
-              {{this.myagency.myUser.name}}
+              {{this.myagency.zipCode}}
             </ion-button>
           </ion-col>
         </ion-row>

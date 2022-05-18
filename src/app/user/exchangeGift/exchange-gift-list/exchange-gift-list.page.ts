@@ -14,7 +14,10 @@ import { ExchangeGiftSawPage } from '../exchange-gift-saw/exchange-gift-saw.page
 export class ExchangeGiftListPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+  oldInfinite:boolean;
+
   public exchanges: ExchangeGift[] = [];
+  oldExchanges: ExchangeGift[] = [];
 
   searchStr = "";
   niTems: number;
@@ -54,11 +57,14 @@ export class ExchangeGiftListPage implements OnInit {
       newExchanges=await this.exs.getByAgencyPaged(this.authS.agency,this.niTems,0);
       //newExchanges=await this.exs.getAll();
       this.exchanges=this.exchanges.concat(newExchanges);
+      this.oldExchanges=[];
+      this.oldExchanges=this.oldExchanges.concat(newExchanges);
 
     }
 
     if(newExchanges.length<this.niTems){
-      //this.infinite.disabled=true;
+      this.infinite.disabled=true;
+      this.oldInfinite=true;
     }
 
     if(event){
@@ -75,9 +81,11 @@ export class ExchangeGiftListPage implements OnInit {
     if (!this.infinite.disabled) {
       newExchanges = await this.exs.getAllPaged(this.niTems, this.exchanges.length);
       this.exchanges = this.exchanges.concat(newExchanges);
+      this.oldExchanges=this.oldExchanges.concat(newExchanges);
 
       if (newExchanges.length < 30) {
         this.infinite.disabled = true;
+        this.oldInfinite=true;
       }
     }
   }
@@ -88,30 +96,45 @@ export class ExchangeGiftListPage implements OnInit {
 
   public async reset(event) {
     this.infinite.disabled = false;
+    this.oldInfinite=false;
     this.exchanges = [];
+    this.oldExchanges=[];
     this.loadExchanges(event);
   }
 
   async searchChange(event){
     this.searchStr=event.detail.value;
-    console.log(this.searchStr);
 
     let list:ExchangeGift[]=[];
+    this.exchanges=[];
 
     let lenght=this.searchStr.length;
-    if(lenght>1){
-      this.exchanges.forEach(agency=>{
-        if(true){
-          list.push(agency);
+
+    if(lenght>0){
+
+      //consultar y cambiar lista
+      await this.uts.presentLoading();
+
+      //username
+      list=await this.exs.getByDateFilter(this.searchStr);
+      list.forEach((e:ExchangeGift)=>{
+        if(!this.exchanges.includes(e)){
+
+          if(e.agency.id=this.authS.agency.id){
+            this.exchanges.push(e);
+          }
+
         }
-
       })
-      this.exchanges=list;
 
+      this.infinite.disabled=true;
+      await this.uts.hideLoading()
     }
     else if(lenght<1){
-      this.reset(null);
-      this.uts.hideLoading();
+      this.exchanges=[];
+      this.exchanges=this.exchanges.concat(this.oldExchanges);
+      this.infinite.disabled=this.oldInfinite;
+      await this.uts.hideLoading();
     }
   }
 

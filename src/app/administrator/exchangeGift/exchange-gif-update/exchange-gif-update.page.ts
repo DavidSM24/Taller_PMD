@@ -37,11 +37,11 @@ export class ExchangeGifUpdatePage implements OnInit {
     }
 
     ngOnInit() {
-    
+
       try {
       this.mygift=this.exchange.gift;
       this.myagency=this.exchange.agency;
-  
+
       this.formEditExchange = this.fb.group({
         dateExchange: [this.exchange.dateExchange, Validators.required],
         observations: [this.exchange.observations, Validators.required],
@@ -76,7 +76,7 @@ export class ExchangeGifUpdatePage implements OnInit {
         newExchange:Exchangeeditado
       })
     }
-   
+
   }
 
   async showGiftsPicker() {
@@ -101,7 +101,7 @@ export class ExchangeGifUpdatePage implements OnInit {
 
     let picker = await this.pickerController.create(options);
     picker.present()
-    
+
   }
 
   getGiftColumnOptions(){
@@ -112,11 +112,11 @@ export class ExchangeGifUpdatePage implements OnInit {
     return options;
   }
   async ionViewWillEnter() {
-    
+
     this.uts.presentLoading();
     this.gifts=await this.giftserv.getAll();
     this.agencies=await this.ageserv.getAll();
-    
+
     if(this.agencies.length<=0&&this.gifts.length<=0){
       this.uts.presentToast('','danger');
     }
@@ -152,7 +152,7 @@ export class ExchangeGifUpdatePage implements OnInit {
   getAgenciesColumnOptions(){
     let options = [];
     this.agencies.forEach(x => {
-      options.push({text:x.myUser.name,value:x});
+      options.push({text:x.myInsuranceCompany.cia_Name+" - "+x.location,value:x});
     });
     return options;
   }
