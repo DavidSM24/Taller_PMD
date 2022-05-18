@@ -12,22 +12,26 @@
 
   </ion-toolbar>
   <ion-toolbar color="primary" (ionChange)="searchChange($event)">
-    <ion-searchbar placeholder="Encuentra la agencia que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+    <ion-searchbar placeholder="Encuentra la agencia que estás buscando..." debounce="600" inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
     <ion-row class="header-row">
       <ion-col size="1" style="border: 0px !important;">
         <ion-text></ion-text>
       </ion-col>
 
-      <ion-col size="3.3" style="border: 0px !important;">
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Código Zip</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
         <ion-text>Compañía</ion-text>
       </ion-col>
 
-      <ion-col  size="3.3" style="border: 0px !important;">
+      <ion-col  size="2.5" style="border: 0px !important;">
         <ion-text>Localidad</ion-text>
       </ion-col>
 
-      <ion-col size="3.3" style="border: 0px !important;">
+      <ion-col size="2.5" style="border: 0px !important; margin-left: -1.5% !important;">
         <ion-text>Puntos</ion-text>
       </ion-col>
 
@@ -59,19 +63,25 @@
         </ion-text>
       </ion-col>
 
-      <ion-col size="3.4">
+      <ion-col size="2.5">
+        <ion-text>
+            {{agency.zipCode}}
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="2.5">
         <ion-text>
             {{agency.myInsuranceCompany.cia_Name}}
         </ion-text>
       </ion-col>
 
-        <ion-col size="3.3">
+        <ion-col size="2.5">
           <ion-text>
             {{agency.location}}
           </ion-text>
         </ion-col>
 
-        <ion-col size="3.3">
+        <ion-col size="2.5">
           <ion-text>
             {{agency.points}}
           </ion-text>

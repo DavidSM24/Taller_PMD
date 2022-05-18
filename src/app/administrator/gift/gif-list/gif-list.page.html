@@ -10,7 +10,7 @@
 
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Encuentra el regalo que estás buscando..." inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+    <ion-searchbar placeholder="Encuentra el regalo que estás buscando..." debounce="600" inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
     <ion-row #rowItem class="header-row">
       <ion-col size="1" style="border: 0px !important;">
