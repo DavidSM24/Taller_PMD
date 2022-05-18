@@ -17,12 +17,16 @@
         <ion-text></ion-text>
       </ion-col>
 
-      <ion-col size="5" style="border: 0px !important;">
+      <ion-col size="3.3" style="border: 0px !important;">
         <ion-text>Nombre</ion-text>
       </ion-col>
 
-      <ion-col  size="5" style="border: 0px !important;">
+      <ion-col  size="3.4" style="border: 0px !important; margin-left:-0.5% !important">
         <ion-text>Puntos</ion-text>
+      </ion-col>
+
+      <ion-col  size="3.3" style="border: 0px !important; margin-left:-1% !important">
+        <ion-text>Disponible</ion-text>
       </ion-col>
 
       <ion-col size="1" style="border: 0px !important;">
@@ -52,16 +56,21 @@
         </ion-text>
       </ion-col>
 
-      <ion-col size="5">
+      <ion-col size="3.3">
         <ion-text>
             {{gift.name}}
         </ion-text>
       </ion-col>
 
-        <ion-col size="5">
+        <ion-col size="3.4">
           <ion-text>
             {{gift.points}}
           </ion-text>
+        </ion-col>
+
+        <ion-col size="3.3">
+          <ion-icon *ngIf="gift.available" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
+          <ion-icon *ngIf="!gift.available" name="close-circle" style="color: red;"></ion-icon>
         </ion-col>
 
         <ion-col size="1">
@@ -69,6 +78,7 @@
             <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="showDeleteMenu(gift)"></ion-icon>
           </ion-text>
         </ion-col>
+
     </ion-row>
 
   </ion-grid>
