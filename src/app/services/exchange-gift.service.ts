@@ -88,6 +88,11 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
   public getByDeliveredPaged(delivered:Boolean, element: number, page: number):Promise<ExchangeGift[]>{
     return this.getListData(this.URLDatabase + this.endpoint +"/delivered/"+ delivered + "/element/" + element + "/paged/" + page);
   }
+
+  public getByGiftName(gname:string):Promise<ExchangeGift[]>{
+    return this.getListData(this.URLDatabase + this.endpoint +"/gname/"+ gname);
+  }
+
   public getByAgencyPaged(agency:Agency, element: number, page: number):Promise<ExchangeGift[]>{
     if(agency!=null){
       return this.getListData(this.URLDatabase + this.endpoint +"/id_agency/"+ agency.id + "/element/" + element + "/paged/" + page);

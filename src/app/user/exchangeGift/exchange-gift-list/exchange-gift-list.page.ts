@@ -141,6 +141,18 @@ export class ExchangeGiftListPage implements OnInit {
         })
       }
 
+      //gift-name
+      list=await this.exs.getByGiftName(this.searchStr);
+      list.forEach((e:ExchangeGift)=>{
+        if(!this.exchanges.includes(e)){
+
+          //filtrar por agencia
+          if(e.agency.id==this.authS.agency.id){
+            this.exchanges.push(e);
+          }
+        }
+      })
+
 
       this.infinite.disabled=true;
       await this.uts.hideLoading()
