@@ -252,24 +252,30 @@ export class ExchangeGiftListPage {
       })
 
       if(selectO=="true"){
-        this.exGifts.forEach((e:ExchangeGift)=>{
-          if(!e.delivered){
-            let i:number=this.exGifts.indexOf(e);
-            this.exGifts.splice(i,1);
-          }
-        })
+        for(let i:number=0;i<this.exGifts.length;i++){
+          this.exGifts.forEach((e:ExchangeGift)=>{
+            if(!e.delivered){
+              let i:number=this.exGifts.indexOf(e);
+              this.exGifts.splice(i,1);
+            }
+          })
+        }
+
       }
 
-      else if(selectO=="false"){
-        this.exGifts.forEach((e:ExchangeGift)=>{
-          if(e.delivered){
-            let i:number=this.exGifts.indexOf(e);
-            this.exGifts.splice(i,1);
-          }
-        })
+      if(selectO=="false"){
+        for(let i:number=0;i<this.exGifts.length;i++){
+          this.exGifts.forEach((e:ExchangeGift)=>{
+            if(e.delivered){
+              let i:number=this.exGifts.indexOf(e);
+              this.exGifts.splice(i,1);
+            }
+          })
+        }
+
       }
 
-      this.infinite.disabled=true;
+      this.infinite.disabled=false
       await this.miLoading.dismiss();
     }
     else if(lenght<1){

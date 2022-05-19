@@ -153,21 +153,27 @@ export class ExchangeGiftListPage implements OnInit {
       })
 
       if(selectO=="true"){
-        this.exchanges.forEach((e:ExchangeGift)=>{
-          if(!e.delivered){
-            let i:number=this.exchanges.indexOf(e);
-            this.exchanges.splice(i,1);
-          }
-        })
+        for(let i:number=0;i<this.exchanges.length;i++){
+          this.exchanges.forEach((e:ExchangeGift)=>{
+            if(!e.delivered){
+              let i:number=this.exchanges.indexOf(e);
+              this.exchanges.splice(i,1);
+            }
+          })
+        }
+
       }
 
-      else if(selectO=="false"){
-        this.exchanges.forEach((e:ExchangeGift)=>{
-          if(e.delivered){
-            let i:number=this.exchanges.indexOf(e);
-            this.exchanges.splice(i,1);
-          }
-        })
+      if(selectO=="false"){
+        for(let i:number=0;i<this.exchanges.length;i++){
+          this.exchanges.forEach((e:ExchangeGift)=>{
+            if(e.delivered){
+              let i:number=this.exchanges.indexOf(e);
+              this.exchanges.splice(i,1);
+            }
+          })
+        }
+
       }
 
 
