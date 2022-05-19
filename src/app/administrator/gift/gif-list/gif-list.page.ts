@@ -183,7 +183,7 @@ export class GifListPage implements OnInit {
       })
 
       //points
-      if(+this.searchStr>0){
+      if(+this.searchStr>=0){
         list=await this.gs.getByPoints(+this.searchStr);
         list.forEach((e:Gift)=>{
         if(!this.gifts.includes(e)){

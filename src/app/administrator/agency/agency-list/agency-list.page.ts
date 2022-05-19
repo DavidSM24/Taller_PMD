@@ -223,7 +223,7 @@ export class AgencyListPage implements OnInit {
       })
 
       //points
-      if(+this.searchStr>0){
+      if(+this.searchStr>=0){
         list=await this.as.getByPoints(+this.searchStr);
         list.forEach((e:Agency)=>{
         if(!this.agencies.includes(e)){

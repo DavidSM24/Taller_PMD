@@ -115,17 +115,32 @@ export class ExchangeGiftListPage implements OnInit {
       //consultar y cambiar lista
       await this.uts.presentLoading();
 
-      //username
+      //date
       list=await this.exs.getByDateFilter(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
         if(!this.exchanges.includes(e)){
 
-          if(e.agency.id=this.authS.agency.id){
+          //filtrar por agencia
+          if(e.agency.id==this.authS.agency.id){
             this.exchanges.push(e);
           }
-
         }
       })
+
+      //points
+      if(+this.searchStr>=0){
+        list=await this.exs.getByPoints(this.searchStr);
+        list.forEach((e:ExchangeGift)=>{
+          if(!this.exchanges.includes(e)){
+
+            //filtrar por agencia
+            if(e.agency.id==this.authS.agency.id){
+              this.exchanges.push(e);
+            }
+          }
+        })
+      }
+
 
       this.infinite.disabled=true;
       await this.uts.hideLoading()
