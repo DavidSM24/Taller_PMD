@@ -1,7 +1,7 @@
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExchangeGiftService } from '../../../services/exchange-gift.service';
-import { AlertController, IonInfiniteScroll, Platform, ModalController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, Platform, ModalController, IonSearchbar, IonSelect } from '@ionic/angular';
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ExchangeGiftSawPage } from '../exchange-gift-saw/exchange-gift-saw.page';
@@ -12,8 +12,10 @@ import { ExchangeGiftSawPage } from '../exchange-gift-saw/exchange-gift-saw.page
   styleUrls: ['./exchange-gift-list.page.scss'],
 })
 export class ExchangeGiftListPage implements OnInit {
+  @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
+  @ViewChild(IonSelect) select:IonSelect;
+  @ViewChild(IonSearchbar) sb:IonSearchbar;
 
-  @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
   oldInfinite:boolean;
 
   public exchanges: ExchangeGift[] = [];
@@ -90,10 +92,6 @@ export class ExchangeGiftListPage implements OnInit {
     }
   }
 
-  public onSearchChange(event) {
-    this.searchStr = event.detail.value;
-  }
-
   public async reset(event) {
     this.infinite.disabled = false;
     this.oldInfinite=false;
@@ -102,8 +100,9 @@ export class ExchangeGiftListPage implements OnInit {
     this.loadExchanges(event);
   }
 
-  async searchChange(event){
-    this.searchStr=event.detail.value;
+  async searchChange(){
+    let selectO=this.select.value;;
+    this.searchStr=this.sb.value;
 
     let list:ExchangeGift[]=[];
     this.exchanges=[];
@@ -153,6 +152,24 @@ export class ExchangeGiftListPage implements OnInit {
         }
       })
 
+      if(selectO=="true"){
+        this.exchanges.forEach((e:ExchangeGift)=>{
+          if(!e.delivered){
+            let i:number=this.exchanges.indexOf(e);
+            this.exchanges.splice(i,1);
+          }
+        })
+      }
+
+      else if(selectO=="false"){
+        this.exchanges.forEach((e:ExchangeGift)=>{
+          if(e.delivered){
+            let i:number=this.exchanges.indexOf(e);
+            this.exchanges.splice(i,1);
+          }
+        })
+      }
+
 
       this.infinite.disabled=true;
       await this.uts.hideLoading()
@@ -162,6 +179,30 @@ export class ExchangeGiftListPage implements OnInit {
       this.exchanges=this.exchanges.concat(this.oldExchanges);
       this.infinite.disabled=this.oldInfinite;
       await this.uts.hideLoading();
+    }
+
+    if(selectO=="true"){
+      for(let i:number=0;i<this.exchanges.length;i++){
+        this.exchanges.forEach((e:ExchangeGift)=>{
+          if(!e.delivered){
+            let i:number=this.exchanges.indexOf(e);
+            this.exchanges.splice(i,1);
+          }
+        })
+      }
+
+    }
+
+    if(selectO=="false"){
+      for(let i:number=0;i<this.exchanges.length;i++){
+        this.exchanges.forEach((e:ExchangeGift)=>{
+          if(e.delivered){
+            let i:number=this.exchanges.indexOf(e);
+            this.exchanges.splice(i,1);
+          }
+        })
+      }
+
     }
   }
 

@@ -9,13 +9,23 @@
     </ion-buttons>
 
   </ion-toolbar>
-  <ion-toolbar color="medium" (ionChange)="searchChange($event)">
+  <ion-toolbar color="medium">
     <ion-row class="ion-align-items-center">
-      <ion-col>
+      <ion-col size="9">
         <ion-searchbar  placeholder="Encuentra el canjeo que estás buscando..." inputmode="text" type="text"
-        debounce="1000" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
-
+        debounce="1000" (ionChange)="this.searchChange()" showCancelButton="always"></ion-searchbar>
       </ion-col>
+      <ion-col sizeSm="3" sizeLg="3" class="selector">
+        <ion-item>
+          <ion-label>Entregado:</ion-label>
+          <ion-select (ionChange)="this.searchChange()" interface="popover" multiple="false">
+            <ion-select-option value="true">Si</ion-select-option>
+            <ion-select-option value="false">No</ion-select-option>
+            <ion-select-option value="all">Todos</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+    </ion-col>
     </ion-row>
 
     <ion-row class="header-row">
