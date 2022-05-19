@@ -176,6 +176,19 @@ export class ExchangeGiftListPage implements OnInit {
 
       await modal.present();
 
+      const resp = await modal.onDidDismiss();
+
+      if (resp.data != null) {
+
+        let i: number = this.exchanges.indexOf(exchangesaw);
+        let i2: number = this.oldExchanges.indexOf(exchangesaw);
+
+        await this.uts.presentLoading();
+        this.exchanges.splice(i,1);
+        this.oldExchanges.splice(i2,1);
+        await this.uts.hideLoading();
+
+      }
 
     } catch (error) {
       console.log(error);

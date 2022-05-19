@@ -20,16 +20,19 @@
 
     <ion-row class="header-row">
 
+      <ion-col size="1" style="border: 0px !important;">
+      </ion-col>
+
       <ion-col size="4" style="border: 0px !important;">
         <ion-text>Regalo</ion-text>
       </ion-col>
 
-      <ion-col  size="4" style="border: 0px !important;">
+      <ion-col  size="3" style="border: 0px !important;">
         <ion-text>Puntos</ion-text>
       </ion-col>
 
       <ion-col size="4" style="border: 0px !important;">
-        <ion-text>Fecha de canje</ion-text>
+        <ion-text>Fecha del pedido</ion-text>
       </ion-col>
 
     </ion-row>
@@ -51,13 +54,19 @@
 
   <ion-row (click)="show(exchange)" let   *ngFor="let exchange of this.exchanges;let i=index" class="row">
 
+      <ion-col  size="1">
+        <ion-icon style="color:blueviolet" *ngIf="exchange.delivered" name="gift"></ion-icon>
+      </ion-col>
+
       <ion-col ize="4" >
+
+
         <ion-text class="pointer">
             {{exchange.gift.name}}
         </ion-text>
       </ion-col>
 
-        <ion-col  size="4">
+        <ion-col  size="3">
           <ion-text class="pointer">
             {{exchange.gift.points}}
           </ion-text>
@@ -67,7 +76,10 @@
           <ion-text class="pointer">
             {{exchange.dateExchange}}
           </ion-text>
+
         </ion-col>
+
+
 
     </ion-row>
 

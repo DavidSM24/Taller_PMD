@@ -69,6 +69,10 @@
                 <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
                   Cerrar Visualizacion
                 </ion-button>
+
+                <ion-button *ngIf="!this.exchangesaw.delivered" (click)="mensagealerta(exchangesaw)" color="danger" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
+                  Cancelar peido
+                </ion-button>
               </center>
             </ion-col>
           </ion-row>
