@@ -13,12 +13,12 @@
     <ion-row class="ion-align-items-center">
     <ion-col sizeSm="9.5" sizeLg="9.5">
       <ion-searchbar  placeholder="Encuentra el canjeo que estás buscando..." inputmode="text" type="text"
-        debounce="1000" (ionChange)="this.searchChange($event)" showCancelButton="always"></ion-searchbar>
+        debounce="1000" (ionChange)="this.searchChange()" showCancelButton="always"></ion-searchbar>
     </ion-col>
     <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">
           <ion-item>
             <ion-label>Entregado:</ion-label>
-            <ion-select (ionChange)="setbyExGiftByStatus($event)" interface="popover" multiple="false">
+            <ion-select (ionChange)="searchChange()" interface="popover" multiple="false">
               <ion-select-option value="true">Si</ion-select-option>
               <ion-select-option value="false">No</ion-select-option>
               <ion-select-option value="all">Todos</ion-select-option>

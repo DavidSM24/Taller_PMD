@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
-import { AlertController, IonInfiniteScroll, IonSelect, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, IonSelect, LoadingController, ModalController, Platform, ToastController, IonSearchbar } from '@ionic/angular';
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
 import { UtilService } from 'src/app/services/util.service';
@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ExchangeGiftListPage {
   @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
   @ViewChild(IonSelect) select:IonSelect;
+  @ViewChild(IonSearchbar) sb:IonSearchbar;
 
   oldInfinite:boolean;
 
@@ -67,9 +68,9 @@ export class ExchangeGiftListPage {
     }
 
     public async setbyExGiftByStatus(event?){
-
-      this.
+      this.searchChange();
     }
+
     public async saw(exchangesaw: ExchangeGift) {
       try {
         const modal = await this.modalCtrl.create({
@@ -197,20 +198,13 @@ export class ExchangeGiftListPage {
     this.searchStr = event.detail.value;
   }
 
-  async searchChange(event){
+  async searchChange(){
 
-    let selectO=this.select.value;
-
-    if(event instanceof String){
-      this.searchStr=event;
-    }
-    else{
-      this.searchStr=event.detail.value;
-    }
-
-
+    let selectO=this.select.value;;
+    this.searchStr=this.sb.value;
     let list:ExchangeGift[]=[];
     this.exGifts=[];
+
 
     let lenght=this.searchStr.length;
 
@@ -281,7 +275,14 @@ export class ExchangeGiftListPage {
     else if(lenght<1){
       this.exGifts=[];
       this.exGifts=this.exGifts.concat(this.oldExGifts);
-      if(selectO=="true"){
+
+
+      this.infinite.disabled=this.oldInfinite;
+      await this.miLoading.dismiss();
+    }
+
+    if(selectO=="true"){
+      for(let i:number=0;i<this.exGifts.length;i++){
         this.exGifts.forEach((e:ExchangeGift)=>{
           if(!e.delivered){
             let i:number=this.exGifts.indexOf(e);
@@ -290,7 +291,10 @@ export class ExchangeGiftListPage {
         })
       }
 
-      else if(selectO=="false"){
+    }
+
+    if(selectO=="false"){
+      for(let i:number=0;i<this.exGifts.length;i++){
         this.exGifts.forEach((e:ExchangeGift)=>{
           if(e.delivered){
             let i:number=this.exGifts.indexOf(e);
@@ -298,8 +302,7 @@ export class ExchangeGiftListPage {
           }
         })
       }
-      this.infinite.disabled=this.oldInfinite;
-      await this.miLoading.dismiss();
+
     }
   }
 }
