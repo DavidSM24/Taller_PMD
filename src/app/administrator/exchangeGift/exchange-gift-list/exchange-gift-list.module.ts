@@ -10,6 +10,7 @@ import { ExchangeGiftListPage } from './exchange-gift-list.page';
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
+import { UtilService } from '../../../services/util.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
     ReactiveFormsModule,
     Ng2SearchPipeModule
   ],
+  providers:[UtilService],
   declarations: [ExchangeGiftListPage ,ExchangeGifUpdatePage, ExchangeGifSawPage]
 })
 export class ExchangeGiftListPageModule {}

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, IonSelect, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-update.page';
 import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
 import { UtilService } from 'src/app/services/util.service';
@@ -12,12 +12,20 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./exchange-gift-list.page.scss'],
 })
 export class ExchangeGiftListPage {
+  @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
+  @ViewChild(IonSelect) select:IonSelect;
+
+  oldInfinite:boolean;
+
+  public searchStr:any;
   public exGifts:ExchangeGift[]=[];
+  public oldExGifts:ExchangeGift[]=[];
+
   public exGiftsx:ExchangeGift[]=[];
   private niTems:number;
   public searchTerm:string;
-  @ViewChild(IonInfiniteScroll) infinite:IonInfiniteScroll;
   private miLoading:HTMLIonLoadingElement;
+
   constructor(private exs:ExchangeGiftService,
     private loading:LoadingController,
     private toast:ToastController,
@@ -40,46 +48,27 @@ export class ExchangeGiftListPage {
             exchange: exchange
           }
         });
-  
+
         await modal.present();
-  
+
         const resp = await modal.onDidDismiss();
-  
+
         if (resp.data != null) {
           let i: number = this.exGifts.indexOf(exchange);
           this.exGifts[i] = resp.data.newExchange;
+
+          let i2: number = this.oldExGifts.indexOf(exchange);
+          this.oldExGifts[i2] = resp.data.newExchange;
         }
       } catch (error) {
         console.log(error);
       }
-  
+
     }
 
     public async setbyExGiftByStatus(event?){
-    
-      let exgif:ExchangeGift[]=[]
-      const value:string=event.detail.value;
-       
-  
-      if("false".match(value)){
-        this.exGiftsx.forEach(status=>{
-          if(!status.delivered){
-            exgif.push(status);
-          }
-        });
-        this.exGifts=exgif;
-  
-      } else if("true".match(value)){
-        this.exGiftsx.forEach(status=>{
-          if(status.delivered){
-            exgif.push(status);
-          }
-        });
-        console.log(exgif);
-        this.exGifts=exgif;
-      }else if("all".match(value)) {
-        this.reset();
-      }
+
+      this.
     }
     public async saw(exchangesaw: ExchangeGift) {
       try {
@@ -89,31 +78,37 @@ export class ExchangeGiftListPage {
             'exchangesaw': exchangesaw
           }
         });
-  
+
         await modal.present();
-  
+
         const resp = await modal.onDidDismiss();
-  
+
         if (resp.data != null) {
           let i: number = this.exGifts.indexOf(exchangesaw);
           this.exGifts[i] = resp.data.newExchange;
+
+          let i2: number = this.oldExGifts.indexOf(exchangesaw);
+          this.oldExGifts[i2] = resp.data.newExchange;
         }
       } catch (error) {
         console.log(error);
       }
-  
+
     }
 
   public async cargaExGifts(event?){
     if(this.infinite){
       this.infinite.disabled=false;
+      this.oldInfinite=false;
     }
     if(!event){
       await this.presentLoading();
     }
     this.exGifts=[];
+    this.oldExGifts=[];
     try{
       this.exGifts=await this.exs.getAllPaged(this.niTems, this.exGifts.length);;
+      this.oldExGifts=this.oldExGifts.concat(this.exGifts)
       this.exGiftsx=this.exGifts;
     }catch(err){
       console.error(err);
@@ -130,8 +125,12 @@ export class ExchangeGiftListPage {
     await this.presentLoading();
     await this.exs.delete(exgift);
     let i=this.exGifts.indexOf(exgift,0);
+    let i2=this.oldExGifts.indexOf(exgift,0);
     if(i>-1){
       this.exGifts.splice(i,1);
+    }
+    if(i2>-1){
+      this.oldExGifts.splice(i2,1);
     }
     await this.miLoading.dismiss();
   }
@@ -164,7 +163,7 @@ export class ExchangeGiftListPage {
           text: 'Cancelar',
           cssClass: 'secondary',
           handler: (blah) => {}},
-          
+
       ]
     });
    await alert.present();
@@ -174,18 +173,133 @@ export class ExchangeGiftListPage {
     if (!this.infinite.disabled) {
       newExchange = await this.exs.getAllPaged(this.niTems, this.exGifts.length);
       this.exGifts = this.exGifts.concat(newExchange);
+      this.oldExGifts=this.oldExGifts.concat(newExchange);
 
       if (newExchange.length < 30) {
         this.infinite.disabled = true;
+        this.oldInfinite=true;
       }
     }
   }
   public async reset(event?){
     this.infinite.disabled=false;
+    this.oldInfinite=false;
     this.exGifts=[];
+    this.oldExGifts=[];
     this.cargaExGifts(event);
   }
+
   public logout(){
     this.authS.logout();
+  }
+
+  public onSearchChange(event) {
+    this.searchStr = event.detail.value;
+  }
+
+  async searchChange(event){
+
+    let selectO=this.select.value;
+
+    if(event instanceof String){
+      this.searchStr=event;
+    }
+    else{
+      this.searchStr=event.detail.value;
+    }
+
+
+    let list:ExchangeGift[]=[];
+    this.exGifts=[];
+
+    let lenght=this.searchStr.length;
+
+    if(lenght>0){
+
+      //consultar y cambiar lista
+      await this.presentLoading();
+
+      //date
+      list=await this.exs.getByDateFilter(this.searchStr);
+      list.forEach((e:ExchangeGift)=>{
+        if(!this.exGifts.includes(e)){
+
+          this.exGifts.push(e);
+        }
+      })
+
+      //points
+      if(+this.searchStr>=0){
+        list=await this.exs.getByPoints(this.searchStr);
+        list.forEach((e:ExchangeGift)=>{
+          if(!this.exGifts.includes(e)){
+
+            this.exGifts.push(e);
+          }
+        })
+      }
+
+      //gift-name
+      list=await this.exs.getByGiftName(this.searchStr);
+      list.forEach((e:ExchangeGift)=>{
+        if(!this.exGifts.includes(e)){
+
+          this.exGifts.push(e);
+        }
+      })
+
+      //agency-user-name
+      list=await this.exs.getByAgencyUsername(this.searchStr);
+      list.forEach((e:ExchangeGift)=>{
+        if(!this.exGifts.includes(e)){
+
+          this.exGifts.push(e);
+        }
+      })
+
+      if(selectO=="true"){
+        this.exGifts.forEach((e:ExchangeGift)=>{
+          if(!e.delivered){
+            let i:number=this.exGifts.indexOf(e);
+            this.exGifts.splice(i,1);
+          }
+        })
+      }
+
+      else if(selectO=="false"){
+        this.exGifts.forEach((e:ExchangeGift)=>{
+          if(e.delivered){
+            let i:number=this.exGifts.indexOf(e);
+            this.exGifts.splice(i,1);
+          }
+        })
+      }
+
+      this.infinite.disabled=true;
+      await this.miLoading.dismiss();
+    }
+    else if(lenght<1){
+      this.exGifts=[];
+      this.exGifts=this.exGifts.concat(this.oldExGifts);
+      if(selectO=="true"){
+        this.exGifts.forEach((e:ExchangeGift)=>{
+          if(!e.delivered){
+            let i:number=this.exGifts.indexOf(e);
+            this.exGifts.splice(i,1);
+          }
+        })
+      }
+
+      else if(selectO=="false"){
+        this.exGifts.forEach((e:ExchangeGift)=>{
+          if(e.delivered){
+            let i:number=this.exGifts.indexOf(e);
+            this.exGifts.splice(i,1);
+          }
+        })
+      }
+      this.infinite.disabled=this.oldInfinite;
+      await this.miLoading.dismiss();
+    }
   }
 }

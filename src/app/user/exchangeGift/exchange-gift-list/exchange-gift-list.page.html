@@ -55,7 +55,9 @@
   <ion-row (click)="show(exchange)" let   *ngFor="let exchange of this.exchanges;let i=index" class="row">
 
       <ion-col  size="1">
-        <ion-icon style="color:blueviolet" *ngIf="exchange.delivered" name="gift"></ion-icon>
+        <div title="Entregado">
+          <ion-icon class="icon-c" style="color:blueviolet" *ngIf="exchange.delivered" name="gift"></ion-icon>
+        </div>
       </ion-col>
 
       <ion-col ize="4" >

@@ -58,6 +58,10 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     return this.getListData(this.URLDatabase + this.endpoint+ "/points/"+ points);
   }
 
+  public getByAgencyUsername(auname:string):Promise<ExchangeGift[]>{
+    return this.getListData(this.URLDatabase + this.endpoint+ "/auname/"+ auname);
+  }
+
   public async getById(id: number): Promise<ExchangeGift> {
 
     let exchangegift: ExchangeGift = null;

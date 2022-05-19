@@ -1,6 +1,6 @@
 <ion-header [translucent]="false">
   <ion-toolbar color="primary">
-    
+
     <ion-title>Lista de Pedidos</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
@@ -12,16 +12,17 @@
   <ion-toolbar color="primary">
     <ion-row class="ion-align-items-center">
     <ion-col sizeSm="9.5" sizeLg="9.5">
-    <ion-searchbar placeholder="Encuentra el regalo intercambiado que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
+      <ion-searchbar  placeholder="Encuentra el canjeo que estás buscando..." inputmode="text" type="text"
+        debounce="1000" (ionChange)="this.searchChange($event)" showCancelButton="always"></ion-searchbar>
     </ion-col>
-    <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">     
+    <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">
           <ion-item>
-            <ion-label>Estado De La Entrega</ion-label>
+            <ion-label>Entregado:</ion-label>
             <ion-select (ionChange)="setbyExGiftByStatus($event)" interface="popover" multiple="false">
-              <ion-select-option value="true">Entregado</ion-select-option>
-              <ion-select-option value="false">Pendiente</ion-select-option>
+              <ion-select-option value="true">Si</ion-select-option>
+              <ion-select-option value="false">No</ion-select-option>
               <ion-select-option value="all">Todos</ion-select-option>
-             
+
             </ion-select>
           </ion-item>
       </ion-col>
@@ -53,7 +54,7 @@
     </ion-row>
 
   </ion-toolbar>
-  
+
 </ion-header>
 
 <ion-content [fullscreen]="true" style="background-color: white;">
@@ -63,12 +64,11 @@
   </ion-refresher>
 
   <div class="body">
-  
 
   <ion-grid class="ion-text-center">
 
-    <ion-row let *ngFor="let exchangeGift of this.exGifts | filter:searchTerm" class="row">
-      
+    <ion-row let *ngFor="let exchangeGift of this.exGifts" class="row">
+
       <ion-col size="0.6">
         <ion-text>
           <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="edit(exchangeGift)"></ion-icon>
@@ -90,7 +90,7 @@
             {{exchangeGift.agency.myUser.name}}
           </ion-text>
         </ion-col>
-  
+
         <ion-col size="2.5">
           <ion-text>
             {{exchangeGift.gift.name}}
