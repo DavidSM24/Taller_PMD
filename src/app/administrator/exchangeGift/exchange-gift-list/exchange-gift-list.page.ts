@@ -6,6 +6,7 @@ import { ExchangeGifUpdatePage } from '../exchange-gif-update/exchange-gif-updat
 import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { enGB } from 'date-fns/locale';
 @Component({
   selector: 'app-exchange-gift-list',
   templateUrl: './exchange-gift-list.page.html',
@@ -108,7 +109,9 @@ export class ExchangeGiftListPage {
     this.exGifts=[];
     this.oldExGifts=[];
     try{
-      this.exGifts=await this.exs.getAllPaged(this.niTems, this.exGifts.length);;
+      this.exGifts=await this.exs.getAllPaged(this.niTems, this.exGifts.length);
+      this.exGifts= this.sortList(this.exGifts);
+
       this.oldExGifts=this.oldExGifts.concat(this.exGifts)
       this.exGiftsx=this.exGifts;
     }catch(err){
@@ -122,6 +125,7 @@ export class ExchangeGiftListPage {
       }
     }
   }
+
   public async borra(exgift:ExchangeGift){
     await this.presentLoading();
     await this.exs.delete(exgift);
@@ -169,10 +173,12 @@ export class ExchangeGiftListPage {
     });
    await alert.present();
   }
+
   public async infiniteLoad($event) {
     let newExchange: ExchangeGift[] = [];
     if (!this.infinite.disabled) {
       newExchange = await this.exs.getAllPaged(this.niTems, this.exGifts.length);
+      newExchange=this.sortList(newExchange);
       this.exGifts = this.exGifts.concat(newExchange);
       this.oldExGifts=this.oldExGifts.concat(newExchange);
 
@@ -260,6 +266,8 @@ export class ExchangeGiftListPage {
           if(e.delivered) listS.push(e);
         })
         this.exGifts=listS;
+        this.exGifts=this.sortList(this.exGifts);
+
       }
 
       else if(selectO=="false"){
@@ -267,10 +275,14 @@ export class ExchangeGiftListPage {
           if(!e.delivered) listS.push(e);
         })
         this.exGifts=listS;
+        this.exGifts=this.sortList(this.exGifts);
+
       }
 
       else{
         this.exGifts=resultFilter;
+        this.exGifts=this.sortList(this.exGifts);
+
       }
 
       this.infinite.disabled=false
@@ -285,6 +297,7 @@ export class ExchangeGiftListPage {
           if(e.delivered) listS.push(e);
         })
         this.exGifts=listS;
+        this.exGifts=this.sortList(this.exGifts);
       }
 
       else if(selectO=="false"){
@@ -292,10 +305,14 @@ export class ExchangeGiftListPage {
           if(!e.delivered) listS.push(e);
         })
         this.exGifts=listS;
+        this.exGifts=this.sortList(this.exGifts);
+
       }
 
       else{
         this.exGifts=resultFilter;
+        this.exGifts=this.sortList(this.exGifts);
+
       }
 
       this.infinite.disabled=this.oldInfinite;
@@ -303,5 +320,84 @@ export class ExchangeGiftListPage {
     }
 
 
+  }
+
+  public async changeDeliveredAlert(eg:ExchangeGift){
+
+    let del:string;
+    if(!eg.delivered) del= "Entregado"
+    else del="Pendiente"
+
+    const alert = await this.alerta.create({
+      header: 'Cambio de estado de pedido.',
+      message: 'El estado de este pedido se cambiará a '+del+", ¿está seguro que quiere continuar?",
+      buttons: [
+        {text: 'Aceptar',
+        cssClass: 'secondary',
+          handler: () => {
+            this.changeDelivered(eg);
+          }
+        },{
+          text: 'Cancelar',
+          cssClass: 'rojo',
+          handler: (blah) => {}},
+
+      ]
+    });
+   await alert.present();
+  }
+
+  public async changeDelivered(eg:ExchangeGift){
+    if(eg!=null) {
+
+      eg.delivered=!eg.delivered;
+
+      let del:string;
+      if(eg.delivered) del= "Entregado"
+      else del="Pendiente"
+
+
+      try {
+        await this.presentLoading();
+        eg=await this.exs.createOrUpdate(eg);
+
+        if(eg!=null){
+          this.presentToast("Se ha cambiado el estado del pedido a "+del+".","success");
+        }
+        await this.miLoading.dismiss();
+      } catch (error) {
+        console.log(error);
+        this.presentToast("Ha habido un error al cambiar el estado del pedido.","danger");
+        await this.miLoading.dismiss();
+      }
+
+    }
+  }
+
+  private sortList(eg:ExchangeGift[]):ExchangeGift[] {
+    if(eg!=null&&eg.length>1){
+      eg=eg.sort((n1,n2) => {
+        if (n1.dateExchange > n2.dateExchange) {
+            return 1;
+        }
+
+        else if (n1.dateExchange < n2.dateExchange) {
+            return -1;
+        }
+
+        else {
+          if (n1.id > n2.id) {
+            return 1;
+          }
+
+          else if (n1.id < n2.id) {
+              return -1;
+          }
+        }
+        return 0;
+    });
+    }
+
+    return eg;
   }
 }

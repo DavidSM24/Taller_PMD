@@ -3,9 +3,12 @@
 
     <ion-title>Lista de Pedidos</ion-title>
 
-    <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" routerLink="/tab-administrator/exchange-gift/create"></ion-icon>
-      <ion-icon class="icon-logout" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
+    <ion-buttons style="cursor:pointer" title="Nuevo" slot="end" routerLink="/tab-administrator/exchange-gift/create">
+      <ion-icon class="icon-c" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer !important"></ion-icon>
+    </ion-buttons>
+
+    <ion-buttons style="margin-right: 1%; cursor:pointer;" title="Cerrar Sesión" slot="end" (click)="logout()">
+      <ion-icon class="icon-c" slot="end" name="log-out-outline" style="zoom:1.7;cursor:pointer"></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
@@ -28,7 +31,7 @@
       </ion-col>
     </ion-row>
     <ion-row class="header-row">
-      <ion-col size="1" style="border: 0px !important;">
+      <ion-col size="1.4" style="border: 0px !important;">
         <ion-text></ion-text>
       </ion-col>
 
@@ -44,7 +47,7 @@
         <ion-text>Nombre de Regalo</ion-text>
       </ion-col>
 
-      <ion-col size="2.5" style="border: 0px !important;">
+      <ion-col size="2.5" style="border: 0px !important; margin-left:-1% !important">
         <ion-text>Entregado</ion-text>
       </ion-col>
 
@@ -69,14 +72,28 @@
 
     <ion-row let *ngFor="let exchangeGift of this.exGifts" class="row">
 
-      <ion-col size="0.6">
+      <ion-col size="0.5">
         <ion-text>
-          <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="edit(exchangeGift)"></ion-icon>
+          <div title="Editar" (click)="edit(exchangeGift)" style=cursor:pointer>
+            <ion-icon class="icon-c" name="pencil" style="color:#22388c;cursor:pointer" ></ion-icon>
+          </div>
         </ion-text>
       </ion-col>
-      <ion-col size="0.3">
+
+      <ion-col size="0.5">
         <ion-text>
-          <ion-icon name="eye-outline" style="color:#22388c;cursor:pointer" (click)="saw(exchangeGift)"></ion-icon>
+          <div title="Ver detalles" (click)="saw(exchangeGift)" style="cursor:pointer">
+            <ion-icon name="eye-outline" style="color:#22388c;pointer-events: none;"></ion-icon>
+          </div>
+        </ion-text>
+      </ion-col>
+
+
+      <ion-col size="0.5">
+        <ion-text>
+          <div (click)="changeDeliveredAlert(exchangeGift)" style="cursor:pointer" title="Cambiar estado">
+            <ion-icon (click)="changeDeliveredAlert(exchangeGift)" name="gift-outline" style="color:#22388c;pointer-events: none;"></ion-icon>
+          </div>
         </ion-text>
       </ion-col>
       <ion-col size="2.5">
@@ -98,15 +115,21 @@
         </ion-col>
 
         <ion-col size="2.5">
-          <ion-icon *ngIf="exchangeGift.delivered" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
-          <ion-icon *ngIf="!exchangeGift.delivered" name="close-circle" style="color: red;"></ion-icon>
+          <div title="Entregado" *ngIf="exchangeGift.delivered">
+            <ion-icon  name="checkmark-circle" style="color: #39ff14;pointer-events: none;"></ion-icon>
+          </div>
+          <div title="Pendiente" *ngIf="!exchangeGift.delivered">
+            <ion-icon  name="close-circle" style="color: red;pointer-events: none;"></ion-icon>
+          </div>
         </ion-col>
 
 
 
-        <ion-col size="1">
+        <ion-col size="0.4">
           <ion-text>
-            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="mensagealerta(exchangeGift)"></ion-icon>
+            <div (click)="mensagealerta(exchangeGift)" title="Eliminar" style="cursor:pointer">
+              <ion-icon name="trash" color="danger" style="pointer-events: none;" ></ion-icon>
+            </div>
           </ion-text>
         </ion-col>
     </ion-row>
