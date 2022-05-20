@@ -1,143 +1,196 @@
 <ion-header [translucent]="false">
   <ion-toolbar color="primary">
-
     <ion-title>Lista de Pedidos</ion-title>
 
-    <ion-buttons style="cursor:pointer" title="Nuevo" slot="end" routerLink="/tab-administrator/exchange-gift/create">
-      <ion-icon class="icon-c" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer !important"></ion-icon>
+    <ion-buttons
+      style="cursor: pointer"
+      title="Nuevo"
+      slot="end"
+      routerLink="/tab-administrator/exchange-gift/create"
+    >
+      <ion-icon
+        class="icon-c"
+        slot="end"
+        name="add-circle"
+        style="zoom: 1.5; cursor: pointer !important"
+      ></ion-icon>
     </ion-buttons>
 
-    <ion-buttons style="margin-right: 1%; cursor:pointer;" title="Cerrar Sesión" slot="end" (click)="logout()">
-      <ion-icon class="icon-c" slot="end" name="log-out-outline" style="zoom:1.7;cursor:pointer"></ion-icon>
+    <ion-buttons
+      style="margin-right: 1%; cursor: pointer"
+      title="Cerrar Sesión"
+      slot="end"
+      (click)="logout()"
+    >
+      <ion-icon
+        class="icon-c"
+        slot="end"
+        name="log-out-outline"
+        style="zoom: 1.7; cursor: pointer"
+      ></ion-icon>
     </ion-buttons>
-
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-row class="ion-align-items-center">
-    <ion-col sizeSm="9.5" sizeLg="9.5">
-      <ion-searchbar  placeholder="Encuentra el canjeo que estás buscando..." inputmode="text" type="text"
-        debounce="1000" (ionChange)="this.searchChange()" showCancelButton="always"></ion-searchbar>
-    </ion-col>
-    <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">
-          <ion-item>
-            <ion-label>Entregado:</ion-label>
-            <ion-select (ionChange)="searchChange()" interface="popover" multiple="false">
-              <ion-select-option value="true">Si</ion-select-option>
-              <ion-select-option value="false">No</ion-select-option>
-              <ion-select-option value="all">Todos</ion-select-option>
-
-            </ion-select>
-          </ion-item>
+    <ion-row>
+      <ion-col sizeSm="9.5" sizeLg="9.5">
+        <ion-searchbar
+          placeholder="Encuentra el canjeo que estás buscando..."
+          inputmode="text"
+          type="text"
+          debounce="1000"
+          (ionChange)="this.searchChange()"
+          showCancelButton="always"
+        ></ion-searchbar>
+      </ion-col>
+      <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">
+        <ion-item style="height: 85%; margin-top:1.1%">
+          <ion-label>Entregado:</ion-label>
+          <ion-select
+            (ionChange)="searchChange()"
+            interface="popover"
+            multiple="false"
+          >
+            <ion-select-option value="true">Si</ion-select-option>
+            <ion-select-option value="false">No</ion-select-option>
+            <ion-select-option value="all">Todos</ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-col>
     </ion-row>
+
     <ion-row class="header-row">
-      <ion-col size="1.4" style="border: 0px !important;">
+      <ion-col size="1.4" style="border: 0px !important">
         <ion-text></ion-text>
       </ion-col>
 
-      <ion-col size="2.5" style="border: 0px !important;">
+      <ion-col size="2.5" style="border: 0px !important">
         <ion-text>Fecha de Intercambio</ion-text>
       </ion-col>
 
-      <ion-col  size="2.5" style="border: 0px !important;">
+      <ion-col size="2.5" style="border: 0px !important">
         <ion-text>Nombre de Agencia</ion-text>
       </ion-col>
 
-      <ion-col size="2.5" style="border: 0px !important;">
+      <ion-col size="2.5" style="border: 0px !important">
         <ion-text>Nombre de Regalo</ion-text>
       </ion-col>
 
-      <ion-col size="2.5" style="border: 0px !important; margin-left:-1% !important">
+      <ion-col
+        size="2.5"
+        style="border: 0px !important; margin-left: -1% !important"
+      >
         <ion-text>Entregado</ion-text>
       </ion-col>
 
-      <ion-col size="1" style="border: 0px !important;">
+      <ion-col size="1" style="border: 0px !important">
         <ion-text></ion-text>
       </ion-col>
     </ion-row>
-
   </ion-toolbar>
-
 </ion-header>
 
-<ion-content [fullscreen]="true" style="background-color: white;">
-
+<ion-content [fullscreen]="true" style="background-color: white">
   <ion-refresher slot="fixed" (ionRefresh)="reset($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <div class="body">
-
-  <ion-grid class="ion-text-center">
-
-    <ion-row let *ngFor="let exchangeGift of this.exGifts" class="row">
-
-      <ion-col size="0.5">
-        <ion-text>
-          <div title="Editar" (click)="edit(exchangeGift)" style=cursor:pointer>
-            <ion-icon class="icon-c" name="pencil" style="color:#22388c;cursor:pointer" ></ion-icon>
-          </div>
-        </ion-text>
-      </ion-col>
-
-      <ion-col size="0.5">
-        <ion-text>
-          <div title="Ver detalles" (click)="saw(exchangeGift)" style="cursor:pointer">
-            <ion-icon name="eye-outline" style="color:#22388c;pointer-events: none;"></ion-icon>
-          </div>
-        </ion-text>
-      </ion-col>
-
-
-      <ion-col size="0.5">
-        <ion-text>
-          <div (click)="changeDeliveredAlert(exchangeGift)" style="cursor:pointer" title="Cambiar estado">
-            <ion-icon (click)="changeDeliveredAlert(exchangeGift)" name="gift-outline" style="color:#22388c;pointer-events: none;"></ion-icon>
-          </div>
-        </ion-text>
-      </ion-col>
-      <ion-col size="2.5">
-        <ion-text>
-            {{exchangeGift.dateExchange}}
-        </ion-text>
-      </ion-col>
-
-        <ion-col size="2.5">
+    <ion-grid class="ion-text-center">
+      <ion-row let *ngFor="let exchangeGift of this.exGifts" class="row">
+        <ion-col size="0.5">
           <ion-text>
-            {{exchangeGift.agency.myUser.name}}
+            <div
+              title="Editar"
+              (click)="edit(exchangeGift)"
+              style="cursor: pointer"
+            >
+              <ion-icon
+                class="icon-c"
+                name="pencil"
+                style="color: #22388c; cursor: pointer"
+              ></ion-icon>
+            </div>
           </ion-text>
         </ion-col>
 
-        <ion-col size="2.5">
+        <ion-col size="0.5">
           <ion-text>
-            {{exchangeGift.gift.name}}
+            <div
+              title="Ver detalles"
+              (click)="saw(exchangeGift)"
+              style="cursor: pointer"
+            >
+              <ion-icon
+                name="eye-outline"
+                style="color: #22388c; pointer-events: none"
+              ></ion-icon>
+            </div>
           </ion-text>
+        </ion-col>
+
+        <ion-col size="0.5">
+          <ion-text>
+            <div
+              (click)="changeDeliveredAlert(exchangeGift)"
+              style="cursor: pointer"
+              title="Cambiar estado"
+            >
+              <ion-icon
+                (click)="changeDeliveredAlert(exchangeGift)"
+                name="gift-outline"
+                style="color: #22388c; pointer-events: none"
+              ></ion-icon>
+            </div>
+          </ion-text>
+        </ion-col>
+        <ion-col size="2.5">
+          <ion-text> {{exchangeGift.dateExchange}} </ion-text>
+        </ion-col>
+
+        <ion-col size="2.5">
+          <ion-text> {{exchangeGift.agency.myUser.name}} </ion-text>
+        </ion-col>
+
+        <ion-col size="2.5">
+          <ion-text> {{exchangeGift.gift.name}} </ion-text>
         </ion-col>
 
         <ion-col size="2.5">
           <div title="Entregado" *ngIf="exchangeGift.delivered">
-            <ion-icon  name="checkmark-circle" style="color: #39ff14;pointer-events: none;"></ion-icon>
+            <ion-icon
+              name="checkmark-circle"
+              style="color: #39ff14; pointer-events: none"
+            ></ion-icon>
           </div>
           <div title="Pendiente" *ngIf="!exchangeGift.delivered">
-            <ion-icon  name="close-circle" style="color: red;pointer-events: none;"></ion-icon>
+            <ion-icon
+              name="close-circle"
+              style="color: red; pointer-events: none"
+            ></ion-icon>
           </div>
         </ion-col>
-
-
 
         <ion-col size="0.4">
           <ion-text>
-            <div (click)="mensagealerta(exchangeGift)" title="Eliminar" style="cursor:pointer">
-              <ion-icon name="trash" color="danger" style="pointer-events: none;" ></ion-icon>
+            <div
+              (click)="mensagealerta(exchangeGift)"
+              title="Eliminar"
+              style="cursor: pointer"
+            >
+              <ion-icon
+                name="trash"
+                color="danger"
+                style="pointer-events: none"
+              ></ion-icon>
             </div>
           </ion-text>
         </ion-col>
-    </ion-row>
+      </ion-row>
+    </ion-grid>
 
-  </ion-grid>
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="infiniteLoad($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="infiniteLoad($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

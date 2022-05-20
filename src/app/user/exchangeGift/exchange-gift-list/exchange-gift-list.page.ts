@@ -59,6 +59,7 @@ export class ExchangeGiftListPage implements OnInit {
       newExchanges=await this.exs.getByAgencyPaged(this.authS.agency,this.niTems,0);
       //newExchanges=await this.exs.getAll();
       this.exchanges=this.exchanges.concat(newExchanges);
+      this.exchanges=this.sortList(this.exchanges);
       this.oldExchanges=[];
       this.oldExchanges=this.oldExchanges.concat(newExchanges);
 
@@ -82,6 +83,7 @@ export class ExchangeGiftListPage implements OnInit {
     let newExchanges: ExchangeGift[] = [];
     if (!this.infinite.disabled) {
       newExchanges = await this.exs.getAllPaged(this.niTems, this.exchanges.length);
+      newExchanges=this.sortList(newExchanges);
       this.exchanges = this.exchanges.concat(newExchanges);
       this.oldExchanges=this.oldExchanges.concat(newExchanges);
 
@@ -210,6 +212,7 @@ export class ExchangeGiftListPage implements OnInit {
       await this.uts.hideLoading();
     }
 
+    this.exchanges=this.sortList(this.exchanges);
 
   }
 
@@ -244,4 +247,34 @@ export class ExchangeGiftListPage implements OnInit {
 
   }
 
+  private sortList(eg:ExchangeGift[]):ExchangeGift[] {
+    if(eg!=null&&eg.length>1){
+      eg=eg.sort((n1,n2) => {
+        if (n1.dateExchange > n2.dateExchange) {
+            return 1;
+        }
+
+        else if (n1.dateExchange < n2.dateExchange) {
+            return -1;
+        }
+
+        else {
+          if (n1.id > n2.id) {
+            return 1;
+          }
+
+          else if (n1.id < n2.id) {
+              return -1;
+          }
+        }
+        return 0;
+    });
+    }
+
+    return eg;
+  }
+
+  public logout() {
+    this.authS.logout();
+  }
 }

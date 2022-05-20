@@ -4,19 +4,19 @@
 
     <ion-title>Lista de Canjees</ion-title>
 
-    <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon class="icon-logout" slot="end" name="log-out-outline" style="zoom:1.7;cursor:pointer"></ion-icon>
+    <ion-buttons style="margin-right: 1%;cursor:pointer;" slot="end" title="Cerrar Sesión" (click)="this.logout()">
+      <ion-icon slot="end" name="log-out-outline" style="color: rgb(255, 255, 255);zoom:1.7;cursor:pointer"></ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
   <ion-toolbar color="medium">
-    <ion-row class="ion-align-items-center">
+    <ion-row>
       <ion-col size="9">
         <ion-searchbar  placeholder="Encuentra el canjeo que estás buscando..." inputmode="text" type="text"
         debounce="1000" (ionChange)="this.searchChange()" showCancelButton="always"></ion-searchbar>
       </ion-col>
       <ion-col sizeSm="3" sizeLg="3" class="selector">
-        <ion-item>
+        <ion-item style="height: 85%; margin-top:1.1%">
           <ion-label>Entregado:</ion-label>
           <ion-select (ionChange)="this.searchChange()" interface="popover" multiple="false">
             <ion-select-option value="true">Si</ion-select-option>

@@ -4,15 +4,38 @@
     <ion-title>Lista de Regalos</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon routerLink="/tab-administrator/gift/create" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" ></ion-icon>
-      <ion-icon class="icon-logout" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
-    </ion-buttons>
+      <div style="cursor:pointer;" title="Nuevo" routerLink="/tab-administrator/gift/create">
+        <ion-icon  slot="end" name="add-circle" style="zoom:1.5;" ></ion-icon>
+      </div>
+      <div style="cursor:pointer;" (click)="logout()" title="Cerrar Sesión">
+        <ion-icon class="icon-logout" slot="end" name="log-out-outline"  style="zoom:1.7;cursor:pointer"></ion-icon>
+      </div>
+      </ion-buttons>
 
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Encuentra el regalo que estás buscando..." debounce="600" inputmode="text" type="text" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
+
+    <ion-row>
+      <ion-col size="9.5">
+        <ion-searchbar placeholder="Encuentra el regalo que estás buscando..." debounce="600" inputmode="text" type="text" (ionChange)="onSearchChange()" showCancelButton="always"></ion-searchbar>
+      </ion-col>
+
+      <ion-col>
+          <ion-item style="height: 85%; margin-top:1.1%">
+            <ion-label>Disponible:</ion-label>
+            <ion-select  (ionChange)="this.onSearchChange()" interface="popover" multiple="false">
+              <ion-select-option value="true">Si</ion-select-option>
+              <ion-select-option value="false">No</ion-select-option>
+              <ion-select-option value="all">Todos</ion-select-option>
+
+            </ion-select>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+
 
     <ion-row #rowItem class="header-row">
+
       <ion-col size="1" style="border: 0px !important;">
         <ion-text></ion-text>
       </ion-col>
@@ -52,7 +75,9 @@
 
       <ion-col size="1">
         <ion-text>
-          <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="edit(gift)"></ion-icon>
+        <div title="Editar" (click)="edit(gift)" style="cursor:pointer">
+          <ion-icon name="pencil" style="color:#22388c;" (click)="edit(gift)"></ion-icon>
+        </div>
         </ion-text>
       </ion-col>
 
@@ -69,13 +94,20 @@
         </ion-col>
 
         <ion-col size="3.3">
-          <ion-icon *ngIf="gift.available" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
-          <ion-icon *ngIf="!gift.available" name="close-circle" style="color: red;"></ion-icon>
+          <div title="Disponible">
+            <ion-icon *ngIf="gift.available" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
+          </div>
+
+          <div title="Sin stock">
+            <ion-icon *ngIf="!gift.available" name="close-circle" style="color: red;"></ion-icon>
+          </div>
         </ion-col>
 
         <ion-col size="1">
           <ion-text>
-            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="showDeleteMenu(gift)"></ion-icon>
+            <div title="Eliminar" (click)="showDeleteMenu(gift)" style="cursor:pointer">
+              <ion-icon name="trash" color="danger" (click)="showDeleteMenu(gift)"></ion-icon>
+            </div>
           </ion-text>
         </ion-col>
 

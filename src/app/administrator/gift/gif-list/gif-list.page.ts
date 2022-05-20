@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonInfiniteScroll, ModalController, Platform} from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, ModalController, Platform, IonSelect, IonSearchbar } from '@ionic/angular';
 import { Gift } from 'src/app/models/Gift';
 import { GiftService } from '../../../services/gift.service';
 import { GifUpdatePage } from '../gif-update/gif-update.page';
 import { UtilService } from '../../../services/util.service';
 import { AuthService } from '../../../services/auth.service';
+import subBusinessDays from 'date-fns/subBusinessDays';
 
 @Component({
   selector: 'app-gif-list',
@@ -13,6 +14,9 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class GifListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+  @ViewChild(IonSelect) select:IonSelect;
+  @ViewChild(IonSearchbar) sb:IonSearchbar;
+
   oldInfinite:boolean;
 
   private n:number=0;
@@ -66,6 +70,7 @@ export class GifListPage implements OnInit {
       newGifts=await this.gs.getAllPaged(this.niTems,0);
 
       this.gifts=this.gifts.concat(newGifts);
+      this.gifts=this.sortList(this.gifts);
 
       this.oldGifts=[];
       this.oldGifts=this.oldGifts.concat(newGifts);
@@ -151,6 +156,7 @@ export class GifListPage implements OnInit {
 
     if(!this.infinite.disabled){
       newgifts=await this.gs.getAllPaged(this.niTems,this.gifts.length);
+      newgifts=this.sortList(newgifts);
       this.gifts=this.gifts.concat(newgifts);
       this.oldGifts=this.oldGifts.concat(newgifts);
 
@@ -161,8 +167,13 @@ export class GifListPage implements OnInit {
     }
   }
 
-  public async onSearchChange(event) {
-    this.searchStr=event.detail.value;
+  public async onSearchChange() {
+
+    let resultFilter:Gift[]=[];
+    let listS:Gift[]=[];
+    let selectO=this.select.value;
+    this.searchStr=this.sb.value;
+
     console.log(this.searchStr);
 
     let list:Gift[]=[];
@@ -177,8 +188,8 @@ export class GifListPage implements OnInit {
       //nombre
       list=await this.gs.getByNamePaged(this.searchStr,9999,0);
       list.forEach((e:Gift)=>{
-        if(!this.gifts.includes(e)){
-          this.gifts.push(e);
+        if(!resultFilter.includes(e)){
+          resultFilter.push(e);
         }
       })
 
@@ -186,19 +197,60 @@ export class GifListPage implements OnInit {
       if(+this.searchStr>=0){
         list=await this.gs.getByPoints(+this.searchStr);
         list.forEach((e:Gift)=>{
-        if(!this.gifts.includes(e)){
-          this.gifts.push(e);
+        if(!resultFilter.includes(e)){
+          resultFilter.push(e);
         }
         })
+      }
+
+      if(selectO=="true"){
+        resultFilter.forEach((e:Gift)=>{
+          if(e.available) listS.push(e);
+        })
+        this.gifts=listS;
+
+      }
+
+      else if(selectO=="false"){
+        resultFilter.forEach((e:Gift)=>{
+          if(!e.available) listS.push(e);
+        })
+        this.gifts=listS;
+
+      }
+
+      else{
+        this.gifts=resultFilter;
+
       }
 
       this.infinite.disabled=true;
       await this.uts.hideLoading()
     }
     else if(lenght<1){
-      this.gifts=[];
-      this.gifts=this.gifts.concat(this.oldGifts);
+      resultFilter=resultFilter.concat(this.oldGifts);
       this.infinite.disabled=this.oldInfinite;
+
+      if(selectO=="true"){
+        resultFilter.forEach((e:Gift)=>{
+          if(e.available) listS.push(e);
+        })
+        this.gifts=listS;
+      }
+
+      else if(selectO=="false"){
+        resultFilter.forEach((e:Gift)=>{
+          if(!e.available) listS.push(e);
+        })
+        this.gifts=listS;
+
+      }
+
+      else{
+        this.gifts=resultFilter;
+      }
+
+      this.gifts=this.sortList(this.gifts);
       await this.uts.hideLoading();
     }
   }
@@ -212,6 +264,33 @@ export class GifListPage implements OnInit {
 
   public logout(){
     this.authS.logout();
+  }
+
+  private sortList(eg:Gift[]):Gift[] {
+    if(eg!=null&&eg.length>1){
+      eg=eg.sort((n1,n2) => {
+        if (n1.name > n2.name) {
+            return 1;
+        }
+
+        else if (n1.name < n2.name) {
+            return -1;
+        }
+
+        else {
+          if (n1.id > n2.id) {
+            return 1;
+          }
+
+          else if (n1.id < n2.id) {
+              return -1;
+          }
+        }
+        return 0;
+    });
+    }
+
+    return eg;
   }
 
 }

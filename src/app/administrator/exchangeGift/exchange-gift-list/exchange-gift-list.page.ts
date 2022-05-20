@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ɵɵsanitizeUrlOrResourceUrl } from '@angular/core';
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
 import { AlertController, IonInfiniteScroll, IonSelect, LoadingController, ModalController, Platform, ToastController, IonSearchbar } from '@ionic/angular';
@@ -206,7 +206,6 @@ export class ExchangeGiftListPage {
 
   async searchChange(){
 
-    console.log("entro en searchbar");
     let resultFilter:ExchangeGift[]=[];
     let listS:ExchangeGift[]=[];
     let selectO=this.select.value;
@@ -291,6 +290,7 @@ export class ExchangeGiftListPage {
     else if(lenght<1){
 
       resultFilter=resultFilter.concat(this.oldExGifts);
+      this.infinite.disabled=this.oldInfinite;
 
       if(selectO=="true"){
         resultFilter.forEach((e:ExchangeGift)=>{
