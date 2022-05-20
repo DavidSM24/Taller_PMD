@@ -101,11 +101,15 @@ export class ExchangeGiftListPage implements OnInit {
   }
 
   async searchChange(){
-    let selectO=this.select.value;;
-    this.searchStr=this.sb.value;
 
+    console.log("entro en searchbar");
+    let resultFilter:ExchangeGift[]=[];
+    let listS:ExchangeGift[]=[];
+    let selectO=this.select.value;
+    this.searchStr=this.sb.value;
     let list:ExchangeGift[]=[];
     this.exchanges=[];
+
 
     let lenght=this.searchStr.length;
 
@@ -117,11 +121,10 @@ export class ExchangeGiftListPage implements OnInit {
       //date
       list=await this.exs.getByDateFilter(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
-        if(!this.exchanges.includes(e)){
+        if(!resultFilter.includes(e)){
 
-          //filtrar por agencia
           if(e.agency.id==this.authS.agency.id){
-            this.exchanges.push(e);
+            resultFilter.push(e);
           }
         }
       })
@@ -130,11 +133,10 @@ export class ExchangeGiftListPage implements OnInit {
       if(+this.searchStr>=0){
         list=await this.exs.getByPoints(this.searchStr);
         list.forEach((e:ExchangeGift)=>{
-          if(!this.exchanges.includes(e)){
+          if(!resultFilter.includes(e)){
 
-            //filtrar por agencia
             if(e.agency.id==this.authS.agency.id){
-              this.exchanges.push(e);
+              resultFilter.push(e);
             }
           }
         })
@@ -143,73 +145,72 @@ export class ExchangeGiftListPage implements OnInit {
       //gift-name
       list=await this.exs.getByGiftName(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
-        if(!this.exchanges.includes(e)){
+        let result:boolean=true;
+        resultFilter.forEach((x:ExchangeGift)=>{
+          if(x.id=e.id) result=false;
+        })
+        if(result && e.agency.id==this.authS.agency.id) resultFilter.push(e);
+      })
 
-          //filtrar por agencia
+      //agency-user-name
+      list=await this.exs.getByAgencyUsername(this.searchStr);
+      list.forEach((e:ExchangeGift)=>{
+        if(!resultFilter.includes(e)){
+
           if(e.agency.id==this.authS.agency.id){
-            this.exchanges.push(e);
+            resultFilter.push(e);
           }
         }
       })
 
       if(selectO=="true"){
-        for(let i:number=0;i<this.exchanges.length;i++){
-          this.exchanges.forEach((e:ExchangeGift)=>{
-            if(!e.delivered){
-              let i:number=this.exchanges.indexOf(e);
-              this.exchanges.splice(i,1);
-            }
-          })
-        }
-
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(e.delivered) listS.push(e);
+        })
+        this.exchanges=listS;
       }
 
-      if(selectO=="false"){
-        for(let i:number=0;i<this.exchanges.length;i++){
-          this.exchanges.forEach((e:ExchangeGift)=>{
-            if(e.delivered){
-              let i:number=this.exchanges.indexOf(e);
-              this.exchanges.splice(i,1);
-            }
-          })
-        }
-
+      else if(selectO=="false"){
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(!e.delivered) listS.push(e);
+        })
+        this.exchanges=listS;
       }
 
+      else{
+        this.exchanges=resultFilter;
+      }
 
-      this.infinite.disabled=true;
-      await this.uts.hideLoading()
+      this.infinite.disabled=false
+      await this.uts.hideLoading();
     }
     else if(lenght<1){
-      this.exchanges=[];
-      this.exchanges=this.exchanges.concat(this.oldExchanges);
+
+      resultFilter=resultFilter.concat(this.oldExchanges);
+
+      if(selectO=="true"){
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(e.delivered) listS.push(e);
+        })
+        this.exchanges=listS;
+      }
+
+      else if(selectO=="false"){
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(!e.delivered) listS.push(e);
+        })
+        this.exchanges=listS;
+      }
+
+      else{
+        this.exchanges=resultFilter;
+      }
+
       this.infinite.disabled=this.oldInfinite;
       await this.uts.hideLoading();
     }
 
-    if(selectO=="true"){
-      for(let i:number=0;i<this.exchanges.length;i++){
-        this.exchanges.forEach((e:ExchangeGift)=>{
-          if(!e.delivered){
-            let i:number=this.exchanges.indexOf(e);
-            this.exchanges.splice(i,1);
-          }
-        })
-      }
 
-    }
-
-    if(selectO=="false"){
-      for(let i:number=0;i<this.exchanges.length;i++){
-        this.exchanges.forEach((e:ExchangeGift)=>{
-          if(e.delivered){
-            let i:number=this.exchanges.indexOf(e);
-            this.exchanges.splice(i,1);
-          }
-        })
-      }
-
-    }
   }
 
   public async show(exchangesaw: ExchangeGift) {

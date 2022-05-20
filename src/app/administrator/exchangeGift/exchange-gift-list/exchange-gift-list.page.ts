@@ -200,7 +200,10 @@ export class ExchangeGiftListPage {
 
   async searchChange(){
 
-    let selectO=this.select.value;;
+    console.log("entro en searchbar");
+    let resultFilter:ExchangeGift[]=[];
+    let listS:ExchangeGift[]=[];
+    let selectO=this.select.value;
     this.searchStr=this.sb.value;
     let list:ExchangeGift[]=[];
     this.exGifts=[];
@@ -216,9 +219,9 @@ export class ExchangeGiftListPage {
       //date
       list=await this.exs.getByDateFilter(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
-        if(!this.exGifts.includes(e)){
+        if(!resultFilter.includes(e)){
 
-          this.exGifts.push(e);
+          resultFilter.push(e);
         }
       })
 
@@ -226,9 +229,9 @@ export class ExchangeGiftListPage {
       if(+this.searchStr>=0){
         list=await this.exs.getByPoints(this.searchStr);
         list.forEach((e:ExchangeGift)=>{
-          if(!this.exGifts.includes(e)){
+          if(!resultFilter.includes(e)){
 
-            this.exGifts.push(e);
+            resultFilter.push(e);
           }
         })
       }
@@ -236,79 +239,69 @@ export class ExchangeGiftListPage {
       //gift-name
       list=await this.exs.getByGiftName(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
-        if(!this.exGifts.includes(e)){
-
-          this.exGifts.push(e);
-        }
+        let result:boolean=true;
+        resultFilter.forEach((x:ExchangeGift)=>{
+          if(x.id=e.id) result=false;
+        })
+        if(result) resultFilter.push(e);
       })
 
       //agency-user-name
       list=await this.exs.getByAgencyUsername(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
-        if(!this.exGifts.includes(e)){
+        if(!resultFilter.includes(e)){
 
-          this.exGifts.push(e);
+          resultFilter.push(e);
         }
       })
 
       if(selectO=="true"){
-        for(let i:number=0;i<this.exGifts.length;i++){
-          this.exGifts.forEach((e:ExchangeGift)=>{
-            if(!e.delivered){
-              let i:number=this.exGifts.indexOf(e);
-              this.exGifts.splice(i,1);
-            }
-          })
-        }
-
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(e.delivered) listS.push(e);
+        })
+        this.exGifts=listS;
       }
 
-      if(selectO=="false"){
-        for(let i:number=0;i<this.exGifts.length;i++){
-          this.exGifts.forEach((e:ExchangeGift)=>{
-            if(e.delivered){
-              let i:number=this.exGifts.indexOf(e);
-              this.exGifts.splice(i,1);
-            }
-          })
-        }
+      else if(selectO=="false"){
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(!e.delivered) listS.push(e);
+        })
+        this.exGifts=listS;
+      }
 
+      else{
+        this.exGifts=resultFilter;
       }
 
       this.infinite.disabled=false
       await this.miLoading.dismiss();
     }
     else if(lenght<1){
-      this.exGifts=[];
-      this.exGifts=this.exGifts.concat(this.oldExGifts);
 
+      resultFilter=resultFilter.concat(this.oldExGifts);
+
+      if(selectO=="true"){
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(e.delivered) listS.push(e);
+        })
+        this.exGifts=listS;
+      }
+
+      else if(selectO=="false"){
+        resultFilter.forEach((e:ExchangeGift)=>{
+          if(!e.delivered) listS.push(e);
+        })
+        this.exGifts=listS;
+      }
+
+      else{
+        this.exGifts=resultFilter;
+      }
 
       this.infinite.disabled=this.oldInfinite;
       await this.miLoading.dismiss();
     }
 
-    if(selectO=="true"){
-      for(let i:number=0;i<this.exGifts.length;i++){
-        this.exGifts.forEach((e:ExchangeGift)=>{
-          if(!e.delivered){
-            let i:number=this.exGifts.indexOf(e);
-            this.exGifts.splice(i,1);
-          }
-        })
-      }
 
-    }
-
-    if(selectO=="false"){
-      for(let i:number=0;i<this.exGifts.length;i++){
-        this.exGifts.forEach((e:ExchangeGift)=>{
-          if(e.delivered){
-            let i:number=this.exGifts.indexOf(e);
-            this.exGifts.splice(i,1);
-          }
-        })
-      }
-
-    }
   }
 }
