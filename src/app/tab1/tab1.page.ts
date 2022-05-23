@@ -35,16 +35,16 @@ export class Tab1Page {
         name:this.formUser.get("name").value
       }
       await this.presentLoading();
-      
+
       try{
         let id=await this.usserv.createOrUpdate(newUser);
         this.miLoading && this.miLoading.dismiss();
         await this.presentToast("Regalo agregada correctamente","success");
         this.formUser.reset();
       }catch(err){
-        
+
         this.miLoading && this.miLoading.dismiss();
-        await this.presentToast("Error agregando Regalo","danger");
+        await this.presentToast("Error agregando Regalo","danger",'ban');
       }
   }
   async presentLoading() {
@@ -53,11 +53,12 @@ export class Tab1Page {
     });
     await this.miLoading.present();
   }
-  async presentToast(msg:string,clr:string) {
+  async presentToast(msg:string,clr:string,icn?:string) {
     this.miToast = await this.toast.create({
       message: msg,
       duration: 2000,
-      color:clr
+      color:clr,
+      icon:icn
     });
     this.miToast.present();
   }

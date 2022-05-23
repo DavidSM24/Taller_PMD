@@ -116,7 +116,7 @@ export class ExchangeGiftListPage {
       this.exGiftsx=this.exGifts;
     }catch(err){
       console.error(err);
-      await this.presentToast("Error cargando datos","danger");
+      await this.presentToast("Error cargando datos","danger",'ban');
     } finally{
       if(event){
         event.target.complete();
@@ -145,11 +145,12 @@ export class ExchangeGiftListPage {
     });
     await this.miLoading.present();
   }
-  async presentToast(msg:string,clr:string) {
+  async presentToast(msg:string,clr:string, icn?:string) {
     const miToast = await this.toast.create({
       message: msg,
       duration: 2000,
-      color:clr
+      color:clr,
+      icon:icn
     });
     miToast.present();
   }
@@ -367,7 +368,7 @@ export class ExchangeGiftListPage {
         await this.miLoading.dismiss();
       } catch (error) {
         console.log(error);
-        this.presentToast("Ha habido un error al cambiar el estado del pedido.","danger");
+        this.presentToast("Ha habido un error al cambiar el estado del pedido.","danger",'ban');
         await this.miLoading.dismiss();
       }
 

@@ -29,43 +29,48 @@ export class GifCreatePage {
 
       this.formGift = this.fb.group({
         name: ["", Validators.required],
-        points: ["",Validators.required],
+        points: ["", Validators.required]
       });
     }
 
   public async create(): Promise<void> {
 
-    await this.uts.presentLoading();
+    if(this.formGift.get("points").value>1){
+      await this.uts.presentLoading();
 
-    if(this.extension){
-      if(this.extension==("image/jpg")
-      ||this.extension==("image/jpeg")
-      ||this.extension=="image/png"){
+      if(this.extension){
+        if(this.extension==("image/jpg")
+        ||this.extension==("image/jpeg")
+        ||this.extension=="image/png"){
 
-        console.log("entro?");
+          console.log("entro?");
 
-        let newGift:Gift = {
-          name: this.formGift.get("name").value,
-          points: this.formGift.get("points").value,
-          available: this.toggle.checked,
-          picture: '',
-          exchangeGifts: []
-        }
+          let newGift:Gift = {
+            name: this.formGift.get("name").value,
+            points: this.formGift.get("points").value,
+            available: this.toggle.checked,
+            picture: '',
+            exchangeGifts: []
+          }
 
-        newGift=await this.gs.createOrUpdate(newGift,this.file);
-        if(newGift.id){
-          this.gs.added=true;
-          console.log(this.gs.added);
-          this.formGift.reset();
-          this.uts.presentToast('El regalo se ha creado correctamente.','success');
-        }
-        else{
-          this.uts.presentToast('Un error ha surgido al intentar crear el regalo.','danger');
+          newGift=await this.gs.createOrUpdate(newGift,this.file);
+          if(newGift.id){
+            this.gs.added=true;
+            console.log(this.gs.added);
+            this.formGift.reset();
+            this.uts.presentToast('El regalo se ha creado correctamente.','success');
+          }
+          else{
+            this.uts.presentToast('Un error ha surgido al intentar crear el regalo.','danger','ban');
+          }
         }
       }
-    }
 
-    await this.uts.hideLoading();
+      await this.uts.hideLoading();
+    }
+    else this.uts.presentToast("Los puntos deben ser mayores de 0.","danger",'ban');
+
+
   }
 
   public async test_Update() {

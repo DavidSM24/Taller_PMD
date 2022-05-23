@@ -54,7 +54,7 @@ export class UserCreatePage {
     this.uts.presentLoading();
     this.companies = await this.is.getAll();
     if (this.companies.length <= 0) {
-      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.', 'danger');
+      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.', 'danger','ban');
     }
     this.uts.hideLoading();
   }
@@ -79,8 +79,8 @@ export class UserCreatePage {
         if (!this.admin) {
           if (this.insurance != null) {
             let ag: Agency = await this.as.getById(7);
-  
-  
+
+
             let newAgency: Agency = {
               zipCode: this.formAgency.get("zipCode").value,
               address: this.formAgency.get("address").value,
@@ -95,7 +95,7 @@ export class UserCreatePage {
               myUser: newUser,
               active: this.active
             }
-  
+
             console.log(newAgency);
             newAgency = await this.as.createOrUpdate(newAgency);
             this.as.added=true;
@@ -106,13 +106,13 @@ export class UserCreatePage {
               this.uts.presentToast('La agencia se ha creado correctamente.', 'success');
             }
             else {
-              this.uts.presentToast('Un error ha surgido al intentar crear la agencia.', 'danger');
+              this.uts.presentToast('Un error ha surgido al intentar crear la agencia.', 'danger','ban');
             }
-  
+
           }
         }
       } catch (err) {
-        this.uts.presentToast("Error agregando Usuario", "danger");
+        this.uts.presentToast("Error agregando Usuario", "danger",'ban');
       }
 
     } catch (error) {
@@ -122,7 +122,7 @@ export class UserCreatePage {
     this.uts.hideLoading();
   }
 
-  
+
   async showPicker() {
     let options: PickerOptions = {
       buttons: [
@@ -177,4 +177,4 @@ export interface PickerColumn {
   suffixWidth?: string;
   optionsWidth?: string;
   refresh?: () => void;
-} 
+}

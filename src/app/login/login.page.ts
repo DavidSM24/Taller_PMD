@@ -100,13 +100,13 @@ export class LoginPage implements OnInit {
 
         }
         else {
-          this.uts.presentToast("Usuario o contraseña incorrecta...", "danger")
+          this.uts.presentToast("Usuario o contraseña incorrecta...", "danger",'ban')
         }
 
         await this.uts.hideLoading();
       } catch (error) {
         await this.uts.hideLoading();
-        this.uts.presentToast("Usuario o contraseña incorrecta...", "danger")
+        this.uts.presentToast("Usuario o contraseña incorrecta...", "danger",'ban')
       }
 
   }

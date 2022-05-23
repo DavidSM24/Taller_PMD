@@ -123,7 +123,7 @@ export class GifListPage implements OnInit {
       this.uts.presentToast("Regalo eliminada correctamente.","success");
     }
     else{
-      this.uts.presentToast("Error al eliminar el regalo...","danger");
+      this.uts.presentToast("No se pueden eliminar regalos con pedidos. Puede quitarlo de la lista para adquirirlo cambiandolo a No disponible.","danger","ban");
     }
   }
 

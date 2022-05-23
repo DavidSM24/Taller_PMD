@@ -43,7 +43,6 @@ export class GiftService {
             gifts.push(tmp);
           }
         }
-        console.log(data);
         resolve(gifts);
       }, error => {
         console.log(error);

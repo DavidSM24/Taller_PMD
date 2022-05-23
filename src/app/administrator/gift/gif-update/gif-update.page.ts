@@ -77,10 +77,10 @@ export class GifUpdatePage implements OnInit {
     newGift = await this.gs.createOrUpdate(newGift, this.file);
     if (newGift.id) {
       this.formGift.reset();
-      this.uts.presentToast('El regalo se ha creado correctamente.', 'success');
+      this.uts.presentToast('El regalo se ha modificado correctamente.', 'success');
     }
     else {
-      this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger');
+      this.uts.presentToast('Un error ha surgido al intentar modificar el regalo.', 'danger','ban');
     }
 
     await this.uts.hideLoading();

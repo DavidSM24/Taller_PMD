@@ -17,6 +17,7 @@ export class UserUpdatePage implements OnInit{
   public miLoading:HTMLIonLoadingElement;
   public formEditUser:FormGroup;
   constructor(private modalCtrl: ModalController,
+    private uts:UtilService,
     private userv: UserService,
     private fb: FormBuilder) {
     this.formEditUser=this.fb.group({
@@ -49,11 +50,19 @@ export class UserUpdatePage implements OnInit{
           email:this.formEditUser.get("email").value,
           name:this.formEditUser.get("name").value
         }
+
+
         userEditado = await this.userv.createOrUpdate(userEditado);
-    
-     this.modalCtrl.dismiss({
-       newUser:userEditado
-     })   
+        if(userEditado!=null) this.modalCtrl.dismiss({
+          newUser:userEditado
+        })
+
+        else {
+          this.modalCtrl.dismiss();
+          this.uts.presentToast("Ha habido un error al modificar el usuario.","danger",'ban')
+        }
+
+
   }
   close() {
     this.modalCtrl.dismiss();

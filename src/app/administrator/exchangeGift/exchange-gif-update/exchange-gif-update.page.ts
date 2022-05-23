@@ -69,7 +69,7 @@ export class ExchangeGifUpdatePage implements OnInit {
         this.uts.presentToast('El regalo se ha creado correctamente.', 'success');
       }
       else {
-        this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger');
+        this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger','ban');
       }
       this.uts.hideLoading();
       this.modalCtrl.dismiss({
@@ -118,7 +118,7 @@ export class ExchangeGifUpdatePage implements OnInit {
     this.agencies=await this.ageserv.getAll();
 
     if(this.agencies.length<=0&&this.gifts.length<=0){
-      this.uts.presentToast('','danger');
+      this.uts.presentToast('','danger','ban');
     }
     this.uts.hideLoading();
     console.log(this.gifts);

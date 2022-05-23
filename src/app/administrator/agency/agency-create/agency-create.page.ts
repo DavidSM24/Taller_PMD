@@ -43,7 +43,7 @@ export class AgencyCreatePage {
     await this.uts.presentLoading();
     this.companies=await this.is.getAll();
     if(this.companies.length<=0){
-      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger');
+      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger','ban');
     }
     await this.uts.hideLoading();
   }
@@ -81,7 +81,7 @@ export class AgencyCreatePage {
 
       }
       else{
-        this.uts.presentToast('Un error ha surgido al intentar crear la agencia.','danger');
+        this.uts.presentToast('Un error ha surgido al intentar crear la agencia.','danger','ban');
       }
 
       await this.uts.hideLoading();

@@ -22,12 +22,12 @@ export class CarRepairCreatePage implements OnInit {
    @ViewChild(IonDatetime) datetime: IonDatetime;
    //Guarda la fecha con el formato de españa
    public spanishDateOrder:string;
- 
+
    //Guarda la fecha de la reparación con un formato legible para el ion-dateTime
    public stringDateOrder:string;
    //variable que guarda los datos proporcionados por el evento del ion-dateTime
    public dateValue = '';
-  //Variable que guarda la fecha de reparación con el formato correcto para ser enviado a la api 
+  //Variable que guarda la fecha de reparación con el formato correcto para ser enviado a la api
   public formatedString;
 
   public myAgency:Agency;
@@ -36,7 +36,7 @@ export class CarRepairCreatePage implements OnInit {
   public validator;
   public carRepairs:CarRepair;
 
- 
+
 
   constructor(
     private carRepairService:CarRepairService,
@@ -50,7 +50,7 @@ export class CarRepairCreatePage implements OnInit {
 
   ) {
     this.createFormGroup();
-    
+
    }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class CarRepairCreatePage implements OnInit {
   onSubmit(){
     this.create();
   }
-  
+
   /**
    * Método que guarda la reparación en la base de datos
    */
@@ -90,12 +90,12 @@ export class CarRepairCreatePage implements OnInit {
         this.carRepairService.added=true;
         this.routeCarRepairList();
       }else{
-        this.utilService.presentToast("Ha surgido un error al intentar crear la reparacion",'danger')
+        this.utilService.presentToast("Ha surgido un error al intentar crear la reparacion",'danger','ban')
       }
       this.utilService.hideLoading();
     }
 
-    
+
   }
 
   /**
@@ -116,13 +116,13 @@ export class CarRepairCreatePage implements OnInit {
         }
       });
     }
-      
+
     }catch{
-      this.utilService.presentToast("Fallo al cargar","danger");
+      this.utilService.presentToast("Fallo al cargar","danger",'ban');
 
     }
 
-    
+
   }
 
   /**
@@ -146,7 +146,7 @@ export class CarRepairCreatePage implements OnInit {
     return this.formCarRepair.controls;
   }
 
-  
+
 
     //Métodos para cerrar y abrir el modal de DateTime
    /**
@@ -167,23 +167,23 @@ export class CarRepairCreatePage implements OnInit {
       let date:Date=new Date(Date.now());
       this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(date.toISOString());
       this.formatedString=this.dateTimeService.formatString(date.toISOString());
-      
+
 
     }
    /**
    * Método que asigna la fecha de reparación cuando el usuario pulsa el botón de aceptar en el ión date time
-   * @param event 
+   * @param event
    */
     changeDateRepair(event){
-      this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(event);    
+      this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(event);
       this.stringDateOrder=this.dateTimeService.formatString(event);
       this.dateValue=event;
       this.formatedString=this.formatDate(this.dateValue);
-  
+
     }
      /**
    * Metodo para darle formato a la fecha y que se pueda guardar en la base de datos
-   * @param value 
+   * @param value
    * @returns fecha con el formato yyyy-MM-ddTHH:mm
    */
   formatDate(value: string):string {

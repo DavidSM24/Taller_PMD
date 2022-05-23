@@ -110,7 +110,7 @@ export class CarRepairUpdatePage implements OnInit {
         })
 
       } catch (error) {
-        this.uts.presentToast("Fallo al guradar","danger");
+        this.uts.presentToast("Fallo al guradar","danger",'ban');
         console.log(error);
       }
     }

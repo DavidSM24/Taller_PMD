@@ -14,7 +14,7 @@ export class UserService {
   constructor(public http: HttpClient) {
     this.URLDatabase = environment.herokuConfig.url;
    }
-  
+
   private async getListData(endpoint: string): Promise<User[]> {
     let users: User[] = [];
 
@@ -79,7 +79,7 @@ export class UserService {
       });
     });
   }
-  
+
   public async getByAvailable():Promise<User[]>{
     return this.getListData(this.URLDatabase + this.endpoint + "/available");
   }
@@ -161,13 +161,13 @@ export class UserService {
           resolve(result);
         }, error => {
           console.log(error);
-          resolve(user);
+          resolve(null);
         });
       });
     }
   }
 
-  
+
   public async delete(user:User):Promise<boolean>{
     return new Promise(resolve => {
       this.http.delete<User>(this.URLDatabase + this.endpoint, { body: user }).subscribe(() => {

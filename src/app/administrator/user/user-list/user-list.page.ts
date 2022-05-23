@@ -41,7 +41,7 @@ private miLoading:HTMLIonLoadingElement;
       this.usersx=this.users;
     }catch(err){
       console.error(err);
-      await this.presentToast("Error cargando datos","danger");
+      await this.presentToast("Error cargando datos","danger",'ban');
     } finally{
       if(event){
         event.target.complete();
@@ -58,20 +58,31 @@ private miLoading:HTMLIonLoadingElement;
     });
     await this.miLoading.present();
   }
+
   public async borra(user:User){
     await this.presentLoading();
-    await this.usser.delete(user);
-    let i=this.users.indexOf(user,0);
-    if(i>-1){
-      this.users.splice(i,1);
+
+    let result:boolean=await this.usser.delete(user);
+
+    if(result){
+      let i=this.users.indexOf(user,0);
+      if(i>-1){
+        this.users.splice(i,1);
+      };
+      this.presentToast("Usuario eliminado correctamente.","success")
     }
+    else this.presentToast("No se ha podido eliminar el usuario. Compruebe que no está asociado a ninguna agencia con datos.","danger",'ban');
+
+
     await this.miLoading.dismiss();
   }
-  async presentToast(msg:string,clr:string) {
+
+  async presentToast(msg:string,clr:string,icn?:string) {
     const miToast = await this.toast.create({
       message: msg,
       duration: 2000,
-      color:clr
+      color:clr,
+      icon:icn
     });
     miToast.present();
   }
@@ -92,6 +103,7 @@ private miLoading:HTMLIonLoadingElement;
       if (resp.data != null) {
         let i: number = this.users.indexOf(user);
         this.users[i] = resp.data.newUser;
+        this.presentToast("Usuario modificado correctamente.","success")
       }
     } catch (error) {
       console.log(error);
@@ -99,12 +111,12 @@ private miLoading:HTMLIonLoadingElement;
 
   }
 
-  
+
   public async setbyUserRol(event?){
-    
+
     let userol:User[]=[]
     const value:string=event.detail.value;
-     
+
 
     if("false".match(value)){
       this.usersx.forEach(rol=>{
@@ -139,7 +151,7 @@ private miLoading:HTMLIonLoadingElement;
           text: 'Cancelar',
           cssClass: 'secondary',
           handler: (blah) => {}}
-          
+
       ]
     });
    await alert.present();

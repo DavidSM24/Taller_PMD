@@ -36,7 +36,7 @@ export class Tab5Page {
     public async CreateExgift(): Promise<void> {
       if(this.mygift!=null&&this.myagency!=null){
 
-      
+
       let newExchange: ExchangeGift = {
         dateExchange: this.formExchange.get("dateEchange").value,
         observations: this.formExchange.get("observations").value,
@@ -44,18 +44,18 @@ export class Tab5Page {
         agency: this.myagency,
         gift: this.mygift
       }
-      
+
       this.uts.presentLoading();
-      
+
       try{
         await this.exser.createOrUpdate(newExchange);
         this.uts.hideLoading;
         this.uts.presentToast("Regalo agregada correctamente","success");
         this.formExchange.reset();
       }catch(err){
-        
+
         this.uts.hideLoading;
-        this.uts.presentToast("Error agregando Regalo","danger");
+        this.uts.presentToast("Error agregando Regalo","danger",'ban');
       }
     }
   }
@@ -92,13 +92,13 @@ export class Tab5Page {
     return options;
   }
   async ionViewWillEnter() {
-    
+
     this.uts.presentLoading();
     this.gifts=await this.giftserv.getAll();
     this.agencies=await this.ageserv.getAll();
-    
+
     if(this.agencies.length<=0&&this.gifts.length<=0){
-      this.uts.presentToast('','danger');
+      this.uts.presentToast('','danger','ban');
     }
     this.uts.hideLoading();
     console.log(this.gifts);

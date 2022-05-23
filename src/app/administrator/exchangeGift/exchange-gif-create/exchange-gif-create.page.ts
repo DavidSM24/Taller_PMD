@@ -57,7 +57,7 @@ export class ExchangeGifCreatePage {
         let result=await this.exser.createOrUpdate(newExchange);
 
         if(!result){
-          this.uts.presentToast("Error al insertar canje, compruebe los puntos de la agencia y la disponibilidad del regalo.","danger");
+          this.uts.presentToast("Error al insertar canje, compruebe los puntos de la agencia y la disponibilidad del regalo.","danger",'ban');
         }
 
         else{
@@ -69,7 +69,7 @@ export class ExchangeGifCreatePage {
       }catch(err){
 
 
-        this.uts.presentToast("Error agregando Pedido","danger");
+        this.uts.presentToast("Error agregando Pedido","danger",'ban');
       }
     }
    }catch(error){
@@ -118,7 +118,7 @@ export class ExchangeGifCreatePage {
     this.agencies=await this.ageserv.getAll();
 
     if(this.agencies.length<=0&&this.gifts.length<=0){
-      this.uts.presentToast('','danger');
+      this.uts.presentToast('','danger','ban');
     }
     await this.uts.hideLoading();
     console.log(this.gifts);

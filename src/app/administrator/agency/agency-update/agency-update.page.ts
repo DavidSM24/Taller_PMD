@@ -56,7 +56,7 @@ export class AgencyUpdatePage implements OnInit {
 
     this.companies=await this.is.getAll();
     if(this.companies.length<=0){
-      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger');
+      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger','ban');
     }
     await this.uts.hideLoading();
   }
@@ -81,13 +81,32 @@ export class AgencyUpdatePage implements OnInit {
        active: this.toggle.checked
      }
 
-     A = await this.as.createOrUpdate(A);
+     try {
 
-     await this.uts.hideLoading();
+      A = await this.as.createOrUpdate(A);
 
-     this.modalCtrl.dismiss({
-       newAgency:A
-     })
+      await this.uts.hideLoading();
+
+      if(A.id){
+        this.uts.presentToast("Agencia modificada correctamente.","success");
+
+      }
+      else{
+        this.uts.presentToast("Ha surgido un error al intentar modificar la agencia. Compruebe todos los campos","danger",'ban');
+        A=null;
+      }
+
+     } catch (error) {
+       console.log(error);
+       this.uts.presentToast("Ha surgido un error al intentar modificar la agencia. Compruebe todos los campos","danger",'ban');
+       await this.uts.hideLoading();
+     }
+
+     if(A!=null) this.modalCtrl.dismiss({
+      newAgency:A
+        });
+      else this.modalCtrl.dismiss();
+
   }
 
   close() {

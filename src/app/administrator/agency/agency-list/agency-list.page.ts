@@ -121,7 +121,7 @@ export class AgencyListPage implements OnInit {
       this.uts.presentToast("Agencia eliminada correctamente.", "success");
     }
     else {
-      this.uts.presentToast("Error al eliminar la agencia...", "danger");
+      this.uts.presentToast("Error al eliminar la agencia...", "danger",'ban');
     }
   }
 

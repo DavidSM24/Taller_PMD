@@ -32,11 +32,12 @@ export class UtilService {
     this.active=false;
   }
 
-  async presentToast(msg: string, clr: string) {
+  async presentToast(msg: string, clr: string, icn?:string) {
     const miToast = await this.toast.create({
       message: msg,
-      duration: 3000,
-      color: clr
+      duration: 6000,
+      color: clr,
+      icon:icn
     });
     miToast.present();
   }

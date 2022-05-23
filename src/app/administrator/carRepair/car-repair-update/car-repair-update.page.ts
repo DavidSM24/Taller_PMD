@@ -21,17 +21,17 @@ export class CarRepairUpdatePage implements OnInit {
   @ViewChild(IonDatetime) datetime: IonDatetime;
   //Guarda la fecha con el formato de españa
   public spanishDateOrder:string;
- 
+
    //Guarda la fecha de la reparación con el formato de españa
    public spanishDateRepair:string;
    //Guarda la fecha de la reparación con un formato legible para el ion-dateTime
    public stringDateRepair:string;
    //variable que guarda los datos proporcionados por el evento del ion-dateTime
    public dateValue = '';
-  //Variable que guarda la fecha de reparación con el formato correcto para ser enviado a la api 
+  //Variable que guarda la fecha de reparación con el formato correcto para ser enviado a la api
   public formatedString;
   public formCarRepair:FormGroup;
-  public id:number;   
+  public id:number;
   private newCarRepair:CarRepair;
 
 
@@ -41,10 +41,10 @@ export class CarRepairUpdatePage implements OnInit {
     private formBuilder:FormBuilder,
     private uts:UtilService,
     private dateTimeService:DateTimeServiceService
-   
+
   ) {
-    
-   
+
+
    }
 
   ngOnInit() {
@@ -52,11 +52,11 @@ export class CarRepairUpdatePage implements OnInit {
     this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateOrder);
     //compruba si exite una fecha de reparación previa, en caso de que exista se preparan las variables para mostrarlas en el html
     if(this.carRepair.dateRepair){
-      this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);    
+      this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);
       this.formatedString=this.dateTimeService.formatString(""+this.carRepair.dateRepair);
     }
-   
-    
+
+
 
     this.formCarRepair=this.formBuilder.group({
 
@@ -75,11 +75,11 @@ export class CarRepairUpdatePage implements OnInit {
     dateRepair:[this.carRepair.dateRepair],
     repaired:[this.carRepair.repaired,[Validators.required]]
 
-    
+
   });
   }
-  async ionViewDidEnter(){     
-   
+  async ionViewDidEnter(){
+
   }
 
 
@@ -87,8 +87,8 @@ export class CarRepairUpdatePage implements OnInit {
    * Método que guarda la nota una vez editada
    */
   public async editCarRepair(){
-   
-    //se asigna los datos 
+
+    //se asigna los datos
     this.newCarRepair={
 
       id:this.carRepair.id,
@@ -104,21 +104,21 @@ export class CarRepairUpdatePage implements OnInit {
       asigPoints:this.formCarRepair.get("asigPoints").value,
       repaired:this.formCarRepair.get("repaired").value,
       myAgency:this.carRepair.myAgency
-   
+
     }
     try {
       //Guarda la reparación en la base de datos
       this.newCarRepair=await this.carRepairService.createOrUpdate(this.newCarRepair);
       //presenta el toast para que el usuario sepa que se ha guardado con  éxito
       this.uts.presentToast("Se ha gurdadado correctamente","success");
-     
+
       //Cierra el modal pasando la reparación guardada a la página con las reparaciones
       this.modalController.dismiss({
         newCarRepair:this.newCarRepair
       })
-   
+
     } catch (error) {
-      this.uts.presentToast("Fallo al guradar","danger");
+      this.uts.presentToast("Fallo al guradar","danger",'ban');
       console.log(error);
     }
   }
@@ -145,7 +145,7 @@ export class CarRepairUpdatePage implements OnInit {
 
   /**
    * Metodo para darle formato a la fecha y que se pueda guardar en la base de datos
-   * @param value 
+   * @param value
    * @returns fecha con el formato yyyy-MM-ddTHH:mm
    */
   formatDate(value: string):string {
@@ -153,21 +153,21 @@ export class CarRepairUpdatePage implements OnInit {
   }
 
 
-  
- 
+
+
   /**
    * Método que asigna la fecha de reparación cuando el usuario pulsa el botón de aceptar en el ión date time
-   * @param event 
+   * @param event
    */
   changeDateRepair(event){
-    this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(event);    
+    this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(event);
     this.stringDateRepair=this.dateTimeService.formatString(event);
     this.dateValue=event;
     this.formatedString=this.formatDate(this.dateValue);
 
   }
- 
 
-  
+
+
 
 }

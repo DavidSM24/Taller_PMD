@@ -50,7 +50,7 @@ export class ExchangeGiftSawPage implements OnInit {
         await this.uts.hideLoading();
       }
     }
-    else this.uts.presentToast("Error: Está intentando eliminar un pedido entregado.","danger");
+    else this.uts.presentToast("Error: Está intentando eliminar un pedido entregado.","danger",'ban');
   }
 
   public async mensagealerta(n:any){

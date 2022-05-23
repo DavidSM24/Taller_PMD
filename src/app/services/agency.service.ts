@@ -168,7 +168,7 @@ export class AgencyService {
           resolve(agency);
         }, error => {
           console.log(error);
-          resolve(agency);
+          resolve(null);
         });
       });
     }
