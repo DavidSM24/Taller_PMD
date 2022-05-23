@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { resolve } from 'dns';
 import { environment } from 'src/environments/environment';
 import { CarRepair } from '../models/CarRepair';
 import { InsuranceCompany } from '../models/InsuranceCompany';
@@ -22,7 +21,7 @@ export class InsuranceCompanyService {
 
    /**
     * Método que carga una lista de compañias de coches en función de la petición
-    * @param endpoint 
+    * @param endpoint
     * @returns Promise<CarRepair[]>
     */
    private async getListData(endpoint:string):Promise<InsuranceCompany[]>{
@@ -127,11 +126,11 @@ export class InsuranceCompanyService {
       console.error(error);
       //meter una alerta
     });
-      
-     
+
+
     });
-    
-   } 
+
+   }
 
 
    //CreateOrUpdate

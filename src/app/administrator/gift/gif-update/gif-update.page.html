@@ -7,16 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
   <div class="body">
-    <div class="ion-padding">    
-      <center>
-        
+    <div class="ion-padding">
+      <div class="center">
+
         <ion-card>
           <ion-img  [src]="this.img"></ion-img>
         </ion-card>
 
-      </center>
+      </div>
     </div>
     <form [formGroup]="formGift" class="ion-padding">
       <div class="formulario">
@@ -39,7 +39,7 @@
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="9" sizeLg="1">
-            Disponible: 
+            Disponible:
           </ion-col>
           <ion-col sizeSm="3" sizeLg="11  ">
             <ion-item  lines="none">
@@ -48,20 +48,20 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
-        
+
           <ion-col size="12">
             <ion-input type="file" accept=".jpg,.jpeg,.png" (change)="changeListener($event)"></ion-input>
           </ion-col>
         </ion-row>
-        
+
         <ion-row class="ion-align-items-center">
-          
+
           <ion-col size="6">
             <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="close()" class="button">
               Cancelar
             </ion-button>
           </ion-col>
-          
+
           <ion-col size="6">
             <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="edit()" class="button" [disabled]="this.formGift.invalid||this.file==null">
               ACTUALIZAR
@@ -71,7 +71,7 @@
       </ion-grid>
     </div>
     </form>
-  
+
 </div>
 </ion-content>
 

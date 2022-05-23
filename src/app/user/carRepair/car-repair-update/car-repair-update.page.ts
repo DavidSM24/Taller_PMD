@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonDatetime, ModalController } from '@ionic/angular';
-import { Console } from 'console';
 import { format, parseISO } from 'date-fns';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { CarRepairService } from 'src/app/services/car-repair.service';
@@ -27,10 +26,10 @@ export class CarRepairUpdatePage implements OnInit {
   public stringDateOrder:string;
   //variable que guarda los datos proporcionados por el evento del ion-dateTime
   public dateValue = '';
- //Variable que guarda la fecha de reparación con el formato correcto para ser enviado a la api 
+ //Variable que guarda la fecha de reparación con el formato correcto para ser enviado a la api
  public formatedString;
  public formCarRepair:FormGroup;
- public id:number;   
+ public id:number;
  private newCarRepair:CarRepair;
   constructor(
     private modalController: ModalController,
@@ -49,13 +48,13 @@ export class CarRepairUpdatePage implements OnInit {
       }
      //compruba si exite una fecha de reparación previa, en caso de que exista se preparan las variables para mostrarlas en el html
      if(this.carRepair.dateRepair){
-       this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);    
+       this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);
      }
-    
-     
- 
+
+
+
      this.formCarRepair=this.formBuilder.group({
- 
+
      operation:[this.carRepair.operation],
      carPlate:[this.carRepair.carPlate,[Validators.required]],
      model:[this.carRepair.model,[Validators.required]],
@@ -70,8 +69,8 @@ export class CarRepairUpdatePage implements OnInit {
      spanishDateRepair:[this.spanishDateRepair],
      dateRepair:[this.carRepair.dateRepair],
      repaired:[this.carRepair.repaired,[Validators.required]]
- 
-     
+
+
    });
   }
 
@@ -79,10 +78,10 @@ export class CarRepairUpdatePage implements OnInit {
    * Método que guarda la nota una vez editada
    */
     public async editCarRepair(){
-   
-      //se asigna los datos 
+
+      //se asigna los datos
       this.newCarRepair={
-  
+
         id:this.carRepair.id,
         operation:this.carRepair.operation,
         carPlate:this.formCarRepair.get("carPlate").value,
@@ -96,7 +95,7 @@ export class CarRepairUpdatePage implements OnInit {
         asigPoints:this.carRepair.asigPoints,
         repaired:this.carRepair.repaired,
         myAgency:this.carRepair.myAgency
-     
+
       }
       console.log(this.newCarRepair);
       try {
@@ -104,12 +103,12 @@ export class CarRepairUpdatePage implements OnInit {
         this.newCarRepair=await this.carRepairService.createOrUpdate(this.newCarRepair);
         //presenta el toast para que el usuario sepa que se ha guardado con  éxito
         this.uts.presentToast("Se ha gurdadado correctamente","success");
-       
+
         //Cierra el modal pasando la reparación guardada a la página con las reparaciones
         this.modalController.dismiss({
           newCarRepair:this.newCarRepair
         })
-     
+
       } catch (error) {
         this.uts.presentToast("Fallo al guradar","danger");
         console.log(error);
@@ -140,18 +139,18 @@ export class CarRepairUpdatePage implements OnInit {
     ////Métodos para cambiar la fecha
    /**
    * Método que asigna la fecha de reparación cuando el usuario pulsa el botón de aceptar en el ión date time
-   * @param event 
+   * @param event
    */
     changeDateRepair(event){
-      this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(event);    
+      this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(event);
       this.stringDateOrder=this.dateTimeService.formatString(event);
       this.dateValue=event;
       this.formatedString=this.formatDate(this.dateValue);
-  
+
     }
      /**
    * Metodo para darle formato a la fecha y que se pueda guardar en la base de datos
-   * @param value 
+   * @param value
    * @returns fecha con el formato yyyy-MM-ddTHH:mm
    */
   formatDate(value: string):string {

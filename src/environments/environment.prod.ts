@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+
+  herokuConfig: {
+    url: "https://talleraadd.herokuapp.com"
+  }
 };
