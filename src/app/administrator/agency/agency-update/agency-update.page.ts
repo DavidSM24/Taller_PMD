@@ -88,7 +88,7 @@ export class AgencyUpdatePage implements OnInit {
       await this.uts.hideLoading();
 
       if(A.id){
-        this.uts.presentToast("Agencia modificada correctamente.","success");
+        this.uts.presentToast("Agencia modificada correctamente.","success","checkmark-circle-outline");
 
       }
       else{

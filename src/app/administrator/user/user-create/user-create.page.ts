@@ -73,7 +73,7 @@ export class UserCreatePage {
       try {
         newUser=await this.usserv.createOrUpdate(newUser);
 
-        this.uts.presentToast("Usuario agregado correctamente", "success");
+        this.uts.presentToast("Usuario agregado correctamente", "success","checkmark-circle-outline");
         this.formUser.reset();
 
         if (!this.admin) {
@@ -103,7 +103,7 @@ export class UserCreatePage {
             console.log(this.as.added);
             if (newAgency.id) {
               this.formAgency.reset();
-              this.uts.presentToast('La agencia se ha creado correctamente.', 'success');
+              this.uts.presentToast('La agencia se ha creado correctamente.', 'success',"checkmark-circle-outline");
             }
             else {
               this.uts.presentToast('Un error ha surgido al intentar crear la agencia.', 'danger','ban');

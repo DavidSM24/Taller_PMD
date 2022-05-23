@@ -76,7 +76,7 @@ export class AgencyCreatePage {
       newAgency = await this.as.createOrUpdate(newAgency);
       if(newAgency.id){
         this.formAgency.reset();
-        this.uts.presentToast('La agencia se ha creado correctamente.','success');
+        this.uts.presentToast('La agencia se ha creado correctamente.','success',"checkmark-circle-outline");
         this.as.added=true;
 
       }

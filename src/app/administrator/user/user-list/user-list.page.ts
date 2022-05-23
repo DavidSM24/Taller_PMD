@@ -69,7 +69,7 @@ private miLoading:HTMLIonLoadingElement;
       if(i>-1){
         this.users.splice(i,1);
       };
-      this.presentToast("Usuario eliminado correctamente.","success")
+      this.presentToast("Usuario eliminado correctamente.","success","checkmark-circle-outline")
     }
     else this.presentToast("No se ha podido eliminar el usuario. Compruebe que no está asociado a ninguna agencia con datos.","danger",'ban');
 
@@ -103,7 +103,7 @@ private miLoading:HTMLIonLoadingElement;
       if (resp.data != null) {
         let i: number = this.users.indexOf(user);
         this.users[i] = resp.data.newUser;
-        this.presentToast("Usuario modificado correctamente.","success")
+        this.presentToast("Usuario modificado correctamente.","success","checkmark-circle-outline")
       }
     } catch (error) {
       console.log(error);

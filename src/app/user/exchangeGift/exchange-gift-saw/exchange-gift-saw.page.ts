@@ -38,7 +38,7 @@ export class ExchangeGiftSawPage implements OnInit {
 
       try {
         let result:boolean= await this.exs.delete(this.exchangesaw);
-        this.uts.presentToast("Su pedido se ha cancelado correctamente. Puntos añadidos: "+this.exchangesaw.gift.points+".","success")
+        this.uts.presentToast("Su pedido se ha cancelado correctamente. Puntos añadidos: "+this.exchangesaw.gift.points+".","success","checkmark-circle-outline")
         await this.uts.hideLoading();
 
         this.modalCtrl.dismiss({

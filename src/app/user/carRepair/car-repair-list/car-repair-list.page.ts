@@ -164,7 +164,7 @@ export class CarRepairListPage implements OnInit {
           this.carRepairs.splice(i,1);//borra la reparación de la lista
         }
 
-        this.presentToast("La reparación ha sido eliminada correctamente.","success");
+        this.presentToast("La reparación ha sido eliminada correctamente.","success","checkmark-circle-outline");
       }else{
         this.presentToast("Error al borrar la reparación","danger",'ban');
       }

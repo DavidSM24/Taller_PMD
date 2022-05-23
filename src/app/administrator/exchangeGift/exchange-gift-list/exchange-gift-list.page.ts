@@ -363,7 +363,7 @@ export class ExchangeGiftListPage {
         eg=await this.exs.createOrUpdate(eg);
 
         if(eg!=null){
-          this.presentToast("Se ha cambiado el estado del pedido a "+del+".","success");
+          this.presentToast("Se ha cambiado el estado del pedido a "+del+".","success","checkmark-circle-outline");
         }
         await this.miLoading.dismiss();
       } catch (error) {

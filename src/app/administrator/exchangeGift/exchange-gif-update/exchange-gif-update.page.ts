@@ -66,7 +66,7 @@ export class ExchangeGifUpdatePage implements OnInit {
       Exchangeeditado = await this.excser.createOrUpdate(Exchangeeditado);
       if (Exchangeeditado.id) {
         this.formEditExchange.reset();
-        this.uts.presentToast('El regalo se ha creado correctamente.', 'success');
+        this.uts.presentToast('El regalo se ha creado correctamente.', 'success',"checkmark-circle-outline");
       }
       else {
         this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger','ban');

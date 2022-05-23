@@ -61,7 +61,7 @@ export class ExchangeGifCreatePage {
         }
 
         else{
-          this.uts.presentToast("Pedido agregada correctamente","success");
+          this.uts.presentToast("Pedido agregada correctamente","success","checkmark-circle-outline");
           this.formExchange.reset();
         }
 

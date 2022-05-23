@@ -50,7 +50,7 @@ export class Tab5Page {
       try{
         await this.exser.createOrUpdate(newExchange);
         this.uts.hideLoading;
-        this.uts.presentToast("Regalo agregada correctamente","success");
+        this.uts.presentToast("Regalo agregada correctamente","success","checkmark-circle-outline");
         this.formExchange.reset();
       }catch(err){
 

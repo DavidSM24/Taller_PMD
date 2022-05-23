@@ -58,7 +58,7 @@ export class GifCreatePage {
             this.gs.added=true;
             console.log(this.gs.added);
             this.formGift.reset();
-            this.uts.presentToast('El regalo se ha creado correctamente.','success');
+            this.uts.presentToast('El regalo se ha creado correctamente.','success',"checkmark-circle-outline");
           }
           else{
             this.uts.presentToast('Un error ha surgido al intentar crear el regalo.','danger','ban');

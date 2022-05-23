@@ -39,7 +39,7 @@ export class Tab1Page {
       try{
         let id=await this.usserv.createOrUpdate(newUser);
         this.miLoading && this.miLoading.dismiss();
-        await this.presentToast("Regalo agregada correctamente","success");
+        await this.presentToast("Regalo agregada correctamente","success","checkmark-circle-outline");
         this.formUser.reset();
       }catch(err){
 

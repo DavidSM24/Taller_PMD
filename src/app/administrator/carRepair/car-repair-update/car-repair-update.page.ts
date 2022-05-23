@@ -110,7 +110,7 @@ export class CarRepairUpdatePage implements OnInit {
       //Guarda la reparación en la base de datos
       this.newCarRepair=await this.carRepairService.createOrUpdate(this.newCarRepair);
       //presenta el toast para que el usuario sepa que se ha guardado con  éxito
-      this.uts.presentToast("Se ha gurdadado correctamente","success");
+      this.uts.presentToast("Se ha gurdadado correctamente","success","checkmark-circle-outline");
 
       //Cierra el modal pasando la reparación guardada a la página con las reparaciones
       this.modalController.dismiss({
