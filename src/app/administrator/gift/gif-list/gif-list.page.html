@@ -3,14 +3,14 @@
 
     <ion-title>Lista de Regalos</ion-title>
 
-    <ion-buttons style="margin-right: 1%;" slot="end">
-      <div style="cursor:pointer;" title="Nuevo" routerLink="/tab-administrator/gift/create">
-        <ion-icon  slot="end" name="add-circle" style="zoom:1.5;" ></ion-icon>
+    <ion-buttons style="margin-right: 1%;" slot="end" class="icon-div-container">
+      <div title="Nuevo" routerLink="/tab-administrator/gift/create" >
+        <ion-icon class="icon-logout" slot="end" style="pointer-events: none;zoom:1.5;cursor:pointer;content:url(../../../../assets/icon/add-circle-outline.png);" ></ion-icon>
       </div>
-      <div style="cursor:pointer;" (click)="logout()" title="Cerrar Sesión">
-        <ion-icon class="icon-logout" slot="end" name="log-out-outline"  style="zoom:1.7;cursor:pointer"></ion-icon>
+      <div title="Cerrar Sesión" (click)="logout() ">
+      <ion-icon class="icon-logout" slot="end" name="log-out-outline" style="pointer-events: none;zoom:1.7;cursor:pointer"></ion-icon>
       </div>
-      </ion-buttons>
+    </ion-buttons>
 
   </ion-toolbar>
   <ion-toolbar color="primary">

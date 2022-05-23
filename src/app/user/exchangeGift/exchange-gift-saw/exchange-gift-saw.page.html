@@ -9,13 +9,13 @@
 <ion-content [fullscreen]="true" >
   <div class="body">
     <div class="ion-padding">
-      <center>
+      <div class="center">
 
         <ion-card>
           <ion-img  [src]="this.img"></ion-img>
         </ion-card>
 
-      </center>
+      </div>
     </div>
     <div class="ion-padding">
       <div class="formulario">
@@ -65,7 +65,7 @@
 
           <ion-row class="ion-align-items-center">
             <ion-col size="12">
-              <center>
+              <div class="center">
                 <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
                   Cerrar Visualizacion
                 </ion-button>
@@ -73,7 +73,7 @@
                 <ion-button *ngIf="!this.exchangesaw.delivered" (click)="mensagealerta(exchangesaw)" color="danger" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
                   Cancelar peido
                 </ion-button>
-              </center>
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>

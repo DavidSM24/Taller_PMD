@@ -2,33 +2,15 @@
   <ion-toolbar color="primary">
     <ion-title>Lista de Pedidos</ion-title>
 
-    <ion-buttons
-      style="cursor: pointer"
-      title="Nuevo"
-      slot="end"
-      routerLink="/tab-administrator/exchange-gift/create"
-    >
-      <ion-icon
-        class="icon-c"
-        slot="end"
-        name="add-circle"
-        style="zoom: 1.5; cursor: pointer !important"
-      ></ion-icon>
+    <ion-buttons style="margin-right: 1%;" slot="end" class="icon-div-container">
+      <div title="Nuevo" routerLink="/tab-administrator/exchange-gift/create" >
+        <ion-icon class="icon-logout" slot="end" style="pointer-events: none;zoom:1.5;cursor:pointer;content:url(../../../../assets/icon/add-circle-outline.png);" ></ion-icon>
+      </div>
+      <div title="Cerrar Sesión" (click)="logout() ">
+      <ion-icon class="icon-logout" slot="end" name="log-out-outline" style="pointer-events: none;zoom:1.7;cursor:pointer"></ion-icon>
+      </div>
     </ion-buttons>
 
-    <ion-buttons
-      style="margin-right: 1%; cursor: pointer"
-      title="Cerrar Sesión"
-      slot="end"
-      (click)="logout()"
-    >
-      <ion-icon
-        class="icon-c"
-        slot="end"
-        name="log-out-outline"
-        style="zoom: 1.7; cursor: pointer"
-      ></ion-icon>
-    </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary">
     <ion-row>
