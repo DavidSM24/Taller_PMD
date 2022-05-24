@@ -121,9 +121,19 @@ export class GiftService {
     else {
       const body:Gift = gift;
       return new Promise(resolve => {
+        let body;
+        if(gift.id){
+          body={
+            id:gift.id,
+            name:gift.name,
+            points: gift.points,
+            available: gift.available
+          }
+        }
+        else body=gift;
 
         let formData = new FormData();
-        formData.append('g', new Blob([JSON.stringify(gift)], {
+        formData.append('g', new Blob([JSON.stringify(body)], {
           type: 'application/json'
         }));
         formData.append('file', ImageFile);

@@ -79,14 +79,19 @@ export class GifUpdatePage implements OnInit {
         this.uts.presentToast('El regalo se ha modificado correctamente.', 'success',"checkmark-circle-outline");
       }
       else {
-        this.uts.presentToast('Un error ha surgido al intentar modificar el regalo.', 'danger','ban');
+        this.uts.presentToast('Ha habido un error relacionado con subida de la imagen. Inténtelo más tarde.', 'danger','ban');
+        newGift=null;
       }
 
       await this.uts.hideLoading();
 
-      this.modalCtrl.dismiss({
-        newGift:newGift
-      })
+      if(newGift){
+        this.modalCtrl.dismiss({
+          newGift:newGift
+        })
+      }
+      else this.modalCtrl.dismiss();
+
     }
     else this.uts.presentToast('Los puntos deben ser superiores a 0.', 'danger','ban');
 

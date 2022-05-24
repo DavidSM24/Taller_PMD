@@ -5,6 +5,8 @@ import { AgencyService } from '../../../services/agency.service';
 import { AgencyUpdatePage } from '../agency-update/agency-update.page';
 import { UtilService } from '../../../services/util.service';
 import { AuthService } from '../../../services/auth.service';
+import { User } from 'src/app/models/User';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-agency-list',
@@ -31,7 +33,8 @@ export class AgencyListPage implements OnInit {
     private modalCtrl: ModalController,
     private pt: Platform,
     private uts: UtilService,
-    private authS:AuthService) { }
+    private authS:AuthService,
+    private us:UserService) { }
 
   ngOnInit() {
   }
@@ -116,6 +119,7 @@ export class AgencyListPage implements OnInit {
   }
 
   public async delete(agency: Agency) {
+
     if(agency.myCarRepairs.length>0||agency.myExchangesGifts.length>0){
 
       let msg:string='Error. ';
@@ -133,6 +137,9 @@ export class AgencyListPage implements OnInit {
     }
 
     else {
+
+      let user:User=agency.myUser;
+
       await this.uts.presentLoading();
       const result: boolean = await this.as.delete(agency);
       let i = this.agencies.indexOf(agency, 0);
@@ -141,7 +148,10 @@ export class AgencyListPage implements OnInit {
       if (result) {
         if (i > -1) {
           this.agencies.splice(i, 1);
+          let result2:boolean=await this.us.delete(user);
+          if(!result2) this.uts.presentToast("Error al eliminar el usuario asociado.","danger","ban");
         }
+
         this.uts.presentToast("Agencia eliminada correctamente.", "success","checkmark-circle-outline");
       }
       else {
@@ -153,7 +163,7 @@ export class AgencyListPage implements OnInit {
   public async showDeleteMenu(agency: Agency) {
     const alert = await this.AlertCtrl.create({
       header: 'Confirmación',
-      message: '¿Desea eliminar esta Agencia?',
+      message: '¿Desea eliminar esta Agencia? También se eliminará el usuario asociado.',
       buttons: [
         {
           text: 'Eliminar',

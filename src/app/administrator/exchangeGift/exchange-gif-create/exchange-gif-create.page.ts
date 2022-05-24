@@ -37,8 +37,6 @@ export class ExchangeGifCreatePage {
     }
     public async CreateExgift(): Promise<void> {
 
-
-
       try {
         await this.uts.presentLoading();
       if(this.mygift!=null&&this.myagency!=null){
@@ -114,7 +112,7 @@ export class ExchangeGifCreatePage {
   async ionViewWillEnter() {
 
     await this.uts.presentLoading();
-    this.gifts=await this.giftserv.getAll();
+    this.gifts=await this.giftserv.getByAvailablePaged(true,99999,0);
     this.agencies=await this.ageserv.getAll();
 
     if(this.agencies.length<=0&&this.gifts.length<=0){
