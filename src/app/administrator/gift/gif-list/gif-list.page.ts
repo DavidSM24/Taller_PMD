@@ -107,6 +107,12 @@ export class GifListPage implements OnInit {
     if(resp.data!=null){
       let i:number=this.gifts.indexOf(gift);
       this.gifts[i]=resp.data.newGift;
+      this.oldGifts.forEach((e:Gift)=>{
+        if(e.id==resp.data.newGift.id){
+          let i2=this.oldGifts.indexOf(e);
+          this.oldGifts[i2]=this.gifts[i];
+        }
+      })
     }
   }
 
@@ -173,8 +179,6 @@ export class GifListPage implements OnInit {
     let listS:Gift[]=[];
     let selectO=this.select.value;
     this.searchStr=this.sb.value;
-
-    console.log(this.searchStr);
 
     let list:Gift[]=[];
     this.gifts=[];

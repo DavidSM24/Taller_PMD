@@ -67,6 +67,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     let exchangegift: ExchangeGift = null;
 
     return new Promise(resolve => {
+
       this.http.get(this.URLDatabase + this.endpoint + "/id/" + id).subscribe((miexgift: any) => {
 
         if (miexgift.id) {
@@ -111,19 +112,25 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
     console.log(exgift)
 
     if (exgift != null) {
-      const body=exgift;
+
+      const body={
+        id:exgift.id,
+        dateExchange:exgift.dateExchange,
+        observations:exgift.observations,
+        delivered:exgift.delivered,
+        agency:{
+          id:exgift.agency.id
+        },
+        gift:{
+          id:exgift.gift.id
+        }
+      }
+
       return new Promise(resolve => {
 
-        this.http.post(this.URLDatabase + this.endpoint, body).subscribe((miexgift: any) => {
-          let result: ExchangeGift = {
-            id: miexgift.id,
-            dateExchange: miexgift.dateExchange,
-            observations:miexgift.observations,
-            delivered: miexgift.delivered,
-            agency: miexgift.agency,
-            gift: miexgift.gift
-          }
-          resolve(result);
+        this.http.post(this.URLDatabase + this.endpoint, body).subscribe((data: any) => {
+          exgift.id=data.id;
+          resolve(exgift);
         }, error => {
           console.log(error);
           resolve(null);
@@ -133,13 +140,22 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
   }
 
   public async delete(exgift:ExchangeGift):Promise<boolean>{
-    return new Promise(resolve => {
-      this.http.delete<ExchangeGift>(this.URLDatabase + this.endpoint, { body: exgift }).subscribe(() => {
-        resolve(true);
-      }, error => {
-        console.log(error);
-        resolve(false);
+
+    if(exgift!=null){
+      const body={
+        id:exgift.id
+      }
+
+      return new Promise(resolve => {
+        this.http.delete<ExchangeGift>(this.URLDatabase + this.endpoint, {body}).subscribe(() => {
+          resolve(true);
+        }, error => {
+          console.log(error);
+          resolve(false);
+        });
       });
-    });
+    }
+
+
   }
 }

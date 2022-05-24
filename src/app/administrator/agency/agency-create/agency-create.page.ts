@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonToggle, PickerColumnOption, PickerController, PickerOptions } from '@ionic/angular';
+import { IonToggle, NavController, PickerColumnOption, PickerController, PickerOptions } from '@ionic/angular';
 import { Agency } from 'src/app/models/Agency';
 import { InsuranceCompany } from 'src/app/models/InsuranceCompany';
 import { AgencyService } from 'src/app/services/agency.service';
@@ -26,7 +26,8 @@ export class AgencyCreatePage {
     private fb: FormBuilder,
     private is: InsuranceCompanyService,
     private pickerController:PickerController,
-    private uts:UtilService) {
+    private uts:UtilService,
+    private nav:NavController) {
 
     this.formAgency = this.fb.group({
       zipCode: ["", Validators.required],
@@ -43,7 +44,9 @@ export class AgencyCreatePage {
     await this.uts.presentLoading();
     this.companies=await this.is.getAll();
     if(this.companies.length<=0){
+      await this.uts.hideLoading();
       this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.','danger','ban');
+      this.nav.back();
     }
     await this.uts.hideLoading();
   }

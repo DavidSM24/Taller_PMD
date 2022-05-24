@@ -61,33 +61,37 @@ export class GifUpdatePage implements OnInit {
 
   public async edit(): Promise<void> {
 
-    await this.uts.presentLoading();
+    if(this.formGift.get('points').value>0){
+      await this.uts.presentLoading();
 
-    console.log("entro?");
+      let newGift: Gift = {
+        id:this.gift.id,
+        name: this.formGift.get("name").value,
+        points: this.formGift.get("points").value,
+        available: this.toggle.checked,
+        picture: '',
+        exchangeGifts: this.gift.exchangeGifts
+      }
 
-    let newGift: Gift = {
-      id:this.gift.id,
-      name: this.formGift.get("name").value,
-      points: this.formGift.get("points").value,
-      available: this.toggle.checked,
-      picture: '',
-      exchangeGifts: this.gift.exchangeGifts
+      newGift = await this.gs.createOrUpdate(newGift, this.file);
+      if (newGift.id) {
+        this.formGift.reset();
+        this.uts.presentToast('El regalo se ha modificado correctamente.', 'success',"checkmark-circle-outline");
+      }
+      else {
+        this.uts.presentToast('Un error ha surgido al intentar modificar el regalo.', 'danger','ban');
+      }
+
+      await this.uts.hideLoading();
+
+      this.modalCtrl.dismiss({
+        newGift:newGift
+      })
     }
+    else this.uts.presentToast('Los puntos deben ser superiores a 0.', 'danger','ban');
 
-    newGift = await this.gs.createOrUpdate(newGift, this.file);
-    if (newGift.id) {
-      this.formGift.reset();
-      this.uts.presentToast('El regalo se ha modificado correctamente.', 'success',"checkmark-circle-outline");
-    }
-    else {
-      this.uts.presentToast('Un error ha surgido al intentar modificar el regalo.', 'danger','ban');
-    }
 
-    await this.uts.hideLoading();
 
-    this.modalCtrl.dismiss({
-      newGift:newGift
-    })
   }
 
   close() {

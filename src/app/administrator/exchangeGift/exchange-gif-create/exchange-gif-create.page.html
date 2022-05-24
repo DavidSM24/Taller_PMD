@@ -51,7 +51,7 @@
               Seleccionar
             </ion-button>
             <ion-button expand="block" shape="round" (click)="showAgenciesPicker()" *ngIf="this.myagency!=null">
-              {{this.myagency.zipCode}}
+              {{this.myagency.myInsuranceCompany.cia_Name + " - "+this.myagency.location}}
             </ion-button>
           </ion-col>
         </ion-row>

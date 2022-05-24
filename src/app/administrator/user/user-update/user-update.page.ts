@@ -59,7 +59,7 @@ export class UserUpdatePage implements OnInit{
 
         else {
           this.modalCtrl.dismiss();
-          this.uts.presentToast("Ha habido un error al modificar el usuario.","danger",'ban')
+          this.uts.presentToast("Ha habido un error al modificar el usuario. Compruebe longitud: código (<=3), contraseña: (<=10).","danger",'ban');
         }
 
 

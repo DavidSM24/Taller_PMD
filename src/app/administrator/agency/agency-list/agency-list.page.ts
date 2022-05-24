@@ -64,6 +64,7 @@ export class AgencyListPage implements OnInit {
       newAgencies=await this.as.getAllPaged(this.niTems,0);
 
       this.agencies=this.agencies.concat(newAgencies);
+      this.agencies=this.sortList(this.agencies);
       this.oldAgencies=[];
       this.oldAgencies=this.oldAgencies.concat(newAgencies);
 
@@ -101,6 +102,12 @@ export class AgencyListPage implements OnInit {
       if (resp.data != null) {
         let i: number = this.agencies.indexOf(agency);
         this.agencies[i] = resp.data.newAgency;
+        this.oldAgencies.forEach((e:Agency)=>{
+          if(e.id==resp.data.newAgency.id){
+            let i2=this.oldAgencies.indexOf(e);
+            this.oldAgencies[i2]=this.agencies[i];
+          }
+        })
       }
     } catch (error) {
       console.log(error);
@@ -109,19 +116,37 @@ export class AgencyListPage implements OnInit {
   }
 
   public async delete(agency: Agency) {
-    await this.uts.presentLoading();
-    const result: boolean = await this.as.delete(agency);
-    let i = this.agencies.indexOf(agency, 0);
+    if(agency.myCarRepairs.length>0||agency.myExchangesGifts.length>0){
 
-    await this.uts.hideLoading();
-    if (result) {
-      if (i > -1) {
-        this.agencies.splice(i, 1);
+      let msg:string='Error. ';
+      if(agency.myCarRepairs.length>0&&agency.myExchangesGifts.length>0){
+        msg+="No se puede eliminar la agencia porque tiene reparaciones y pedidos asociados.";
       }
-      this.uts.presentToast("Agencia eliminada correctamente.", "success","checkmark-circle-outline");
+      else if(agency.myCarRepairs.length>0){
+        msg+="No se puede eliminar la agencia porque tiene reparaciones asociadas.";
+      }
+      else if(agency.myExchangesGifts.length>0){
+        msg+="No se puede eliminar la agencia porque tiene pedidos asociados.";
+      }
+
+      this.uts.presentToast(msg, "danger",'ban');
     }
+
     else {
-      this.uts.presentToast("Error al eliminar la agencia...", "danger",'ban');
+      await this.uts.presentLoading();
+      const result: boolean = await this.as.delete(agency);
+      let i = this.agencies.indexOf(agency, 0);
+
+      await this.uts.hideLoading();
+      if (result) {
+        if (i > -1) {
+          this.agencies.splice(i, 1);
+        }
+        this.uts.presentToast("Agencia eliminada correctamente.", "success","checkmark-circle-outline");
+      }
+      else {
+        this.uts.presentToast("Error al eliminar la agencia...", "danger",'ban');
+      }
     }
   }
 
@@ -248,8 +273,36 @@ export class AgencyListPage implements OnInit {
     else if(lenght<1){
       this.agencies=[];
       this.agencies=this.agencies.concat(this.oldAgencies);
+      this.agencies=this.sortList(this.agencies);
       this.infinite.disabled=this.oldInfinite;
       await this.uts.hideLoading();
     }
+  }
+
+  private sortList(eg:Agency[]):Agency[] {
+    if(eg!=null&&eg.length>1){
+      eg=eg.sort((n1,n2) => {
+        if (n1.myInsuranceCompany.cia_Name > n2.myInsuranceCompany.cia_Name) {
+            return 1;
+        }
+
+        else if (n1.myInsuranceCompany.cia_Name < n2.myInsuranceCompany.cia_Name) {
+            return -1;
+        }
+
+        else {
+          if (n1.id > n2.id) {
+            return 1;
+          }
+
+          else if (n1.id < n2.id) {
+              return -1;
+          }
+        }
+        return 0;
+    });
+    }
+
+    return eg;
   }
 }

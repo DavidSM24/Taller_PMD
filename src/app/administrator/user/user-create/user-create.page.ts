@@ -16,6 +16,7 @@ import { UtilService } from '../../../services/util.service';
 })
 export class UserCreatePage {
   @ViewChild(IonToggle) toggle: IonToggle;
+
   public admin: boolean = false;
   public active: boolean = false;
 
@@ -51,16 +52,20 @@ export class UserCreatePage {
 
   async ionViewWillEnter() {
 
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
+    this.companies=[];
     this.companies = await this.is.getAll();
     if (this.companies.length <= 0) {
-      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros.', 'danger','ban');
+      this.uts.presentToast('Para crear agencias, deben existir compañías de seguros. Solo podrá crear usuarios administradores.', 'danger','ban');
+      this.admin=true;
+      this.toggle.checked=true;
+      this.toggle.disabled=true;
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
   public async CreateUser(): Promise<void> {
-    this.uts.presentLoading();
+    await this.uts.presentLoading();
     try {
       let newUser: User = {
         code: this.formUser.get("code").value,
@@ -112,14 +117,14 @@ export class UserCreatePage {
           }
         }
       } catch (err) {
-        this.uts.presentToast("Error agregando Usuario", "danger",'ban');
+        this.uts.presentToast("Ha habido un error al crear el usuario. Compruebe longitud: código (<=3), contraseña: (<=10).","danger",'ban');
       }
 
     } catch (error) {
-      this.uts.hideLoading();
+      await this.uts.hideLoading();
       console.log(error)
     }
-    this.uts.hideLoading();
+    await this.uts.hideLoading();
   }
 
 

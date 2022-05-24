@@ -59,8 +59,12 @@ export class ExchangeGiftListPage {
           let i: number = this.exGifts.indexOf(exchange);
           this.exGifts[i] = resp.data.newExchange;
 
-          let i2: number = this.oldExGifts.indexOf(exchange);
-          this.oldExGifts[i2] = resp.data.newExchange;
+          this.oldExGifts.forEach((e:ExchangeGift)=>{
+            if(e.id==resp.data.newExchange.id){
+              let i2=this.oldExGifts.indexOf(e);
+              this.oldExGifts[i2]=this.exGifts[i];
+            }
+          })
         }
       } catch (error) {
         console.log(error);
@@ -128,23 +132,36 @@ export class ExchangeGiftListPage {
 
   public async borra(exgift:ExchangeGift){
     await this.presentLoading();
-    await this.exs.delete(exgift);
-    let i=this.exGifts.indexOf(exgift,0);
-    let i2=this.oldExGifts.indexOf(exgift,0);
-    if(i>-1){
-      this.exGifts.splice(i,1);
+    let result=await this.exs.delete(exgift);
+
+    if(result){
+      let i=this.exGifts.indexOf(exgift,0);
+      let i2=this.oldExGifts.indexOf(exgift,0);
+      if(i>-1){
+        this.exGifts.splice(i,1);
+      }
+      if(i2>-1){
+        this.oldExGifts.splice(i2,1);
+      }
+      this.presentToast("Pedido eliminado correctamente.","success","checkmark-circle-outline");
+
     }
-    if(i2>-1){
-      this.oldExGifts.splice(i2,1);
+
+    else{
+      this.presentToast("Ha habido un error al intentar eliminar el pedido.","danger","ban");
     }
+
+
     await this.miLoading.dismiss();
   }
+
   async presentLoading() {
     this.miLoading = await this.loading.create({
       message: ''
     });
     await this.miLoading.present();
   }
+
   async presentToast(msg:string,clr:string, icn?:string) {
     const miToast = await this.toast.create({
       message: msg,
