@@ -80,6 +80,14 @@ export class UserService {
     });
   }
 
+  public async getByMail(mail:string):Promise<User[]>{
+    return this.getListData(this.URLDatabase + this.endpoint + "/mail/"+mail);
+  }
+
+  public async getFilterCode(code:string):Promise<User[]>{
+    return this.getListData(this.URLDatabase + this.endpoint + "/fcode/"+code);
+  }
+
   public async getByAvailable():Promise<User[]>{
     return this.getListData(this.URLDatabase + this.endpoint + "/available");
   }
@@ -110,32 +118,10 @@ export class UserService {
       });
     });
   }
-  public async getByName(name:string):Promise<User>{
-    let user: User = null;
-
-    return new Promise(resolve => {
-      this.http.get(this.URLDatabase + this.endpoint + "/name/" + name).subscribe((miuser: any) => {
-
-        if (miuser.name) {
-          const tmp: User = {
-            id: miuser.id,
-            code: miuser.code,
-            password: miuser.password,
-            administrator: miuser.administrator,
-            email: miuser.email,
-            name: miuser.name
-          }
-          user = tmp;
-        }
-        console.log(user);
-        resolve(user);
-      }, error => {
-        console.log(error);
-        console.log(user);
-        resolve(user);
-      });
-    });
+  public async getByName(name:string):Promise<User[]>{
+    return this.getListData(this.URLDatabase+this.endpoint+"/name/"+name);
   }
+
   public async getAllUserAgenciesPaged(administrator:boolean, element: number, page: number):Promise<User[]>{
     return this.getListData(this.URLDatabase+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
   }

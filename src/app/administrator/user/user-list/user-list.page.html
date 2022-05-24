@@ -19,12 +19,19 @@
   <ion-toolbar color="primary">
     <ion-row class="ion-align-items-center">
       <ion-col sizeSm="9.5" sizeLg="9.5">
-        <ion-searchbar placeholder="Encuentra el Usuario que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
+        <ion-searchbar
+        placeholder="Encuentra el usuario que estás buscando..."
+        inputmode="text"
+        type="text"
+        debounce="1000"
+        (ionChange)="this.searchAction()"
+        showCancelButton="always"
+      ></ion-searchbar>
       </ion-col>
       <ion-col sizeSm="2.5" sizeLg="2.5" class="selector">
         <ion-item>
           <ion-label>Tipo De Usuario</ion-label>
-          <ion-select (ionChange)="setbyUserRol($event)" interface="popover" multiple="false">
+          <ion-select (ionChange)="searchAction()" interface="popover" multiple="false">
             <ion-select-option value="true">Administrador</ion-select-option>
             <ion-select-option value="false">Cliente</ion-select-option>
             <ion-select-option value="all">Todos</ion-select-option>
