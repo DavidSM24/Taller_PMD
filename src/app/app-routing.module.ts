@@ -45,7 +45,19 @@ const routes: Routes = [
   {
     path: 'user-update',
     loadChildren: () => import('./administrator/user/user-update/user-update.module').then( m => m.UserUpdatePageModule)
+  },  {
+    path: 'company-list',
+    loadChildren: () => import('./administrator/company/company-list/company-list.module').then( m => m.CompanyListPageModule)
+  },
+  {
+    path: 'company-update',
+    loadChildren: () => import('./administrator/company/company-update/company-update.module').then( m => m.CompanyUpdatePageModule)
+  },
+  {
+    path: 'company-create',
+    loadChildren: () => import('./administrator/company/company-create/company-create.module').then( m => m.CompanyCreatePageModule)
   }
+
 ];
 @NgModule({
   imports: [

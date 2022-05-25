@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CarRepair } from '../models/CarRepair';
 import { InsuranceCompany } from '../models/InsuranceCompany';
 
 @Injectable({
@@ -9,6 +8,7 @@ import { InsuranceCompany } from '../models/InsuranceCompany';
 })
 export class InsuranceCompanyService {
 
+  public added?:boolean;
   private endpoint:string="/insuranceCompany";
   private URLDataBase:string;
 
@@ -46,7 +46,6 @@ export class InsuranceCompanyService {
 
       },error=>{
         console.log(error);
-        //mandar una alerta
       });
     });
    }
@@ -146,7 +145,7 @@ export class InsuranceCompanyService {
             insuranceCompany=data;
             resolve(insuranceCompany);
           },error=>{
-            resolve(error);
+            resolve(null);
           });
          });
 

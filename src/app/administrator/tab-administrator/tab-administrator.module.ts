@@ -12,10 +12,11 @@ import { TabAdministratorPage } from './tab-administrator.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     TabAdministratorPageRoutingModule,
 
-    
+
   ],
   declarations: [TabAdministratorPage]
 })

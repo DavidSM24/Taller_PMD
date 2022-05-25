@@ -71,7 +71,7 @@ const routes: Routes = [
           }
         ]
       },
-      
+
       //Regalos
       {
         path:'gift',
@@ -108,6 +108,20 @@ const routes: Routes = [
           {
             path: 'update',
             loadChildren: () => import('../user/user-update/user-update.module').then( m => m.UserUpdatePageModule)
+          }
+        ]
+      },
+      //companies
+      {
+        path:'company',
+        children:[
+          {
+            path: 'list',
+            loadChildren: () => import('../company/company-list/company-list.module').then( m => m.CompanyListPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () => import('../company/company-create/company-create.module').then( m => m.CompanyCreatePageModule)
           }
         ]
       },

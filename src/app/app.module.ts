@@ -13,12 +13,18 @@ import { AgencyService } from './services/agency.service';
 import { GiftService } from './services/gift.service';
 import { AuthService } from './services/auth.service';
 import { UtilService } from './services/util.service';
+import { InsuranceCompanyService } from './services/insurance-company.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NavControlService, AgencyService,GiftService, AuthService,UtilService],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NavControlService, AgencyService,GiftService, AuthService,UtilService,InsuranceCompanyService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

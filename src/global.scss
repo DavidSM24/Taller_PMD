@@ -83,6 +83,13 @@ ion-modal.fullscreen {
   align-items: center;
 }
 
+.left {
+  position:relative;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+}
+
 .icon-div-container{
   cursor:pointer;
 }
