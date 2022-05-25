@@ -77,10 +77,12 @@ export class UserListPage {
       if (i > -1) {
         this.users.splice(i, 1);
       };
-      i = this.oldUsers.indexOf(user);
-      if (i > -1) {
-        this.oldUsers.splice(i, 1);
-      };
+      this.oldUsers.forEach((e:User)=>{
+        if(e.id==user.id){
+          let i2=this.oldUsers.indexOf(e);
+          this.oldUsers.splice(i2,1);
+        }
+      });
       this.presentToast("Usuario eliminado correctamente.", "success", "checkmark-circle-outline")
     }
     else this.presentToast("No se ha podido eliminar el usuario. Compruebe que no está asociado a ninguna agencia con datos.", "danger", 'ban');
@@ -115,8 +117,12 @@ export class UserListPage {
       if (resp.data != null) {
         let i: number = this.users.indexOf(user);
         this.users[i] = resp.data.newUser;
-        let i2 = this.oldUsers.indexOf(user);
-        this.oldUsers[i2] = this.users[i];
+        this.oldUsers.forEach((e:User)=>{
+          if(e.id==resp.data.newUser.id){
+            let i2=this.oldUsers.indexOf(e);
+            this.oldUsers[i2]=this.users[i];
+          }
+        })
         this.presentToast("Usuario modificado correctamente.", "success", "checkmark-circle-outline")
       }
     } catch (error) {
@@ -190,20 +196,22 @@ export class UserListPage {
       //name
       list = await this.usser.getByName(this.searchStr);
       list.forEach((e: User) => {
-        if (!resultFilter.includes(e)) {
-
-          resultFilter.push(e);
-        }
+        let result: boolean = true;
+        resultFilter.forEach((x: User) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
       })
 
       //code
       if (+this.searchStr >= 0) {
         list = await this.usser.getFilterCode(this.searchStr);
         list.forEach((e: User) => {
-          if (!resultFilter.includes(e)) {
-
-            resultFilter.push(e);
-          }
+          let result: boolean = true;
+          resultFilter.forEach((x: User) => {
+            if (x.id == e.id) result = false;
+          })
+          if (result) resultFilter.push(e);
         })
       }
 
@@ -212,7 +220,7 @@ export class UserListPage {
       list.forEach((e: User) => {
         let result: boolean = true;
         resultFilter.forEach((x: User) => {
-          if (x.id = e.id) result = false;
+          if (x.id == e.id) result = false;
         })
         if (result) resultFilter.push(e);
       })

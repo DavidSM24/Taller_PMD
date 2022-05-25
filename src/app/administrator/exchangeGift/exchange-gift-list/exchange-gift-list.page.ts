@@ -36,6 +36,7 @@ export class ExchangeGiftListPage {
     private modalCtrl: ModalController,
     private authS:AuthService) { }
     private uts:UtilService
+
     async ionViewDidEnter(){
       this.niTems = Math.ceil(this.pt.height() / 20 + 10);
       await this.cargaExGifts();
@@ -136,13 +137,15 @@ export class ExchangeGiftListPage {
 
     if(result){
       let i=this.exGifts.indexOf(exgift,0);
-      let i2=this.oldExGifts.indexOf(exgift,0);
       if(i>-1){
         this.exGifts.splice(i,1);
       }
-      if(i2>-1){
-        this.oldExGifts.splice(i2,1);
-      }
+      this.oldExGifts.forEach((e:ExchangeGift)=>{
+        if(e.id==exgift.id){
+          let i2=this.oldExGifts.indexOf(e);
+          this.oldExGifts.splice(i2,1);
+        }
+      });
       this.presentToast("Pedido eliminado correctamente.","success","checkmark-circle-outline");
 
     }
@@ -242,20 +245,22 @@ export class ExchangeGiftListPage {
       //date
       list=await this.exs.getByDateFilter(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
-        if(!resultFilter.includes(e)){
-
-          resultFilter.push(e);
-        }
+        let result:boolean=true;
+        resultFilter.forEach((x:ExchangeGift)=>{
+          if(x.id==e.id) result=false;
+        })
+        if(result) resultFilter.push(e);
       })
 
       //points
       if(+this.searchStr>=0){
         list=await this.exs.getByPoints(this.searchStr);
         list.forEach((e:ExchangeGift)=>{
-          if(!resultFilter.includes(e)){
-
-            resultFilter.push(e);
-          }
+          let result:boolean=true;
+          resultFilter.forEach((x:ExchangeGift)=>{
+            if(x.id==e.id) result=false;
+          })
+          if(result) resultFilter.push(e);
         })
       }
 
@@ -264,7 +269,7 @@ export class ExchangeGiftListPage {
       list.forEach((e:ExchangeGift)=>{
         let result:boolean=true;
         resultFilter.forEach((x:ExchangeGift)=>{
-          if(x.id=e.id) result=false;
+          if(x.id==e.id) result=false;
         })
         if(result) resultFilter.push(e);
       })
@@ -272,10 +277,11 @@ export class ExchangeGiftListPage {
       //agency-user-name
       list=await this.exs.getByAgencyUsername(this.searchStr);
       list.forEach((e:ExchangeGift)=>{
-        if(!resultFilter.includes(e)){
-
-          resultFilter.push(e);
-        }
+        let result:boolean=true;
+        resultFilter.forEach((x:ExchangeGift)=>{
+          if(x.id==e.id) result=false;
+        })
+        if(result) resultFilter.push(e);
       })
 
       if(selectO=="true"){

@@ -35,7 +35,7 @@ export class GifCreatePage {
 
   public async create(): Promise<void> {
 
-    if(this.formGift.get("points").value>1){
+    if(this.formGift.get("points").value>0){
       await this.uts.presentLoading();
 
       if(this.extension){

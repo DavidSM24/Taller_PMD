@@ -41,6 +41,7 @@ export class AgencyListPage implements OnInit {
 
   async ionViewWillEnter() {
 
+    this.niTems = Math.ceil(this.pt.height() / 20 + 10);
     console.log(this.as.added);
 
     if(this.as.added){
@@ -49,7 +50,7 @@ export class AgencyListPage implements OnInit {
       this.as.added=false;
     }
     else{
-      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
+
       await this.loadAgencies();
     }
   }
@@ -148,6 +149,13 @@ export class AgencyListPage implements OnInit {
       if (result) {
         if (i > -1) {
           this.agencies.splice(i, 1);
+          this.oldAgencies.forEach((e:Agency)=>{
+            if(e.id==agency.id){
+              let i2=this.oldAgencies.indexOf(e);
+              this.oldAgencies.splice(i2,1);
+            }
+          });
+
           let result2:boolean=await this.us.delete(user);
           if(!result2) this.uts.presentToast("Error al eliminar el usuario asociado.","danger","ban");
         }
@@ -216,6 +224,7 @@ export class AgencyListPage implements OnInit {
   async searchChange(event){
     this.searchStr=event.detail.value;
 
+    let resultFilter:Agency[]=[];
     let list:Agency[]=[];
     this.agencies=[];
 
@@ -227,56 +236,70 @@ export class AgencyListPage implements OnInit {
       await this.uts.presentLoading();
       //username
       list=await this.as.getByUserNamePaged(this.searchStr,99999,0);
-      list.forEach((e:Agency)=>{
-        if(!this.agencies.includes(e)){
-          this.agencies.push(e);
-        }
+      list.forEach((e: Agency) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: Agency) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
       })
 
       //address
       list=await this.as.getByAddress(this.searchStr);
-      list.forEach((e:Agency)=>{
-        if(!this.agencies.includes(e)){
-          this.agencies.push(e);
-        }
+      list.forEach((e: Agency) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: Agency) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
       })
 
       //company
       list=await this.as.getByCompany(this.searchStr);
-      list.forEach((e:Agency)=>{
-        if(!this.agencies.includes(e)){
-          this.agencies.push(e);
-        }
+      list.forEach((e: Agency) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: Agency) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
       })
 
       //location
       list=await this.as.getByLocation(this.searchStr);
-      list.forEach((e:Agency)=>{
-        if(!this.agencies.includes(e)){
-          this.agencies.push(e);
-        }
+      list.forEach((e: Agency) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: Agency) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
       })
 
       //points
       if(+this.searchStr>=0){
         list=await this.as.getByPoints(+this.searchStr);
-        list.forEach((e:Agency)=>{
-        if(!this.agencies.includes(e)){
-          this.agencies.push(e);
-        }
+        list.forEach((e: Agency) => {
+          let result: boolean = true;
+          resultFilter.forEach((x: Agency) => {
+            if (x.id == e.id) result = false;
+          })
+          if (result) resultFilter.push(e);
         })
       }
 
       //zipcode
       if(+this.searchStr>=0){
         list=await this.as.getByZipcode(+this.searchStr);
-        list.forEach((e:Agency)=>{
-        if(!this.agencies.includes(e)){
-          this.agencies.push(e);
-        }
+        list.forEach((e: Agency) => {
+          let result: boolean = true;
+          resultFilter.forEach((x: Agency) => {
+            if (x.id == e.id) result = false;
+          })
+          if (result) resultFilter.push(e);
         })
       }
 
+      this.agencies=resultFilter;
+      this.agencies=this.sortList(this.agencies);
       this.infinite.disabled=true;
       await this.uts.hideLoading()
     }

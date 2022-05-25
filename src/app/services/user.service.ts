@@ -97,8 +97,7 @@ export class UserService {
 
     return new Promise(resolve => {
       this.http.get(this.URLDatabase + this.endpoint + "/code/" + code).subscribe((miuser: any) => {
-
-        if (miuser.code) {
+        if (miuser&&miuser.code) {
           const tmp: User = {
             id: miuser.id,
             code: miuser.code,
@@ -114,7 +113,7 @@ export class UserService {
       }, error => {
         console.log(error);
         console.log(user);
-        resolve(user);
+        resolve(null);
       });
     });
   }
@@ -131,6 +130,7 @@ export class UserService {
   }
 
   public async createOrUpdate(user:User):Promise<User>{
+
     if (user != null) {
       const body=user;
       return new Promise(resolve => {

@@ -39,7 +39,7 @@ export class GifListPage implements OnInit {
 
   async ionViewWillEnter() {
 
-    console.log(this.gs.added);
+    this.niTems = Math.ceil(this.pt.height() / 20 + 10);
 
     if(this.gs.added){
 
@@ -47,7 +47,6 @@ export class GifListPage implements OnInit {
       this.gs.added=false;
     }
     else{
-      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
       await this.loadgifts();
     }
 
@@ -126,6 +125,12 @@ export class GifListPage implements OnInit {
       if(i>-1){
         this.gifts.splice(i,1);
       }
+      this.oldGifts.forEach((e:Gift)=>{
+        if(e.id==gift.id){
+          let i2=this.oldGifts.indexOf(e);
+          this.oldGifts.splice(i2,1);
+        }
+      });
       this.uts.presentToast("Regalo eliminada correctamente.","success","checkmark-circle-outline");
     }
     else{
@@ -192,18 +197,22 @@ export class GifListPage implements OnInit {
       //nombre
       list=await this.gs.getByNamePaged(this.searchStr,9999,0);
       list.forEach((e:Gift)=>{
-        if(!resultFilter.includes(e)){
-          resultFilter.push(e);
-        }
+        let result:boolean=true;
+        resultFilter.forEach((x:Gift)=>{
+          if(x.id==e.id) result=false;
+        })
+        if(result) resultFilter.push(e);
       })
 
       //points
       if(+this.searchStr>=0){
         list=await this.gs.getByPoints(+this.searchStr);
         list.forEach((e:Gift)=>{
-        if(!resultFilter.includes(e)){
-          resultFilter.push(e);
-        }
+          let result:boolean=true;
+          resultFilter.forEach((x:Gift)=>{
+            if(x.id==e.id) result=false;
+          })
+          if(result) resultFilter.push(e);
         })
       }
 
