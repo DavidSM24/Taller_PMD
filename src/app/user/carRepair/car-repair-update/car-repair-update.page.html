@@ -30,10 +30,10 @@
               </ion-item>
             </ion-col>
             
-            <ion-col sizeSm="2" sizeLg="2">
+            <ion-col *ngIf="this.carRepair.dateRepair!=null"  sizeSm="2" sizeLg="2">
               <ion-label>Fecha de reparación</ion-label>
             </ion-col>
-            <ion-col sizeSm="4" sizeLg="4">
+            <ion-col *ngIf="this.carRepair.dateRepair!=null" sizeSm="4" sizeLg="4">
               <ion-input class="customInput" Disabled type="text" formControlName="spanishDateRepair"></ion-input>
             </ion-col>
           </ion-row>
@@ -41,7 +41,7 @@
 
 
 
-          <ion-row class="ion-align-items-center">
+          <ion-row *ngIf="this.carRepair.operation>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
               <ion-label>Operación</ion-label>
             </ion-col>
@@ -86,7 +86,8 @@
               <ion-input class="customInput" type="text" formControlName="clienteName"></ion-input>
             </ion-col>
           </ion-row>
-          <ion-row class="ion-align-items-center">
+
+          <ion-row *ngIf="this.carRepair.nor>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
               <ion-label>NOR</ion-label>
             </ion-col>
@@ -94,7 +95,8 @@
               <ion-input class="customInput" Disabled type="number" formControlName="nor"></ion-input>
             </ion-col>
           </ion-row>
-          <ion-row class="ion-align-items-center">
+
+          <ion-row *ngIf="this.carRepair.amount>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
               <ion-label>Coste</ion-label>
             </ion-col>
@@ -102,7 +104,8 @@
               <ion-input class="customInput" Disabled type="number" formControlName="amount"></ion-input>
             </ion-col>
           </ion-row>
-          <ion-row class="ion-align-items-center">
+
+          <ion-row *ngIf="this.carRepair.asigPoints>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
               <ion-label>Puntos</ion-label>
             </ion-col>
@@ -110,7 +113,8 @@
               <ion-input class="customInput" Disabled type="number" formControlName="asigPoints"></ion-input>
             </ion-col>
           </ion-row>
-          <ion-row class="ion-align-items-center">
+
+          <ion-row  class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
               <ion-label>Agencia</ion-label>
             </ion-col>
@@ -125,8 +129,8 @@
               Reparado
             </ion-col>
             <ion-col sizeSm="7" sizeLg="4">
-              <ion-icon *ngIf="carRepair.repaired" name="checkmark-circle" style="zoom:1.7;color: #39ff14;"></ion-icon>
-              <ion-icon *ngIf="!carRepair.repaired" name="close-circle" style="zoom:1.7;color: red;"></ion-icon>
+              <ion-icon *ngIf="carRepair.repaired" name="car" style="zoom:1.7;color: #39ff14;"></ion-icon>
+              <ion-icon *ngIf="!carRepair.repaired" name="construct" style="zoom:1.7;color: red;"></ion-icon>
             </ion-col>
           </ion-row>
 

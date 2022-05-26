@@ -333,26 +333,23 @@ export class CarRepairListPage implements OnInit {
    * Método que obtiene el id de la agencia conectada
    */
     public async getMyAgency(){
-
-      let agencys:Agency[];
-
-      try{
-        this.utilService.presentLoading();
-        agencys= await this.agencyService.getByUserNamePaged(this.authService.user.name,100,0);
-      if(agencys.length>0){
-        agencys.forEach(agency=>{
-          if(agency.myUser.id==this.authService.user.id){
-            this.myAgency=agency;
-            this.idAgency=agency.id;
-            console.log("id-->"+this.idAgency);
-            this.utilService.hideLoading();
-          }
-        });
-      }
+      let agency:Agency;
+      
+      try{        
+        await this.utilService.presentLoading();
+        agency=this.authService.agency;
+        
+            this.myAgency=this.authService.agency;
+            this.idAgency=this.authService.agency.id;
+            
+           await this.utilService.hideLoading();
+          
+        
+      
 
       }catch{
-        this.utilService.presentToast("Fallo al cargar","danger",'ban');
-
+        await this.utilService.presentToast("Fallo al cargar","danger",'ban');
+        await this.utilService.hideLoading();
       }
 
 

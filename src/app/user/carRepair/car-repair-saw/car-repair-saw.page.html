@@ -10,7 +10,7 @@
       <div class="formulario">
       <ion-grid>
         
-        <ion-row class="ion-align-items-center">
+        <ion-row *ngIf="this.carRepair.operation>0" class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Operación</ion-label>
           </ion-col>
@@ -54,7 +54,7 @@
             <ion-input class="customInput" Disabled type="text" formControlName="clientName"></ion-input>
           </ion-col>
         </ion-row>
-        <ion-row class="ion-align-items-center">
+        <ion-row *ngIf="this.carRepair.nor>0" class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>NOR</ion-label>
           </ion-col>
@@ -62,7 +62,7 @@
             <ion-input class="customInput" Disabled type="number" formControlName="nor"></ion-input>
           </ion-col>
         </ion-row>
-        <ion-row class="ion-align-items-center">
+        <ion-row *ngIf="this.carRepair.amount>0" class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Coste</ion-label>
           </ion-col>
@@ -70,7 +70,7 @@
             <ion-input class="customInput" Disabled type="number" formControlName="amount"></ion-input>
           </ion-col>
         </ion-row>
-        <ion-row class="ion-align-items-center">
+        <ion-row *ngIf="this.carRepair.asigPoints>0" class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Puntos</ion-label>
           </ion-col>
@@ -97,7 +97,7 @@
          
          
         </ion-row> 
-        <ion-row class="ion-align-items-center">
+        <ion-row *ngIf="this.carRepair.dateRepair!=null" class="ion-align-items-center">
           <ion-col sizeSm="7" sizeLg="3">
             <ion-label>Fecha de reparación</ion-label>
           </ion-col>
@@ -110,8 +110,8 @@
             Reparado
           </ion-col>
           <ion-col sizeSm="7" sizeLg="1.5">
-            <ion-icon *ngIf="carRepair.repaired" name="checkmark-circle"  style="color: #39ff14; zoom: 2.0;"></ion-icon>
-           <ion-icon *ngIf="!carRepair.repaired" name="close-circle" style="color: red; zoom: 2.0;"></ion-icon>
+            <ion-icon *ngIf="carRepair.repaired" name="car"  style="color: #39ff14; zoom: 2.0;"></ion-icon>
+           <ion-icon *ngIf="!carRepair.repaired" name="construct" style="color: red; zoom: 2.0;"></ion-icon>
           
           </ion-col>
         </ion-row> 

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="medium">
     <ion-title>Lista de Reparaciones</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
@@ -8,7 +8,7 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-toolbar color="primary">
+  <ion-toolbar color="medium">
     <ion-row class="ion-align-items-center">
       <ion-col sizeSm="9.5" sizeLg="9.5">
         <ion-searchbar  placeholder="Encuentra la reparación que estás buscando..." inputmode="text" type="text"
@@ -101,8 +101,8 @@
         </ion-col>
   
         <ion-col size="2.5"(click)="saw(carRepair)">
-          <ion-icon *ngIf="carRepair.repaired" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
-          <ion-icon *ngIf="!carRepair.repaired" name="close-circle" style="color: red;"></ion-icon>
+          <ion-icon *ngIf="carRepair.repaired" name="car" style="color: #39ff14;"></ion-icon>
+          <ion-icon *ngIf="!carRepair.repaired" name="construct" style="color: red;"></ion-icon>
         </ion-col>
 
         <ion-col size="1">
