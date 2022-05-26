@@ -44,7 +44,7 @@ export class CarRepairUpdatePage implements OnInit {
      if(this.carRepair.dateOrder){
        this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateOrder);
        this.formatedString=this.dateTimeService.formatString(""+this.carRepair.dateOrder);
-      console.log(this.stringDateOrder);
+     
       }
      //compruba si exite una fecha de reparación previa, en caso de que exista se preparan las variables para mostrarlas en el html
      if(this.carRepair.dateRepair){
@@ -102,7 +102,7 @@ export class CarRepairUpdatePage implements OnInit {
         //Guarda la reparación en la base de datos
         this.newCarRepair=await this.carRepairService.createOrUpdate(this.newCarRepair);
         //presenta el toast para que el usuario sepa que se ha guardado con  éxito
-        this.uts.presentToast("Se ha gurdadado correctamente","success","checkmark-circle-outline");
+       await this.uts.presentToast("Se ha gurdadado correctamente","success","checkmark-circle-outline");
 
         //Cierra el modal pasando la reparación guardada a la página con las reparaciones
         this.modalController.dismiss({

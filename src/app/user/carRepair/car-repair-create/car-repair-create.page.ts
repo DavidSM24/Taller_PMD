@@ -66,8 +66,9 @@ export class CarRepairCreatePage implements OnInit {
    * Método que guarda la reparación en la base de datos
    */
   public async create():Promise<void>{
-    this.utilService.presentLoading();
-    if(this.myAgency!=null){
+    
+    await this.utilService.presentLoading();
+    if(this.authService.agency!=null){
       let newCarRepair:CarRepair={
         operation:0,
         carPlate:this.formCarRepair.get("carPlate").value,
@@ -80,19 +81,31 @@ export class CarRepairCreatePage implements OnInit {
         dateRepair:null,
         asigPoints:0,
         repaired:false,
-        myAgency:this.myAgency
+        myAgency:this.authService.agency
       }
-
-      newCarRepair=await this.carRepairService.createOrUpdate(newCarRepair);
-      if(newCarRepair.id){
-        this.formCarRepair.reset();
-        this.utilService.presentToast("La reparación se ha guardado correctamente",'success',"checkmark-circle-outline");
-        this.carRepairService.added=true;
-        this.routeCarRepairList();
-      }else{
-        this.utilService.presentToast("Ha surgido un error al intentar crear la reparacion",'danger','ban')
+      try {
+        if(newCarRepair.carPlate.length>4){
+          newCarRepair=await this.carRepairService.createOrUpdate(newCarRepair);
+          if(newCarRepair.id){
+            this.formCarRepair.reset();
+            this.utilService.presentToast("La reparación se ha guardado correctamente",'success',"checkmark-circle-outline");
+            this.carRepairService.added=true;
+            this.routeCarRepairList();
+          }else{
+            this.utilService.presentToast("Ha surgido un error al intentar crear la reparacion",'danger','ban');
+          }
+        }else{
+          this.utilService.presentToast("La matrícula debe tener más de cuatro caracteres",'danger','ban')
+        }
+        
+        
+        
+      } catch (error) {
+        
+      }finally{
+        await this.utilService.hideLoading();
       }
-      this.utilService.hideLoading();
+      
     }
 
 
