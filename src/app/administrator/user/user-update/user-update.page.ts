@@ -44,8 +44,13 @@ export class UserUpdatePage implements OnInit {
   public async EditUser(): Promise<void> {
 
     await this.uts.presentLoading();
-    let userCode:User=await this.userv.getByCode(this.formEditUser.get('code').value);
-    await this.uts.hideLoading();
+
+    let userCode:User=null;
+
+    if(this.formEditUser.get('code').value!=this.user.code){
+      userCode=await this.userv.getByCode(this.formEditUser.get('code').value);
+    }
+
 
     if(!userCode){
       let userEditado: User = {
@@ -71,7 +76,7 @@ export class UserUpdatePage implements OnInit {
 
     else this.uts.presentToast("Ya existe un usuario con este código. Prueba con otro diferente.","danger","ban");
 
-
+    this.uts.hideLoading();
   }
 
   close() {

@@ -22,15 +22,15 @@ export class CarRepairService {
 
    /**
     * Método que carga una lista de reparaciones de coches en función de la petición
-    * @param endpoint 
-    * @returns 
+    * @param endpoint
+    * @returns
     */
    private async getListData(endpoint:string):Promise<CarRepair[]>{
      let carRepairs:CarRepair[]=[];
 
     return new Promise(resolve=>{
 
-      this.http.get(endpoint).subscribe((data:any[])=>{//se trae la petición 
+      this.http.get(endpoint).subscribe((data:any[])=>{//se trae la petición
 
         if(data !=null && data.length>0){//comprueba que la petición se ha traido correctamente
 
@@ -54,7 +54,7 @@ export class CarRepairService {
             }
 
             carRepairs.push(tmp);//se añade a la lista
-            
+
           }
         }
         resolve(carRepairs);
@@ -81,8 +81,8 @@ export class CarRepairService {
 
    /**
     * Método que devuevle las reparaciones de la base de datos de forma paginada.
-    * Devuelve una lista con el número de reparaciones especificadas 
-    * a partir del último elemento que se le indique 
+    * Devuelve una lista con el número de reparaciones especificadas
+    * a partir del último elemento que se le indique
     * @param limit número de reparaciones que se quiera obtener
     * @param offset a partir de que reparación se empieza a contar, con ese incliudo
     * @returns Promise<CarRepair[]>
@@ -146,8 +146,13 @@ export class CarRepairService {
     */
 
    public async getByOperationPaged(operation:number,element:number,offset:number):Promise<CarRepair[]>{
-     
+
     return this.getListData(this.URLDatabase+this.endpoint+"/operation/"+operation+"/elements/"+element+"/page/"+offset);
+   }
+
+   public async getByOperationFilter(operation:string):Promise<CarRepair[]>{
+
+    return this.getListData(this.URLDatabase+this.endpoint+"/foperation/"+operation);
    }
 
    //ByCarPLate
@@ -159,8 +164,8 @@ export class CarRepairService {
     * @param offset A partir de que reparación se va a devolver
     * @returns Promise<CarRepair[]>
     */
-   public async gerByCarPlate(carPlate:string,element:number,offset:number):Promise<CarRepair[]>{
-     
+   public async getByCarPlate(carPlate:string,element:number,offset:number):Promise<CarRepair[]>{
+
     return this.getListData(this.URLDatabase+this.endpoint+"/carPlate/"+carPlate+"/elements/"+element+"/page/"+offset);
    }
 
@@ -186,7 +191,7 @@ export class CarRepairService {
     * @param end Fecha mas moderna
     * @param element Número de reparaciones que se quiera obtener
     * @param offset A partir de que elemento se quiere empezar a contar
-    * @returns 
+    * @returns
     */
    public async getByDateOrderPaged(ini:Date,end:Date,element:number,offset:number):Promise<CarRepair[]>{
 
@@ -218,9 +223,22 @@ export class CarRepairService {
     * @returns Promise<CarRepair[]>
     */
    public async getByStatedPaged(repaired:boolean,element:number,offset:number):Promise<CarRepair[]>{
-     
+
     return this.getListData(this.URLDatabase+this.endpoint+"/repaired/"+repaired+"/elements/"+element+"/page/"+offset);
    }
+
+   //ByAgencyInfo(Location and Company name)
+
+   /**
+    * Método que devuelve una lista con las reparaciones en función de la información de su agencia,
+    * más concretame, el nombre de la compañia y su localidad.
+    * @param fagency palabras por las que filtrar.
+    * @returns Promise<CarRepair[]>
+    */
+    public async getByAgencyInfoFilter(fagency:string):Promise<CarRepair[]>{
+
+      return this.getListData(this.URLDatabase+this.endpoint+"/fagency/"+fagency);
+     }
 
    //CreateOrUpdate
 
@@ -235,7 +253,7 @@ export class CarRepairService {
         //&&carRepair.model!=null
         //&&carRepair.brandCar!=null
        // &&carRepair.clientName!=null
-        //&&carRepair.dateOrder!=null        
+        //&&carRepair.dateOrder!=null
         //&&carRepair.repaired!=null
         //&&carRepair.myAgency!=null
         ){
@@ -248,7 +266,7 @@ export class CarRepairService {
               carRepair=data;
               resolve(carRepair);
             },error=>{
-              resolve(carRepair);
+              resolve(null);
               //meter una alerta que indique que se ha producido un error
             });
 

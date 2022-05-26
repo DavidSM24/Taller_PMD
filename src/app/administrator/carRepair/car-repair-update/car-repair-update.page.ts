@@ -16,69 +16,69 @@ import { DateTimeServiceService } from 'src/app/services/date-time-service.servi
 })
 export class CarRepairUpdatePage implements OnInit {
 
-  @Input() carRepair:CarRepair;
+  @Input() carRepair: CarRepair;
   //variables para la fecha
   @ViewChild(IonDatetime) datetime: IonDatetime;
   //Guarda la fecha con el formato de españa
-  public spanishDateOrder:string;
+  public spanishDateOrder: string;
 
-   //Guarda la fecha de la reparación con el formato de españa
-   public spanishDateRepair:string;
-   //Guarda la fecha de la reparación con un formato legible para el ion-dateTime
-   public stringDateRepair:string;
-   //variable que guarda los datos proporcionados por el evento del ion-dateTime
-   public dateValue = '';
+  //Guarda la fecha de la reparación con el formato de españa
+  public spanishDateRepair: string;
+  //Guarda la fecha de la reparación con un formato legible para el ion-dateTime
+  public stringDateRepair: string;
+  //variable que guarda los datos proporcionados por el evento del ion-dateTime
+  public dateValue = '';
   //Variable que guarda la fecha de reparación con el formato correcto para ser enviado a la api
   public formatedString;
-  public formCarRepair:FormGroup;
-  public id:number;
-  private newCarRepair:CarRepair;
+  public formCarRepair: FormGroup;
+  public id: number;
+  private newCarRepair: CarRepair;
 
 
   constructor(
     private modalController: ModalController,
-    private carRepairService:CarRepairService,
-    private formBuilder:FormBuilder,
-    private uts:UtilService,
-    private dateTimeService:DateTimeServiceService
+    private carRepairService: CarRepairService,
+    private formBuilder: FormBuilder,
+    private uts: UtilService,
+    private dateTimeService: DateTimeServiceService
 
   ) {
 
 
-   }
+  }
 
   ngOnInit() {
     //se crea la fecha en formato español
-    this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateOrder);
+    this.spanishDateOrder = this.dateTimeService.formatSpanishDateString("" + this.carRepair.dateOrder);
     //compruba si exite una fecha de reparación previa, en caso de que exista se preparan las variables para mostrarlas en el html
-    if(this.carRepair.dateRepair){
-      this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);
-      this.formatedString=this.dateTimeService.formatString(""+this.carRepair.dateRepair);
+    if (this.carRepair.dateRepair) {
+      this.spanishDateRepair = this.dateTimeService.formatSpanishDateString("" + this.carRepair.dateRepair);
+      this.formatedString = this.dateTimeService.formatString("" + this.carRepair.dateRepair);
     }
 
 
 
-    this.formCarRepair=this.formBuilder.group({
+    this.formCarRepair = this.formBuilder.group({
 
-    operation:[this.carRepair.operation,[Validators.required]],
-    carPlate:[this.carRepair.carPlate,[Validators.required]],
-    model:[this.carRepair.model,[Validators.required]],
-    brandCar:[this.carRepair.brandCar,[Validators.required]],
-    clienteName:[this.carRepair.clienteName,[Validators.required]],
-    nor:[this.carRepair.nor,[Validators.required]],
-    amount:[this.carRepair.amount],
-    asigPoints:[this.carRepair.asigPoints],
-    myAgency:[this.carRepair.myAgency.myUser.name],
-    dateOrder:[this.carRepair.dateOrder,[Validators.required]],
-    //esta variable solo se usa para mostrar la fecha de la orden con el formato de España en el html
-    spanishDateOrder:[this.spanishDateOrder],
-    dateRepair:[this.carRepair.dateRepair],
-    repaired:[this.carRepair.repaired,[Validators.required]]
+      operation: [this.carRepair.operation, [Validators.required]],
+      carPlate: [this.carRepair.carPlate, [Validators.required]],
+      model: [this.carRepair.model, [Validators.required]],
+      brandCar: [this.carRepair.brandCar, [Validators.required]],
+      clienteName: [this.carRepair.clienteName, [Validators.required]],
+      nor: [this.carRepair.nor, [Validators.required]],
+      amount: [this.carRepair.amount],
+      asigPoints: [this.carRepair.asigPoints],
+      myAgency: [this.carRepair.myAgency.myUser.name],
+      dateOrder: [this.carRepair.dateOrder, [Validators.required]],
+      //esta variable solo se usa para mostrar la fecha de la orden con el formato de España en el html
+      spanishDateOrder: [this.spanishDateOrder],
+      dateRepair: [this.carRepair.dateRepair],
+      repaired: [this.carRepair.repaired, [Validators.required]]
 
 
-  });
+    });
   }
-  async ionViewDidEnter(){
+  async ionViewDidEnter() {
 
   }
 
@@ -86,47 +86,71 @@ export class CarRepairUpdatePage implements OnInit {
   /**
    * Método que guarda la nota una vez editada
    */
-  public async editCarRepair(){
+  public async editCarRepair() {
 
-    //se asigna los datos
-    this.newCarRepair={
+    await this.uts.presentLoading();
 
-      id:this.carRepair.id,
-      operation:this.formCarRepair.get("operation").value,
-      carPlate:this.carRepair.carPlate,
-      model:this.carRepair.model,
-      brandCar:this.carRepair.brandCar,
-      clienteName:this.formCarRepair.get("clienteName").value,
-      dateOrder:this.formCarRepair.get("dateOrder").value,
-      nor:this.formCarRepair.get("nor").value,
-      amount:this.formCarRepair.get("amount").value,
-      dateRepair:this.formatedString,
-      asigPoints:this.formCarRepair.get("asigPoints").value,
-      repaired:this.formCarRepair.get("repaired").value,
-      myAgency:this.carRepair.myAgency
+    let result: boolean = true;
 
+    if (this.formCarRepair.get("asigPoints").value < 1 && this.formCarRepair.get("repaired").value == true) {
+      result = false;
+      this.uts.presentToast("No se puede asignar una reparación como terminada a 0 puntos.","danger","ban");
     }
-    try {
-      //Guarda la reparación en la base de datos
-      this.newCarRepair=await this.carRepairService.createOrUpdate(this.newCarRepair);
-      //presenta el toast para que el usuario sepa que se ha guardado con  éxito
-      this.uts.presentToast("Se ha gurdadado correctamente","success","checkmark-circle-outline");
 
-      //Cierra el modal pasando la reparación guardada a la página con las reparaciones
-      this.modalController.dismiss({
-        newCarRepair:this.newCarRepair
-      })
+    if (result) {
+      //se asigna los datos
+      this.newCarRepair = {
 
-    } catch (error) {
-      this.uts.presentToast("Fallo al guradar","danger",'ban');
-      console.log(error);
+        id: this.carRepair.id,
+        operation: this.formCarRepair.get("operation").value,
+        carPlate: this.carRepair.carPlate,
+        model: this.carRepair.model,
+        brandCar: this.carRepair.brandCar,
+        clienteName: this.formCarRepair.get("clienteName").value,
+        dateOrder: this.formCarRepair.get("dateOrder").value,
+        nor: this.formCarRepair.get("nor").value,
+        amount: this.formCarRepair.get("amount").value,
+        dateRepair: this.formatedString,
+        asigPoints: this.formCarRepair.get("asigPoints").value,
+        repaired: this.formCarRepair.get("repaired").value,
+        myAgency: this.carRepair.myAgency
+
+      }
+      try {
+        //Guarda la reparación en la base de datos
+        this.newCarRepair = await this.carRepairService.createOrUpdate(this.newCarRepair);
+
+        if(this.newCarRepair){
+          //Cierra el modal pasando la reparación guardada a la página con las reparaciones
+          this.modalController.dismiss({
+            newCarRepair: this.newCarRepair
+          })
+          this.uts.presentToast("Se ha gurdadado correctamente", "success", "checkmark-circle-outline");
+        }
+        else{
+          this.uts.presentToast("Fallo al actualizar la reparación. Inténtelo más tarde.", "danger", 'ban');
+          this.closeModal();
+        }
+
+        //presenta el toast para que el usuario sepa que se ha guardado con  éxito
+
+
+
+
+      } catch (error) {
+        this.uts.presentToast("Fallo al actualizar la reparación. Inténtelo más tarde.", "danger", 'ban');
+        console.log(error);
+      }
     }
+
+    this.uts.hideLoading();
+
   }
 
   /**
    * Método para cerrar el modal
    */
-  public closeModal(){
+  public closeModal() {
     this.modalController.dismiss();
   }
 
@@ -148,7 +172,7 @@ export class CarRepairUpdatePage implements OnInit {
    * @param value
    * @returns fecha con el formato yyyy-MM-ddTHH:mm
    */
-  formatDate(value: string):string {
+  formatDate(value: string): string {
     return format(parseISO(value), 'yyyy-MM-dd HH:mm:SS');
   }
 
@@ -159,11 +183,11 @@ export class CarRepairUpdatePage implements OnInit {
    * Método que asigna la fecha de reparación cuando el usuario pulsa el botón de aceptar en el ión date time
    * @param event
    */
-  changeDateRepair(event){
-    this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(event);
-    this.stringDateRepair=this.dateTimeService.formatString(event);
-    this.dateValue=event;
-    this.formatedString=this.formatDate(this.dateValue);
+  changeDateRepair(event) {
+    this.spanishDateRepair = this.dateTimeService.formatSpanishDateString(event);
+    this.stringDateRepair = this.dateTimeService.formatString(event);
+    this.dateValue = event;
+    this.formatedString = this.formatDate(this.dateValue);
 
   }
 

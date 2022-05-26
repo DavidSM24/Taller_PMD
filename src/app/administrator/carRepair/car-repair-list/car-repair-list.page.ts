@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, IonSearchbar, IonSelect, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarRepairService } from 'src/app/services/car-repair.service';
@@ -15,39 +15,43 @@ import { CarRepairUpdatePage } from '../car-repair-update/car-repair-update.page
 export class CarRepairListPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+  @ViewChild(IonSelect) select: IonSelect;
+  @ViewChild(IonSearchbar) sb: IonSearchbar;
 
-  private n:number=0;
+  oldInifinte: boolean;
+
+  private n: number = 0;
   //variable que muestra las reparaciones en pantalla
-  public carRepairs:CarRepair[]=[];
+  public carRepairs: CarRepair[] = [];
   //variable que guarda las reparaciones mientras se muestran otras en pantalla
-  public carRepairsStore:CarRepair[]=[];
+  public carRepairsStore: CarRepair[] = [];
   //variable que guarda las letras de la barra de busqueda
-  private searchStr:string="";
-  private miLoading:HTMLIonLoadingElement;
-  private nItems:number; //variable que almacena el número de elemetenos que caben dentro de la página
+  private searchStr: string = "";
+  private miLoading: HTMLIonLoadingElement;
+  private nItems: number; //variable que almacena el número de elemetenos que caben dentro de la página
 
   constructor(
-    private cS:CarRepairService,
-    private toast:ToastController,
-    private alertCtrl:AlertController,
-    private modalCtrl:ModalController,
-    private loading:LoadingController,
-    private routes:Router,
-    private pt:Platform,//para saber el dispositivo
-    private authS:AuthService
+    private cS: CarRepairService,
+    private toast: ToastController,
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private loading: LoadingController,
+    private routes: Router,
+    private pt: Platform,//para saber el dispositivo
+    private authS: AuthService
 
   ) {
 
-   }
+  }
 
   ngOnInit() {
   }
 
-  async ionViewWillEnter(){
-    this.nItems=Math.ceil(this.pt.height()/20+10);
+  async ionViewWillEnter() {
+    this.nItems = Math.ceil(this.pt.height() / 20 + 10);
     try {
       await this.loadCarRepair();
-      this.n=this.carRepairs.length;
+      this.n = this.carRepairs.length;
     } catch (error) {
 
     }
@@ -59,35 +63,37 @@ export class CarRepairListPage implements OnInit {
    * se llama la primera vez que carga la página
    * @param event
    */
-  public async loadCarRepair(event?){
+  public async loadCarRepair(event?) {
 
-    let newCarRepair:CarRepair[]=[];
+    let newCarRepair: CarRepair[] = [];
 
-    if(this.carRepairs.length==0){
+    if (this.carRepairs.length == 0) {
 
-        if(!event){
-          this.presentLoading();
-        }
-
-      this.infinite.disabled=false;
-
-      try{
-      newCarRepair=await this.cS.getAllPaged(this.nItems,0);
-      this.carRepairs=this.carRepairs.concat(newCarRepair);
-      this.storageCarRepairs();
-      if(newCarRepair.length<this.nItems){
-      this.infinite.disabled=true;
-
+      if (!event) {
+        this.presentLoading();
       }
-      }catch(error){
+
+      this.infinite.disabled = false;
+      this.oldInifinte = false;
+
+      try {
+        newCarRepair = await this.cS.getAllPaged(this.nItems, 0);
+        this.carRepairs = this.carRepairs.concat(newCarRepair);
+        this.storageCarRepairs(this.carRepairs);
+        if (newCarRepair.length < this.nItems) {
+          this.infinite.disabled = true;
+          this.oldInifinte = true;
+
+        }
+      } catch (error) {
         console.log(error);
-        this.presentToast("Error de carga","danger",'ban');
-      }finally{
-        if(event){
+        this.presentToast("Error de carga", "danger", 'ban');
+      } finally {
+        if (event) {
 
           event.target.complete();
 
-        }else{
+        } else {
           this.loading.dismiss();
         }
       }
@@ -99,7 +105,7 @@ export class CarRepairListPage implements OnInit {
    * Método que actualiza una reparación mediante un modal
    * @param carRepair Reparación que se quiera modificar
    */
-  public async edit(carRepair:CarRepair){
+  public async edit(carRepair: CarRepair) {
 
     const modal = await this.modalCtrl.create({
       component: CarRepairUpdatePage,
@@ -108,7 +114,7 @@ export class CarRepairListPage implements OnInit {
       //pasar datos al modal
 
       componentProps: {
-        'carRepair':carRepair
+        'carRepair': carRepair
 
 
       }
@@ -116,20 +122,28 @@ export class CarRepairListPage implements OnInit {
 
     await modal.present();
 
-    const resp=await modal.onDidDismiss();
-    if(resp.data !=null){
-      let i:number=this.carRepairs.indexOf(carRepair);
-      this.carRepairs[i]=resp.data.newCarRepair;
+    const resp = await modal.onDidDismiss();
+
+    if (resp.data != null) {
+      let i: number = this.carRepairs.indexOf(carRepair);
+      this.carRepairs[i] = resp.data.newCarRepair;
+
+      this.carRepairsStore.forEach((e:CarRepair)=>{
+        if(e.id==resp.data.newCarRepair.id){
+          let i2=this.carRepairsStore.indexOf(e);
+          this.carRepairsStore[i2]=this.carRepairs[i];
+        }
+      })
     }
 
   }
 
-   /**
-     * Método que carga el modal de los datos de una reparación
-     * @param carRepair
-     * @returns
-     */
-  public async saw(carRepair:CarRepair){
+  /**
+    * Método que carga el modal de los datos de una reparación
+    * @param carRepair
+    * @returns
+    */
+  public async saw(carRepair: CarRepair) {
 
     const modal = await this.modalCtrl.create({
       component: CarRepairSawPage,
@@ -137,7 +151,7 @@ export class CarRepairListPage implements OnInit {
       //pasar datos al modal
 
       componentProps: {
-        'carRepair':carRepair
+        'carRepair': carRepair
       }
     });
 
@@ -149,23 +163,28 @@ export class CarRepairListPage implements OnInit {
    * Método que borra una reparación de la base de datos
    * @param carRepair reparación que se quiera eliminar
    */
-  public async delete(carRepair:CarRepair){
+  public async delete(carRepair: CarRepair) {
     try {
-    await this.presentLoading();
-    const result:boolean=await this.cS.delete(carRepair);//borra la reparación y guarda si se ha borrado
-    let i=this.carRepairs.indexOf(carRepair,0);//se comprueba si la reparación esta en la lista
-    if(result){
-      if(i>-1){
-        this.carRepairs.splice(i,1);//borra la reparación de la lista
+      await this.presentLoading();
+      const result: boolean = await this.cS.delete(carRepair);//borra la reparación y guarda si se ha borrado
+      let i = this.carRepairs.indexOf(carRepair, 0);//se comprueba si la reparación esta en la lista
+      if (result) {
+        if (i > -1) {
+          this.carRepairs.splice(i, 1);//borra la reparación de la lista
+        }
+        this.carRepairsStore.forEach((e:CarRepair)=>{
+          if(e.id==carRepair.id){
+            let i2=this.carRepairsStore.indexOf(e);
+            this.carRepairsStore.splice(i2,1);
+          }
+        });
+        this.presentToast("La reparación ha sido eliminada correctamente.", "success", "checkmark-circle-outline");
+      } else {
+        this.presentToast("Error al borrar la reparación", "danger", 'ban');
       }
-
-      this.presentToast("La reparación ha sido eliminada correctamente.","success","checkmark-circle-outline");
-    }else{
-      this.presentToast("Error al borrar la reparación","danger",'ban');
-    }
     } catch (error) {
-      this.presentToast("Nose ha podido borrar la reparación, intentelo más tarde","danger",'ban');
-    }finally{
+      this.presentToast("Nose ha podido borrar la reparación, intentelo más tarde", "danger", 'ban');
+    } finally {
       try {
         await this.miLoading.dismiss();
       } catch (error) {
@@ -178,22 +197,22 @@ export class CarRepairListPage implements OnInit {
    * Método que muestra una alerta cuando se quiere borrar una reparación
    * @param carRepair reparación que se quiere borrar
    */
-  public async showDeleteMenu(carRepair:CarRepair){
-    const alert=await this.alertCtrl.create({
-      header:'Confirmación',
-      message:'¿Desea eliminar la reparación?',
-      buttons:[
+  public async showDeleteMenu(carRepair: CarRepair) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmación',
+      message: '¿Desea eliminar la reparación?',
+      buttons: [
         {
-          text:'Eliminar',
-          cssClass:'rojo',
-          handler:()=>{
+          text: 'Eliminar',
+          cssClass: 'rojo',
+          handler: () => {
             this.delete(carRepair);
           }
         },
         {
-          text:'Cancelar',
-          cssClass:'secondary',
-          role:'cancel',
+          text: 'Cancelar',
+          cssClass: 'secondary',
+          role: 'cancel',
 
         }
       ]
@@ -212,17 +231,19 @@ export class CarRepairListPage implements OnInit {
    * Método que carga más reparaciones cuando se llega al final de la pantalla
    * @param $event
    */
-  public async infiniteLoad($event){
+  public async infiniteLoad($event) {
 
-    let newCarRepairs:CarRepair[]=[];
+    let newCarRepairs: CarRepair[] = [];
 
-    if(!this.infinite.disabled){
+    if (!this.infinite.disabled) {
 
       try {
-        newCarRepairs=await this.cS.getAllPaged(this.nItems,this.carRepairs.length);
-        this.carRepairs=this.carRepairs.concat(newCarRepairs);
-        if(newCarRepairs.length<30){
-          this.infinite.disabled=true;
+        newCarRepairs = await this.cS.getAllPaged(this.nItems, this.carRepairs.length);
+        this.carRepairs = this.carRepairs.concat(newCarRepairs);
+        this.carRepairsStore = this.carRepairsStore.concat(newCarRepairs);
+        if (newCarRepairs.length < 30) {
+          this.infinite.disabled = true;
+          this.oldInifinte = true;
         }
 
       } catch (error) {
@@ -236,22 +257,22 @@ export class CarRepairListPage implements OnInit {
   /**
    * Método que te redirige a la página de crear
    */
-  public goCreatePage(){
+  public goCreatePage() {
     this.routes.navigateByUrl('tab-administrator/car-repair/create');
   }
 
   /**
    * Método que redirige a la página de actualizar reparaciones
    */
-  public goUpdatePage(id:number){
-    this.routes.navigateByUrl('tab-administrator/car-repair/update/'+id);
+  public goUpdatePage(id: number) {
+    this.routes.navigateByUrl('tab-administrator/car-repair/update/' + id);
   }
 
   /**
    * Método que redirige a la página de ver
    */
-  public goSawPage(id:number){
-    this.routes.navigateByUrl('tab-administrator/car-repair/saw/'+id);
+  public goSawPage(id: number) {
+    this.routes.navigateByUrl('tab-administrator/car-repair/saw/' + id);
 
   }
 
@@ -265,12 +286,12 @@ export class CarRepairListPage implements OnInit {
   }
 
   //Método que muestra un toast
-  public async presentToast(msg: string, clr: string, icn?:string) {
+  public async presentToast(msg: string, clr: string, icn?: string) {
     const miToast = await this.toast.create({
       message: msg,
       duration: 2000,
       color: clr,
-      icon:icn
+      icon: icn
     });
     miToast.present();
   }
@@ -281,90 +302,140 @@ export class CarRepairListPage implements OnInit {
    * y nombre de la agencia
    * @param event
    */
-  public async onSearchChange(event) {
-    this.searchStr = event.detail.value;
-    console.log(this.searchStr);
-    let carR:CarRepair[]=[]
-    const value:string=event.detail.value;
-    const length=this.searchStr.length;
-    //Comprueba que hay algo introducido
-    if(length>1){
-      this.carRepairsStore.forEach(repair=>{
-        //Compara si lo introducido en la barra de busqueda coincide con
-        //cualquiera de los siguientes campos:
-        //matrícula, nombre del dueño del coche, operación o nombre de la agencia
-        if(repair.brandCar.includes(value)||repair.clienteName.includes(value)
-        ||repair.operation.toLocaleString().includes(value)
-        ||repair.myAgency.myUser.name.includes(value)){
-          carR.push(repair);
-        }
-        });
-        this.carRepairs=carR;
-    }else if(length<1){
-      try {
-        await this.reset();
+  public async onSearchChange() {
 
-      } catch (error) {
+    let resultFilter: CarRepair[] = [];
+    let listS: CarRepair[] = [];
+    let selectO = this.select.value;
+    this.searchStr = this.sb.value;
+    let list: CarRepair[] = [];
+    this.carRepairs = [];
+
+
+    let lenght = this.searchStr.length;
+
+    if (lenght > 0) {
+
+      //consultar y cambiar lista
+      await this.presentLoading();
+
+      //operation
+      list = await this.cS.getByOperationFilter(this.searchStr);
+      list.forEach((e: CarRepair) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: CarRepair) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
+      })
+
+      //car_plate
+      list = await this.cS.getByCarPlate(this.searchStr,9999,0);
+      list.forEach((e: CarRepair) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: CarRepair) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
+      })
+
+      //client_name
+      list = await this.cS.getByClientName(this.searchStr,9999,0);
+      list.forEach((e: CarRepair) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: CarRepair) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
+      })
+
+      //agency_info
+      list = await this.cS.getByAgencyInfoFilter(this.searchStr);
+      list.forEach((e: CarRepair) => {
+        let result: boolean = true;
+        resultFilter.forEach((x: CarRepair) => {
+          if (x.id == e.id) result = false;
+        })
+        if (result) resultFilter.push(e);
+      })
+
+      if (selectO == "true") {
+        resultFilter.forEach((e: CarRepair) => {
+          if (e.repaired) listS.push(e);
+        })
+        this.carRepairs = listS;
 
       }
 
+      else if (selectO == "false") {
+        resultFilter.forEach((e: CarRepair) => {
+          if (!e.repaired) listS.push(e);
+        })
+        this.carRepairs = listS;
 
+      }
+
+      else {
+        this.carRepairs = resultFilter;
+
+      }
+
+      this.infinite.disabled = false
+      await this.miLoading.dismiss();
     }
-  }
+    else if (lenght < 1) {
 
-  /**
-   * Método que muestra en la vista los coches que correspondan con el estado seleccionado el Ion-Select
-   * @param event
-   */
-  public async setCarByStatus(event?){
+      resultFilter = resultFilter.concat(this.carRepairsStore);
+      this.infinite.disabled = this.oldInifinte;
 
-    let carR:CarRepair[]=[]
-    const value:string=event.detail.value;
+      if (selectO == "true") {
+        resultFilter.forEach((e: CarRepair) => {
+          if (e.repaired) listS.push(e);
+        })
+        this.carRepairs = listS;
+      }
 
+      else if (selectO == "false") {
+        resultFilter.forEach((e: CarRepair) => {
+          if (!e.repaired) listS.push(e);
+        })
+        this.carRepairs = listS;
 
-    if("false".match(value)){
-      this.carRepairsStore.forEach(repair=>{
-        if(!repair.repaired){
-          carR.push(repair);
-        }
-      });
-      this.carRepairs=carR;
+      }
 
-    } else if("true".match(value)){
-      this.carRepairsStore.forEach(repair=>{
-        if(repair.repaired){
-          carR.push(repair);
-        }
-      });
-      console.log(carR);
-      this.carRepairs=carR;
-    }else if("all".match(value)) {
-      this.reset();
+      else {
+        this.carRepairs = resultFilter;
+
+      }
+
+      this.infinite.disabled = this.oldInifinte;
+      await this.miLoading.dismiss();
     }
+
   }
 
   /**
    * Método que reinicia la lista de reparaciones
    * @param event
    */
-  public async reset(event?){
-    this.n=0;
-    this.infinite.disabled=false;
-    this.carRepairs=[];
+  public async reset(event?) {
+    this.n = 0;
+    this.infinite.disabled = false;
+    this.carRepairs = [];
     this.loadCarRepair(event);
 
   }
   /**
    * Método que guarda las reparaciones en un almacen
    */
-  public storageCarRepairs(){
-    this.carRepairsStore=this.carRepairs;
+  public storageCarRepairs(list: CarRepair[]) {
+    this.carRepairsStore = this.carRepairsStore.concat(list);
   }
 
   /**
    * Método que permite al usuario cerrar la sesión
    */
-  public logout(){
+  public logout() {
     this.authS.logout();
   }
 
