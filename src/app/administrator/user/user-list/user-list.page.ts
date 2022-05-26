@@ -83,7 +83,12 @@ export class UserListPage {
           this.oldUsers.splice(i2,1);
         }
       });
-      this.presentToast("Usuario eliminado correctamente.", "success", "checkmark-circle-outline")
+      this.presentToast("Usuario eliminado correctamente.", "success", "checkmark-circle-outline");
+
+      //deslogear si se ha eliminado el admin logeado
+      if(user.administrator&&user.id==this.authS.user.id){
+        this.logout();
+      }
     }
     else this.presentToast("No se ha podido eliminar el usuario. Compruebe que no está asociado a ninguna agencia con datos.", "danger", 'ban');
 

@@ -75,7 +75,7 @@ export class UserService {
       }, error => {
         console.log(error);
         console.log(user);
-        resolve(user);
+        resolve(null);
       });
     });
   }

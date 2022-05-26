@@ -110,8 +110,12 @@
 
 
         <ion-col size="2.5">
-          <ion-icon *ngIf="user.administrator" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
-          <ion-icon *ngIf="!user.administrator" name="close-circle" style="color: red;"></ion-icon>
+          <div title="Administrador">
+            <ion-icon style="pointer-events: none;" name="key" color="secondary" *ngIf="user.administrator"></ion-icon>
+          </div>
+          <div title="Usuario">
+            <ion-icon style="pointer-events: none;" name="person" color="secondary" *ngIf="!user.administrator"></ion-icon>
+          </div>
         </ion-col>
 
 
