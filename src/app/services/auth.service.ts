@@ -38,7 +38,6 @@ export class AuthService {
         let bdUser=await this.us.getByCode(this.user.code);
         if(bdUser&&this.user.password==bdUser.password){
           if(user&&user.administrator==false){
-            console.log("entro");
             let agency:Agency=await this.as.getByUsercode(user.code);
             if(agency){
               this.agency=agency;

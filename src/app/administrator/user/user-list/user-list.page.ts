@@ -21,17 +21,24 @@ export class UserListPage {
   public oldUsers: User[] = [];
   public searchTerm: string;
   private miLoading: HTMLIonLoadingElement;
+  public bdUser:User;
 
   constructor(private usser: UserService, private loading: LoadingController,
+
     private toast: ToastController,
     private pt: Platform,
     private modalCtrl: ModalController,
     private alerta: AlertController,
-    private authS: AuthService) { }
+    public authS: AuthService) { }
 
   async ionViewDidEnter() {
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
     await this.cargaUsers();
+    this.users.forEach((e:User)=>{
+      if(e.id==this.authS.user.id){
+        this.bdUser=e;
+      }
+    })
   }
 
   public async cargaUsers(event?) {
