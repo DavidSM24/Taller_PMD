@@ -34,12 +34,9 @@ export class LoginPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.complete=false;
   }
 
   ionViewWillEnter() {
-
-    this.complete=false;
 
     try {
       if (this.authS.isLogged()) {
