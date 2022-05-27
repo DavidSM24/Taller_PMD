@@ -34,27 +34,35 @@ export class LoginPage implements OnInit {
   }
 
   async ngOnInit() {
-
+    this.complete=false;
   }
 
   ionViewWillEnter() {
-    if (this.authS.isLogged()) {
-      console.log(this.authS.isLogged());
-      try {
-        if (this.authS.user.administrator) {
-          this.uts.presentToast("Ha iniciado sesión con el usuario " + this.authS.user.name + ".", "success", "person");
-          this.router.navigate(['/tab-administrator/agency/list']);
+
+    this.complete=false;
+
+    try {
+      if (this.authS.isLogged()) {
+        console.log(this.authS.isLogged());
+        try {
+          if (this.authS.user.administrator) {
+            this.uts.presentToast("Ha iniciado sesión con el usuario " + this.authS.user.name + ".", "success", "person");
+            this.router.navigate(['/tab-administrator/agency/list']);
+          }
+          else if (!this.authS.user.administrator) {
+            this.uts.presentToast("Ha iniciado sesión con el usuario " + this.authS.user.name + ".", "success", "person");
+            this.router.navigate(['/tab-user/gift/list']);
+          }
+        } catch (error) {
+
         }
-        else if (!this.authS.user.administrator) {
-          this.uts.presentToast("Ha iniciado sesión con el usuario " + this.authS.user.name + ".", "success", "person");
-          this.router.navigate(['/tab-user/gift/list']);
-        }
-      } catch (error) {
 
       }
-
+      this.complete = true;
+    } catch (error) {
+      console.log(error);
     }
-    this.complete = true;
+
   }
 
   public async login() {
