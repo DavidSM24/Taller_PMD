@@ -17,15 +17,15 @@ import { AgencyService } from '../services/agency.service';
 export class LoginPage implements OnInit {
 
   public formLogin: FormGroup;
-  public complete:boolean=false;
+  public complete: boolean = false;
 
-    constructor(
+  constructor(
     private fb: FormBuilder,
     private us: UserService,
     private uts: UtilService,
-    private authS:AuthService,
-    private router:Router,
-    private as:AgencyService) {
+    private authS: AuthService,
+    private router: Router,
+    private as: AgencyService) {
 
     this.formLogin = this.fb.group({
       code: ["", Validators.required, Validators.pattern("[0-9]*")],
@@ -37,16 +37,16 @@ export class LoginPage implements OnInit {
 
   }
 
-  ionViewWillEnter(){
-    if(this.authS.isLogged()){
+  ionViewWillEnter() {
+    if (this.authS.isLogged()) {
       console.log(this.authS.isLogged());
       try {
-        if(this.authS.user.administrator){
-          this.uts.presentToast("Ha iniciado sesión con el usuario "+this.authS.user.name+".","success","person");
+        if (this.authS.user.administrator) {
+          this.uts.presentToast("Ha iniciado sesión con el usuario " + this.authS.user.name + ".", "success", "person");
           this.router.navigate(['/tab-administrator/agency/list']);
         }
-        else if(!this.authS.user.administrator){
-          this.uts.presentToast("Ha iniciado sesión con el usuario "+this.authS.user.name+".","success","person");
+        else if (!this.authS.user.administrator) {
+          this.uts.presentToast("Ha iniciado sesión con el usuario " + this.authS.user.name + ".", "success", "person");
           this.router.navigate(['/tab-user/gift/list']);
         }
       } catch (error) {
@@ -54,15 +54,17 @@ export class LoginPage implements OnInit {
       }
 
     }
-    this.complete=true;
+    this.complete = true;
   }
 
   public async login() {
 
-    let user: User
-    let correct: boolean = false;
+    if (this.formLogin.get("code").value == "" || this.formLogin.get("pass").value == "") this.uts.presentToast("Debe rellenar todos los campos.","danger","ban");
+    else {
+      let user: User
+      let correct: boolean = false;
 
-    await this.uts.presentLoading();
+      await this.uts.presentLoading();
       try {
         let code = await this.formLogin.get("code").value;
         user = await this.us.getByCode(code);
@@ -75,15 +77,15 @@ export class LoginPage implements OnInit {
           //iniciar sesión...
 
           try {
-            this.authS.user=user;
+            this.authS.user = user;
             await this.authS.keepSession();
             console.log("inciando...")
 
-            if(this.authS.user.administrator){
+            if (this.authS.user.administrator) {
               this.router.navigate(['/tab-administrator/agency/list']);
             }
-            else if(!this.authS.user.administrator){
-              this.authS.agency=await this.as.getByUsercode(user.code);
+            else if (!this.authS.user.administrator) {
+              this.authS.agency = await this.as.getByUsercode(user.code);
               console.log(this.authS.agency);
               this.router.navigate(['/tab-user/gift/list']);
             }
@@ -93,14 +95,17 @@ export class LoginPage implements OnInit {
 
         }
         else {
-          this.uts.presentToast("Usuario o contraseña incorrecta...", "danger",'ban')
+          this.uts.presentToast("Usuario o contraseña incorrecta...", "danger", 'ban')
         }
 
         await this.uts.hideLoading();
       } catch (error) {
         await this.uts.hideLoading();
-        this.uts.presentToast("Usuario o contraseña incorrecta...", "danger",'ban')
+        this.uts.presentToast("Usuario o contraseña incorrecta...", "danger", 'ban')
       }
+    }
+
+
 
   }
 

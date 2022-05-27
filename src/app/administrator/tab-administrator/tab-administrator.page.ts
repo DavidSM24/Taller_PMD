@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonTabs } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab-administrator',
@@ -10,6 +11,6 @@ export class TabAdministratorPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
 }

@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { WardClientService } from './services/ward-client.service';
+import { WardAdminService } from './services/wardAdmin.service';
+
+
 
 const routes: Routes = [
   {
@@ -21,14 +25,16 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  
+  },
   {
     path: 'tab-administrator',
-    loadChildren: () => import('./administrator/tab-administrator/tab-administrator.module').then( m => m.TabAdministratorPageModule)
+    loadChildren: () => import('./administrator/tab-administrator/tab-administrator.module').then( m => m.TabAdministratorPageModule),
+    canActivate:[WardAdminService]
   },
   {
     path: 'tab-user',
-    loadChildren: () => import('./user/tab-user/tab-user.module').then( m => m.TabUserPageModule)
+    loadChildren: () => import('./user/tab-user/tab-user.module').then( m => m.TabUserPageModule),
+    canActivate:[WardClientService]
   },
   {
     path: '**',
@@ -45,7 +51,8 @@ const routes: Routes = [
   {
     path: 'user-update',
     loadChildren: () => import('./administrator/user/user-update/user-update.module').then( m => m.UserUpdatePageModule)
-  },  {
+  },
+  {
     path: 'company-list',
     loadChildren: () => import('./administrator/company/company-list/company-list.module').then( m => m.CompanyListPageModule)
   },

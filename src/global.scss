@@ -93,3 +93,7 @@ ion-modal.fullscreen {
 .icon-div-container{
   cursor:pointer;
 }
+
+ion-tab-button{
+  --color-selected: rgb(255, 235, 255) !important;
+  }
