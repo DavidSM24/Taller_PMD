@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonInfiniteScroll, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { id } from 'date-fns/locale';
 import { Agency } from 'src/app/models/Agency';
 import { CarRepair } from 'src/app/models/CarRepair';
 import { AgencyService } from 'src/app/services/agency.service';
@@ -274,12 +275,13 @@ export class CarRepairListPage implements OnInit {
    * y nombre de la agencia
    * @param event
    */
-    public async onSearchChange(event) {
+    public async onSearchChange2(event) {
       this.searchStr = event.detail.value;
-      console.log(this.searchStr);
+      
       let carR:CarRepair[]=[]
       const value:string=event.detail.value;
       const length=this.searchStr.length;
+
       //Comprueba que hay algo introducido
       if(length>1){
         this.carRepairsStore.forEach(repair=>{
@@ -301,6 +303,85 @@ export class CarRepairListPage implements OnInit {
 
         }
       }
+    }
+
+    public async onSearchChange(event){
+      
+      let carRepiarResult:CarRepair[]=[];
+      let carRepairList:CarRepair[]=[];
+
+      this.searchStr = event.detail.value;
+      this.carRepairs=[];
+
+      if(this.searchStr.length>0){
+        try {
+          await this.utilService.presentLoading();
+          //operacion
+          carRepairList=await this.cS.getByOperationFilter(this.searchStr);
+          carRepiarResult=this.addSearchedReparation(carRepairList,carRepiarResult);
+          //Matrícula
+          carRepairList=await this.cS.getByCarPlate(this.searchStr,9999,0);
+          carRepiarResult=this.addSearchedReparation(carRepairList,carRepiarResult);
+          //Nombre del cliente
+          carRepairList=await this.cS.getByClientName(this.searchStr,9999,0);
+          carRepiarResult=this.addSearchedReparation(carRepairList,carRepiarResult);
+          //Información de la agencia
+          carRepairList=await this.cS.getByAgencyInfoFilter(this.searchStr);
+          carRepiarResult=this.addSearchedReparation(carRepairList,carRepiarResult);
+
+          this.carRepairs=carRepiarResult;
+          
+        } catch (error) {
+          await this.utilService.presentToast("Se ha producido un error en la busqueda", "danger", 'ban');
+          
+        }finally{
+          await this.utilService.hideLoading();
+
+        }
+
+      }else if(length<1){
+        try {
+          await this.reset();
+
+        } catch (error) {
+
+        }
+      }
+
+
+    }
+
+    /**
+     * Método que compara las dos listas de reparaciones y añade las que falten
+     * @param carRepairSearch Reparaciones traidas de la base de datos
+     * @param resultFilter Reparaciones que ya se han filtrado
+     * @returns CarRepair[] Lista de reparaciones con el añadido de las reparaciones faltantes
+     */
+    private addSearchedReparation(carRepairSearch:CarRepair[],resultFilter:CarRepair[]):CarRepair[]{
+      let result:boolean;
+
+      carRepairSearch.forEach((search:CarRepair)=>{
+        result=true;      
+        if(this.myAgency.id==search.myAgency.id){
+          
+          resultFilter.forEach((carRepiarResult:CarRepair)=>{
+
+            if(carRepiarResult.id==search.id){
+               result=false;
+           }   
+             
+           });
+           if(result){
+            console.log("ID buscado -->"+search.myAgency.id+"ID lista-->"+this.myAgency.id);
+            resultFilter.push(search);
+            
+          }
+        }
+
+       
+       
+      });
+      return resultFilter;
     }
 
    /**
