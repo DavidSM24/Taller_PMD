@@ -1,9 +1,39 @@
 
   ion-col {
     border-bottom: 1px solid #4b4b4d;
+    
     ion-text{
       color:#4b4b4d !important;
+      text-align: center;
     }
+  }
+  @media screen and (min-width:601px) {
+    
+      ion-text{
+        font-size: 18px !important;      
+    }
+    ion-item{
+      size: 18px;
+    }
+  }
+  @media screen and (max-width:600px) {
+    
+      ion-text{
+        font-size: 11px !important;
+      }
+      ion-item{
+        size: 11px;
+      }
+  }
+  @media screen and (max-width:360px) {
+    
+      ion-text{
+        font-size: 10px !important;
+      }
+      ion-item{
+        size: 10px;
+      }
+    
   }
 .header-row {
     //background: #9b9b9b;
