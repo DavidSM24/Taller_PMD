@@ -248,25 +248,28 @@ export class CarRepairListPage implements OnInit {
     let carR:CarRepair[]=[]
     const value:string=event.detail.value;
 
-
-    if("false".match(value)){
-      this.carRepairsStore.forEach(repair=>{
-        if(!repair.repaired){
-          carR.push(repair);
-        }
-      });
-      this.carRepairs=carR;
-
-    } else if("true".match(value)){
-      this.carRepairsStore.forEach(repair=>{
-        if(repair.repaired){
-          carR.push(repair);
-        }
-      });
-      console.log(carR);
-      this.carRepairs=carR;
-    }else if("all".match(value)) {
-      this.reset();
+    try {
+      await this.utilService.presentLoading();
+      if("false".match(value)){
+        let carRepairSearch=await this.cS.getByStatedPaged(false,9999,0);
+        carR=this.addSearchedReparation(carRepairSearch,carR);
+        
+        this.carRepairs=carR;
+  
+      } else if("true".match(value)){
+        let carRepairSearch=await this.cS.getByStatedPaged(true,9999,0);
+        carR=this.addSearchedReparation(carRepairSearch,carR);
+       
+        this.carRepairs=carR;
+        
+      }else if("all".match(value)) {
+        this.reset();
+      }
+      
+    } catch (error) {
+      
+    }finally{
+      await this.utilService.hideLoading();
     }
   }
    /**
@@ -275,37 +278,7 @@ export class CarRepairListPage implements OnInit {
    * y nombre de la agencia
    * @param event
    */
-    public async onSearchChange2(event) {
-      this.searchStr = event.detail.value;
-      
-      let carR:CarRepair[]=[]
-      const value:string=event.detail.value;
-      const length=this.searchStr.length;
-
-      //Comprueba que hay algo introducido
-      if(length>1){
-        this.carRepairsStore.forEach(repair=>{
-          //Compara si lo introducido en la barra de busqueda coincide con
-          //cualquiera de los siguientes campos:
-          //matrícula, nombre del dueño del coche, operación o nombre de la agencia
-          if(repair.brandCar.includes(value)||repair.clienteName.includes(value)
-          ||repair.operation.toLocaleString().includes(value)
-          ||repair.myAgency.myUser.name.includes(value)){
-            carR.push(repair);
-          }
-          });
-          this.carRepairs=carR;
-      }else if(length<1){
-        try {
-          await this.reset();
-
-        } catch (error) {
-
-        }
-      }
-    }
-
-    public async onSearchChange(event){
+   public async onSearchChange(event){
       
       let carRepiarResult:CarRepair[]=[];
       let carRepairList:CarRepair[]=[];

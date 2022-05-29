@@ -37,16 +37,18 @@
         <ion-text></ion-text>
       </ion-col>
 
-      <ion-col size="2.5" style="border: 0px !important;">
-        <ion-text>Operación</ion-text>
-      </ion-col>
+      
 
       <ion-col  size="2.5" style="border: 0px !important;">
         <ion-text>Matrícula</ion-text>
       </ion-col>
 
       <ion-col size="2.5" style="border: 0px !important;">
-        <ion-text>Agencia</ion-text>
+        <ion-text>Puntos</ion-text>
+      </ion-col>
+
+      <ion-col size="2.5" style="border: 0px !important;">
+        <ion-text>Coste</ion-text>
       </ion-col>
 
       <ion-col size="2.5" style="border: 0px !important;">
@@ -82,11 +84,7 @@
       </ion-col>
 
       
-      <ion-col size="2.5" (click)="saw(carRepair)">
-        <ion-text class="pointerText">
-            {{carRepair.operation}}
-        </ion-text>
-      </ion-col>
+      
       
       <ion-col size="2.5"(click)="saw(carRepair)">
         <ion-text class="pointerText">
@@ -94,9 +92,15 @@
         </ion-text>
       </ion-col>
 
+      <ion-col size="2.5" (click)="saw(carRepair)">
+        <ion-text class="pointerText">
+            {{carRepair.asigPoints}}
+        </ion-text>
+      </ion-col>
+
         <ion-col size="2.5"(click)="saw(carRepair)">
           <ion-text class="pointerText">
-            {{carRepair.myAgency.myUser.name}}
+            {{carRepair.amount}}
           </ion-text>
         </ion-col>
   
