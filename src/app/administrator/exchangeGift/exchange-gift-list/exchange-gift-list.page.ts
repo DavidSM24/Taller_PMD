@@ -208,6 +208,7 @@ export class ExchangeGiftListPage {
         this.oldInfinite=true;
       }
     }
+    this.infinite.complete();
   }
   public async reset(event?){
     this.infinite.disabled=false;

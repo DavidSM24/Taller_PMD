@@ -251,6 +251,7 @@ export class CarRepairListPage implements OnInit {
 
       }
     }
+    this.infinite.complete();
   }
 
 

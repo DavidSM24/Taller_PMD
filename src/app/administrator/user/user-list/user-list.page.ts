@@ -181,6 +181,7 @@ export class UserListPage {
         this.oldInfinite = true;
       }
     }
+    this.infinite.complete();
   }
   public logout() {
     this.authS.logout();

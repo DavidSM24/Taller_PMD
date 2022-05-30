@@ -204,6 +204,7 @@ export class AgencyListPage implements OnInit {
         this.oldInfinite=true;
       }
     }
+    this.infinite.complete();
   }
 
   public onSearchChange(event) {

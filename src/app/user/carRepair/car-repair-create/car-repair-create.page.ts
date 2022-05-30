@@ -66,7 +66,7 @@ export class CarRepairCreatePage implements OnInit {
    * Método que guarda la reparación en la base de datos
    */
   public async create():Promise<void>{
-    
+
     await this.utilService.presentLoading();
     if(this.authService.agency!=null){
       let newCarRepair:CarRepair={
@@ -97,15 +97,15 @@ export class CarRepairCreatePage implements OnInit {
         }else{
           this.utilService.presentToast("La matrícula debe tener más de cuatro caracteres",'danger','ban')
         }
-        
-        
-        
+
+
+
       } catch (error) {
-        
+
       }finally{
         await this.utilService.hideLoading();
       }
-      
+
     }
 
 

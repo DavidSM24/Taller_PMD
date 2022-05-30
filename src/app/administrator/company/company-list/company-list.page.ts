@@ -189,6 +189,7 @@ export class CompanyListPage implements OnInit {
         this.oldInfinite=true;
       }
     }
+    this.infinite.complete();
   }
 
   public async reset(event) {
