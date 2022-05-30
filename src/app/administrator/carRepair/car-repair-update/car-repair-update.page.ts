@@ -92,9 +92,20 @@ export class CarRepairUpdatePage implements OnInit {
 
     let result: boolean = true;
 
+    console.log(this.carRepair.dateOrder);
+    if(!this.dateTimeService.validateDates(this.dateTimeService.formatString(this.carRepair.dateOrder.toString()),this.dateTimeService.formatString(this.formatedString))){
+      result=false;
+      this.uts.presentToast("La fecha de reparación no puede ser anterior a la de alta.","danger","ban");
+    }
+
     if (this.formCarRepair.get("asigPoints").value < 1 && this.formCarRepair.get("repaired").value == true) {
       result = false;
       this.uts.presentToast("No se puede asignar una reparación como terminada a 0 puntos.","danger","ban");
+    }
+
+    if (this.formCarRepair.get("amount").value < 1 && this.formCarRepair.get("repaired").value == true) {
+      result = false;
+      this.uts.presentToast("No se puede asignar una reparación como terminada con un coste de 0 €.","danger","ban");
     }
 
     if (result) {
