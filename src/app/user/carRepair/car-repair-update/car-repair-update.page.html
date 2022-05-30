@@ -9,13 +9,13 @@
     <form [formGroup]="formCarRepair" class="ion-padding">
       <div  class="formulario">
         <ion-grid color="medium">
-          <ion-row class="ion-align-items-center">
 
-            <ion-col sizeSm="3.2" sizeLg="3.2">
+          <ion-row class="ion-align-items-center" style="margin-left:-2% !important;">
+
+            <ion-col >
 
               <ion-item button="true" id="open-date-input">
-                <ion-label>Fecha de alta:</ion-label>
-                <ion-text slot="end">{{ spanishDateOrder }}</ion-text>
+                <ion-text>Fecha de Alta:   {{ spanishDateOrder }}</ion-text>
                 <ion-popover trigger="open-date-input" show-backdrop="false">
                   <ng-template>
                     <ion-datetime color="secondary" #popoverDatetime [value]="stringDateOrder"
@@ -29,14 +29,13 @@
                 </ion-popover>
               </ion-item>
             </ion-col>
-            
-            
           </ion-row>
+
           <ion-row>
-            <ion-col *ngIf="this.carRepair.dateRepair!=null"  sizeSm="2" sizeLg="2">
-              <ion-label>Fecha de reparación</ion-label>
+            <ion-col *ngIf="this.carRepair.dateRepair!=null"  size="3">
+              <ion-label>Fecha de reparación:</ion-label>
             </ion-col>
-            <ion-col *ngIf="this.carRepair.dateRepair!=null" sizeSm="4" sizeLg="4">
+            <ion-col *ngIf="this.carRepair.dateRepair!=null" size="7">
               <ion-input class="customInput" Disabled type="text" formControlName="spanishDateRepair"></ion-input>
             </ion-col>
           </ion-row>
@@ -46,7 +45,7 @@
 
           <ion-row *ngIf="this.carRepair.operation>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Operación</ion-label>
+              <ion-label>Operación:</ion-label>
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" Disabled  type="number" min="0" max="99999" inputmode="numeric" class="customInput"
@@ -56,7 +55,7 @@
 
           <ion-row class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Matrícula</ion-label>
+              <ion-label>Matrícula:</ion-label>
             </ion-col>
             <ion-col sizeSm="11" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="carPlate"></ion-input>
@@ -65,7 +64,7 @@
 
           <ion-row class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Modelo</ion-label>
+              <ion-label>Modelo:</ion-label>
             </ion-col>
             <ion-col sizeSm="5" sizeLg="10">
               <ion-input class="customInput"  type="text" formControlName="model"></ion-input>
@@ -74,7 +73,7 @@
 
           <ion-row class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Marca</ion-label>
+              <ion-label>Marca:</ion-label>
             </ion-col>
             <ion-col sizeSm="5" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="brandCar"></ion-input>
@@ -83,7 +82,7 @@
 
           <ion-row class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Cliente</ion-label>
+              <ion-label>Cliente:</ion-label>
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="clienteName"></ion-input>
@@ -92,7 +91,7 @@
 
           <ion-row *ngIf="this.carRepair.nor>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>NOR</ion-label>
+              <ion-label>NOR:</ion-label>
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" Disabled type="number" formControlName="nor"></ion-input>
@@ -101,7 +100,7 @@
 
           <ion-row *ngIf="this.carRepair.amount>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Coste</ion-label>
+              <ion-label>Coste:</ion-label>
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" Disabled type="number" formControlName="amount"></ion-input>
@@ -110,7 +109,7 @@
 
           <ion-row *ngIf="this.carRepair.asigPoints>0" class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Puntos</ion-label>
+              <ion-label>Puntos:</ion-label>
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" Disabled type="number" formControlName="asigPoints"></ion-input>
@@ -119,7 +118,7 @@
 
           <ion-row  class="ion-align-items-center">
             <ion-col sizeSm="2" sizeLg="2">
-              <ion-label>Agencia</ion-label>
+              <ion-label>Agencia:</ion-label>
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" Disabled type="text" formControlName="myAgency"></ion-input>
@@ -132,24 +131,28 @@
               Reparado
             </ion-col>
             <ion-col sizeSm="7" sizeLg="4">
-              <ion-icon *ngIf="carRepair.repaired" name="car" style="zoom:1.7;color: #39ff14;"></ion-icon>
-              <ion-icon *ngIf="!carRepair.repaired" name="construct" style="zoom:1.7;color: red;"></ion-icon>
+              <div title="Sin Reparar. Espere asignación de administradores.">
+                <ion-icon *ngIf="!carRepair.repaired" name="construct" style="pointer-events: none;zoom:1.7;color: red;"></ion-icon>
+              </div>
             </ion-col>
           </ion-row>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="6">
-              <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="closeModal()"
-                class="button">
-                Cancelar
-              </ion-button>
-            </ion-col>
+
             <ion-col size="6">
               <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="editCarRepair()"
                 class="button">
                 Guardar
               </ion-button>
             </ion-col>
+
+            <ion-col size="6">
+              <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="closeModal()"
+                class="button2">
+                Cancelar
+              </ion-button>
+            </ion-col>
+
           </ion-row>
         </ion-grid>
       </div>

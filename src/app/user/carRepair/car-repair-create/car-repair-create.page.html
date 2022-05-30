@@ -9,13 +9,12 @@
     <form [formGroup]="formCarRepair" (ngSubmit)="create()" class="ion-padding">
       <div class="formulario">
         <ion-grid>
-          <ion-row class="ion-align-items-center">
+          <ion-row class="ion-align-items-center" style="margin-left:-2% !important;">
 
-            <ion-col sizeSm="3.2" sizeLg="3.2">
+            <ion-col >
 
               <ion-item button="true" id="open-date-input">
-                <ion-label>Fecha de alta:</ion-label>
-                <ion-text slot="end">{{ spanishDateOrder }}</ion-text>
+                <ion-text>Fecha de Alta:   {{ spanishDateOrder }}</ion-text>
                 <ion-popover trigger="open-date-input" show-backdrop="false">
                   <ng-template>
                     <ion-datetime color="secondary" #popoverDatetime [value]="stringDateOrder"
@@ -42,7 +41,7 @@
                 Debe rellenar este campo
               </span>
             </ion-col>
-            
+
           </ion-row>
 
           <ion-row class="ion-align-items-center">
@@ -53,7 +52,7 @@
               <ion-input class="customInput" type="text" formControlName="model" required="true"></ion-input>
               <span class="invalid" *ngIf="errorControl.model.errors?.required">
                 Debe rellenar este campo
-              </span>              
+              </span>
             </ion-col>
           </ion-row>
 
@@ -80,25 +79,22 @@
               </span>
             </ion-col>
           </ion-row>
-          
-         
-          
-
-
-
 
           <ion-row class="ion-align-items-center">
+
             <ion-col size="6">
-              <ion-button  expand="block" shape="round" style="margin-top: 2% !important;" class="button" (click)="routeCarRepairList()">
-                Cancelar
-              </ion-button>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button expand="block" type="submit" shape="round" style="margin-top: 2% !important;" 
+              <ion-button expand="block" type="submit" shape="round" style="margin-top: 2% !important;"
                 class="button">
                 Guardar
               </ion-button>
             </ion-col>
+
+            <ion-col size="6">
+              <ion-button  expand="block" shape="round" style="margin-top: 2% !important;" class="button2" (click)="routeCarRepairList()">
+                Cancelar
+              </ion-button>
+            </ion-col>
+
           </ion-row>
         </ion-grid>
       </div>

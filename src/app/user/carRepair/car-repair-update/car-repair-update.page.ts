@@ -44,7 +44,7 @@ export class CarRepairUpdatePage implements OnInit {
      if(this.carRepair.dateOrder){
        this.spanishDateOrder=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateOrder);
        this.formatedString=this.dateTimeService.formatString(""+this.carRepair.dateOrder);
-     
+
       }
      //compruba si exite una fecha de reparación previa, en caso de que exista se preparan las variables para mostrarlas en el html
      if(this.carRepair.dateRepair){
@@ -79,12 +79,15 @@ export class CarRepairUpdatePage implements OnInit {
    */
     public async editCarRepair(){
 
+      let cp:string=this.formCarRepair.get("carPlate").value;
+      cp=cp.toUpperCase();
+
       //se asigna los datos
       this.newCarRepair={
 
         id:this.carRepair.id,
         operation:this.carRepair.operation,
-        carPlate:this.formCarRepair.get("carPlate").value,
+        carPlate:cp,
         model:this.formCarRepair.get("model").value,
         brandCar:this.formCarRepair.get("brandCar").value,
         clienteName:this.formCarRepair.get("clienteName").value,

@@ -1,5 +1,5 @@
 .body{
-    
+    background: #f5fbfe;
     background-size: cover;
     min-height: 100%;
 }
@@ -16,8 +16,12 @@
 }
 
 .button{
-    --background: #22388c;
-    color: white;
+  --background: #4083cc;
+  color: white;
+}
+.button2{
+  --background: #ff8282;
+  color: white;
 }
 
 .customInput{
@@ -34,5 +38,5 @@
 
 .buttonDate{
     background-color: #717499;
-    
+
 }

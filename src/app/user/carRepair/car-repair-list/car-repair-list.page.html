@@ -1,50 +1,55 @@
-<ion-header>
+<ion-header [translucent]="false">
   <ion-toolbar color="medium">
     <ion-title>Lista de Reparaciones</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
-      <ion-icon class="icon-logout" slot="end" name="add-circle" style="zoom:1.5;cursor:pointer" routerLink="/tab-user/car-repair/create"></ion-icon>
-      <ion-icon class="icon-logout" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
+      <div class="icon-div-container" title="Nuevo" routerLink="/tab-user/car-repair/create">
+        <ion-icon class="icon-logout" slot="end" style="color:white;pointer-events: none;zoom:1.5;cursor:pointer;content:url(../../../../assets/icon/new_icon_ui.png);" ></ion-icon>
+      </div>
+
+      <div class="icon-div-container" title="Cerrar Sesión" (click)="logout()">
+        <ion-icon class="icon-logout" slot="end" name="log-out-outline"  style="zoom:1.7;cursor:pointer"></ion-icon>
+      </div>
     </ion-buttons>
   </ion-toolbar>
 
   <ion-toolbar color="medium">
-    <ion-row class="ion-align-items-center">
-      <ion-col sizeSm="11" sizeLg="9.5">
+    <ion-row >
+      <ion-col sizeSm="11" sizeLg="9" style="border:none !important">
         <ion-searchbar  placeholder="Encuentra la reparación que estás buscando..." inputmode="text" type="text"
         debounce="1000" (ionChange)="onSearchChange($event)" showCancelButton="always"></ion-searchbar>
 
       </ion-col>
-      <ion-col sizeSm="1" sizeLg="2.5" class="selector">
-             
-          <ion-item>
+      <ion-col sizeSm="1" sizeLg="3" class="selector" style="border:none !important">
+
+          <ion-item style="height: 85%; margin-top:1.1%">
             <ion-label>Estado del vehículo</ion-label>
             <ion-select (ionChange)="setCarByStatus($event)" interface="popover" multiple="false">
               <ion-select-option value="true">Reparado</ion-select-option>
               <ion-select-option value="false">Sin reparar</ion-select-option>
               <ion-select-option value="all">Todos</ion-select-option>
-             
+
             </ion-select>
           </ion-item>
-        
-          
+
+
       </ion-col>
     </ion-row>
-   
+
 
     <ion-row class="header-row">
       <ion-col sizeSm="1" sizeLg="1" style="border: 0px !important;">
-        <ion-text>Editar</ion-text>
+        <ion-text></ion-text>
       </ion-col>
 
-      
+
 
       <ion-col sizeSm="2.5" sizeLg="2.5" style="border: 0px !important;">
         <ion-text>Matrícula</ion-text>
       </ion-col>
 
       <ion-col sizeSm="2.5" sizeLg="2.5" style="border: 0px !important;">
-        <ion-text>Puntos</ion-text>
+        <ion-text>Fecha de Alta</ion-text>
       </ion-col>
 
       <ion-col sizeSm="2.5" sizeLg="2.5" style="border: 0px !important;">
@@ -54,14 +59,14 @@
       <ion-col sizeSm="2.5" sizeLg="2.5" style="border: 0px !important;">
         <ion-text>Reparado</ion-text>
       </ion-col>
-      
+
       <ion-col sizeSm="1" sizeLg="1" style="border: 0px !important;">
-        <ion-text>Eliminar</ion-text>
+        <ion-text></ion-text>
       </ion-col>
     </ion-row>
 
   </ion-toolbar>
-  
+
 </ion-header>
 
 <ion-content [fullscreen]="true" style="background-color: white;">
@@ -71,21 +76,21 @@
   </ion-refresher>
 
   <div class="body">
-  
+
 
   <ion-grid class="ion-text-center">
 
     <ion-row let *ngFor="let carRepair of this.carRepairs" class="row" >
-      
+
       <ion-col sizeSm="1" sizeLg="1">
-        <ion-text>
-          <ion-icon name="pencil" style="color:#22388c;cursor:pointer" (click)="edit(carRepair)"></ion-icon>
+        <ion-text *ngIf="!carRepair.repaired" class="icon-div-container" (click)="edit(carRepair)" title="Editar">
+          <ion-icon name="pencil" style="color:#22388c;pointer-events: none;"></ion-icon>
         </ion-text>
       </ion-col>
 
-      
-      
-      
+
+
+
       <ion-col sizeSm="2.5" sizeLg="2.5"(click)="saw(carRepair)">
         <ion-text class="pointerText">
             {{carRepair.carPlate}}
@@ -94,7 +99,7 @@
 
       <ion-col sizeSm="2.5" sizeLg="2.5" (click)="saw(carRepair)">
         <ion-text class="pointerText">
-            {{carRepair.asigPoints}}
+            {{carRepair.dateOrder}}
         </ion-text>
       </ion-col>
 
@@ -103,15 +108,16 @@
             {{carRepair.amount}}
           </ion-text>
         </ion-col>
-  
+
         <ion-col sizeSm="2.5" sizeLg="2.5"(click)="saw(carRepair)">
-          <ion-icon *ngIf="carRepair.repaired" name="car" style="color: #39ff14;"></ion-icon>
+          <ion-icon *ngIf="carRepair.repaired" name="car" style="color: blueviolet;"></ion-icon>
           <ion-icon *ngIf="!carRepair.repaired" name="construct" style="color: red;"></ion-icon>
         </ion-col>
 
         <ion-col sizeSm="1" sizeLg="1">
-          <ion-text>
-            <ion-icon name="trash" color="danger" style="cursor: pointer;" (click)="showDeleteMenu(carRepair)"></ion-icon>
+          <ion-text *ngIf="!carRepair.repaired" class="icon-div-container" (click)="showDeleteMenu(carRepair)" title="Eliminar">
+
+            <ion-icon name="trash" color="danger" style="pointer-events: none;" ></ion-icon>
           </ion-text>
         </ion-col>
     </ion-row>

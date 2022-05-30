@@ -69,9 +69,13 @@ export class CarRepairCreatePage implements OnInit {
 
     await this.utilService.presentLoading();
     if(this.authService.agency!=null){
+
+      let cp:string=this.formCarRepair.get("carPlate").value;
+      cp=cp.toUpperCase();
+
       let newCarRepair:CarRepair={
         operation:0,
-        carPlate:this.formCarRepair.get("carPlate").value,
+        carPlate:cp,
         model:this.formCarRepair.get("model").value,
         brandCar:this.formCarRepair.get("brandCar").value,
         clienteName:this.formCarRepair.get("clienteName").value,

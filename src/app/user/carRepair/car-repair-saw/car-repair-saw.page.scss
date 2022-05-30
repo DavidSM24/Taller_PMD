@@ -1,5 +1,5 @@
 .body{
-   
+    background-color: #f5fbfe !important;
     background-size: cover;
     min-height: 100%;
 }
@@ -15,14 +15,12 @@
     margin-bottom: 4%;
 }
 
-.button{
-    --background: #22388c;
-}
-
 .customInput{
         border: 1px solid gray;
         border-color: "primary";
         border-radius: 2.5rem;
+        background-color: #f5fbfe !important;
+        color:black !important;
 }
 .secundaryInput{
     margin-left: 5%;

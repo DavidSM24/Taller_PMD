@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="medium">
-    <ion-title>CarRepairSaw</ion-title>
+    <ion-title>Visualización de Reparación: {{this.carRepair.operation}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +9,7 @@
     <form [formGroup]="formCarRepair" class="ion-padding">
       <div class="formulario">
       <ion-grid>
-        
+
         <ion-row *ngIf="this.carRepair.operation>0" class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Operación</ion-label>
@@ -18,7 +18,7 @@
             <ion-input type="number" Disabled class="customInput" formControlName="operation"></ion-input>
           </ion-col>
         </ion-row>
-        
+
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Matrícula</ion-label>
@@ -34,9 +34,9 @@
           </ion-col>
           <ion-col sizeSm="5" sizeLg="9">
             <ion-input class="customInput" Disabled type="text" formControlName="model"></ion-input>
-          </ion-col>          
+          </ion-col>
         </ion-row>
-        
+
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Marca</ion-label>
@@ -45,7 +45,7 @@
             <ion-input class="customInput" Disabled type="text" formControlName="brandCar"></ion-input>
           </ion-col>
         </ion-row>
-        
+
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="3">
             <ion-label>Cliente</ion-label>
@@ -93,10 +93,10 @@
           <ion-col  sizeSm="7" sizeLg="4" >
             <ion-input class="customInput" Disabled type="text" formControlName="dateOrder"></ion-input>
           </ion-col>
-          
-         
-         
-        </ion-row> 
+
+
+
+        </ion-row>
         <ion-row *ngIf="this.carRepair.dateRepair!=null" class="ion-align-items-center">
           <ion-col sizeSm="7" sizeLg="3">
             <ion-label>Fecha de reparación</ion-label>
@@ -104,32 +104,34 @@
           <ion-col  sizeSm="7" sizeLg="4">
             <ion-input class="customInput" Disabled type="text" formControlName="dateRepair"></ion-input>
           </ion-col>
-        </ion-row> 
+        </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col  sizeSm="7" sizeLg="3">
             Reparado
           </ion-col>
           <ion-col sizeSm="7" sizeLg="1.5">
-            <ion-icon *ngIf="carRepair.repaired" name="car"  style="color: #39ff14; zoom: 2.0;"></ion-icon>
-           <ion-icon *ngIf="!carRepair.repaired" name="construct" style="color: red; zoom: 2.0;"></ion-icon>
-          
+
+            <div title="Reparado">
+              <ion-icon *ngIf="carRepair.repaired" name="car"  style="pointer-events: none;color: #39ff14; zoom: 2.0;"></ion-icon>
+            </div>
+
+            <div title="Sin Reparar">
+              <ion-icon *ngIf="!carRepair.repaired" name="construct" style="pointer-events: none;color: red; zoom: 2.0;"></ion-icon>
+            </div>
+
           </ion-col>
-        </ion-row> 
+        </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col size="6">
-            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="closeModal()" class="button">
-              Cancelar
-            </ion-button>
-          </ion-col>
-          <ion-col size="6">
-            <ion-button expand="block" shape="round" style="margin-top: 2% !important;" (click)="edit()" class="button">
-              Actualizar
+          <ion-col size="12">
+            <ion-button expand="block" shape="round" style="margin-left:22%;margin-right:22%;margin-top: 2% !important; --background: #4083cc;
+            color: white;" (click)="closeModal()" >
+              Cerrar
             </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </div>
-    </form>  
+    </form>
 </div>
 </ion-content>
