@@ -11,14 +11,30 @@
     }
   }
 }
-  
 
-  
+
+
   .button{
     --background: #22388c;
   }
-  
+
   .img{
     border: 5px solid rgb(0, 0, 0);
   }
-  
+
+  ion-input.ng-invalid.ng-touched {
+    border-left: 5px solid #a94442;
+    border-right: 5px solid #a94442;
+  }
+  ion-input.ng-valid.ng-dirty {
+    border-left: 5px solid #42A948;
+    border-right: 5px solid #42A948;
+  }
+  select.ng-invalid.ng-touched {
+    border-left: 5px solid #a94442;
+    border-right: 5px solid #a94442;
+  }
+  select.ng-valid.ng-dirty {
+    border-left: 5px solid #42A948;
+    border-right: 5px solid #42A948;
+  }

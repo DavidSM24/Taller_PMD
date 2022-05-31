@@ -26,6 +26,7 @@ export class UserCreatePage {
   public insurance: InsuranceCompany = null;
   public formAgency: FormGroup;
   public companies: InsuranceCompany[];
+  public errorCompany:boolean;
 
   constructor(
     private usserv: UserService,
@@ -36,17 +37,17 @@ export class UserCreatePage {
     private pickerController: PickerController,) {
 
     this.formUser = this.fb.group({
-      code: ["", Validators.required],
-      password: ["", Validators.required],
-      email: ["", Validators.required],
-      name: ["", Validators.required]
+      code: ["", [Validators.required,Validators.pattern("[0-9]{1,3}")]],
+      password: ["", [Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{5,10}$")]],
+      email: ["", [Validators.required,Validators.email, Validators.minLength(4),Validators.maxLength(50)]],
+      name: ["", [Validators.required,Validators.minLength(3),Validators.maxLength(100)]]
     });
 
     this.formAgency = this.fb.group({
-      zipCode: ["", Validators.required],
-      address: ["", Validators.required],
-      location: ["", Validators.required],
-      phoneNumber: ["", Validators.required]
+      zipCode: ["",  [Validators.required, Validators.pattern("[0-9]{2,21}")]],
+      address: ["", [Validators.required,Validators.maxLength(50),Validators.minLength(4)]],
+      location: ["", [Validators.required,Validators.maxLength(50),Validators.minLength(4)]],
+      phoneNumber: ["", [Validators.required,Validators.pattern("[0-9]{9}")]]
     });
   }
 
@@ -147,12 +148,16 @@ export class UserCreatePage {
       buttons: [
         {
           text: "Cancel",
-          role: 'cancel'
+          role: 'cancel',
+          handler: (value: any) => {
+            if(!this.insurance) this.errorCompany=true;
+          }
         },
         {
           text: 'Ok',
           handler: (value: any) => {
             this.insurance = value.Compañías.value;
+            this.errorCompany=false;
           }
         }
       ],

@@ -34,13 +34,15 @@ export class CarRepairUpdatePage implements OnInit {
   public id: number;
   private newCarRepair: CarRepair;
 
+  public errorForm:boolean;
+
 
   constructor(
     private modalController: ModalController,
     private carRepairService: CarRepairService,
     private formBuilder: FormBuilder,
     private uts: UtilService,
-    private dateTimeService: DateTimeServiceService
+    public dateTimeService: DateTimeServiceService
 
   ) {
 
@@ -66,8 +68,8 @@ export class CarRepairUpdatePage implements OnInit {
       brandCar: [this.carRepair.brandCar, [Validators.required]],
       clienteName: [this.carRepair.clienteName, [Validators.required]],
       nor: [this.carRepair.nor, [Validators.required]],
-      amount: [this.carRepair.amount],
-      asigPoints: [this.carRepair.asigPoints],
+      amount: [this.carRepair.amount,Validators.required],
+      asigPoints: [this.carRepair.asigPoints, [Validators.required,Validators.pattern("[0-9]+")]],
       myAgency: [this.carRepair.myAgency.myUser.name],
       dateOrder: [this.carRepair.dateOrder, [Validators.required]],
       //esta variable solo se usa para mostrar la fecha de la orden con el formato de España en el html
@@ -93,19 +95,19 @@ export class CarRepairUpdatePage implements OnInit {
     let result: boolean = true;
 
     console.log(this.carRepair.dateOrder);
-    if(!this.dateTimeService.validateDates(this.dateTimeService.formatString(this.carRepair.dateOrder.toString()),this.dateTimeService.formatString(this.formatedString))){
-      result=false;
-      this.uts.presentToast("La fecha de reparación no puede ser anterior a la de alta.","danger","ban");
+    if (this.formatedString!=null && !this.dateTimeService.validateDates(this.dateTimeService.formatString(this.carRepair.dateOrder.toString()), this.dateTimeService.formatString(this.formatedString))) {
+      result = false;
+      this.uts.presentToast("La fecha de reparación no puede ser anterior a la de alta.", "danger", "ban");
     }
 
     if (this.formCarRepair.get("asigPoints").value < 1 && this.formCarRepair.get("repaired").value == true) {
       result = false;
-      this.uts.presentToast("No se puede asignar una reparación como terminada a 0 puntos.","danger","ban");
+      this.uts.presentToast("No se puede asignar una reparación como terminada a 0 puntos.", "danger", "ban");
     }
 
-    if (this.formCarRepair.get("amount").value < 1 && this.formCarRepair.get("repaired").value == true) {
+    if (this.formCarRepair.get("amount").value == 0 && this.formCarRepair.get("repaired").value == true) {
       result = false;
-      this.uts.presentToast("No se puede asignar una reparación como terminada con un coste de 0 €.","danger","ban");
+      this.uts.presentToast("No se puede asignar una reparación como terminada con un coste de 0 €.", "danger", "ban");
     }
 
     if (result) {
@@ -131,14 +133,14 @@ export class CarRepairUpdatePage implements OnInit {
         //Guarda la reparación en la base de datos
         this.newCarRepair = await this.carRepairService.createOrUpdate(this.newCarRepair);
 
-        if(this.newCarRepair){
+        if (this.newCarRepair) {
           //Cierra el modal pasando la reparación guardada a la página con las reparaciones
           this.modalController.dismiss({
             newCarRepair: this.newCarRepair
           })
           this.uts.presentToast("Se ha gurdadado correctamente", "success", "checkmark-circle-outline");
         }
-        else{
+        else {
           this.uts.presentToast("Fallo al actualizar la reparación. Inténtelo más tarde.", "danger", 'ban');
           this.closeModal();
         }
@@ -170,6 +172,7 @@ export class CarRepairUpdatePage implements OnInit {
    */
   confirm() {
     this.datetime.confirm(true);
+    this.validateForm();
   }
   /**
    * Método que se usa en ion-DateTime para cerrar la ventana
@@ -199,10 +202,27 @@ export class CarRepairUpdatePage implements OnInit {
     this.stringDateRepair = this.dateTimeService.formatString(event);
     this.dateValue = event;
     this.formatedString = this.formatDate(this.dateValue);
-
+    this.validateForm();
   }
 
+  public validateForm(){
 
+    this.errorForm=false;
+    if(this.formCarRepair.get("repaired").value==true){
+
+      if (this.formatedString!=null && !this.dateTimeService.validateDates(this.dateTimeService.formatString(this.carRepair.dateOrder.toString()), this.dateTimeService.formatString(this.formatedString))) {
+        this.errorForm = true;
+      }
+
+      if (this.formCarRepair.get("asigPoints").value == 0 && this.formCarRepair.get("repaired").value == true) {
+        this.errorForm = true;
+      }
+
+      if (this.formCarRepair.get("amount").value < 1 && this.formCarRepair.get("repaired").value == true) {
+        this.errorForm = true;
+      }
+    }
+  }
 
 
 }

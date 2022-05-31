@@ -29,6 +29,15 @@
             <ion-input type="text" class="customInput" formControlName="name"></ion-input>
           </ion-col>
         </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.formGift.get('name').invalid&&formGift.get('name').touched">
+              *Campo obligatorio. Debe introducir entre 3 y 50 caracteres.
+            </p>
+          </ion-col>
+        </ion-row>
+
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="1">
             <ion-label>Puntos:</ion-label>
@@ -37,6 +46,15 @@
             <ion-input class="customInput" type="number" formControlName="points"></ion-input>
           </ion-col>
         </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.formGift.get('points').invalid&&formGift.get('points').touched">
+              *Campo obligatorio. El valor mínimo es 1 punto.
+            </p>
+          </ion-col>
+        </ion-row>
+
         <ion-row class="ion-align-items-center">
           <ion-col sizeSm="9" sizeLg="1.5">
             Disponible:
@@ -53,6 +71,15 @@
             <ion-input type="file" accept=".jpg,.jpeg,.png" (change)="changeListener($event)"></ion-input>
           </ion-col>
         </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.errorMsg">
+              *Campo obligatorio. Debe seleccionar un archivo válido para imagen (png, jpg, etc.).
+            </p>
+          </ion-col>
+        </ion-row>
+
         <ion-row class="ion-align-items-center">
 
           <ion-col size="6">
@@ -68,6 +95,7 @@
           </ion-col>
 
         </ion-row>
+
       </ion-grid>
     </div>
     </form>

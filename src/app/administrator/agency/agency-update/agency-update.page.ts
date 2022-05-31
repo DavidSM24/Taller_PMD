@@ -20,6 +20,7 @@ export class AgencyUpdatePage implements OnInit {
   public insurance:InsuranceCompany=null;
   public formAgency: FormGroup;
   public companies: InsuranceCompany[];
+  public errorCompany:boolean;
 
   constructor(
     private modalCtrl: ModalController,
@@ -40,12 +41,14 @@ export class AgencyUpdatePage implements OnInit {
     console.log(this.agency);
 
     this.formAgency = this.fb.group({
-      zipCode: [this.agency.zipCode, Validators.required],
-      address: [this.agency.address, Validators.required],
-      location: [this.agency.location, Validators.required],
-      phoneNumber: [this.agency.phoneNumber, Validators.required],
-      points: [this.agency.points, Validators.required]
+      zipCode: [this.agency.zipCode,  [Validators.required, Validators.pattern("[0-9]{2,21}")]],
+      address: [this.agency.address, [Validators.required,Validators.maxLength(50),Validators.minLength(4)]],
+      location: [this.agency.location, [Validators.required,Validators.maxLength(50),Validators.minLength(4)]],
+      phoneNumber: [this.agency.phoneNumber, [Validators.required,Validators.pattern("[0-9]{9}")]],
+      points:[this.agency.points, Validators.required]
+
     });
+
     } catch (error) {
       console.log(error);
     }
@@ -117,12 +120,16 @@ export class AgencyUpdatePage implements OnInit {
       buttons: [
         {
           text: "Cancel",
-          role: 'cancel'
+          role: 'cancel',
+          handler: (value: any) => {
+            if(!this.insurance) this.errorCompany=true;
+          }
         },
         {
           text:'Ok',
           handler:(value:any) => {
             this.insurance=value.Compañías.value;
+            this.errorCompany=false;
           }
         }
       ],

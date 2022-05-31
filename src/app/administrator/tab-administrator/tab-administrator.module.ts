@@ -11,8 +11,6 @@ import { TabAdministratorPage } from './tab-administrator.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     IonicModule,
     TabAdministratorPageRoutingModule,
 

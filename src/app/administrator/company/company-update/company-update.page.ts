@@ -25,7 +25,7 @@ export class CompanyUpdatePage implements OnInit {
 
   ngOnInit() {
     this.formCompany = this.fb.group({
-      name: [this.company.cia_Name, Validators.required]
+      name: [this.company.cia_Name,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]]
     });
   }
 

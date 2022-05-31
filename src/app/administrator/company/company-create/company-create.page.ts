@@ -24,7 +24,7 @@ export class CompanyCreatePage implements OnInit {
 
   ngOnInit() {
     this.formCompany = this.fb.group({
-      name: ["", Validators.required]
+      name: ["", [Validators.required,Validators.minLength(3),Validators.maxLength(50)]]
     });
   }
 

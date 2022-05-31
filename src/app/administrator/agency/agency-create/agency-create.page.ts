@@ -29,12 +29,17 @@ export class AgencyCreatePage {
     private uts:UtilService,
     private nav:NavController) {
 
-    this.formAgency = this.fb.group({
-      zipCode: ["", Validators.required],
-      address: ["", Validators.required],
-      location: ["", Validators.required],
-      phoneNumber: ["", Validators.required]
-    });
+      this.formAgency = this.fb.group({
+        zipCode: ["", Validators.required,],
+        address: ["", Validators.required],
+        location: ["", Validators.required],
+        phoneNumber: ["", Validators.required]
+      });
+
+  }
+
+  ngOnInit() {
+
   }
 
   async ionViewWillEnter() {

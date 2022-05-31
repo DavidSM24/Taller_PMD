@@ -20,6 +20,7 @@ export class ExchangeGifUpdatePage implements OnInit {
   public myagency:Agency;
   public gifts: Gift[];
   public agencies: Agency[];
+  public errorGift:boolean;
 
   @ViewChild(IonToggle) toggle: IonToggle;
   constructor(private excser: ExchangeGiftService,
@@ -32,7 +33,7 @@ export class ExchangeGifUpdatePage implements OnInit {
 
       this.formEditExchange=this.fb.group({
         dateExchange: ["",Validators.required],
-        observations: ["",Validators.required]
+        observations: [""]
       });
     }
 
@@ -84,12 +85,18 @@ export class ExchangeGifUpdatePage implements OnInit {
       buttons: [
         {
           text: "Cancel",
-          role: 'cancel'
+          role: 'cancel',
+          handler:(value:any) => {
+            if(!this.mygift){
+              this.errorGift=true;
+            }
+          }
         },
         {
           text:'Ok',
           handler:(value:any) => {
             this.mygift=value.Regalos.value;
+            this.errorGift=false;
           }
         }
       ],

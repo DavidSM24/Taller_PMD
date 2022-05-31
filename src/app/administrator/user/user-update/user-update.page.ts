@@ -20,22 +20,16 @@ export class UserUpdatePage implements OnInit {
     private uts: UtilService,
     private userv: UserService,
     private fb: FormBuilder) {
-    this.formEditUser = this.fb.group({
-      code: ["", Validators.required],
-      password: ["", Validators.required],
-      email: ["", Validators.required],
-      name: ["", Validators.required]
-    });
+
   }
   ngOnInit() {
     try {
 
       this.formEditUser = this.fb.group({
-        code: [this.user.code, Validators.required],
-        password: [this.user.password, Validators.required],
-        administrator: [this.user.administrator, Validators.required],
-        email: [this.user.email, Validators.required],
-        name: [this.user.name, Validators.required]
+        code: [this.user.code, [Validators.required,Validators.pattern("[0-9]{1,3}")]],
+        password: [this.user.password, [Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{5,10}$")]],
+        email: [this.user.email, [Validators.required,Validators.email, Validators.minLength(4),Validators.maxLength(50)]],
+        name: [this.user.name, [Validators.required,Validators.minLength(3),Validators.maxLength(100)]]
       });
     } catch (error) {
       console.log(error);

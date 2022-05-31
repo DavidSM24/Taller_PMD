@@ -82,7 +82,7 @@ export class ExchangeGiftListPage implements OnInit {
   public async infiniteLoad($event) {
     let newExchanges: ExchangeGift[] = [];
     if (!this.infinite.disabled) {
-      newExchanges = await this.exs.getAllPaged(this.niTems, this.exchanges.length);
+      newExchanges = await this.exs.getByAgencyPaged(this.authS.agency,this.niTems, this.exchanges.length);
       newExchanges=this.sortList(newExchanges);
       this.exchanges = this.exchanges.concat(newExchanges);
       this.oldExchanges=this.oldExchanges.concat(newExchanges);

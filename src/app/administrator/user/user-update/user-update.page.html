@@ -22,11 +22,27 @@
         </ion-row>
 
         <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.formEditUser.get('code').invalid&&formEditUser.get('code').touched">
+              *Campo obligatorio. El código zip debe tener una longitud exacta de 3 caracteres.
+            </p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="1">
             <ion-label>Contraseña:</ion-label>
           </ion-col>
           <ion-col sizeSm="11" sizeLg="11">
             <ion-input class="customInput" type="password" formControlName="password"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.formEditUser.get('password').invalid&&formEditUser.get('password').touched">
+              *La contraseña debe contener entre 5 y 10 caracteres, incluyendo una minúsucla, mayúscula, número y símbolo.
+            </p>
           </ion-col>
         </ion-row>
 
@@ -51,11 +67,27 @@
         </ion-row>
 
         <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.formEditUser.get('email').invalid&&formEditUser.get('email').touched">
+              *Campo obligatorio. Debe introducir un formato de correo válido. Longitud de 4 a 50 caracteres.
+            </p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
           <ion-col sizeSm="1" sizeLg="1">
             <ion-label>Name:</ion-label>
           </ion-col>
           <ion-col sizeSm="11" sizeLg="11">
             <ion-input class="customInput" type="text" formControlName="name"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.formEditUser.get('name').invalid&&formEditUser.get('name').touched">
+              *Campo obligatorio. Debe introducir entre 3 y 100 caracteres.
+            </p>
           </ion-col>
         </ion-row>
 

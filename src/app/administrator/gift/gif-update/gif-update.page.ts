@@ -22,6 +22,7 @@ export class GifUpdatePage implements OnInit {
   public formTest: FormGroup;
   public file: any = null;
   private extension: string;
+  public errorMsg:boolean;
 
   constructor(
     private modalCtrl: ModalController,
@@ -46,8 +47,8 @@ export class GifUpdatePage implements OnInit {
       });
 
       this.formGift = this.fb.group({
-        name: [this.gift.name, Validators.required],
-        points: [this.gift.points, Validators.required],
+        name: [this.gift.name, [Validators.required, Validators.minLength(3),Validators.maxLength(50)]],
+        points: [this.gift.points, [Validators.required,Validators.min(1),Validators.pattern("[0-9]+")]]
       });
     } catch (error) {
 
@@ -113,14 +114,17 @@ export class GifUpdatePage implements OnInit {
           this.file = $event.target.files[0];
           this.extension = this.file.type;
           this.img=URL.createObjectURL(this.file);
+          this.errorMsg=false;
         }
         else {
           this.file = null;
+          this.errorMsg=true;
         }
       }
     } catch (error) {
       //alert
       this.file = null;
+      this.errorMsg=true;
     }
 
     console.log(this.file.type);

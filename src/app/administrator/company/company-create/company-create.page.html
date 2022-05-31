@@ -23,6 +23,14 @@
         </ion-row>
 
         <ion-row class="ion-align-items-center">
+          <ion-col>
+            <p style="color:red;" *ngIf="this.formCompany.get('name').invalid&&formCompany.get('name').touched">
+              *Campo obligatorio. Debe introducir entre 3 y 50 caracteres.
+            </p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
 
           <ion-col size="6">
             <ion-button expand="block" shape="round" style="margin-top: 2% !important;" routerLink="/tab-administrator/company/list" class="button">

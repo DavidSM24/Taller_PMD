@@ -16,63 +16,66 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class ExchangeGifCreatePage {
 
-  public formExchange:FormGroup;
-  public mygift:Gift=null;
-  public myagency:Agency;
+  public formExchange: FormGroup;
+  public mygift: Gift = null;
+  public myagency: Agency;
   public gifts: Gift[];
   public agencies: Agency[];
+
+  public errorAgency:boolean;
+  public errorGift:boolean;
 
   @ViewChild(IonToggle) toggle: IonToggle;
   constructor(private exser: ExchangeGiftService,
     private fb: FormBuilder,
-    private uts:UtilService,
-    private pickerController:PickerController,
-    private giftserv:GiftService,
-    private ageserv:AgencyService) {
+    private uts: UtilService,
+    private pickerController: PickerController,
+    private giftserv: GiftService,
+    private ageserv: AgencyService) {
 
-      this.formExchange=this.fb.group({
-        dateExchange: ["",Validators.required],
-        observations: ["",Validators.required]
-      });
-    }
-    public async CreateExgift(): Promise<void> {
+    this.formExchange = this.fb.group({
+      dateExchange: ["", Validators.required],
+      observations: [""]
+    });
+  }
+  public async CreateExgift(): Promise<void> {
 
-      try {
-        await this.uts.presentLoading();
-      if(this.mygift!=null&&this.myagency!=null){
+    try {
+      await this.uts.presentLoading();
+      if (this.mygift != null && this.myagency != null) {
 
         console.log(this.myagency);
 
-      let newExchange: ExchangeGift = {
-        dateExchange: this.formExchange.get("dateExchange").value,
-        observations: this.formExchange.get("observations").value,
-        delivered: this.toggle.checked,
-        agency: this.myagency,
-        gift: this.mygift
-      }
-
-      try{
-        let result=await this.exser.createOrUpdate(newExchange);
-
-        if(!result){
-          this.uts.presentToast("Error al insertar canje, compruebe los puntos de la agencia y la disponibilidad del regalo.","danger",'ban');
+        let newExchange: ExchangeGift = {
+          dateExchange: this.formExchange.get("dateExchange").value,
+          observations: this.formExchange.get("observations").value,
+          delivered: this.toggle.checked,
+          agency: this.myagency,
+          gift: this.mygift
         }
 
-        else{
-          this.uts.presentToast("Pedido agregada correctamente","success","checkmark-circle-outline");
-          this.formExchange.reset();
+        try {
+          let result = await this.exser.createOrUpdate(newExchange);
+
+          if (!result) {
+            this.uts.presentToast("Error al insertar canje, compruebe los puntos de la agencia y la disponibilidad del regalo.", "danger", 'ban');
+          }
+
+          else {
+            this.uts.presentToast("Pedido agregada correctamente", "success", "checkmark-circle-outline");
+            this.formExchange.reset();
+          }
+
+
+        } catch (err) {
+
+
+          this.uts.presentToast("Error agregando Pedido", "danger", 'ban');
         }
-
-
-      }catch(err){
-
-
-        this.uts.presentToast("Error agregando Pedido","danger",'ban');
       }
-    }
-   }catch(error){
-    await this.uts.hideLoading;
-    console.log(error);
+    } catch (error) {
+      await this.uts.hideLoading;
+      console.log(error);
     }
     await this.uts.hideLoading();
   }
@@ -82,18 +85,24 @@ export class ExchangeGifCreatePage {
       buttons: [
         {
           text: "Cancel",
-          role: 'cancel'
+          role: 'cancel',
+          handler: (value: any) => {
+            if(!this.mygift){
+              this.errorGift=true;
+            }
+          }
         },
         {
-          text:'Ok',
-          handler:(value:any) => {
-            this.mygift=value.Regalos.value;
+          text: 'Ok',
+          handler: (value: any) => {
+            this.mygift = value.Regalos.value;
+            this.errorGift=false;
           }
         }
       ],
-      columns:[{
-        name:'Regalos',
-        options:this.getGiftColumnOptions()
+      columns: [{
+        name: 'Regalos',
+        options: this.getGiftColumnOptions()
       }]
     };
 
@@ -102,21 +111,21 @@ export class ExchangeGifCreatePage {
 
   }
 
-  getGiftColumnOptions(){
+  getGiftColumnOptions() {
     let options = [];
     this.gifts.forEach(x => {
-      options.push({text:x.name,value:x});
+      options.push({ text: x.name, value: x });
     });
     return options;
   }
   async ionViewWillEnter() {
 
     await this.uts.presentLoading();
-    this.gifts=await this.giftserv.getByAvailablePaged(true,99999,0);
-    this.agencies=await this.ageserv.getAll();
+    this.gifts = await this.giftserv.getByAvailablePaged(true, 99999, 0);
+    this.agencies = await this.ageserv.getAll();
 
-    if(this.agencies.length<=0&&this.gifts.length<=0){
-      this.uts.presentToast('','danger','ban');
+    if (this.agencies.length <= 0 && this.gifts.length <= 0) {
+      this.uts.presentToast('', 'danger', 'ban');
     }
     await this.uts.hideLoading();
     console.log(this.gifts);
@@ -128,19 +137,25 @@ export class ExchangeGifCreatePage {
       buttons: [
         {
           text: "Cancel",
+          handler: (value) => {
+            if(!this.myagency){
+              this.errorAgency=true;
+            }
+          },
           role: 'cancel'
         },
         {
-          text:'Ok',
-          handler:(value) => {
+          text: 'Ok',
+          handler: (value) => {
             console.log(value.Agencias.value)
-            this.myagency=value.Agencias.value;
+            this.myagency = value.Agencias.value;
+            this.errorAgency=false;
           }
         }
       ],
-      columns:[{
-        name:'Agencias',
-        options:this.getAgenciesColumnOptions()
+      columns: [{
+        name: 'Agencias',
+        options: this.getAgenciesColumnOptions()
       }]
     };
 
@@ -148,10 +163,10 @@ export class ExchangeGifCreatePage {
     picker.present()
   }
 
-  getAgenciesColumnOptions(){
+  getAgenciesColumnOptions() {
     let options = [];
     this.agencies.forEach(x => {
-      options.push({text:x.myInsuranceCompany.cia_Name+" - "+x.location,value:x});
+      options.push({ text: x.myInsuranceCompany.cia_Name + " - " + x.location, value: x });
     });
     return options;
   }

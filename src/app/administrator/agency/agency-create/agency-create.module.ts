@@ -17,8 +17,6 @@ import { UtilService } from 'src/app/services/util.service';
     CommonModule,
     IonicModule,
     AgencyCreatePageRoutingModule,
-
-    FormsModule,
     ReactiveFormsModule
 
   ],

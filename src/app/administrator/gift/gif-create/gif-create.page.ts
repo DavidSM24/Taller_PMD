@@ -20,6 +20,7 @@ export class GifCreatePage {
   public formTest: FormGroup;
   public file: any=null;
   private extension:string;
+  public errorMsg:boolean;
 
   constructor(
     private gs: GiftService,
@@ -28,8 +29,8 @@ export class GifCreatePage {
     private router:Router) {
 
       this.formGift = this.fb.group({
-        name: ["", Validators.required],
-        points: ["", Validators.required]
+        name: ["", [Validators.required, Validators.minLength(3),Validators.maxLength(50)]],
+        points: ["", [Validators.required,Validators.min(1),Validators.pattern("[0-9]+")]]
       });
     }
 
@@ -104,13 +105,16 @@ export class GifCreatePage {
           this.file = $event.target.files[0];
           this.extension=this.file.type;
           this.img=URL.createObjectURL(this.file);
+          this.errorMsg=false;
         }
         else{
           this.file=null;
+          this.errorMsg=true;
         }
       }
     } catch (error) {
       //alert
+      this.errorMsg=true;
       this.file=null;
     }
 

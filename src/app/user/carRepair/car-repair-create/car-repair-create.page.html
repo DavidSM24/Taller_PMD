@@ -37,8 +37,8 @@
             </ion-col>
             <ion-col sizeSm="11" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="carPlate" required="true"></ion-input>
-              <span class="invalid" *ngIf="errorControl.carPlate.errors?.required">
-                Debe rellenar este campo
+              <span class="invalid" *ngIf="this.formCarRepair.get('carPlate').invalid&&formCarRepair.get('carPlate').touched">
+                *Debe rellenar este campo. Introduzca entre 4 y 10 caracteres.
               </span>
             </ion-col>
 
@@ -50,8 +50,8 @@
             </ion-col>
             <ion-col sizeSm="5" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="model" required="true"></ion-input>
-              <span class="invalid" *ngIf="errorControl.model.errors?.required">
-                Debe rellenar este campo
+              <span class="invalid" *ngIf="this.formCarRepair.get('model').invalid&&formCarRepair.get('model').touched">
+                *Debe rellenar este campo. Introduzca entre 2 y 50 caracteres.
               </span>
             </ion-col>
           </ion-row>
@@ -62,8 +62,8 @@
             </ion-col>
             <ion-col sizeSm="5" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="brandCar" required="true"></ion-input>
-              <span class="invalid" *ngIf="errorControl.brandCar.errors?.required">
-                Debe rellenar este campo
+              <span class="invalid" *ngIf="this.formCarRepair.get('brandCar').invalid&&formCarRepair.get('brandCar').touched">
+                *Debe rellenar este campo. Introduzca entre 2 y 50 caracteres.
               </span>
             </ion-col>
           </ion-row>
@@ -74,8 +74,8 @@
             </ion-col>
             <ion-col sizeSm="10" sizeLg="10">
               <ion-input class="customInput" type="text" formControlName="clienteName" required="true"></ion-input>
-              <span class="invalid" *ngIf="errorControl.clienteName.errors?.required">
-                Debe rellenar este campo
+              <span class="invalid" *ngIf="this.formCarRepair.get('clienteName').invalid&&formCarRepair.get('clienteName').touched">
+                *Debe rellenar este campo. Introduzca entre 2 y 50 caracteres.
               </span>
             </ion-col>
           </ion-row>
