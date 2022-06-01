@@ -66,7 +66,8 @@
 
   <ion-grid class="ion-text-center">
 
-  <ion-row let *ngFor="let agency of this.agencies;let i=index" class="row">
+  <ion-row let *ngFor="let agency of this.agencies;let i=index"
+  [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'">
 
       <ion-col size="1">
         <ion-text class="icon-div-container" (click)="edit(agency)" title="Editar">

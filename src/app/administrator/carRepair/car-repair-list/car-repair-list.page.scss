@@ -17,9 +17,14 @@
       text-align: center;
     }}
   }
-  .row {
+  .normal{
     //background: #22388c;
-    color: #fff;
+    background-color: #fff;
+    font-size: 1.1rem;
+  }
+
+  .colored{
+    background-color: rgb(205, 204, 204);
     font-size: 1.1rem;
   }
 

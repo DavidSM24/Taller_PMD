@@ -75,7 +75,7 @@
 
   <ion-grid class="ion-text-center">
 
-    <ion-row let *ngFor="let carRepair of this.carRepairs" class="row" >
+    <ion-row let *ngFor="let carRepair of this.carRepairs; let i=index" [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'" >
 
       <ion-col size="1">
         <ion-text class="icon-div-container" (click)="edit(carRepair)" title="Editar">
@@ -110,11 +110,11 @@
 
         <ion-col size="2"(click)="saw(carRepair)">
           <div title="Reparado">
-            <ion-icon *ngIf="carRepair.repaired" name="checkmark-circle" style="color: #39ff14;pointer-events: none;"></ion-icon>
+            <ion-icon *ngIf="carRepair.repaired" name="checkmark-circle" color="success" style="pointer-events: none;"></ion-icon>
           </div>
 
           <div title="Sin reparar">
-            <ion-icon *ngIf="!carRepair.repaired" name="close-circle" style="color: red; pointer-events: none;"></ion-icon>
+            <ion-icon *ngIf="!carRepair.repaired" name="close-circle" color="danger" style="pointer-events: none;"></ion-icon>
           </div>
         </ion-col>
 

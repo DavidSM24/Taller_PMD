@@ -37,7 +37,7 @@
 
   <ion-grid class="ion-text-center">
 
-  <ion-row let *ngFor="let company of this.companies;let i=index" class="row">
+  <ion-row let *ngFor="let company of this.companies; let i=index" [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'" >
 
       <ion-col size="0.4">
         <ion-text class="icon-div-container" (click)="edit(company)" title="Editar">

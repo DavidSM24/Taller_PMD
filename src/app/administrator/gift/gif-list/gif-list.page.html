@@ -71,7 +71,7 @@
 
   <ion-grid class="ion-text-center">
 
-    <ion-row let *ngFor="let gift of this.gifts" class="row">
+    <ion-row let *ngFor="let gift of this.gifts; let i=index" [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'">
 
       <ion-col size="1">
         <ion-text>
@@ -95,11 +95,11 @@
 
         <ion-col size="3.3">
           <div title="Disponible">
-            <ion-icon *ngIf="gift.available" name="checkmark-circle" style="color: #39ff14;"></ion-icon>
+            <ion-icon *ngIf="gift.available" name="checkmark-circle" color="success"></ion-icon>
           </div>
 
           <div title="Sin stock">
-            <ion-icon *ngIf="!gift.available" name="close-circle" style="color: red;"></ion-icon>
+            <ion-icon *ngIf="!gift.available" name="close-circle" color="danger"></ion-icon>
           </div>
         </ion-col>
 

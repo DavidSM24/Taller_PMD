@@ -97,3 +97,14 @@ ion-modal.fullscreen {
 ion-tab-button{
   --color-selected: rgb(255, 235, 255) !important;
   }
+
+  .normal{
+    //background: #22388c;
+    background-color: #fff;
+    font-size: 1.1rem;
+  }
+
+  .colored{
+    background-color: rgb(205, 204, 204);
+    font-size: 1.1rem;
+  }

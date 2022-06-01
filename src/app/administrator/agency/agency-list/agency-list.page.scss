@@ -19,11 +19,7 @@
       text-align: center;
     }}
   }
-  .row {
-    //background: #22388c;
-    color: #fff;
-    font-size: 1.1rem;
-  }
+
 
   .body{
   /*  background: -webkit-linear-gradient(left, #22388c, #9ba2cc);
@@ -32,3 +28,16 @@
     font-family: 'Roboto', sans-serif;
     color: #4b4b4d;
   }
+
+  .normal{
+    //background: #22388c;
+    background-color: #fff;
+    font-size: 1.1rem;
+  }
+
+  .colored{
+    background-color: rgb(205, 204, 204);
+    font-size: 1.1rem;
+  }
+
+
