@@ -210,7 +210,7 @@ export class CarRepairUpdatePage implements OnInit {
     this.errorForm=false;
     if(this.formCarRepair.get("repaired").value==true){
 
-      if (this.formatedString!=null && !this.dateTimeService.validateDates(this.dateTimeService.formatString(this.carRepair.dateOrder.toString()), this.dateTimeService.formatString(this.formatedString))) {
+      if (this.formatedString==null ||!this.dateTimeService.validateDates(this.dateTimeService.formatString(this.carRepair.dateOrder.toString()), this.dateTimeService.formatString(this.formatedString))) {
         this.errorForm = true;
       }
 

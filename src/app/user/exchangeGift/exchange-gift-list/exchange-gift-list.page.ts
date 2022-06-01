@@ -184,32 +184,37 @@ export class ExchangeGiftListPage implements OnInit {
         this.exchanges=resultFilter;
       }
 
-      this.infinite.disabled=false
+      this.infinite.disabled=true
       await this.uts.hideLoading();
     }
     else if(lenght<1){
 
-      resultFilter=resultFilter.concat(this.oldExchanges);
+      await this.uts.presentLoading();
 
       if(selectO=="true"){
+        resultFilter=await this.exs.getByDeliveredPaged(true,9999,0);
         resultFilter.forEach((e:ExchangeGift)=>{
-          if(e.delivered) listS.push(e);
+          if(e.delivered&&e.agency.id==this.authS.agency.id) listS.push(e);
         })
         this.exchanges=listS;
+        this.infinite.disabled=true;
       }
 
       else if(selectO=="false"){
+        resultFilter=await this.exs.getByDeliveredPaged(false,9999,0);
         resultFilter.forEach((e:ExchangeGift)=>{
-          if(!e.delivered) listS.push(e);
+          if(!e.delivered&&e.agency.id==this.authS.agency.id) listS.push(e);
         })
         this.exchanges=listS;
+        this.infinite.disabled=true;
       }
 
       else{
-        this.exchanges=resultFilter;
+        this.exchanges=this.oldExchanges;
+        this.infinite.disabled=this.oldInfinite;
       }
 
-      this.infinite.disabled=this.oldInfinite;
+
       await this.uts.hideLoading();
     }
 

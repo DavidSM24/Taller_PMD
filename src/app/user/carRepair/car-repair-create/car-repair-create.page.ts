@@ -127,7 +127,7 @@ export class CarRepairCreatePage implements OnInit {
     model:["",[Validators.required, Validators.minLength(2),Validators.maxLength(50)]],
     brandCar:["",[Validators.required, Validators.minLength(2),Validators.maxLength(50)]],
     clienteName:["",[Validators.required, Validators.minLength(2),Validators.maxLength(50)]],
-    dateOrder:["",Validators.required],
+    dateOrder:[""],
     myAgency:[this.authService.agency]
     });
   }
