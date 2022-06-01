@@ -17,6 +17,8 @@ export class GiftListPage implements OnInit {
   private niTems: number;
   public img:string;
   public gifts: Gift[] = [];
+  public horizontalCol:number;
+
   constructor(private authS: AuthService, private gs: GiftService,
     private modalCtrl: ModalController,
     private uts: UtilService,
@@ -26,6 +28,8 @@ export class GiftListPage implements OnInit {
   }
 
   async ionViewWillEnter() {
+
+    this.horizontalCol = Math.ceil(this.pt.height() / 540);
 
     console.log(this.gs.added);
 
@@ -52,12 +56,16 @@ export class GiftListPage implements OnInit {
       this.infinite.disabled = false;
       newGifts = await this.gs.getAllPaged(this.niTems, 0);
 
+      if (newGifts.length < this.niTems) {
+        this.infinite.disabled = true;
+      }
+
+      newGifts.forEach((e:Gift)=>{
+        if(!e.available) newGifts.splice(newGifts.indexOf(e),1);
+      })
+
       this.gifts = this.gifts.concat(newGifts);
 
-    }
-
-    if (newGifts.length < this.niTems) {
-      this.infinite.disabled = true;
     }
 
     if (event) {
@@ -78,7 +86,15 @@ export class GiftListPage implements OnInit {
       if (newgifts.length < this.niTems) {
         this.infinite.disabled = true;
       }
+
+      newgifts.forEach((e:Gift)=>{
+        if(!e.available) newgifts.splice(newgifts.indexOf(e),1);
+      })
     }
+
+    this.infinite.complete();
+
+
   }
 
   public async reset(event) {

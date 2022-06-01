@@ -24,27 +24,36 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div class="body">
-    <ion-list class="list">
-      <ion-item-sliding *ngFor="let gift of this.gifts | filter:searchTerm" class="list">
-        <ion-item *ngIf="gift.available==true" color="black">
-          <ion-label class="shopbox">
-            <div class="leftside">
-              <ion-card class="imcage">
-                <ion-img class="image"  src="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/{{gift.picture}}"></ion-img>
 
-              </ion-card>
-            </div>
-            <div class="rightside">
-              <div class="text">
-                <ion-text><p>{{gift.name}}</p></ion-text>
-                <ion-text><p>Precio: {{gift.points}} Puntos</p></ion-text>
-                <ion-button (click)="buy(gift)" color="medium">Canjear Regalo</ion-button>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let gift of this.gifts">
+
+          <ion-item color="black" >
+            <ion-label class="shopbox">
+              <div class="center">
+                <ion-card class="imcage">
+                  <ion-img class="image"  src="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/{{gift.picture}}"></ion-img>
+
+                </ion-card>
               </div>
-            </div>
-          </ion-label>
-        </ion-item>
-      </ion-item-sliding>
-    </ion-list>
+              <div class="center">
+                <div>
+                  <h2 class="ion-text-center">{{gift.name}}</h2>
+                  <ion-text class="ion-text-center"><p>Precio: {{gift.points}} Puntos</p></ion-text>
+                  <ion-button (click)="buy(gift)" color="medium">Canjear Regalo</ion-button>
+                </div>
+              </div>
+            </ion-label>
+          </ion-item>
+
+        </ion-col>
+
+
+      </ion-row>
+    </ion-grid>
 
     <ion-infinite-scroll threshold="100px" (ionInfinite)="infiniteLoad($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">

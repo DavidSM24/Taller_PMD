@@ -1,6 +1,6 @@
 
   ion-col {
-    border-bottom: 1px solid #4b4b4d;
+    //border-bottom: 1px solid #4b4b4d;
     ion-text{
       color:#4b4b4d !important;
     }
@@ -61,10 +61,6 @@
     display: table;
   }
 
-  .text{
-    display: table-cell;
-    vertical-align: middle;
-  }
 
   .imcage{
     width: 15rem;
@@ -85,6 +81,8 @@
     background-color: #fff !important;
     border: 1px solid rgb(179, 179, 179);
     border-radius: 25px;
+    padding-top: 7% !important;
+    padding-bottom: 7% !important;
   }
   ion-item{
     --inner-border-width: 0; // this removes the inner border width
