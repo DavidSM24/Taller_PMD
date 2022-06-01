@@ -29,9 +29,11 @@
   .body{
   /*  background: -webkit-linear-gradient(left, #22388c, #9ba2cc);
     background: linear-gradient(to right, #22388c, #9ba2cc);*/
-    background-color: #f5fbfe !important;
-    font-family: 'Roboto', sans-serif;
+    background: #d0e5f0 !important;
+    background-size: cover;
+    min-height: 100%;
     color: #4b4b4d;
+
   }
 
   ion-content{
@@ -47,7 +49,7 @@
   }
 
   .list{
-    background-color: #f5fbfe;
+    background: #d0e5f0 !important;
   }
 
   .rightside{

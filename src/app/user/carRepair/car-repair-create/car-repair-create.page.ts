@@ -54,7 +54,7 @@ export class CarRepairCreatePage implements OnInit {
    }
 
   ngOnInit() {
-    this.getMyAgency();
+    this.myAgency=this.authService.agency;
     this.setDate();
   }
 
@@ -112,33 +112,9 @@ export class CarRepairCreatePage implements OnInit {
 
     }
 
-
-  }
-
-  /**
-   * Método que obtiene el id de la agencia conectada
-   */
-  public async getMyAgency(){
-
-    let agencys:Agency[];
-
-    try{
-      this.utilService.presentLoading();
-      agencys= await this.agencyService.getByUserNamePaged(this.authService.user.name,100,0);
-    if(agencys.length>0){
-      agencys.forEach(agency=>{
-        if(agency.myUser.id==this.authService.user.id){
-          this.myAgency=agency;
-          this.utilService.hideLoading();
-        }
-      });
+    else {
+      this.utilService.presentToast("Ha habido un error relacionado con su agencia. Inténtelo más tarde.","danger","ban");
     }
-
-    }catch{
-      this.utilService.presentToast("Fallo al cargar","danger",'ban');
-
-    }
-
 
   }
 
@@ -152,7 +128,7 @@ export class CarRepairCreatePage implements OnInit {
     brandCar:["",[Validators.required, Validators.minLength(2),Validators.maxLength(50)]],
     clienteName:["",[Validators.required, Validators.minLength(2),Validators.maxLength(50)]],
     dateOrder:["",Validators.required],
-    myAgency:[this.authService.user.id,Validators.required]
+    myAgency:[this.authService.agency]
     });
   }
 

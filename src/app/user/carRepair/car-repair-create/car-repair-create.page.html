@@ -36,7 +36,7 @@
               <ion-label>Matrícula</ion-label>
             </ion-col>
             <ion-col sizeSm="11" sizeLg="10">
-              <ion-input class="customInput" type="text" formControlName="carPlate" required="true"></ion-input>
+              <ion-input class="customInput" type="text" style="text-transform: uppercase" formControlName="carPlate" required="true"></ion-input>
               <span class="invalid" *ngIf="this.formCarRepair.get('carPlate').invalid&&formCarRepair.get('carPlate').touched">
                 *Debe rellenar este campo. Introduzca entre 4 y 10 caracteres.
               </span>
@@ -84,7 +84,7 @@
 
             <ion-col size="6">
               <ion-button expand="block" type="submit" shape="round" style="margin-top: 2% !important;"
-                class="button">
+                class="button" [disabled]="this.formCarRepair.invalid">
                 Guardar
               </ion-button>
             </ion-col>

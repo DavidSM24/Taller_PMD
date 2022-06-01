@@ -110,8 +110,12 @@
         </ion-col>
 
         <ion-col sizeSm="2.5" sizeLg="2.5"(click)="saw(carRepair)">
-          <ion-icon *ngIf="carRepair.repaired" name="car" style="color: blueviolet;"></ion-icon>
-          <ion-icon *ngIf="!carRepair.repaired" name="construct" style="color: red;"></ion-icon>
+          <div title="Reparado">
+            <ion-icon *ngIf="carRepair.repaired" name="car" style="color: blueviolet;pointer-events: none;"></ion-icon>
+          </div>
+          <div title="Sin Reparar">
+            <ion-icon *ngIf="!carRepair.repaired" name="construct" style="color: red;pointer-events: none;"></ion-icon>
+          </div>
         </ion-col>
 
         <ion-col sizeSm="1" sizeLg="1">
