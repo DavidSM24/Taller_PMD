@@ -25,6 +25,48 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@media screen and (min-width:601px) {
+
+  ion-text{
+    font-size: 1.125rem;
+}
+ion-item{
+  size: 1.125rem;
+}
+}
+@media screen and (max-width:600px) {
+
+
+  ion-text{
+    font-size: 0.7rem;
+  }
+  ion-item{
+    size: 0.7rem;
+    ion-item{
+      --min-height: 13px;
+      --min-width: 13px;
+      size: 11px;
+      ion-select-option{
+        font-size: 11px;
+      }
+  }
+}
+}
+@media screen and (max-width:360px) {
+
+  ion-text{
+    font-size: 0.5rem;
+  }
+  ion-item{
+    --min-height: 8px;
+    --min-width: 8px;
+    size: 7px;
+    ion-select-option{
+      font-size: 0.5rem;
+    }
+  }
+
+}
 
 
 ion-tab-bar, ion-tab-button{
