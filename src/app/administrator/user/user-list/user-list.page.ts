@@ -252,7 +252,7 @@ export class UserListPage {
         resultFilter.forEach((e: User) => {
           if (!e.administrator) listS.push(e);
         })
-
+        this.users = listS;
       }
 
       else {
