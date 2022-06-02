@@ -109,11 +109,11 @@
         </ion-col>
 
         <ion-col size="2.5">
-          <div title="Administrador" *ngIf="user!=this.bdUser">
+          <div title="Administrador" *ngIf="user.id!=this.bdUser.id">
             <ion-icon style="pointer-events: none;" name="key" color="secondary" *ngIf="user.administrator"></ion-icon>
           </div>
 
-          <div title="Sesión Iniciada" *ngIf="user==this.bdUser">
+          <div title="Sesión Iniciada" *ngIf="user!=null&&this.bdUser!=null&&user.id==this.bdUser.id">
             <ion-icon style="pointer-events: none;color:green !important" name="key"></ion-icon>
           </div>
           <div title="Usuario" *ngIf="user.id!=this.authS.user.id">

@@ -239,6 +239,7 @@ export class UserListPage {
       })
 
       if (selectO == "true") {
+
         resultFilter.forEach((e: User) => {
           if (e.administrator) listS.push(e);
         })
@@ -247,6 +248,7 @@ export class UserListPage {
       }
 
       else if (selectO == "false") {
+        console.log(resultFilter)
         resultFilter.forEach((e: User) => {
           if (!e.administrator) listS.push(e);
         })
@@ -263,33 +265,34 @@ export class UserListPage {
     }
     else if (lenght < 1) {
 
-      resultFilter = resultFilter.concat(this.oldUsers);
-      this.infinite.disabled = this.oldInfinite;
+      await this.presentLoading();
 
-      if (selectO == "true") {
-        resultFilter.forEach((e: User) => {
-          if (e.administrator) listS.push(e);
+      if(selectO=="true"){
+        resultFilter=await this.usser.getByAdministrator(true,9999,0);
+        resultFilter.forEach((e:User)=>{
+          if(e.administrator) listS.push(e);
         })
-        this.users = listS;
+        this.users=listS;
+        this.infinite.disabled=true;
       }
 
-      else if (selectO == "false") {
-        resultFilter.forEach((e: User) => {
-          if (!e.administrator) listS.push(e);
+      else if(selectO=="false"){
+        resultFilter=await this.usser.getByAdministrator(false,9999,0);
+        resultFilter.forEach((e:User)=>{
+          if(!e.administrator) listS.push(e);
         })
-        this.users = listS;
-
+        this.users=listS;
+        this.infinite.disabled=true;
       }
 
-      else {
-        this.users = resultFilter;
-
+      else{
+        this.users=this.oldUsers;
+        this.infinite.disabled=this.oldInfinite;
       }
 
-      this.infinite.disabled = this.oldInfinite;
       await this.miLoading.dismiss();
     }
-
+    await this.miLoading.dismiss();
   }
 
 }

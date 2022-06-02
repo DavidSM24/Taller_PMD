@@ -121,12 +121,8 @@ export class UserService {
     return this.getListData(this.URLDatabase+this.endpoint+"/name/"+name);
   }
 
-  public async getAllUserAgenciesPaged(administrator:boolean, element: number, page: number):Promise<User[]>{
-    return this.getListData(this.URLDatabase+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
-  }
-
-  public async getAllAdminPaged(administrator:boolean, element: number, page: number):Promise<User[]>{
-    return this.getListData(this.URLDatabase+"/administrator/" + this.endpoint + "/element/" + element + "/page/" + page);
+  public async getByAdministrator(administrator:boolean, element: number, page: number):Promise<User[]>{
+    return this.getListData(this.URLDatabase + this.endpoint + "/administrator/" + administrator + "/element/" + element + "/page/" + page);
   }
 
   public async createOrUpdate(user:User):Promise<User>{
