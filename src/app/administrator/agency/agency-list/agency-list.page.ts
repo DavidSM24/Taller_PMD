@@ -224,93 +224,105 @@ export class AgencyListPage implements OnInit {
 
   async searchChange(event){
     this.searchStr=event.detail.value;
+    let regex: RegExp = new RegExp("^[ ]");
 
-    let resultFilter:Agency[]=[];
-    let list:Agency[]=[];
-    this.agencies=[];
+    try {
+      if(!this.searchStr.match(regex)){
 
-    let lenght=this.searchStr.length;
+        let resultFilter:Agency[]=[];
+        let list:Agency[]=[];
+        this.agencies=[];
 
-    if(lenght>0){
+        let lenght=this.searchStr.length;
 
-      //consultar y cambiar lista
-      await this.uts.presentLoading();
-      //username
-      list=await this.as.getByUserNamePaged(this.searchStr,99999,0);
-      list.forEach((e: Agency) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: Agency) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
+        if(lenght>0){
 
-      //address
-      list=await this.as.getByAddress(this.searchStr);
-      list.forEach((e: Agency) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: Agency) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
-
-      //company
-      list=await this.as.getByCompany(this.searchStr);
-      list.forEach((e: Agency) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: Agency) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
-
-      //location
-      list=await this.as.getByLocation(this.searchStr);
-      list.forEach((e: Agency) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: Agency) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
-
-      //points
-      if(+this.searchStr>=0){
-        list=await this.as.getByPoints(+this.searchStr);
-        list.forEach((e: Agency) => {
-          let result: boolean = true;
-          resultFilter.forEach((x: Agency) => {
-            if (x.id == e.id) result = false;
+          //consultar y cambiar lista
+          await this.uts.presentLoading();
+          //username
+          list=await this.as.getByUserNamePaged(this.searchStr,99999,0);
+          list.forEach((e: Agency) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: Agency) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
           })
-          if (result) resultFilter.push(e);
-        })
-      }
 
-      //zipcode
-      if(+this.searchStr>=0){
-        list=await this.as.getByZipcode(+this.searchStr);
-        list.forEach((e: Agency) => {
-          let result: boolean = true;
-          resultFilter.forEach((x: Agency) => {
-            if (x.id == e.id) result = false;
+          //address
+          list=await this.as.getByAddress(this.searchStr);
+          list.forEach((e: Agency) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: Agency) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
           })
-          if (result) resultFilter.push(e);
-        })
-      }
 
-      this.agencies=resultFilter;
-      this.agencies=this.sortList(this.agencies);
-      this.infinite.disabled=true;
-      await this.uts.hideLoading()
+          //company
+          list=await this.as.getByCompany(this.searchStr);
+          list.forEach((e: Agency) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: Agency) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
+          })
+
+          //location
+          list=await this.as.getByLocation(this.searchStr);
+          list.forEach((e: Agency) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: Agency) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
+          })
+
+          //points
+          if(+this.searchStr>=0){
+            list=await this.as.getByPoints(+this.searchStr);
+            list.forEach((e: Agency) => {
+              let result: boolean = true;
+              resultFilter.forEach((x: Agency) => {
+                if (x.id == e.id) result = false;
+              })
+              if (result) resultFilter.push(e);
+            })
+          }
+
+          //zipcode
+          if(+this.searchStr>=0){
+            list=await this.as.getByZipcode(+this.searchStr);
+            list.forEach((e: Agency) => {
+              let result: boolean = true;
+              resultFilter.forEach((x: Agency) => {
+                if (x.id == e.id) result = false;
+              })
+              if (result) resultFilter.push(e);
+            })
+          }
+
+          this.agencies=resultFilter;
+          this.agencies=this.sortList(this.agencies);
+          this.infinite.disabled=true;
+          await this.uts.hideLoading()
+        }
+        else if(lenght<1){
+          this.agencies=[];
+          this.agencies=this.agencies.concat(this.oldAgencies);
+          this.agencies=this.sortList(this.agencies);
+          this.infinite.disabled=this.oldInfinite;
+          await this.uts.hideLoading();
+        }
+
+      }else this.uts.presentToast("La búsqueda no puede comenzar por espacios en blanco.","danger","ban");
+
+    } catch (error) {
+
     }
-    else if(lenght<1){
-      this.agencies=[];
-      this.agencies=this.agencies.concat(this.oldAgencies);
-      this.agencies=this.sortList(this.agencies);
-      this.infinite.disabled=this.oldInfinite;
-      await this.uts.hideLoading();
-    }
+
+
   }
 
   private sortList(eg:Agency[]):Agency[] {

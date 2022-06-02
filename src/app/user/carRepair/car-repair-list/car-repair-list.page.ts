@@ -284,42 +284,54 @@ export class CarRepairListPage implements OnInit {
     let carRepairList: CarRepair[] = [];
 
     this.searchStr = event.detail.value;
-    this.carRepairs = [];
+    let regex: RegExp = new RegExp("^[ ]");
 
-    if (this.searchStr.length > 0) {
-      try {
-        await this.utilService.presentLoading();
-        //operacion
-        carRepairList = await this.cS.getByOperationFilter(this.searchStr);
-        carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
-        //Matrícula
-        carRepairList = await this.cS.getByCarPlate(this.searchStr, 9999, 0);
-        carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
-        //Nombre del cliente
-        carRepairList = await this.cS.getByClientName(this.searchStr, 9999, 0);
-        carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
-        //Información de la agencia
-        carRepairList = await this.cS.getByAgencyInfoFilter(this.searchStr);
-        carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
+    if (!this.searchStr.match(regex)) {
 
-        this.carRepairs = carRepiarResult;
+      if (this.searchStr.length > 0) {
+        try {
+          this.carRepairs = [];
 
-      } catch (error) {
-        await this.utilService.presentToast("Se ha producido un error en la busqueda", "danger", 'ban');
+          await this.utilService.presentLoading();
+            //operacion
+            carRepairList = await this.cS.getByOperationFilter(this.searchStr);
+            carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
+            //Matrícula
+            carRepairList = await this.cS.getByCarPlate(this.searchStr, 9999, 0);
+            carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
+            //Nombre del cliente
+            carRepairList = await this.cS.getByClientName(this.searchStr, 9999, 0);
+            carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
+            //Información de la agencia
+            carRepairList = await this.cS.getByAgencyInfoFilter(this.searchStr);
+            carRepiarResult = this.addSearchedReparation(carRepairList, carRepiarResult);
 
-      } finally {
-        await this.utilService.hideLoading();
+            this.carRepairs = carRepiarResult;
 
+
+
+        } catch (error) {
+          await this.utilService.presentToast("Se ha producido un error en la busqueda", "danger", 'ban');
+
+        } finally {
+          await this.utilService.hideLoading();
+
+        }
+
+      } else if (length < 1) {
+        try {
+          await this.reset();
+
+        } catch (error) {
+
+        }
       }
 
-    } else if (length < 1) {
-      try {
-        await this.reset();
-
-      } catch (error) {
-
-      }
     }
+    else this.presentToast("La búsqueda no puede comenzar por espacios en blanco.","danger","ban");
+
+
+
 
 
   }

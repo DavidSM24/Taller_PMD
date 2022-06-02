@@ -75,7 +75,7 @@
 
   <ion-grid class="ion-text-center">
 
-    <ion-row let *ngFor="let carRepair of this.carRepairs; let i=index" [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'" >
+    <ion-row style="border-left: 1px solid #4b4b4d;border-right: 1px solid #4b4b4d;" let *ngFor="let carRepair of this.carRepairs; let i=index" [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'" >
 
       <ion-col size="1">
         <ion-text class="icon-div-container" (click)="edit(carRepair)" title="Editar">

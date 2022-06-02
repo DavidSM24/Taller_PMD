@@ -17,23 +17,23 @@ import { CompanyUpdatePage } from '../company-update/company-update.page';
 export class CompanyListPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
-  @ViewChild(IonSearchbar) sb:IonSearchbar
-  oldInfinite:boolean;
+  @ViewChild(IonSearchbar) sb: IonSearchbar
+  oldInfinite: boolean;
 
   public companies: InsuranceCompany[] = [];
-  public oldCompanies: InsuranceCompany []=[];
+  public oldCompanies: InsuranceCompany[] = [];
 
   searchStr = "";
   niTems: number;
 
   constructor(private is: InsuranceCompanyService,
-    private as:AgencyService,
+    private as: AgencyService,
     private AlertCtrl: AlertController,
     private modalCtrl: ModalController,
     private pt: Platform,
     private uts: UtilService,
-    private authS:AuthService,
-    private us:UserService) { }
+    private authS: AuthService,
+    private us: UserService) { }
 
   ngOnInit() {
   }
@@ -43,12 +43,12 @@ export class CompanyListPage implements OnInit {
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
     console.log(this.is.added);
 
-    if(this.is.added){
+    if (this.is.added) {
 
       this.reset(null);
-      this.is.added=false;
+      this.is.added = false;
     }
-    else{
+    else {
 
       await this.loadCompanies();
     }
@@ -56,32 +56,32 @@ export class CompanyListPage implements OnInit {
 
   public async loadCompanies(event?) {
 
-    let newCompanies:InsuranceCompany[]=[];
+    let newCompanies: InsuranceCompany[] = [];
 
-    if(this.companies.length==0){ //inicio
+    if (this.companies.length == 0) { //inicio
 
       await this.uts.presentLoading();
 
-      this.infinite.disabled=false;
-      this.oldInfinite=false;
-      newCompanies=await this.is.getAllPaged(this.niTems,1);
+      this.infinite.disabled = false;
+      this.oldInfinite = false;
+      newCompanies = await this.is.getAllPaged(this.niTems, 1);
 
-      this.companies=this.companies.concat(newCompanies);
-      this.companies=this.sortList(this.companies);
-      this.oldCompanies=[];
-      this.oldCompanies=this.oldCompanies.concat(newCompanies);
+      this.companies = this.companies.concat(newCompanies);
+      this.companies = this.sortList(this.companies);
+      this.oldCompanies = [];
+      this.oldCompanies = this.oldCompanies.concat(newCompanies);
 
     }
 
-    if(newCompanies.length<this.niTems){
-      this.infinite.disabled=true;
-      this.oldInfinite=true;
+    if (newCompanies.length < this.niTems) {
+      this.infinite.disabled = true;
+      this.oldInfinite = true;
     }
 
-    if(event){
+    if (event) {
       event.target.complete();
     }
-    else{
+    else {
 
     }
     await this.uts.hideLoading();
@@ -105,10 +105,10 @@ export class CompanyListPage implements OnInit {
       if (resp.data != null) {
         let i: number = this.companies.indexOf(company);
         this.companies[i] = resp.data.newCompany;
-        this.oldCompanies.forEach((e:InsuranceCompany)=>{
-          if(e.id==resp.data.newCompany.id){
-            let i2=this.oldCompanies.indexOf(e);
-            this.oldCompanies[i2]=this.companies[i];
+        this.oldCompanies.forEach((e: InsuranceCompany) => {
+          if (e.id == resp.data.newCompany.id) {
+            let i2 = this.oldCompanies.indexOf(e);
+            this.oldCompanies[i2] = this.companies[i];
           }
         })
       }
@@ -121,34 +121,34 @@ export class CompanyListPage implements OnInit {
   public async delete(company: InsuranceCompany) {
 
     await this.uts.presentLoading();
-    let list:Agency[]=await this.as.getByCompany(company.cia_Name);
+    let list: Agency[] = await this.as.getByCompany(company.cia_Name);
     await this.uts.hideLoading();
 
-    if(list.length>0){
+    if (list.length > 0) {
 
-      this.uts.presentToast("No se puede eliminar la Compañia de Seguros porque existen agencias relacionadas.", "danger",'ban');
+      this.uts.presentToast("No se puede eliminar la Compañia de Seguros porque existen agencias relacionadas.", "danger", 'ban');
     }
 
     else {
 
       await this.uts.presentLoading();
       const result: boolean = await this.is.delete(company);
-      let i=this.companies.indexOf(company);
+      let i = this.companies.indexOf(company);
       await this.uts.hideLoading();
 
-      if(result){
-        if(i>-1){
-          this.companies.splice(i,1);
+      if (result) {
+        if (i > -1) {
+          this.companies.splice(i, 1);
         }
-        this.oldCompanies.forEach((e:InsuranceCompany)=>{
-          if(e.id==company.id){
-            let i2=this.oldCompanies.indexOf(e);
-            this.oldCompanies.splice(i2,1);
+        this.oldCompanies.forEach((e: InsuranceCompany) => {
+          if (e.id == company.id) {
+            let i2 = this.oldCompanies.indexOf(e);
+            this.oldCompanies.splice(i2, 1);
           }
         });
-        this.uts.presentToast("Compaía eliminada correctamente.","success","checkmark-circle-outline");
+        this.uts.presentToast("Compaía eliminada correctamente.", "success", "checkmark-circle-outline");
       }
-      else this.uts.presentToast("Error al eliminar la compañia.","danger","ban");
+      else this.uts.presentToast("Error al eliminar la compañia.", "danger", "ban");
     }
   }
 
@@ -180,13 +180,13 @@ export class CompanyListPage implements OnInit {
     let newCompanies: InsuranceCompany[] = [];
     if (!this.infinite.disabled) {
       newCompanies = await this.is.getAllPaged(this.niTems, this.companies.length);
-      newCompanies= this.sortList(newCompanies);
+      newCompanies = this.sortList(newCompanies);
       this.companies = this.companies.concat(newCompanies);
-      this.oldCompanies=this.oldCompanies.concat(newCompanies);
+      this.oldCompanies = this.oldCompanies.concat(newCompanies);
 
       if (newCompanies.length < 30) {
         this.infinite.disabled = true;
-        this.oldInfinite=true;
+        this.oldInfinite = true;
       }
     }
     this.infinite.complete();
@@ -194,62 +194,73 @@ export class CompanyListPage implements OnInit {
 
   public async reset(event) {
     this.infinite.disabled = false;
-    this.oldInfinite=false;
+    this.oldInfinite = false;
     this.companies = [];
     this.loadCompanies(event);
   }
 
-  public logout(){
+  public logout() {
     this.authS.logout();
   }
 
-  async searchChange(){
-    this.searchStr=this.sb.value;
+  async searchChange() {
+    this.searchStr = this.sb.value;
+    let regex: RegExp = new RegExp("^[ ]");
 
-    let resultFilter:InsuranceCompany[]=[];
-    let list:InsuranceCompany[]=[];
-    this.companies=[];
+    try {
 
-    let lenght=this.searchStr.length;
+      if (!this.searchStr.match(regex)) {
+        let resultFilter: InsuranceCompany[] = [];
+        let list: InsuranceCompany[] = [];
+        this.companies = [];
 
-    if(lenght>0){
+        let lenght = this.searchStr.length;
 
-      //consultar y cambiar lista
-      await this.uts.presentLoading();
+        if (lenght > 0) {
 
-      //cia_name
-      list=await this.is.getByCiaName(this.searchStr);
-      list.forEach((e: InsuranceCompany) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: InsuranceCompany) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
+          //consultar y cambiar lista
+          await this.uts.presentLoading();
 
-      this.companies=resultFilter;
-      this.companies=this.sortList(this.companies);
-      this.infinite.disabled=true;
-      await this.uts.hideLoading();
+          //cia_name
+          list = await this.is.getByCiaName(this.searchStr);
+          list.forEach((e: InsuranceCompany) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: InsuranceCompany) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
+          })
+
+          this.companies = resultFilter;
+          this.companies = this.sortList(this.companies);
+          this.infinite.disabled = true;
+          await this.uts.hideLoading();
+        }
+        else if (lenght < 1) {
+          this.companies = [];
+          this.companies = this.companies.concat(this.oldCompanies);
+          this.companies = this.sortList(this.companies);
+          this.infinite.disabled = this.oldInfinite;
+          await this.uts.hideLoading();
+        }
+      } else this.uts.presentToast("La búsqueda no puede comenzar por espacios en blanco.","danger","ban");
+
+    } catch (error) {
+
     }
-    else if(lenght<1){
-      this.companies=[];
-      this.companies=this.companies.concat(this.oldCompanies);
-      this.companies=this.sortList(this.companies);
-      this.infinite.disabled=this.oldInfinite;
-      await this.uts.hideLoading();
-    }
+
+
   }
 
-  private sortList(eg:InsuranceCompany[]):InsuranceCompany[] {
-    if(eg!=null&&eg.length>1){
-      eg=eg.sort((n1,n2) => {
+  private sortList(eg: InsuranceCompany[]): InsuranceCompany[] {
+    if (eg != null && eg.length > 1) {
+      eg = eg.sort((n1, n2) => {
         if (n1.cia_Name > n2.cia_Name) {
-            return 1;
+          return 1;
         }
 
         else if (n1.cia_Name < n2.cia_Name) {
-            return -1;
+          return -1;
         }
 
         else {
@@ -258,11 +269,11 @@ export class CompanyListPage implements OnInit {
           }
 
           else if (n1.id < n2.id) {
-              return -1;
+            return -1;
           }
         }
         return 0;
-    });
+      });
     }
 
     return eg;

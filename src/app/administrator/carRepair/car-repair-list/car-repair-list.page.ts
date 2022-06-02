@@ -128,10 +128,10 @@ export class CarRepairListPage implements OnInit {
       let i: number = this.carRepairs.indexOf(carRepair);
       this.carRepairs[i] = resp.data.newCarRepair;
 
-      this.carRepairsStore.forEach((e:CarRepair)=>{
-        if(e.id==resp.data.newCarRepair.id){
-          let i2=this.carRepairsStore.indexOf(e);
-          this.carRepairsStore[i2]=this.carRepairs[i];
+      this.carRepairsStore.forEach((e: CarRepair) => {
+        if (e.id == resp.data.newCarRepair.id) {
+          let i2 = this.carRepairsStore.indexOf(e);
+          this.carRepairsStore[i2] = this.carRepairs[i];
         }
       })
     }
@@ -172,10 +172,10 @@ export class CarRepairListPage implements OnInit {
         if (i > -1) {
           this.carRepairs.splice(i, 1);//borra la reparación de la lista
         }
-        this.carRepairsStore.forEach((e:CarRepair)=>{
-          if(e.id==carRepair.id){
-            let i2=this.carRepairsStore.indexOf(e);
-            this.carRepairsStore.splice(i2,1);
+        this.carRepairsStore.forEach((e: CarRepair) => {
+          if (e.id == carRepair.id) {
+            let i2 = this.carRepairsStore.indexOf(e);
+            this.carRepairsStore.splice(i2, 1);
           }
         });
         this.presentToast("La reparación ha sido eliminada correctamente.", "success", "checkmark-circle-outline");
@@ -305,117 +305,129 @@ export class CarRepairListPage implements OnInit {
    */
   public async onSearchChange() {
 
-    let resultFilter: CarRepair[] = [];
-    let listS: CarRepair[] = [];
-    let selectO = this.select.value;
     this.searchStr = this.sb.value;
-    let list: CarRepair[] = [];
-    this.carRepairs = [];
+    let regex: RegExp = new RegExp("^[ ]");
+
+    try {
+
+      if (!this.searchStr.match(regex)) {
 
 
-    let lenght = this.searchStr.length;
+        let resultFilter: CarRepair[] = [];
+        let listS: CarRepair[] = [];
+        let selectO = this.select.value;
+        let list: CarRepair[] = [];
+        this.carRepairs = [];
 
-    if (lenght > 0) {
 
-      //consultar y cambiar lista
-      await this.presentLoading();
+        let lenght = this.searchStr.length;
 
-      //operation
-      list = await this.cS.getByOperationFilter(this.searchStr);
-      list.forEach((e: CarRepair) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: CarRepair) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
+        if (lenght > 0) {
 
-      //car_plate
-      list = await this.cS.getByCarPlate(this.searchStr,9999,0);
-      list.forEach((e: CarRepair) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: CarRepair) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
+          //consultar y cambiar lista
+          await this.presentLoading();
 
-      //client_name
-      list = await this.cS.getByClientName(this.searchStr,9999,0);
-      list.forEach((e: CarRepair) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: CarRepair) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
+          //operation
+          list = await this.cS.getByOperationFilter(this.searchStr);
+          list.forEach((e: CarRepair) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: CarRepair) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
+          })
 
-      //agency_info
-      list = await this.cS.getByAgencyInfoFilter(this.searchStr);
-      list.forEach((e: CarRepair) => {
-        let result: boolean = true;
-        resultFilter.forEach((x: CarRepair) => {
-          if (x.id == e.id) result = false;
-        })
-        if (result) resultFilter.push(e);
-      })
+          //car_plate
+          list = await this.cS.getByCarPlate(this.searchStr, 9999, 0);
+          list.forEach((e: CarRepair) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: CarRepair) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
+          })
 
-      if (selectO == "true") {
-        resultFilter.forEach((e: CarRepair) => {
-          if (e.repaired) listS.push(e);
-        })
-        this.carRepairs = listS;
+          //client_name
+          list = await this.cS.getByClientName(this.searchStr, 9999, 0);
+          list.forEach((e: CarRepair) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: CarRepair) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
+          })
 
-      }
+          //agency_info
+          list = await this.cS.getByAgencyInfoFilter(this.searchStr);
+          list.forEach((e: CarRepair) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: CarRepair) => {
+              if (x.id == e.id) result = false;
+            })
+            if (result) resultFilter.push(e);
+          })
 
-      else if (selectO == "false") {
-        resultFilter.forEach((e: CarRepair) => {
-          if (!e.repaired) listS.push(e);
-        })
-        this.carRepairs = listS;
+          if (selectO == "true") {
+            resultFilter.forEach((e: CarRepair) => {
+              if (e.repaired) listS.push(e);
+            })
+            this.carRepairs = listS;
 
-      }
+          }
 
-      else {
-        this.carRepairs = resultFilter;
+          else if (selectO == "false") {
+            resultFilter.forEach((e: CarRepair) => {
+              if (!e.repaired) listS.push(e);
+            })
+            this.carRepairs = listS;
 
-      }
+          }
 
-      this.infinite.disabled = false
-      await this.miLoading.dismiss();
+          else {
+            this.carRepairs = resultFilter;
+
+          }
+
+          this.infinite.disabled = false
+          await this.miLoading.dismiss();
+        }
+
+        else if (lenght < 1) {
+
+          await this.presentLoading();
+
+          if (selectO == "true") {
+            resultFilter = await this.cS.getByStatedPaged(true, 9999, 0);
+            resultFilter.forEach((e: CarRepair) => {
+              if (e.repaired) listS.push(e);
+            })
+            this.carRepairs = listS;
+            this.infinite.disabled = true;
+          }
+
+          else if (selectO == "false") {
+            resultFilter = await this.cS.getByStatedPaged(false, 9999, 0);
+            resultFilter.forEach((e: CarRepair) => {
+              if (!e.repaired) listS.push(e);
+            })
+            this.carRepairs = listS;
+            this.infinite.disabled = true;
+          }
+
+          else {
+            this.carRepairs = this.carRepairsStore;
+            this.infinite.disabled = this.oldInifinte;
+          }
+
+
+          await this.miLoading.dismiss();
+        }
+      } else this.presentToast("La búsqueda no puede comenzar por espacios en blanco.", "danger", "ban");
+
+
+    } catch (error) {
+
     }
-
-    else if (lenght < 1) {
-
-      await this.presentLoading();
-
-      if(selectO=="true"){
-        resultFilter=await this.cS.getByStatedPaged(true,9999,0);
-        resultFilter.forEach((e:CarRepair)=>{
-          if(e.repaired) listS.push(e);
-        })
-        this.carRepairs=listS;
-        this.infinite.disabled=true;
-      }
-
-      else if(selectO=="false"){
-        resultFilter=await this.cS.getByStatedPaged(false,9999,0);
-        resultFilter.forEach((e:CarRepair)=>{
-          if(!e.repaired) listS.push(e);
-        })
-        this.carRepairs=listS;
-        this.infinite.disabled=true;
-      }
-
-      else{
-        this.carRepairs=this.carRepairsStore;
-        this.infinite.disabled=this.oldInifinte;
-      }
-
-
-      await this.miLoading.dismiss();
-    }
-
   }
 
   /**

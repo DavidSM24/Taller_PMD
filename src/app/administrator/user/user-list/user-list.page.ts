@@ -21,7 +21,7 @@ export class UserListPage {
   public oldUsers: User[] = [];
   public searchTerm: string;
   private miLoading: HTMLIonLoadingElement;
-  public bdUser:User;
+  public bdUser: User;
 
   constructor(private usser: UserService, private loading: LoadingController,
 
@@ -34,9 +34,9 @@ export class UserListPage {
   async ionViewDidEnter() {
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
     await this.cargaUsers();
-    this.users.forEach((e:User)=>{
-      if(e.id==this.authS.user.id){
-        this.bdUser=e;
+    this.users.forEach((e: User) => {
+      if (e.id == this.authS.user.id) {
+        this.bdUser = e;
       }
     })
   }
@@ -84,16 +84,16 @@ export class UserListPage {
       if (i > -1) {
         this.users.splice(i, 1);
       };
-      this.oldUsers.forEach((e:User)=>{
-        if(e.id==user.id){
-          let i2=this.oldUsers.indexOf(e);
-          this.oldUsers.splice(i2,1);
+      this.oldUsers.forEach((e: User) => {
+        if (e.id == user.id) {
+          let i2 = this.oldUsers.indexOf(e);
+          this.oldUsers.splice(i2, 1);
         }
       });
       this.presentToast("Usuario eliminado correctamente.", "success", "checkmark-circle-outline");
 
       //deslogear si se ha eliminado el admin logeado
-      if(user.administrator&&user.id==this.authS.user.id){
+      if (user.administrator && user.id == this.authS.user.id) {
         this.logout();
       }
     }
@@ -129,10 +129,10 @@ export class UserListPage {
       if (resp.data != null) {
         let i: number = this.users.indexOf(user);
         this.users[i] = resp.data.newUser;
-        this.oldUsers.forEach((e:User)=>{
-          if(e.id==resp.data.newUser.id){
-            let i2=this.oldUsers.indexOf(e);
-            this.oldUsers[i2]=this.users[i];
+        this.oldUsers.forEach((e: User) => {
+          if (e.id == resp.data.newUser.id) {
+            let i2 = this.oldUsers.indexOf(e);
+            this.oldUsers[i2] = this.users[i];
           }
         })
         this.presentToast("Usuario modificado correctamente.", "success", "checkmark-circle-outline")
@@ -187,16 +187,22 @@ export class UserListPage {
     this.authS.logout();
   }
 
-  searchStr:string;
+  searchStr: string;
 
   public async searchAction() {
 
-    let resultFilter: User[] = [];
+    this.searchStr = this.sb.value;
+    let regex: RegExp = new RegExp("^[ ]");
+
+    try {
+      if (!this.searchStr.match(regex)) {
+
+        let resultFilter: User[] = [];
     let listS: User[] = [];
     let selectO = this.select.value;
-    this.searchStr = this.sb.value;
+
     let list: User[] = [];
-    this.users=[];
+    this.users = [];
 
 
     let lenght = this.searchStr.length;
@@ -267,32 +273,41 @@ export class UserListPage {
 
       await this.presentLoading();
 
-      if(selectO=="true"){
-        resultFilter=await this.usser.getByAdministrator(true,9999,0);
-        resultFilter.forEach((e:User)=>{
-          if(e.administrator) listS.push(e);
+      if (selectO == "true") {
+        resultFilter = await this.usser.getByAdministrator(true, 9999, 0);
+        resultFilter.forEach((e: User) => {
+          if (e.administrator) listS.push(e);
         })
-        this.users=listS;
-        this.infinite.disabled=true;
+        this.users = listS;
+        this.infinite.disabled = true;
       }
 
-      else if(selectO=="false"){
-        resultFilter=await this.usser.getByAdministrator(false,9999,0);
-        resultFilter.forEach((e:User)=>{
-          if(!e.administrator) listS.push(e);
+      else if (selectO == "false") {
+        resultFilter = await this.usser.getByAdministrator(false, 9999, 0);
+        resultFilter.forEach((e: User) => {
+          if (!e.administrator) listS.push(e);
         })
-        this.users=listS;
-        this.infinite.disabled=true;
+        this.users = listS;
+        this.infinite.disabled = true;
       }
 
-      else{
-        this.users=this.oldUsers;
-        this.infinite.disabled=this.oldInfinite;
+      else {
+        this.users = this.oldUsers;
+        this.infinite.disabled = this.oldInfinite;
       }
 
       await this.miLoading.dismiss();
     }
     await this.miLoading.dismiss();
+
+      } else this.presentToast("La búsqueda no puede comenzar por espacios en blanco.","danger","ban");
+
+
+    } catch (error) {
+
+    }
+
+
   }
 
 }

@@ -78,7 +78,7 @@
 
   <div class="body">
     <ion-grid class="ion-text-center">
-      <ion-row let *ngFor="let exchangeGift of this.exGifts; let i=index" [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'" >
+      <ion-row style="border-left: 1px solid #4b4b4d;border-right: 1px solid #4b4b4d;" let *ngFor="let exchangeGift of this.exGifts; let i=index" [ngClass]="(i % 2 == 0) ? 'normal' : 'colored'" >
         <ion-col size="0.5">
           <ion-text>
             <div
@@ -137,7 +137,7 @@
           <ion-text> {{exchangeGift.gift.name}} </ion-text>
         </ion-col>
 
-        <ion-col size="2.5">
+        <ion-col size="2.6">
           <div title="Entregado" *ngIf="exchangeGift.delivered">
             <ion-icon
               name="checkmark-circle"

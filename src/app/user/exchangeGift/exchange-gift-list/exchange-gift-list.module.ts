@@ -17,6 +17,6 @@ import { UtilService } from '../../../services/util.service';
     ExchangeGiftListPageRoutingModule
   ],
   declarations: [ExchangeGiftListPage],
-  providers: [UtilService]
+  providers: []
 })
 export class ExchangeGiftListPageModule {}
