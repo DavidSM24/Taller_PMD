@@ -49,7 +49,7 @@ export class CarRepairSawPage implements OnInit {
     if(this.carRepair.dateRepair){
       this.spanishDateRepair=this.dateTimeService.formatSpanishDateString(""+this.carRepair.dateRepair);
     }
-    
+
     this.formCarRepair=this.formBuilder.group({
       operation:[this.carRepair.operation,[Validators.required]],
     carPlate:[this.carRepair.carPlate,[Validators.required]],
@@ -64,10 +64,14 @@ export class CarRepairSawPage implements OnInit {
     dateRepair:[this.spanishDateRepair],
     repaired:[this.carRepair.repaired,[Validators.required]]
     });
+
+    if(this.carRepair.dateRepair==null){
+      this.formCarRepair.get('dateRepair').setValue("Sin Reparar");
+    }
   }
 
   async ionViewDidEnter(){
-     
+
     this.oldCarRepair={
       id:this.carRepair.id,
     operation:this.carRepair.operation,
@@ -86,9 +90,9 @@ export class CarRepairSawPage implements OnInit {
     }
   }
 
-  
 
-  
+
+
   /**
    * Método que actualiza una reparación mediante un modal
    * @param carRepair Reparación que se quiera modificar
@@ -100,20 +104,20 @@ export class CarRepairSawPage implements OnInit {
       //hoja de estilos
       cssClass: 'my-modal-class',
       //pasar datos al modal
-      
+
       componentProps: {
         'carRepair':this.carRepair
-        
-        
+
+
       }
     });
-   
+
   try {
     return await modal.present();
-   
-    
+
+
   } catch (error) {
-    
+
   }
 
   }
