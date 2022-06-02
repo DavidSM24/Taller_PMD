@@ -384,32 +384,35 @@ export class CarRepairListPage implements OnInit {
       this.infinite.disabled = false
       await this.miLoading.dismiss();
     }
+
     else if (lenght < 1) {
 
-      resultFilter = resultFilter.concat(this.carRepairsStore);
-      this.infinite.disabled = this.oldInifinte;
+      await this.presentLoading();
 
-      if (selectO == "true") {
-        resultFilter.forEach((e: CarRepair) => {
-          if (e.repaired) listS.push(e);
+      if(selectO=="true"){
+        resultFilter=await this.cS.getByStatedPaged(true,9999,0);
+        resultFilter.forEach((e:CarRepair)=>{
+          if(e.repaired) listS.push(e);
         })
-        this.carRepairs = listS;
+        this.carRepairs=listS;
+        this.infinite.disabled=true;
       }
 
-      else if (selectO == "false") {
-        resultFilter.forEach((e: CarRepair) => {
-          if (!e.repaired) listS.push(e);
+      else if(selectO=="false"){
+        resultFilter=await this.cS.getByStatedPaged(false,9999,0);
+        resultFilter.forEach((e:CarRepair)=>{
+          if(!e.repaired) listS.push(e);
         })
-        this.carRepairs = listS;
-
+        this.carRepairs=listS;
+        this.infinite.disabled=true;
       }
 
-      else {
-        this.carRepairs = resultFilter;
-
+      else{
+        this.carRepairs=this.carRepairsStore;
+        this.infinite.disabled=this.oldInifinte;
       }
 
-      this.infinite.disabled = this.oldInifinte;
+
       await this.miLoading.dismiss();
     }
 

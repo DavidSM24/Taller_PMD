@@ -243,30 +243,34 @@ export class GifListPage implements OnInit {
       this.infinite.disabled=true;
       await this.uts.hideLoading()
     }
+
     else if(lenght<1){
-      resultFilter=resultFilter.concat(this.oldGifts);
-      this.infinite.disabled=this.oldInfinite;
+      await this.uts.presentLoading();
 
       if(selectO=="true"){
+        resultFilter=await this.gs.getByAvailablePaged(true,9999,0);
         resultFilter.forEach((e:Gift)=>{
           if(e.available) listS.push(e);
         })
         this.gifts=listS;
+        this.infinite.disabled=true;
       }
 
       else if(selectO=="false"){
+        resultFilter=await this.gs.getByAvailablePaged(false,9999,0);
         resultFilter.forEach((e:Gift)=>{
           if(!e.available) listS.push(e);
         })
         this.gifts=listS;
-
+        this.infinite.disabled=true;
       }
 
       else{
-        this.gifts=resultFilter;
+        this.gifts=this.oldGifts;
+        this.infinite.disabled=this.oldInfinite;
       }
 
-      this.gifts=this.sortList(this.gifts);
+
       await this.uts.hideLoading();
     }
   }

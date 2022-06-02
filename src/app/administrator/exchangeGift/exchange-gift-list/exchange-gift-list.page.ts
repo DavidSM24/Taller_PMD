@@ -312,35 +312,35 @@ export class ExchangeGiftListPage {
       this.infinite.disabled=false
       await this.miLoading.dismiss();
     }
+
     else if(lenght<1){
 
-      resultFilter=resultFilter.concat(this.oldExGifts);
-      this.infinite.disabled=this.oldInfinite;
+      await this.presentLoading();
 
       if(selectO=="true"){
+        resultFilter=await this.exs.getByDeliveredPaged(true,9999,0);
         resultFilter.forEach((e:ExchangeGift)=>{
           if(e.delivered) listS.push(e);
         })
         this.exGifts=listS;
-        this.exGifts=this.sortList(this.exGifts);
+        this.infinite.disabled=true;
       }
 
       else if(selectO=="false"){
+        resultFilter=await this.exs.getByDeliveredPaged(false,9999,0);
         resultFilter.forEach((e:ExchangeGift)=>{
           if(!e.delivered) listS.push(e);
         })
         this.exGifts=listS;
-        this.exGifts=this.sortList(this.exGifts);
-
+        this.infinite.disabled=true;
       }
 
       else{
-        this.exGifts=resultFilter;
-        this.exGifts=this.sortList(this.exGifts);
-
+        this.exGifts=this.oldExGifts;
+        this.infinite.disabled=this.oldInfinite;
       }
 
-      this.infinite.disabled=this.oldInfinite;
+
       await this.miLoading.dismiss();
     }
 
