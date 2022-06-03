@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { Mail } from '../models/Mail';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class UtilService {
 
   constructor(
     private loading: LoadingController,
-    private toast: ToastController
+    private toast: ToastController,
+    public http: HttpClient
   ) { }
 
   async presentLoading() {
@@ -40,5 +43,27 @@ export class UtilService {
       icon:icn
     });
     miToast.present();
+  }
+
+  public async sendMail(mail: Mail): Promise<boolean> {
+
+    if (mail != null &&
+      mail.message != null && mail.receiver != null && mail.subject) {
+
+        const body=mail;
+        return new Promise(resolve => {
+
+          this.http.post('localhost:8080' + '/mailSender', body).subscribe((data: any) => {
+
+            resolve(data);
+          }, error => {
+            console.log(error);
+            resolve(false);
+          });
+        });
+
+    }
+    else return new Promise(resolve => { resolve(false) });
+
   }
 }

@@ -8,6 +8,7 @@ import { AgencyService } from 'src/app/services/agency.service';
 import { ExchangeGiftService } from 'src/app/services/exchange-gift.service';
 import { GiftService } from 'src/app/services/gift.service';
 import { UtilService } from 'src/app/services/util.service';
+import { Mail } from '../../../models/Mail';
 
 @Component({
   selector: 'app-exchange-gif-create',
@@ -22,8 +23,8 @@ export class ExchangeGifCreatePage {
   public gifts: Gift[];
   public agencies: Agency[];
 
-  public errorAgency:boolean;
-  public errorGift:boolean;
+  public errorAgency: boolean;
+  public errorGift: boolean;
 
   @ViewChild(IonToggle) toggle: IonToggle;
   constructor(private exser: ExchangeGiftService,
@@ -62,7 +63,26 @@ export class ExchangeGifCreatePage {
           }
 
           else {
+
+            let mail: Mail = {
+              subject: 'Pedido: ' + newExchange.agency.myUser.name + " -> " + newExchange.gift.name,
+              receiver: newExchange.agency.myUser.email,
+              message: newExchange.agency.myUser.name + ' ha creado un nuevo pedido: ' + newExchange.gift.name + '. Puntos: ' + newExchange.gift.points + "."
+            }
+
             this.uts.presentToast("Pedido agregada correctamente", "success", "checkmark-circle-outline");
+
+            try {
+              let result: boolean = await this.uts.sendMail(mail);
+              if (result) this.uts.presentToast("Se ha enviado un correo a los administradores con la información del neuvo pedido.", "success", "checkmark-circle-outline");
+              else this.uts.presentToast("No se ha podido enviar el correo al administrador con su pedido.", "danger", "ban");
+            } catch (error) {
+
+            }
+
+
+
+
             this.formExchange.reset();
           }
 
@@ -87,8 +107,8 @@ export class ExchangeGifCreatePage {
           text: "Cancel",
           role: 'cancel',
           handler: (value: any) => {
-            if(!this.mygift){
-              this.errorGift=true;
+            if (!this.mygift) {
+              this.errorGift = true;
             }
           }
         },
@@ -96,7 +116,7 @@ export class ExchangeGifCreatePage {
           text: 'Ok',
           handler: (value: any) => {
             this.mygift = value.Regalos.value;
-            this.errorGift=false;
+            this.errorGift = false;
           }
         }
       ],
@@ -138,8 +158,8 @@ export class ExchangeGifCreatePage {
         {
           text: "Cancel",
           handler: (value) => {
-            if(!this.myagency){
-              this.errorAgency=true;
+            if (!this.myagency) {
+              this.errorAgency = true;
             }
           },
           role: 'cancel'
@@ -149,7 +169,7 @@ export class ExchangeGifCreatePage {
           handler: (value) => {
             console.log(value.Agencias.value)
             this.myagency = value.Agencias.value;
-            this.errorAgency=false;
+            this.errorAgency = false;
           }
         }
       ],
