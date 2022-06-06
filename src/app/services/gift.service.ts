@@ -98,7 +98,7 @@ export class GiftService {
     return this.getListData(this.URLDatabase+ this.endpoint + "/name/" + name + "/element/" + limit + "/page/" + offset);
   }
 
-  public async getByPoints(points:number): Promise<Gift[]> {
+  public async getByPoints(points:string): Promise<Gift[]> {
     return this.getListData(this.URLDatabase+ this.endpoint + "/points/" + points);
   }
 

@@ -18,8 +18,8 @@
 
       </div>
     </div>
-    <div class="ion-padding">
-      <div class="formulario">
+    <div  class="ion-padding">
+      <form [formGroup]="formGift" class="formulario">
         <ion-grid>
 
           <ion-row class="ion-align-items-center">
@@ -43,10 +43,18 @@
           </ion-row>
 
           <ion-row class="ion-align-items-center">
+            <ion-col class="colum">
+              <div>
+                <ion-input class="customInput" formControlName="observaciones"></ion-input>
+             </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
             <ion-col size="12">
 
 
-              <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" >
+              <ion-button [disabled]="this.auts.agency.points<=giftsaw.points"  (click)="purchase()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" >
                 Realizar Transacción
               </ion-button>
 
@@ -58,7 +66,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </div>
+      </form>
     </div>
 
 

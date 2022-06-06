@@ -1,5 +1,5 @@
 import { GiftSawPage } from './../gift-saw/gift-saw.page';
-import { IonInfiniteScroll, Platform, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, Platform, ModalController, IonSelect, IonSearchbar } from '@ionic/angular';
 import { UtilService } from './../../../services/util.service';
 import { GiftService } from './../../../services/gift.service';
 import { Gift } from 'src/app/models/Gift';
@@ -10,26 +10,29 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   selector: 'app-gift-list',
   templateUrl: './gift-list.page.html',
   styleUrls: ['./gift-list.page.scss'],
+  
 })
 export class GiftListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+
+  @ViewChild(IonSearchbar) sb:IonSearchbar;
+  public searchStr = "";
   public searchTerm: string;
   private niTems: number;
   public img:string;
   public gifts: Gift[] = [];
-  public horizontalCol:number;
-
+  public oldInfinite:boolean;
+  public oldGifts: Gift []=[];
   constructor(private authS: AuthService, private gs: GiftService,
     private modalCtrl: ModalController,
     private uts: UtilService,
-    private pt: Platform) { }
+    private pt: Platform,
+    public ats:AuthService) { }
 
   ngOnInit() {
   }
 
   async ionViewWillEnter() {
-
-    this.horizontalCol = Math.ceil(this.pt.height() / 540);
 
     console.log(this.gs.added);
 
@@ -56,16 +59,12 @@ export class GiftListPage implements OnInit {
       this.infinite.disabled = false;
       newGifts = await this.gs.getAllPaged(this.niTems, 0);
 
-      if (newGifts.length < this.niTems) {
-        this.infinite.disabled = true;
-      }
-
-      newGifts.forEach((e:Gift)=>{
-        if(!e.available) newGifts.splice(newGifts.indexOf(e),1);
-      })
-
       this.gifts = this.gifts.concat(newGifts);
 
+    }
+
+    if (newGifts.length < this.niTems) {
+      this.infinite.disabled = true;
     }
 
     if (event) {
@@ -86,15 +85,7 @@ export class GiftListPage implements OnInit {
       if (newgifts.length < this.niTems) {
         this.infinite.disabled = true;
       }
-
-      newgifts.forEach((e:Gift)=>{
-        if(!e.available) newgifts.splice(newgifts.indexOf(e),1);
-      })
     }
-
-    this.infinite.complete();
-
-
   }
 
   public async reset(event) {
@@ -125,4 +116,94 @@ export class GiftListPage implements OnInit {
       console.log(error);
     }
   }
+
+
+
+  public async searchChange() {
+
+    let resultFilter:Gift[]=[];
+    let listS:Gift[]=[];
+    
+    this.searchStr=this.sb.value;
+
+    let list:Gift[]=[];
+    this.gifts=[];
+
+    let lenght=this.searchStr.length;
+    if(lenght>0){
+
+      //consultar y cambiar lista
+      await this.uts.presentLoading();
+
+      //nombre
+      list=await this.gs.getByNamePaged(this.searchStr,9999,0);
+      list.forEach((e:Gift)=>{
+        let result:boolean=true;
+        resultFilter.forEach((x:Gift)=>{
+          if(x.id==e.id) result=false;
+        })
+        if(result) resultFilter.push(e);
+      })
+
+      //points
+      if(+this.searchStr>=0){
+        list=await this.gs.getByPoints(this.searchStr);
+        list.forEach((e:Gift)=>{
+          let result:boolean=true;
+          resultFilter.forEach((x:Gift)=>{
+            if(x.id==e.id) result=false;
+          })
+          if(result) resultFilter.push(e);
+        })
+      }
+
+
+
+      else{
+        this.gifts=resultFilter;
+
+      }
+
+      this.infinite.disabled=true;
+      await this.uts.hideLoading()
+    }
+    else if(lenght<1){
+      resultFilter=resultFilter.concat(this.oldGifts);
+      this.infinite.disabled=this.oldInfinite;
+
+
+
+      this.gifts=this.sortList(this.gifts);
+      await this.uts.hideLoading();
+    }
+  }
+
+  private sortList(eg:Gift[]):Gift[] {
+    if(eg!=null&&eg.length>1){
+      eg=eg.sort((n1,n2) => {
+        if (n1.name > n2.name) {
+            return 1;
+        }
+
+        else if (n1.name < n2.name) {
+            return -1;
+        }
+
+        else {
+          if (n1.id > n2.id) {
+            return 1;
+          }
+
+          else if (n1.id < n2.id) {
+              return -1;
+          }
+        }
+        return 0;
+    });
+    }
+
+    return eg;
+  }
+
+
 }
