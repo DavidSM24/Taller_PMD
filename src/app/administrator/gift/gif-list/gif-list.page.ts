@@ -214,7 +214,7 @@ export class GifListPage implements OnInit {
 
           //points
           if (+this.searchStr >= 0) {
-            list = await this.gs.getByPoints(+this.searchStr);
+            list = await this.gs.getByPoints(this.searchStr);
             list.forEach((e: Gift) => {
               let result: boolean = true;
               resultFilter.forEach((x: Gift) => {

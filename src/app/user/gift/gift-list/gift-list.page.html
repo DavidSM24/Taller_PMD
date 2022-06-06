@@ -4,6 +4,10 @@
     <ion-title>Articulos Disponibles</ion-title>
 
     <ion-buttons style="margin-right: 1%;" slot="end">
+      <ion-text>Tus Puntos Actuales :</ion-text>
+      <ion-card>
+      <ion-text>{{this.ats.agency.points}}</ion-text>
+      </ion-card>
       <ion-icon class="ico" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
     </ion-buttons>
 
@@ -11,7 +15,7 @@
   <ion-toolbar color="medium">
     <ion-row class="ion-align-items-center">
     <ion-col>
-    <ion-searchbar placeholder="Escribe para encuentrar el Articulo que estás buscando..." inputmode="text" type="text" showCancelButton="always" [(ngModel)]="searchTerm"></ion-searchbar>
+    <ion-searchbar placeholder="Escribe para encuentrar el Articulo que estás buscando..." inputmode="text" type="text" showCancelButton="always" (ionChange)="this.searchChange()"></ion-searchbar>
     </ion-col>
     </ion-row>
 
