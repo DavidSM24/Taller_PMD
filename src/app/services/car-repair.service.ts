@@ -279,7 +279,7 @@ export class CarRepairService {
           return new Promise(resolve=>{
             this.http.post(this.URLDatabase+this.endpoint,body).subscribe((data:any)=>{
 
-              carRepair=data;
+              carRepair.id=data.id;
               resolve(carRepair);
             },error=>{
               resolve(null);
