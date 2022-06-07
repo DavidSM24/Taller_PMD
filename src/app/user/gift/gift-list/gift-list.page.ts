@@ -5,6 +5,7 @@ import { GiftService } from './../../../services/gift.service';
 import { Gift } from 'src/app/models/Gift';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Agency } from 'src/app/models/Agency';
 
 @Component({
   selector: 'app-gift-list',
@@ -16,6 +17,7 @@ export class GiftListPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   @ViewChild(IonSearchbar) sb:IonSearchbar;
+  public points:number=0;
   public searchStr = "";
   public searchTerm: string;
   private niTems: number;
@@ -23,26 +25,31 @@ export class GiftListPage implements OnInit {
   public gifts: Gift[] = [];
   public oldInfinite:boolean;
   public oldGifts: Gift []=[];
-  constructor(private authS: AuthService, private gs: GiftService,
+  public agency:Agency;
+  constructor(
+    public authS: AuthService,
+    private gs: GiftService,
     private modalCtrl: ModalController,
     private uts: UtilService,
-    private pt: Platform,
-    public ats:AuthService) { }
+    private pt: Platform) { }
 
   ngOnInit() {
   }
 
   async ionViewWillEnter() {
+    
+    this.points=this.authS.agency.points;
 
+    this.niTems = Math.ceil(this.pt.height() / 20 + 10);
     console.log(this.gs.added);
 
-    if (this.gs.added) {
+    if(this.gs.added){
 
       this.reset(null);
-      this.gs.added = false;
+      this.gs.added=false;
     }
-    else {
-      this.niTems = Math.ceil(this.pt.height() / 20 + 10);
+    else{
+
       await this.loadgifts();
     }
 

@@ -22,8 +22,8 @@
         <ion-grid>
 
           <ion-row class="ion-align-items-center">
-            <ion-col>
-              <ion-label>Fecha de Intercambio:</ion-label>
+            <ion-col size="4">
+              <ion-text>Fecha de Intercambio:</ion-text>
             </ion-col>
 
             <ion-col>
@@ -34,8 +34,8 @@
           </ion-row>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
-              <ion-label>Observaciones:</ion-label>
+            <ion-col size="4">
+              <ion-text>Observaciones:</ion-text>
             </ion-col>
             <div>
             <ion-text>
@@ -45,8 +45,8 @@
           </ion-row>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
-              Entregado:
+            <ion-col size="4">
+              <ion-text>Entregado:</ion-text>
             </ion-col>
               <div>
                 <ion-col *ngIf="this.exchangesaw.delivered">
@@ -65,16 +65,21 @@
 
           <ion-row class="ion-align-items-center">
             <ion-col size="12">
-              <div class="center">
+              <div>
                 <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
                   Cerrar Visualizacion
-                </ion-button>
-
-                <ion-button *ngIf="!this.exchangesaw.delivered" (click)="mensagealerta(exchangesaw)" color="danger" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
-                  Cancelar peido
-                </ion-button>
+                </ion-button>   
               </div>
             </ion-col>
+          </ion-row>
+            <ion-row class="ion-align-items-center">
+
+            <ion-col size="12">
+              <ion-button *ngIf="!this.exchangesaw.delivered" (click)="mensagealerta(exchangesaw)" color="danger" expand="block" shape="round"  style="margin-top: 4% !important;" class="button">
+                Cancelar peido
+              </ion-button>
+            </ion-col>
+            
           </ion-row>
         </ion-grid>
       </div>
