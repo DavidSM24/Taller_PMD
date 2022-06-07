@@ -257,9 +257,25 @@ export class CarRepairService {
         //&&carRepair.repaired!=null
         //&&carRepair.myAgency!=null
         ){
-          const body=carRepair;
-          console.log(body);
 
+          let tmp={
+            operation: carRepair.operation,
+            carPlate: carRepair.carPlate,
+            model: carRepair.model,
+            brandCar: carRepair.brandCar,
+            clienteName: carRepair.clienteName,
+            dateOrder: carRepair.dateOrder,
+            nor: carRepair.nor,
+            amount: carRepair.amount,
+            dateRepair: carRepair.dateRepair,
+            asigPoints: carRepair.asigPoints,
+            repaired: carRepair.repaired,
+            myAgency: {
+              id:carRepair.myAgency.id
+            }
+          }
+          const body=tmp;
+          
           return new Promise(resolve=>{
             this.http.post(this.URLDatabase+this.endpoint,body).subscribe((data:any)=>{
 
