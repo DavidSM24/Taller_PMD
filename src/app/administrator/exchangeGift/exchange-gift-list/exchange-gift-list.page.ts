@@ -364,7 +364,6 @@ export class ExchangeGiftListPage {
 
 
 
-
   }
 
   public async changeDeliveredAlert(eg: ExchangeGift) {

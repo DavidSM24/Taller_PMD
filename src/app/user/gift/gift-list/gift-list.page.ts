@@ -1,3 +1,4 @@
+import { Agency } from './../../../models/Agency';
 import { GiftSawPage } from './../gift-saw/gift-saw.page';
 import { IonInfiniteScroll, Platform, ModalController, IonSelect, IonSearchbar } from '@ionic/angular';
 import { UtilService } from './../../../services/util.service';
@@ -23,7 +24,8 @@ export class GiftListPage implements OnInit {
   public gifts: Gift[] = [];
   public oldInfinite:boolean;
   public oldGifts: Gift []=[];
-  constructor(private authS: AuthService, private gs: GiftService,
+  public actualpoints:number;
+  constructor(private gs: GiftService,
     private modalCtrl: ModalController,
     private uts: UtilService,
     private pt: Platform,
@@ -33,7 +35,7 @@ export class GiftListPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-
+    this.actualpoints=this.ats.agency.points;
     console.log(this.gs.added);
 
     if (this.gs.added) {
@@ -95,9 +97,10 @@ export class GiftListPage implements OnInit {
   }
 
   public logout() {
-    this.authS.logout();
+    this.ats.logout();
   }
   public async buy(giftsaw: Gift) {
+    let agency:Agency
     try {
       const modal = await this.modalCtrl.create({
         component: GiftSawPage,
@@ -109,8 +112,11 @@ export class GiftListPage implements OnInit {
       await modal.present();
       const resp = await modal.onDidDismiss();
       if (resp.data != null) {
+        
         let i: number = this.gifts.indexOf(giftsaw);
         this.gifts[i] = resp.data.newGift;
+        agency=resp.data.nagency
+        this.actualpoints=this.ats.agency.points;
       }
     } catch (error) {
       console.log(error);

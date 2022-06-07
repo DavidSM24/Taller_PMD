@@ -1,3 +1,5 @@
+import { AgencyService } from './../../../services/agency.service';
+import { Agency } from './../../../models/Agency';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ExchangeGiftService } from './../../../services/exchange-gift.service';
 import { UtilService } from './../../../services/util.service';
@@ -23,7 +25,8 @@ export class GiftSawPage implements OnInit {
     private uts:UtilService,
     private exser: ExchangeGiftService,
     private fb: FormBuilder,
-    private datePipe: DatePipe) {
+    private datePipe: DatePipe,
+    private as:AgencyService) {
       this.formGift = this.fb.group({
         observaciones: ["", [Validators.required]]
       });
@@ -77,6 +80,16 @@ export class GiftSawPage implements OnInit {
 
       else{
         this.uts.presentToast("Pedido agregada correctamente","success","checkmark-circle-outline");
+        let tmp: Agency = await this.as.getById(this.auts.agency.id);
+        
+            try {
+              if (!tmp) this.uts.presentToast("Ha habido un error al actualizar su agencia.", "danger", "ban");
+              else this.auts.agency = tmp;
+              
+            } catch (error) {
+              this.uts.presentToast("Ha habido un error al actualizar su agencia.", "danger", "ban");
+              console.log(error);
+            }
       }
 
 
@@ -91,6 +104,8 @@ export class GiftSawPage implements OnInit {
   console.log(error);
   }
   await this.uts.hideLoading();
-  this.modalCtrl.dismiss();
+  this.modalCtrl.dismiss({
+    nagency:this.auts.agency
+  })
 }
 }
