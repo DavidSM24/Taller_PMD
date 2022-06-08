@@ -92,6 +92,7 @@ export class GiftListPage implements OnInit {
         this.infinite.disabled = true;
       }
     }
+    this.infinite.complete();
   }
 
   public async reset(event) {
