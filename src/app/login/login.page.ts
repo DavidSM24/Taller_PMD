@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
         }
 
       }
-      this.complete = true;
+      else this.complete = true;
     } catch (error) {
       console.log(error);
     }
