@@ -29,13 +29,16 @@ export class GiftListPage implements OnInit {
     private modalCtrl: ModalController,
     private uts: UtilService,
     private pt: Platform,
-    public ats:AuthService) { }
+    public ats:AuthService) { 
+
+      this.actualpoints=-1;
+    }
 
   ngOnInit() {
   }
 
   async ionViewWillEnter() {
-    this.actualpoints=this.ats.agency.points;
+    
     console.log(this.gs.added);
 
     if (this.gs.added) {
@@ -62,6 +65,7 @@ export class GiftListPage implements OnInit {
       newGifts = await this.gs.getAllPaged(this.niTems, 0);
 
       this.gifts = this.gifts.concat(newGifts);
+      this.actualpoints=this.ats.agency.points;
 
     }
 

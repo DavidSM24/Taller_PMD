@@ -3,7 +3,7 @@
 
     <ion-title>Articulos Disponibles</ion-title>
 
-    <ion-buttons style="margin-right: 1%;" slot="end">
+    <ion-buttons style="margin-right: 1%;" slot="end" *ngIf="this.actualpoints>-1">
       <ion-text>Tus Puntos Actuales :</ion-text>
       <ion-card>
       <ion-text>{{this.actualpoints}}</ion-text>
