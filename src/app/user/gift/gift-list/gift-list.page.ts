@@ -62,9 +62,10 @@ export class GiftListPage implements OnInit {
       await this.uts.presentLoading();
 
       this.infinite.disabled = false;
-      newGifts = await this.gs.getAllPaged(this.niTems, 0);
+      newGifts = await this.gs.getByAvailablePaged(true,this.niTems, 0);
 
       this.gifts = this.gifts.concat(newGifts);
+      this.oldGifts=this.oldGifts.concat(this.gifts);
       this.actualpoints=this.ats.agency.points;
 
     }
@@ -85,8 +86,9 @@ export class GiftListPage implements OnInit {
     let newgifts: Gift[] = [];
 
     if (!this.infinite.disabled) {
-      newgifts = await this.gs.getAllPaged(this.niTems, this.gifts.length);
+      newgifts = await this.gs.getByAvailablePaged(true,this.niTems, this.gifts.length);
       this.gifts = this.gifts.concat(newgifts);
+      this.oldGifts=this.oldGifts.concat(newgifts);
 
       if (newgifts.length < this.niTems) {
         this.infinite.disabled = true;
@@ -132,60 +134,68 @@ export class GiftListPage implements OnInit {
 
   public async searchChange() {
 
-    let resultFilter:Gift[]=[];
-    let listS:Gift[]=[];
-    
-    this.searchStr=this.sb.value;
+    this.searchStr = this.sb.value;
+    let regex: RegExp = new RegExp("^[ ]");
 
-    let list:Gift[]=[];
-    this.gifts=[];
+    try {
+      if (!this.searchStr.match(regex)) {
+        let resultFilter: Gift[] = [];
+        let listS: Gift[] = [];
 
-    let lenght=this.searchStr.length;
-    if(lenght>0){
+        let list: Gift[] = [];
+        this.gifts = [];
 
-      //consultar y cambiar lista
-      await this.uts.presentLoading();
+        let lenght = this.searchStr.length;
+        if (lenght > 0) {
 
-      //nombre
-      list=await this.gs.getByNamePaged(this.searchStr,9999,0);
-      list.forEach((e:Gift)=>{
-        let result:boolean=true;
-        resultFilter.forEach((x:Gift)=>{
-          if(x.id==e.id) result=false;
-        })
-        if(result) resultFilter.push(e);
-      })
+          //consultar y cambiar lista
+          await this.uts.presentLoading();
 
-      //points
-      if(+this.searchStr>=0){
-        list=await this.gs.getByPoints(this.searchStr);
-        list.forEach((e:Gift)=>{
-          let result:boolean=true;
-          resultFilter.forEach((x:Gift)=>{
-            if(x.id==e.id) result=false;
+          //nombre
+          list = await this.gs.getByNamePaged(this.searchStr, 9999, 0);
+          list.forEach((e: Gift) => {
+            let result: boolean = true;
+            resultFilter.forEach((x: Gift) => {
+              if (x.id == e.id || x.available==false) result = false;
+            })
+            if (result) resultFilter.push(e);
           })
-          if(result) resultFilter.push(e);
-        })
+
+          //points
+          if (+this.searchStr >= 0) {
+            list = await this.gs.getByPoints(this.searchStr);
+            list.forEach((e: Gift) => {
+              let result: boolean = true;
+              resultFilter.forEach((x: Gift) => {
+                if (x.id == e.id || x.available==false) result = false;
+              })
+              if (result) resultFilter.push(e);
+            })
+          }
+
+          resultFilter.forEach((e:Gift)=>{
+            if(!e.available){
+              resultFilter.splice(resultFilter.indexOf(e),1);
+            }
+          })
+          this.gifts=resultFilter;
+          this.infinite.disabled = true;
+          await this.uts.hideLoading()
+        }
+
+        else if (lenght < 1) {
+          await this.uts.presentLoading();
+
+          this.gifts = this.oldGifts;
+          this.infinite.disabled = this.oldInfinite;
+          await this.uts.hideLoading();
+        }
       }
+      else this.uts.presentToast("La búsqueda no puede comenzar por espacios en blanco.","danger","ban");
 
 
+    }catch (error) {
 
-      else{
-        this.gifts=resultFilter;
-
-      }
-
-      this.infinite.disabled=true;
-      await this.uts.hideLoading()
-    }
-    else if(lenght<1){
-      resultFilter=resultFilter.concat(this.oldGifts);
-      this.infinite.disabled=this.oldInfinite;
-
-
-
-      this.gifts=this.sortList(this.gifts);
-      await this.uts.hideLoading();
     }
   }
 

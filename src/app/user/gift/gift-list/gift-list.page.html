@@ -6,17 +6,19 @@
     <ion-buttons style="margin-right: 1%;" slot="end" *ngIf="this.actualpoints>-1">
       <ion-text>Tus Puntos Actuales :</ion-text>
       <ion-card>
-      <ion-text>{{this.actualpoints}}</ion-text>
+        <ion-text>{{this.actualpoints}}</ion-text>
       </ion-card>
-      <ion-icon class="ico" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer"></ion-icon>
+      <ion-icon class="ico" slot="end" name="log-out-outline" (click)="logout() " style="zoom:1.7;cursor:pointer">
+      </ion-icon>
     </ion-buttons>
 
   </ion-toolbar>
   <ion-toolbar color="medium">
     <ion-row class="ion-align-items-center">
-    <ion-col>
-    <ion-searchbar placeholder="Escribe para encuentrar el Articulo que estás buscando..." inputmode="text" type="text" showCancelButton="always" (ionChange)="this.searchChange()"></ion-searchbar>
-    </ion-col>
+      <ion-col>
+        <ion-searchbar placeholder="Escribe para encuentrar el Articulo que estás buscando..." inputmode="text"
+          type="text" showCancelButton="always" (ionChange)="this.searchChange()"></ion-searchbar>
+      </ion-col>
     </ion-row>
 
   </ion-toolbar>
@@ -35,19 +37,23 @@
       <ion-row>
         <ion-col sizeLg="4" sizeMd="4" *ngFor="let gift of this.gifts">
 
-          <ion-item color="black" >
+          <ion-item color="black">
             <ion-label class="shopbox">
               <div class="center">
                 <ion-card class="imcage">
-                  <ion-img class="image"  src="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/{{gift.picture}}"></ion-img>
+                  <ion-img class="image"
+                    src="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/{{gift.picture}}"></ion-img>
 
                 </ion-card>
               </div>
               <div class="center">
                 <div>
                   <h2 class="ion-text-center">{{gift.name}}</h2>
-                  <ion-text class="ion-text-center"><p>Precio: {{gift.points}} Puntos</p></ion-text>
-                  <ion-button sizeSm="1.3" sizeMd="1.3" sizeLg="1.3" (click)="buy(gift)" color="medium">Canjear Regalo</ion-button>
+                  <ion-text class="ion-text-center">
+                    <p>Precio: {{gift.points}} Puntos</p>
+                  </ion-text>
+                  <ion-button sizeSm="1.3" sizeMd="1.3" sizeLg="1.3" (click)="buy(gift)" color="medium">Canjear Regalo
+                  </ion-button>
                 </div>
               </div>
             </ion-label>
