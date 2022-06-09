@@ -8,6 +8,8 @@ import { UtilService } from 'src/app/services/util.service';
 import { format, parseISO } from 'date-fns';
 
 import { DateTimeServiceService } from 'src/app/services/date-time-service.service';
+import { AgencyService } from '../../../services/agency.service';
+import { Agency } from 'src/app/models/Agency';
 
 @Component({
   selector: 'app-car-repair-update',
@@ -42,7 +44,8 @@ export class CarRepairUpdatePage implements OnInit {
     private carRepairService: CarRepairService,
     private formBuilder: FormBuilder,
     private uts: UtilService,
-    public dateTimeService: DateTimeServiceService
+    public dateTimeService: DateTimeServiceService,
+    private as:AgencyService
 
   ) {
 
@@ -134,11 +137,13 @@ export class CarRepairUpdatePage implements OnInit {
         this.newCarRepair = await this.carRepairService.createOrUpdate(this.newCarRepair);
 
         if (this.newCarRepair) {
+          
           //Cierra el modal pasando la reparación guardada a la página con las reparaciones
           this.modalController.dismiss({
             newCarRepair: this.newCarRepair
           })
-          this.uts.presentToast("Se ha gurdadado correctamente", "success", "checkmark-circle-outline");
+          this.uts.presentToast("Se ha gurdadado correctamente.", "success", "checkmark-circle-outline");
+          this.as.added=true;
         }
         else {
           this.uts.presentToast("Fallo al actualizar la reparación. Inténtelo más tarde.", "danger", 'ban');
