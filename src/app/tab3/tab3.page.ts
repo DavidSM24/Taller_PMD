@@ -80,7 +80,7 @@ export class Tab3Page {
         active: this.toggle.checked
       }
   
-      console.log(newGift);
+      
   
       newGift = await this.as.createOrUpdate(newGift);
     }
@@ -92,18 +92,18 @@ export class Tab3Page {
     let toDrop: Agency[] = await this.as.getAll();
     let last: Agency = toDrop[toDrop.length - 1];
     last.address = "se ha modificadoo 666";
-    console.log(last);
+    
     if (toDrop != null) {
-      console.log(await this.as.createOrUpdate(last));
+      
     }
   }
 
   public async test_Delete() {
     let toDrop: Agency[] = await this.as.getAll();
     let last: Agency = toDrop[toDrop.length - 1];
-    console.log(last);
+    
     if (toDrop != null) {
-      console.log(await this.as.delete(last));
+      
     }
   }
 

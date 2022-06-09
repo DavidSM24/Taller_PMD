@@ -57,7 +57,7 @@ export class UtilService {
 
             resolve(data);
           }, error => {
-            console.log(error);
+            
             resolve(false);
           });
         });

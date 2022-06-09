@@ -41,7 +41,7 @@ export class AuthService {
             let agency:Agency=await this.as.getByUsercode(user.code);
             if(agency){
               this.agency=agency;
-              console.log(this.agency);
+              
             }
           }
         }

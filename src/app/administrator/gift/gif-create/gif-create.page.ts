@@ -44,7 +44,7 @@ export class GifCreatePage {
         ||this.extension==("image/jpeg")
         ||this.extension=="image/png"){
 
-          console.log("entro?");
+          
 
           let newGift:Gift = {
             name: this.formGift.get("name").value,
@@ -57,7 +57,7 @@ export class GifCreatePage {
           newGift=await this.gs.createOrUpdate(newGift,this.file);
           if(newGift.id){
             this.gs.added=true;
-            console.log(this.gs.added);
+            
             this.formGift.reset();
             this.uts.presentToast('El regalo se ha creado correctamente.','success',"checkmark-circle-outline");
           }
@@ -78,10 +78,10 @@ export class GifCreatePage {
     let toDrop: Gift[] = await this.gs.getAll();
     let last: Gift = toDrop[toDrop.length - 1];
     last.name="hola1";
-    console.log(last);
+    
     if (toDrop != null) {
       last=await this.gs.createOrUpdate(last,this.file);
-      console.log(last);
+      
       this.img="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/"+last.picture;
     }
   }
@@ -89,9 +89,9 @@ export class GifCreatePage {
   public async test_Delete() {
     let toDrop: Gift[] = await this.gs.getAll();
     let last: Gift = toDrop[toDrop.length - 1];
-    console.log(last);
+    
     if (toDrop != null) {
-      console.log(await this.gs.delete(last));
+      
     }
   }
 
@@ -118,7 +118,7 @@ export class GifCreatePage {
       this.file=null;
     }
 
-    console.log(this.file.type);
+    
   }
 
 }

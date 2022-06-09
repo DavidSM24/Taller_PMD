@@ -28,7 +28,7 @@ export class ExchangeGiftSawPage implements OnInit {
 
   ngOnInit() {
     this.img=this.exchangesaw.gift.picture;
-    console.log(this.img);
+    
   }
 
   async ionViewWillEnter() {

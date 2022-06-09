@@ -127,7 +127,7 @@ export class GifUpdatePage implements OnInit {
       this.errorMsg=true;
     }
 
-    console.log(this.file.type);
+    
   }
 
 }

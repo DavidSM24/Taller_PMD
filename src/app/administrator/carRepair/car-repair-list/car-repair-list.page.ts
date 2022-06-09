@@ -86,7 +86,7 @@ export class CarRepairListPage implements OnInit {
 
         }
       } catch (error) {
-        console.log(error);
+        
         this.presentToast("Error de carga", "danger", 'ban');
       } finally {
         if (event) {
@@ -223,7 +223,7 @@ export class CarRepairListPage implements OnInit {
       await alert.present();
 
     } catch (error) {
-      console.log(error);
+      
     }
   }
 
@@ -247,7 +247,7 @@ export class CarRepairListPage implements OnInit {
         }
 
       } catch (error) {
-        console.log(error);
+        
 
       }
     }

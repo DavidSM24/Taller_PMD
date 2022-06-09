@@ -115,7 +115,7 @@ export class UserCreatePage {
                 active: this.active
               }
 
-              console.log(newAgency);
+              
               newAgency = await this.as.createOrUpdate(newAgency);
               this.as.added = true;
 
@@ -135,7 +135,7 @@ export class UserCreatePage {
 
       } catch (error) {
         await this.uts.hideLoading();
-        console.log(error)
+        
       }
       await this.uts.hideLoading();
     }

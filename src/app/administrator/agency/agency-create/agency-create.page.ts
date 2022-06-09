@@ -44,7 +44,7 @@ export class AgencyCreatePage {
 
   async ionViewWillEnter() {
 
-    console.log("en agency-cretae");
+    
 
     await this.uts.presentLoading();
     this.companies=await this.is.getAll();
@@ -79,7 +79,7 @@ export class AgencyCreatePage {
         active: this.toggle.checked
       }
 
-      console.log(newAgency);
+      
 
       newAgency = await this.as.createOrUpdate(newAgency);
       if(newAgency.id){

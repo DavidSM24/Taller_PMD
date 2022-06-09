@@ -44,7 +44,7 @@ export class ExchangeGiftListPage implements OnInit {
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
     await this.loadExchanges();
 
-    console.log(this.exchanges)
+    
   }
 
   async loadExchanges(event?) {
@@ -55,7 +55,7 @@ export class ExchangeGiftListPage implements OnInit {
       await this.uts.presentLoading();
 
       //this.infinite.disabled=false;
-      console.log(this.authS.agency);
+      
       newExchanges = await this.exs.getByAgencyPaged(this.authS.agency, this.niTems, 0);
       //newExchanges=await this.exs.getAll();
       this.exchanges = this.exchanges.concat(newExchanges);
@@ -112,7 +112,7 @@ export class ExchangeGiftListPage implements OnInit {
 
       if (!this.searchStr.match(regex)) {
 
-        console.log("entro en searchbar");
+        
         let resultFilter: ExchangeGift[] = [];
         let listS: ExchangeGift[] = [];
         let selectO = this.select.value;
@@ -270,7 +270,7 @@ export class ExchangeGiftListPage implements OnInit {
       }
 
     } catch (error) {
-      console.log(error);
+      
     }
 
   }

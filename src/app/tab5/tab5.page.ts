@@ -101,8 +101,8 @@ export class Tab5Page {
       this.uts.presentToast('','danger','ban');
     }
     this.uts.hideLoading();
-    console.log(this.gifts);
-    console.log(this.agencies);
+    
+    
   }
 
   async showAgenciesPicker() {

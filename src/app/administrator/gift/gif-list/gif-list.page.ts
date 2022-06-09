@@ -40,7 +40,7 @@ export class GifListPage implements OnInit {
   async ionViewWillEnter() {
 
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
-    console.log(this.niTems);
+    
 
     if (this.gs.added) {
 
@@ -167,7 +167,7 @@ export class GifListPage implements OnInit {
     let newgifts: Gift[] = [];
 
     if (!this.infinite.disabled) {
-      console.log(this.niTems);
+      
       newgifts = await this.gs.getAllPaged(this.niTems, this.gifts.length);
       newgifts = this.sortList(newgifts);
       this.gifts = this.gifts.concat(newgifts);
@@ -326,6 +326,6 @@ export class GifListPage implements OnInit {
   }
 
   public count(gifts: Gift[]) {
-    console.log(gifts.length);
+    
   }
 }

@@ -39,7 +39,7 @@ export class GiftListPage implements OnInit {
 
   async ionViewWillEnter() {
     
-    console.log(this.gs.added);
+    
 
     if (this.gs.added) {
 
@@ -125,7 +125,7 @@ export class GiftListPage implements OnInit {
         this.actualpoints=this.ats.agency.points;
       }
     } catch (error) {
-      console.log(error);
+      
     }
   }
 

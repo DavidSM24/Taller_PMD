@@ -32,7 +32,7 @@ export class UserUpdatePage implements OnInit {
         name: [this.user.name, [Validators.required,Validators.minLength(3),Validators.maxLength(100)]]
       });
     } catch (error) {
-      console.log(error);
+      
     }
   }
   public async EditUser(): Promise<void> {

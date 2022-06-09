@@ -45,7 +45,7 @@ export class ExchangeGifCreatePage {
       await this.uts.presentLoading();
       if (this.mygift != null && this.myagency != null) {
 
-        console.log(this.myagency);
+        
 
         let newExchange: ExchangeGift = {
           dateExchange: this.formExchange.get("dateExchange").value,
@@ -93,7 +93,7 @@ export class ExchangeGifCreatePage {
       }
     } catch (error) {
       await this.uts.hideLoading;
-      console.log(error);
+      
     }
     await this.uts.hideLoading();
   }
@@ -146,8 +146,8 @@ export class ExchangeGifCreatePage {
       this.uts.presentToast('', 'danger', 'ban');
     }
     await this.uts.hideLoading();
-    console.log(this.gifts);
-    console.log(this.agencies);
+    
+    
   }
 
   async showAgenciesPicker() {
@@ -165,7 +165,7 @@ export class ExchangeGifCreatePage {
         {
           text: 'Ok',
           handler: (value) => {
-            console.log(value.Agencias.value)
+            
             this.myagency = value.Agencias.value;
             this.errorAgency = false;
           }

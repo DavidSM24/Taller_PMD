@@ -100,7 +100,7 @@ export class CarRepairListPage implements OnInit {
       try {
 
         newCarRepair = await this.cS.getByAgencyPaged(this.myAgency.id, this.nItems, 0);
-        console.log(newCarRepair)
+        
         this.carRepairs = this.carRepairs.concat(newCarRepair);
         this.storageCarRepairs();
         if (newCarRepair.length < this.nItems) {
@@ -108,7 +108,7 @@ export class CarRepairListPage implements OnInit {
 
         }
       } catch (error) {
-        console.log(error);
+        
         this.presentToast("Error de carga", "danger", 'ban');
       } finally {
         if (event) {
@@ -212,7 +212,7 @@ export class CarRepairListPage implements OnInit {
       await alert.present();
 
     } catch (error) {
-      console.log(error);
+      
     }
   }
   /**
@@ -357,7 +357,7 @@ export class CarRepairListPage implements OnInit {
 
         });
         if (result) {
-          console.log("ID buscado -->" + search.myAgency.id + "ID lista-->" + this.myAgency.id);
+          
           resultFilter.push(search);
 
         }
@@ -442,7 +442,7 @@ export class CarRepairListPage implements OnInit {
         }
 
       } catch (error) {
-        console.log(error);
+        
 
       }
     }

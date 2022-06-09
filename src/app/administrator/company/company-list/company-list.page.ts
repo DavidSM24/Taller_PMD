@@ -41,7 +41,7 @@ export class CompanyListPage implements OnInit {
   async ionViewWillEnter() {
 
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
-    console.log(this.is.added);
+    
 
     if (this.is.added) {
 
@@ -113,7 +113,7 @@ export class CompanyListPage implements OnInit {
         })
       }
     } catch (error) {
-      console.log(error);
+      
     }
 
   }

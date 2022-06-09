@@ -45,7 +45,7 @@ export class InsuranceCompanyService {
         resolve(insurancesCompany);
 
       },error=>{
-        console.log(error);
+        
       });
     });
    }

@@ -36,8 +36,8 @@ export class GiftSawPage implements OnInit {
   ngOnInit() {
 
 
-    console.log(this.giftsaw);
-    console.log(this.auts.agency);
+    
+    
     this.img = this.giftsaw.picture;
   }
   async ionViewWillEnter() {
@@ -52,7 +52,7 @@ export class GiftSawPage implements OnInit {
   public async purchase(): Promise<void> {
     let actualdate = new Date;
     let newdate
-    console.log(actualdate);
+    
 
     newdate = this.datePipe.transform(actualdate, 'yyyy-MM-dd');
 
@@ -60,7 +60,7 @@ export class GiftSawPage implements OnInit {
       await this.uts.presentLoading();
       if (this.giftsaw != null && this.auts.agency != null) {
 
-        console.log(this.auts.agency);
+        
 
         let newExchange: ExchangeGift = {
           dateExchange: newdate,
@@ -69,7 +69,7 @@ export class GiftSawPage implements OnInit {
           agency: this.auts.agency,
           gift: this.giftsaw
         }
-        console.log(newExchange);
+        
 
         try {
           let result = await this.exser.createOrUpdate(newExchange);
@@ -88,7 +88,7 @@ export class GiftSawPage implements OnInit {
 
             } catch (error) {
               this.uts.presentToast("Ha habido un error al actualizar su agencia.", "danger", "ban");
-              console.log(error);
+              
             }
           }
 
@@ -101,7 +101,7 @@ export class GiftSawPage implements OnInit {
       }
     } catch (error) {
       await this.uts.hideLoading;
-      console.log(error);
+      
     }
     await this.uts.hideLoading();
     this.modalCtrl.dismiss({

@@ -138,7 +138,7 @@ export class UserListPage {
         this.presentToast("Usuario modificado correctamente.", "success", "checkmark-circle-outline")
       }
     } catch (error) {
-      console.log(error);
+      
     }
 
   }
@@ -254,7 +254,7 @@ export class UserListPage {
       }
 
       else if (selectO == "false") {
-        console.log(resultFilter)
+        
         resultFilter.forEach((e: User) => {
           if (!e.administrator) listS.push(e);
         })

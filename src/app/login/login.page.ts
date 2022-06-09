@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
 
     try {
       if (this.authS.isLogged()) {
-        console.log(this.authS.isLogged());
+        
         try {
           if (this.authS.user.administrator) {
             this.uts.presentToast("Ha iniciado sesión con el usuario " + this.authS.user.name + ".", "success", "person");
@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
       }
       else this.complete = true;
     } catch (error) {
-      console.log(error);
+      
     }
 
   }
@@ -84,18 +84,18 @@ export class LoginPage implements OnInit {
           try {
             this.authS.user = user;
             await this.authS.keepSession();
-            console.log("inciando...")
+            
 
             if (this.authS.user.administrator) {
               this.router.navigate(['/tab-administrator/agency/list']);
             }
             else if (!this.authS.user.administrator) {
               this.authS.agency = await this.as.getByUsercode(user.code);
-              console.log(this.authS.agency);
+              
               this.router.navigate(['/tab-user/gift/list']);
             }
           } catch (error) {
-            console.log(error);
+            
           }
 
         }

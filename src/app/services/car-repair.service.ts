@@ -59,7 +59,7 @@ export class CarRepairService {
         }
         resolve(carRepairs);
       },error=>{
-        console.log(error);
+        
         //mandar una alerta
       });
     });
@@ -128,7 +128,7 @@ export class CarRepairService {
         resolve(carRepair);
 
       },error=>{
-        console.log(error);
+        
         //introducir una alerta
         resolve(carRepair);
       });

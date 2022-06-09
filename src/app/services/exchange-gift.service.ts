@@ -36,10 +36,10 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
             users.push(tmp);
           }
         }
-        console.log(data);
+        
         resolve(users);
       }, error => {
-        console.log(error);
+        
       });
     });
   }
@@ -81,11 +81,11 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
           }
           exchangegift = tmp;
         }
-        console.log(exchangegift);
+        
         resolve(exchangegift);
       }, error => {
-        console.log(error);
-        console.log(exchangegift);
+        
+        
         resolve(exchangegift);
       });
     });
@@ -109,7 +109,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
   }
   public async createOrUpdate(exgift:ExchangeGift):Promise<ExchangeGift>{
 
-    console.log(exgift)
+    
 
     if (exgift != null) {
 
@@ -132,7 +132,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
           exgift.id=data.id;
           resolve(exgift);
         }, error => {
-          console.log(error);
+          
           resolve(null);
         });
       });
@@ -150,7 +150,7 @@ private async getListData(endpoint: string): Promise<ExchangeGift[]> {
         this.http.delete<ExchangeGift>(this.URLDatabase + this.endpoint, {body}).subscribe(() => {
           resolve(true);
         }, error => {
-          console.log(error);
+          
           resolve(false);
         });
       });

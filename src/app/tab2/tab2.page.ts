@@ -54,14 +54,14 @@ export class Tab2Page {
 
   public async test_Create(): Promise<void> {
     
-    console.log(this.toggle.checked);
+    
     
     if(this.extension){
       if(this.extension==("image/jpg")
       ||this.extension==("image/jpeg")
       ||this.extension=="image/png"){
 
-        console.log("entro?");
+        
 
         let newGift:Gift = {
           name: this.formGift.get("name").value,
@@ -80,10 +80,10 @@ export class Tab2Page {
     let toDrop: Gift[] = await this.gs.getAll();
     let last: Gift = toDrop[toDrop.length - 1];
     last.name="hola1";
-    console.log(last);
+    
     if (toDrop != null) {
       last=await this.gs.createOrUpdate(last,this.file);
-      console.log(last);
+      
       this.img="https://res.cloudinary.com/duq0pz1vi/image/upload/v1645471738/"+last.picture;
     }
   }
@@ -91,9 +91,9 @@ export class Tab2Page {
   public async test_Delete() {
     let toDrop: Gift[] = await this.gs.getAll();
     let last: Gift = toDrop[toDrop.length - 1];
-    console.log(last);
+    
     if (toDrop != null) {
-      console.log(await this.gs.delete(last));
+      
     }
   }
 
@@ -116,6 +116,6 @@ export class Tab2Page {
       this.file=null;
     }
     
-    console.log(this.file.type);
+    
   }
 }

@@ -42,7 +42,7 @@ export class AgencyListPage implements OnInit {
   async ionViewWillEnter() {
 
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
-    console.log(this.as.added);
+    
 
     if(this.as.added){
 
@@ -114,7 +114,7 @@ export class AgencyListPage implements OnInit {
         })
       }
     } catch (error) {
-      console.log(error);
+      
     }
 
   }

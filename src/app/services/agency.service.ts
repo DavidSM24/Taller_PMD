@@ -16,7 +16,7 @@ export class AgencyService {
 
   constructor(public http: HttpClient) {
     this.URLDatabase = environment.herokuConfig.url;
-    console.log(this.added);
+    
   }
 
   public async getData(endpoint:string): Promise<Agency> {
@@ -46,12 +46,12 @@ export class AgencyService {
           agency = tmp;
         }
 
-        console.log(agency);
+        
 
         resolve(agency);
       }, error => {
-        console.log(error);
-        console.log(agency);
+        
+        
         resolve(agency);
       });
     });
@@ -85,10 +85,10 @@ export class AgencyService {
             agencies.push(tmp);
           }
         }
-        console.log(data);
+        
         resolve(agencies);
       }, error => {
-        console.log(error);
+        
       });
     });
   }
@@ -149,13 +149,13 @@ export class AgencyService {
       || agency.myInsuranceCompany == null
       || agency.myUser == null) {
 
-      console.log("Algún campo es nulo o no contiene caracteres.")
+      
       return agency
     }
 
     else {
 
-      console.log(agency);
+      
 
       const body = agency;
       return new Promise(resolve => {
@@ -164,10 +164,10 @@ export class AgencyService {
 
           agency=data;
 
-          console.log(data);
+          
           resolve(agency);
         }, error => {
-          console.log(error);
+          
           resolve(agency);
         });
       });
@@ -181,7 +181,7 @@ export class AgencyService {
       this.http.delete<Agency>(this.URLDatabase + this.endpoint, { body: agency }).subscribe(() => {
         resolve(true);
       }, error => {
-        console.log(error);
+        
         resolve(false);
       });
     });

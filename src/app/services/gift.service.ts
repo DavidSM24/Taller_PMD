@@ -45,7 +45,7 @@ export class GiftService {
         }
         resolve(gifts);
       }, error => {
-        console.log(error);
+        
       });
     });
   }
@@ -83,12 +83,12 @@ export class GiftService {
           gift = tmp;
         }
 
-        console.log(gift);
+        
 
         resolve(gift);
       }, error => {
-        console.log(error);
-        console.log(gift);
+        
+        
         resolve(gift);
       });
     });
@@ -107,14 +107,14 @@ export class GiftService {
   }
 
   public async createOrUpdate(gift: Gift, ImageFile: any): Promise<Gift> {
-    console.log(gift);
+    
     if (
       gift == null
       || gift.name == null
       || gift.name == ("")
       || ImageFile==null
     ) {
-      console.log("El campo name esta nulo o no contiene caracteres.");
+      
       return gift
     }
 
@@ -140,11 +140,11 @@ export class GiftService {
 
         this.http.post(this.URLDatabase+this.endpoint, formData).subscribe((data: any) => {
 
-          console.log(data);
+          
 
           resolve(data);
         }, error => {
-          console.log(error);
+          
           resolve(error);
         });
       });
@@ -158,7 +158,7 @@ export class GiftService {
       this.http.delete<Gift>(this.URLDatabase + this.endpoint, { body: gift }).subscribe(() => {
         resolve(true);
       }, error => {
-        console.log(error);
+        
         resolve(false);
       });
     });

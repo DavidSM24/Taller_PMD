@@ -88,7 +88,7 @@ export class CarRepairUpdatePage implements OnInit {
       myAgency: this.carRepair.myAgency
 
     }
-    console.log(this.newCarRepair);
+    
     try {
       //Guarda la reparación en la base de datos
       this.newCarRepair = await this.carRepairService.createOrUpdate(this.newCarRepair);
@@ -102,7 +102,7 @@ export class CarRepairUpdatePage implements OnInit {
 
     } catch (error) {
       this.uts.presentToast("Fallo al guradar", "danger", 'ban');
-      console.log(error);
+      
     }
   }
 

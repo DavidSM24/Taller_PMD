@@ -70,7 +70,7 @@ export class ExchangeGiftListPage {
         })
       }
     } catch (error) {
-      console.log(error);
+      
     }
 
   }
@@ -100,7 +100,7 @@ export class ExchangeGiftListPage {
         this.oldExGifts[i2] = resp.data.newExchange;
       }
     } catch (error) {
-      console.log(error);
+      
     }
 
   }
@@ -416,7 +416,7 @@ export class ExchangeGiftListPage {
         }
         await this.miLoading.dismiss();
       } catch (error) {
-        console.log(error);
+        
         this.presentToast("Ha habido un error al cambiar el estado del pedido.", "danger", 'ban');
         await this.miLoading.dismiss();
       }

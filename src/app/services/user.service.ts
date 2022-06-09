@@ -36,10 +36,10 @@ export class UserService {
             users.push(tmp);
           }
         }
-        console.log(data);
+        
         resolve(users);
       }, error => {
-        console.log(error);
+        
       });
     });
   }
@@ -70,11 +70,11 @@ export class UserService {
           }
           user = tmp;
         }
-        console.log(user);
+        
         resolve(user);
       }, error => {
-        console.log(error);
-        console.log(user);
+        
+        
         resolve(null);
       });
     });
@@ -108,11 +108,11 @@ export class UserService {
           }
           user = tmp;
         }
-        console.log(user);
+        
         resolve(user);
       }, error => {
-        console.log(error);
-        console.log(user);
+        
+        
         resolve(null);
       });
     });
@@ -142,7 +142,7 @@ export class UserService {
           }
           resolve(result);
         }, error => {
-          console.log(error);
+          
           resolve(null);
         });
       });
@@ -155,7 +155,7 @@ export class UserService {
       this.http.delete<User>(this.URLDatabase + this.endpoint, { body: user }).subscribe(() => {
         resolve(true);
       }, error => {
-        console.log(error);
+        
         resolve(false);
       });
     });

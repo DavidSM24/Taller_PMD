@@ -38,7 +38,7 @@ export class AgencyUpdatePage implements OnInit {
     this.insurance=this.agency.myInsuranceCompany;
     //this.uts.presentLoading();
 
-    console.log(this.agency);
+    
 
     this.formAgency = this.fb.group({
       zipCode: [this.agency.zipCode,  [Validators.required, Validators.pattern("[0-9]{2,21}")]],
@@ -50,7 +50,7 @@ export class AgencyUpdatePage implements OnInit {
     });
 
     } catch (error) {
-      console.log(error);
+      
     }
   }
 
@@ -100,7 +100,7 @@ export class AgencyUpdatePage implements OnInit {
       }
 
      } catch (error) {
-       console.log(error);
+       
        this.uts.presentToast("Ha surgido un error al intentar modificar la agencia. Compruebe todos los campos","danger",'ban');
        await this.uts.hideLoading();
      }

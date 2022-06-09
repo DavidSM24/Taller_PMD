@@ -50,7 +50,7 @@ export class ExchangeGifUpdatePage implements OnInit {
         delivered: [this.exchange.delivered, Validators.required]
       });
       } catch (error) {
-        console.log(error);
+        
       }
     }
 
@@ -129,8 +129,8 @@ export class ExchangeGifUpdatePage implements OnInit {
       this.uts.presentToast('','danger','ban');
     }
     this.uts.hideLoading();
-    console.log(this.gifts);
-    console.log(this.agencies);
+    
+    
   }
 
   async showAgenciesPicker() {

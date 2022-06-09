@@ -97,7 +97,7 @@ export class CarRepairUpdatePage implements OnInit {
 
     let result: boolean = true;
 
-    console.log(this.carRepair.dateOrder);
+    
     if (this.formatedString!=null && !this.dateTimeService.validateDates(this.dateTimeService.formatString(this.carRepair.dateOrder.toString()), this.dateTimeService.formatString(this.formatedString))) {
       result = false;
       this.uts.presentToast("La fecha de reparación no puede ser anterior a la de alta.", "danger", "ban");
@@ -157,7 +157,7 @@ export class CarRepairUpdatePage implements OnInit {
 
       } catch (error) {
         this.uts.presentToast("Fallo al actualizar la reparación. Inténtelo más tarde.", "danger", 'ban');
-        console.log(error);
+        
       }
     }
 
