@@ -21,8 +21,8 @@
         <ion-grid>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
-              <ion-label>Fecha de Intercambio:</ion-label>
+            <ion-col sizeLg="5" sizeXs="6.5">
+              <ion-label>Fecha de Intercambio: </ion-label>
             </ion-col>
             <div>
               <ion-text>
@@ -32,8 +32,8 @@
           </ion-row>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
-              <ion-label>Observaciones:</ion-label>
+            <ion-col sizeLg="5" sizeXs="6.5">
+              <ion-label>Observaciones: </ion-label>
             </ion-col>
             <div>
             <ion-text>
@@ -43,8 +43,8 @@
           </ion-row>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
-              Entregado:
+            <ion-col sizeLg="5" sizeXs="6.5">
+              Entregado: 
             </ion-col>
               <div>
                 <ion-col *ngIf="this.exchangesaw.delivered">
@@ -62,12 +62,23 @@
           </ion-row>
 
           <ion-row class="ion-align-items-center">
-            <ion-col size="4.2">
+            <ion-col sizeLg="5" sizeXs="6.5">
               <ion-label>Agencia:</ion-label>
             </ion-col>
             <div>
               <ion-text>
-                {{this.exchangesaw.agency.zipCode}}
+                {{this.exchangesaw.agency.myInsuranceCompany.cia_Name}} - {{this.exchangesaw.agency.location}}
+              </ion-text>
+              </div>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
+            <ion-col sizeLg="5" sizeXs="6.5" >
+              <ion-label>Puntos:</ion-label>
+            </ion-col>
+            <div>
+              <ion-text>
+                {{this.exchangesaw.gift.points}}
               </ion-text>
               </div>
           </ion-row>

@@ -7,6 +7,7 @@ import { ExchangeGifSawPage } from '../exchange-gif-saw/exchange-gif-saw.page';
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { enGB } from 'date-fns/locale';
+import { AgencyService } from '../../../services/agency.service';
 @Component({
   selector: 'app-exchange-gift-list',
   templateUrl: './exchange-gift-list.page.html',
@@ -34,7 +35,8 @@ export class ExchangeGiftListPage {
     private alerta: AlertController,
     private pt: Platform,
     private modalCtrl: ModalController,
-    private authS: AuthService) { }
+    private authS: AuthService,
+    private as:AgencyService) { }
   private uts: UtilService
 
   async ionViewDidEnter() {
@@ -147,6 +149,7 @@ export class ExchangeGiftListPage {
         }
       });
       this.presentToast("Pedido eliminado correctamente.", "success", "checkmark-circle-outline");
+      this.as.added=true;
 
     }
 

@@ -3,6 +3,9 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { ExchangeGift } from 'src/app/models/ExchangeGift';
 import { ExchangeGiftService } from '../../../services/exchange-gift.service';
 import { UtilService } from '../../../services/util.service';
+import { AgencyService } from '../../../services/agency.service';
+import { AuthService } from '../../../services/auth.service';
+import { GiftService } from '../../../services/gift.service';
 
 @Component({
   selector: 'app-exchange-gift-saw',
@@ -18,7 +21,10 @@ export class ExchangeGiftSawPage implements OnInit {
     private modalCtrl: ModalController,
     private exs:ExchangeGiftService,
     private uts:UtilService,
-    private alerta: AlertController,) { }
+    private alerta: AlertController,
+    private as:AgencyService,
+    private authS:AuthService,
+    private gs:GiftService) { }
 
   ngOnInit() {
     this.img=this.exchangesaw.gift.picture;
@@ -38,7 +44,18 @@ export class ExchangeGiftSawPage implements OnInit {
 
       try {
         let result:boolean= await this.exs.delete(this.exchangesaw);
-        this.uts.presentToast("Su pedido se ha cancelado correctamente. Puntos añadidos: "+this.exchangesaw.gift.points+".","success","checkmark-circle-outline")
+
+        if(result) {
+          this.authS.agency=await this.as.getById(this.authS.agency.id);
+          this.gs.added=true;
+          this.uts.presentToast("Su pedido se ha cancelado correctamente. Puntos añadidos: "+this.exchangesaw.gift.points+".","success","checkmark-circle-outline");
+        }
+
+        else {
+          this.uts.presentToast("Error al eliminar el pedido.","danger.");
+        }
+
+        
         await this.uts.hideLoading();
 
         this.modalCtrl.dismiss({
@@ -46,7 +63,7 @@ export class ExchangeGiftSawPage implements OnInit {
         });
 
       } catch (error) {
-        this.uts.presentToast("Error al eliminar el pedido.","danger.")
+        this.uts.presentToast("Error al eliminar el pedido.","danger.");
         await this.uts.hideLoading();
       }
     }

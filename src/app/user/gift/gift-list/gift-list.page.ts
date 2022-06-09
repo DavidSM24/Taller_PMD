@@ -43,7 +43,7 @@ export class GiftListPage implements OnInit {
 
     if (this.gs.added) {
 
-      this.reset(null);
+      this.actualpoints=this.ats.agency.points;
       this.gs.added = false;
     }
     else {
@@ -82,6 +82,7 @@ export class GiftListPage implements OnInit {
     }
     await this.uts.hideLoading();
   }
+
   public async infiniteLoad($event) {
     let newgifts: Gift[] = [];
 
@@ -106,6 +107,7 @@ export class GiftListPage implements OnInit {
   public logout() {
     this.ats.logout();
   }
+
   public async buy(giftsaw: Gift) {
     let agency:Agency
     try {
@@ -119,9 +121,6 @@ export class GiftListPage implements OnInit {
       await modal.present();
       const resp = await modal.onDidDismiss();
       if (resp.data != null) {
-        
-        let i: number = this.gifts.indexOf(giftsaw);
-        this.gifts[i] = resp.data.newGift;
         agency=resp.data.nagency
         this.actualpoints=this.ats.agency.points;
       }

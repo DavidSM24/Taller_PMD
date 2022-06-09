@@ -53,7 +53,7 @@ export class CarRepairUpdatePage implements OnInit {
 
     this.formCarRepair = this.formBuilder.group({
 
-      carPlate: [this.carRepair.carPlate, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
+      carPlate: [this.carRepair.carPlate.toUpperCase(), [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
       model: [this.carRepair.model, [Validators.required, Validators.minLength(2),Validators.maxLength(50)]],
       brandCar: [this.carRepair.brandCar, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       clienteName: [this.carRepair.clienteName, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -93,7 +93,7 @@ export class CarRepairUpdatePage implements OnInit {
       //Guarda la reparación en la base de datos
       this.newCarRepair = await this.carRepairService.createOrUpdate(this.newCarRepair);
       //presenta el toast para que el usuario sepa que se ha guardado con  éxito
-      await this.uts.presentToast("Se ha gurdadado correctamente", "success", "checkmark-circle-outline");
+      await this.uts.presentToast("Reparación modificada correctamente.", "success", "checkmark-circle-outline");
 
       //Cierra el modal pasando la reparación guardada a la página con las reparaciones
       this.modalController.dismiss({

@@ -70,7 +70,7 @@
           </ion-col>
 
           <ion-col size="rem">
-            <ion-button expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift==null">
+            <ion-button disabled="true" expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift==null">
               Seleccionar
             </ion-button>
             <ion-button expand="block" shape="round" (click)="showGiftsPicker()" *ngIf="this.mygift!=null">
@@ -89,13 +89,13 @@
 
         <ion-row class="ion-align-items-center">
           <ion-col size="6">
-            <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button" [disabled]="this.formEditExchange.invalid">
+            <ion-button (click)="close()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button">
               Cancelar
             </ion-button>
           </ion-col>
           <ion-col size="6">
             <ion-button (click)="EditExgift()" expand="block" shape="round"  style="margin-top: 2% !important;" class="button">
-              Actualizar Pedido
+              Actualizar
             </ion-button>
           </ion-col>
         </ion-row>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">taller_PMD</string>
-    <string name="title_activity_main">taller_PMD</string>
+    <string name="app_name">Taller Jiménez Ortiz</string>
+    <string name="title_activity_main">Taller Jiménez Ortiz</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
 </resources>

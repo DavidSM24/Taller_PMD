@@ -70,18 +70,16 @@ export class ExchangeGifCreatePage {
               message: newExchange.agency.myUser.name + ' ha creado un nuevo pedido: ' + newExchange.gift.name + '. Puntos: ' + newExchange.gift.points + "."
             }
 
-            this.uts.presentToast("Pedido agregada correctamente", "success", "checkmark-circle-outline");
+            this.uts.presentToast("Pedido agregado correctamente.", "success", "checkmark-circle-outline");
+            this.ageserv.added=true;
 
             try {
               let result: boolean = await this.uts.sendMail(mail);
               if (result) this.uts.presentToast("Se ha enviado un correo a los administradores con la información del neuvo pedido.", "success", "checkmark-circle-outline");
-              else this.uts.presentToast("No se ha podido enviar el correo al administrador con su pedido.", "danger", "ban");
+              //else this.uts.presentToast("No se ha podido enviar el correo al administrador con su pedido.", "danger", "ban");
             } catch (error) {
 
             }
-
-
-
 
             this.formExchange.reset();
           }

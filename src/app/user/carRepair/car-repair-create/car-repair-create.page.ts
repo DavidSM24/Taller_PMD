@@ -92,7 +92,7 @@ export class CarRepairCreatePage implements OnInit {
           newCarRepair=await this.carRepairService.createOrUpdate(newCarRepair);
           if(newCarRepair.id){
             this.formCarRepair.reset();
-            this.utilService.presentToast("La reparación se ha guardado correctamente",'success',"checkmark-circle-outline");
+            this.utilService.presentToast("La reparación se ha creado correctamente.",'success',"checkmark-circle-outline");
             this.carRepairService.added=true;
             this.routeCarRepairList();
           }else{

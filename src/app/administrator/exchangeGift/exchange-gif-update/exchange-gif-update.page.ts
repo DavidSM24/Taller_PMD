@@ -29,7 +29,8 @@ export class ExchangeGifUpdatePage implements OnInit {
     private pickerController:PickerController,
     private giftserv:GiftService,
     private ageserv:AgencyService,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private as:AgencyService) {
 
       this.formEditExchange=this.fb.group({
         dateExchange: ["",Validators.required],
@@ -67,10 +68,10 @@ export class ExchangeGifUpdatePage implements OnInit {
       Exchangeeditado = await this.excser.createOrUpdate(Exchangeeditado);
       if (Exchangeeditado.id) {
         this.formEditExchange.reset();
-        this.uts.presentToast('El regalo se ha creado correctamente.', 'success',"checkmark-circle-outline");
+        this.uts.presentToast('Pedido modificado correctamente.', 'success',"checkmark-circle-outline");
       }
       else {
-        this.uts.presentToast('Un error ha surgido al intentar crear el regalo.', 'danger','ban');
+        this.uts.presentToast('Un error ha surgido al intentar actualiar el pedido. Compruebe la disponibilidad del regalo.', 'danger','ban');
       }
       this.uts.hideLoading();
       this.modalCtrl.dismiss({

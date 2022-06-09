@@ -259,6 +259,7 @@ export class CarRepairService {
         ){
 
           let tmp={
+            id:null,
             operation: carRepair.operation,
             carPlate: carRepair.carPlate,
             model: carRepair.model,
@@ -273,6 +274,10 @@ export class CarRepairService {
             myAgency: {
               id:carRepair.myAgency.id
             }
+          }
+
+          if(carRepair.id&&carRepair.id>0){
+            tmp.id=carRepair.id
           }
           const body=tmp;
           
@@ -306,9 +311,13 @@ export class CarRepairService {
     */
    public delete(carRepair:CarRepair):Promise<boolean>{
 
+    const body={
+      id:carRepair.id
+    }
+
     return new Promise(resolve=>{
 
-      this.http.delete<CarRepair>(this.URLDatabase+this.endpoint,{body:carRepair}).subscribe(()=>{
+      this.http.delete<CarRepair>(this.URLDatabase+this.endpoint,{body:body}).subscribe(()=>{
         resolve(true);
       },error=>{
         resolve(false);

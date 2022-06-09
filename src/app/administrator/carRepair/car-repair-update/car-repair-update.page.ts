@@ -63,7 +63,7 @@ export class CarRepairUpdatePage implements OnInit {
     this.formCarRepair = this.formBuilder.group({
 
       operation: [this.carRepair.operation, [Validators.required]],
-      carPlate: [this.carRepair.carPlate, [Validators.required]],
+      carPlate: [this.carRepair.carPlate.toUpperCase(), [Validators.required]],
       model: [this.carRepair.model, [Validators.required]],
       brandCar: [this.carRepair.brandCar, [Validators.required]],
       clienteName: [this.carRepair.clienteName, [Validators.required]],

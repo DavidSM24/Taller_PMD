@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { InsuranceCompanyService } from 'src/app/services/insurance-company.service';
 import { UtilService } from 'src/app/services/util.service';
 import { InsuranceCompany } from '../../../models/InsuranceCompany';
+import { AgencyService } from '../../../services/agency.service';
 
 @Component({
   selector: 'app-company-update',
@@ -19,7 +20,8 @@ export class CompanyUpdatePage implements OnInit {
     private cs: InsuranceCompanyService,
     private fb: FormBuilder,
     private uts:UtilService,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private as:AgencyService) {
 
      }
 
@@ -39,6 +41,7 @@ export class CompanyUpdatePage implements OnInit {
 
     editCompany=await this.cs.createOrUpdate(editCompany);
     if(editCompany){
+      this.as.added=true;
       this.formCompany.reset();
       this.uts.presentToast('La compañía se ha modificado correctamente.','success',"checkmark-circle-outline");
     }
