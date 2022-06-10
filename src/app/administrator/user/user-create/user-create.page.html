@@ -227,7 +227,7 @@
         </ion-col>
 
         <ion-col size="6">
-          <ion-button (click)="CreateUser()" expand="block" shape="round" style="margin-top: 2% !important;" class="button" [disabled]="((!this.admin)&&this.formAgency.invalid)||this.formUser.invalid||((!this.admin)&&this.formAgency.invalid)||((!this.admin)&&this.insurance==null)">
+          <ion-button (click)="CreateUser()" expand="block" shape="round" class="button" [disabled]="((!this.admin)&&this.formAgency.invalid)||this.formUser.invalid||((!this.admin)&&this.formAgency.invalid)||((!this.admin)&&this.insurance==null)">
             Crear
           </ion-button>
         </ion-col>

@@ -81,6 +81,7 @@ export class GiftSawPage implements OnInit {
           else {
             this.uts.presentToast("Pedido agregada correctamente", "success", "checkmark-circle-outline");
             let tmp: Agency = await this.as.getById(this.auts.agency.id);
+            this.as.added=true;
 
             try {
               if (!tmp) this.uts.presentToast("Ha habido un error al actualizar su agencia.", "danger", "ban");

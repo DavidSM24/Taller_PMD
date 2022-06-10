@@ -5,6 +5,7 @@ import { AlertController, IonInfiniteScroll, Platform, ModalController, IonSearc
 import { UtilService } from 'src/app/services/util.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ExchangeGiftSawPage } from '../exchange-gift-saw/exchange-gift-saw.page';
+import { AgencyService } from '../../../services/agency.service';
 
 @Component({
   selector: 'app-exchange-gift-list',
@@ -33,7 +34,8 @@ export class ExchangeGiftListPage implements OnInit {
     private pt: Platform,
     private uts: UtilService,
     private authS: AuthService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private as:AgencyService
   ) { }
 
   ngOnInit() {
@@ -42,7 +44,16 @@ export class ExchangeGiftListPage implements OnInit {
 
   async ionViewWillEnter() {
     this.niTems = Math.ceil(this.pt.height() / 20 + 10);
-    await this.loadExchanges();
+    
+    if(this.as.added){
+
+      this.reset(null);
+      this.as.added=false;
+    }
+    else{
+
+      await this.loadExchanges();
+    }
 
     
   }
